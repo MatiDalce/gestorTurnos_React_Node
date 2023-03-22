@@ -1,6 +1,7 @@
+const Appointment = require("./Appointment");
 
     module.exports = (sequelize, DataTypes) =>{
-    const Patient = sequelize.define('patient', {
+    const Patient = sequelize.define('Patient', {
         id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -33,7 +34,7 @@
         allowNull: false
         }
     })
-    Patient.hasMany(Appointment)
+
 
     return Patient
 

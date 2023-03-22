@@ -1,3 +1,5 @@
+const Patient = require("../models/Patient")
+
 module.exports = (sequelize, DataTypes) => {
   const Appointment = sequelize.define('Appointment', {
     id: {
@@ -15,8 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  Appointment.belongsTo(Patient);
-  Appointment.PatientId = Appointment.belongsTo(Patient);
+ 
 
   return Appointment;
 };

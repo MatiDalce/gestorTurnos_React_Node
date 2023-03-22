@@ -3,12 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const Patient = require('./database/Patient');
-const Appointment = require('./database/Appointment');
-const sequelize = require('./database');
+
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var usersRouter = require('./routes/patient');
+var patientRouter = require('./routes/patient')
 
 var app = express();
 
@@ -23,7 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/patient', patientRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,13 +40,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-sequelize.sync({alter: true})
-  .then(() => {
-    console.log('Base de datos y tablas creadas correctamente');
-  })
-  .catch((error) => {
-    console.error('Error al crear la base de datos:', error);
-  });
+
 
  
   
