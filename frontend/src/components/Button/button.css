@@ -1,0 +1,9 @@
+.btn {
+    border: none;
+    border-radius: 40px;
+    width: 8em;
+    padding: 0.4em;
+    font-size: 2em;
+    color: var(--white-bg);
+    margin: 0.5em 0;
+}

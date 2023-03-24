@@ -1,0 +1,9 @@
+.headerTitle-container {
+    width: 100%;
+    text-align: center;
+}
+
+.headerTitle {
+    font-weight: normal;
+    font-size: 3em;
+}
