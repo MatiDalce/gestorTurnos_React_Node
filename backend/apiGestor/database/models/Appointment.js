@@ -1,4 +1,4 @@
-const Patient = require("../models/Patient")
+const Patient = require("./Patient")
 
 module.exports = (sequelize, DataTypes) => {
   const Appointment = sequelize.define('Appointment', {
@@ -14,8 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     hour: {
       type: DataTypes.INTEGER,
       allowNull: false
-    }
+    },
+    note: {
+      type: DataTypes.STRING,
+      allowNull: false
+      }
   });
+
+  
+Appointment.associate = (models) => {
+  Appointment.belongsTo(models.Patient, { as: 'patient', foreignKey: 'patientId' });
+};
+ 
 
  
 

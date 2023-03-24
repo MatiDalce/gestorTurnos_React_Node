@@ -35,6 +35,13 @@ const Appointment = require("./Appointment");
         }
     })
 
+    Patient.associate = (models)=>{
+        Patient.hasMany(models.Appointment,{
+            foreignKey: 'patientId',
+            as : 'patientAppointments'
+        })
+        
+    }
 
     return Patient
 
