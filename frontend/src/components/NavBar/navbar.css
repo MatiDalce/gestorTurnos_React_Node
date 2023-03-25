@@ -25,6 +25,7 @@
     justify-content: center;
     border: none;
     background-color: transparent;
+    cursor: pointer;
 }
 
 .navbar-arrow {

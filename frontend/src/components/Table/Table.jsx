@@ -28,7 +28,12 @@ const Table = ({
     const cells = columns.map((column) => (
       <p className='table-cell' key={column}>{row[column]}</p>
     ));
-    return <div key={index} /* style={colorRow} */ className='table-row'>{cells}</div>
+    return <div 
+      key={index} 
+      /* style={colorRow} */ 
+      className='table-row' 
+      onClick={ () => navigate(`${staticPath}/${cells[0].props.children}`) }
+    >{cells}</div>
   });
 
   return (
@@ -40,18 +45,7 @@ const Table = ({
       </div>
       <div className="table">
           {
-            content.length > 0 ? 
-            <>
-            {
-              content.map((row, index) => {
-                const cells = columns.map((column) => (
-                  <p className='table-cell' key={column}>{row[column]}</p>
-                ));
-                return <div key={index} /* style={colorRow} */ className='table-row' onClick={() => navigate(`${staticPath}/${cells[0].props.children}`)}>{cells}</div> 
-              })
-            }
-            </>
-            : ''
+            content.length > 0 ? rows : ''
           }
       </div>
     </div>
