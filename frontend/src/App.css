@@ -1,3 +1,13 @@
+
+/* TAMAÑOS */
+/* Extra small 576 o menos */
+/* Small 577 a 767 */
+/* Medium 768 a 991 */
+/* Large 992 a 1199 */
+/* Extra large 1200 a 1399 */
+/* Extra extra large 1400 o mas  */
+
+
 :root {
   /* USO: var(--color) */
   --skyblue-bg: #5BC0EB;

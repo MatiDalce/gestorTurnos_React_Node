@@ -10,7 +10,8 @@ const Input = ({
   nameProp,
   placeholder,
   inputWidth,
-  isSearcheable
+  isSearcheable,
+  margin
 }) => {
 
   const labelStyles = {
@@ -18,17 +19,19 @@ const Input = ({
     textAlign: isLabelCenter ? 'center' : ''
   }
 
+  const containerStyles = {
+    width: inputWidth ? inputWidth : '40%',
+  }
+
   const inputStyles = {
-    width: inputWidth ? inputWidth : '20em',
-    // borderRadius: isSearcheable ? '20px 0 0 20px' : '20px'
-    backgroundImage: `url(${magnifyingGlass})`,
-    backgroundRepeat: `no-repeat`,
-    backgroundSize: `30px`,
-    backgroundPosition: '98% 50%'
+    backgroundImage: isSearcheable ? `url(${magnifyingGlass})` : '',
+    backgroundRepeat: isSearcheable ? `no-repeat` : '',
+    backgroundSize: isSearcheable ? `30px` : '',
+    backgroundPosition: isSearcheable ? '98% 50%' : '',
   }
 
   return (
-    <div className="input-container">
+    <div className="input-container" style={containerStyles}>
       {
         hasLabel && <label style={labelStyles} className="label-el">{labelTitle}</label>
       }

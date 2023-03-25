@@ -30,10 +30,14 @@ const Table = ({
   return (
     <div className="table-container">
       <div className="headers">
-        {header}
+        {
+          headers.length > 0 ? header : ''
+        }
       </div>
       <div className="table">
-          {rows}
+          {
+            content.length > 0 ? rows : ''
+          }
       </div>
     </div>
   );

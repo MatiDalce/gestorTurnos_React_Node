@@ -18,17 +18,17 @@ import Shift from './Shift/Shift'
 // RUTAS
 export const router = createBrowserRouter(
     createRoutesFromChildren(
-        <Route path="/" element={<Navbar title={'Gestor de turnos'} />}>
+        <Route path="/" element={<Navbar />}>
             <Route path="*" element={<Error />} />
             <Route index element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/listado-pacientes" element={<PatientList />} />
             <Route path="agregar-paciente" element={<AddPatient />} />
-            <Route path="paciente/{id}" element={<Patient />} />
+            <Route path="paciente/:pacienteID" element={<Patient />} />
             <Route path="mi-calendario" element={<MyCalendar />} />
             <Route path="listado-turnos" element={<ShiftList />} />
             <Route path="agregar-turno" element={<AddShift />} />
-            <Route path="turno/{id}" element={<Shift />} />
+            <Route path="turno/:turnoID" element={<Shift />} />
         </Route>
     )
 );

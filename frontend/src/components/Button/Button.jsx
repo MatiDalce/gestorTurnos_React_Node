@@ -4,11 +4,13 @@ import './button.css'
 const Button = ({
   title,
   type,
-  bgColor
+  bgColor,
+  width
 }) => {
 
   const buttonStyle = {
     backgroundColor: `${bgColor ? bgColor : 'var(--skyblue-bg)'}`,
+    width: `${width ? width : '30%'}`
   };
 
   return (
