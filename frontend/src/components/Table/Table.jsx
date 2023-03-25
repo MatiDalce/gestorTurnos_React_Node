@@ -1,10 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import './table.css'
 
 const Table = ({
   headers, // Array de strings
   content, // Array de objetos
+  staticPath,
 }) => {
+  let navigate = useNavigate();
+
   // Obtengo los keys (y su cantidad) existentes en los objetos.
   const columns = Object.keys(content[0]);
 
@@ -36,7 +40,18 @@ const Table = ({
       </div>
       <div className="table">
           {
-            content.length > 0 ? rows : ''
+            content.length > 0 ? 
+            <>
+            {
+              content.map((row, index) => {
+                const cells = columns.map((column) => (
+                  <p className='table-cell' key={column}>{row[column]}</p>
+                ));
+                return <div key={index} /* style={colorRow} */ className='table-row' onClick={() => navigate(`${staticPath}/${cells[0].props.children}`)}>{cells}</div> 
+              })
+            }
+            </>
+            : ''
           }
       </div>
     </div>
