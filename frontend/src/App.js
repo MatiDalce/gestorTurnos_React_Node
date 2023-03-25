@@ -1,8 +1,6 @@
 import { RouterProvider } from 'react-router-dom';
-import { router } from './pages/routes';
-import Navbar from './components/NavBar/Navbar'
-import AppContainer from './components/AppContainer/AppContainer'
 import './App.css';
+import { router } from './pages/routes';
 
 // Tamaños
 // Extra small 576 o menos
@@ -119,15 +117,7 @@ function App() {
   // ]} />
 
   return (
-    <div className="App">
-      <Navbar title='Gestor de turnos' />
-
-      <AppContainer>
-
-        <RouterProvider router={router} />
-
-      </AppContainer>
-    </div>
+    <RouterProvider router={router} />
   );
 }
 
