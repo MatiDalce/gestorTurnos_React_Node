@@ -30,7 +30,7 @@ const AddPatient = () => {
             inputWidth='30%'
           />
         </div>
-        <div className="inputRow">
+        <div className="input-row">
           <Input
             colorLabel='var(--black-bg)' 
             hasLabel
@@ -52,7 +52,7 @@ const AddPatient = () => {
             inputWidth='30%'
           />
         </div>
-        <div className="inputRow">
+        <div className="input-row">
           <Input
             colorLabel='var(--black-bg)' 
             hasLabel

@@ -19,18 +19,21 @@ const Home = () => {
               type='button'
               width='30%'
               margin='5% 0'
+              path='/listado-pacientes'
             />
             <Button 
               title={'Mi Calendario'} 
               type='button'
               width='30%'
               margin='5% 0'
+              path='/mi-calendario'
             />
             <Button 
               title={'Turnos'} 
               type='button'
               width='30%'
               margin='5% 0'
+              path='/listado-turnos'
             />
           </div>
         </div>
