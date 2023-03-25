@@ -2,8 +2,11 @@ import React from 'react'
 import './patient.css';
 import Button from '../../components/Button/Button';
 import Title from '../../components/Title/Title';
+import { useParams } from 'react-router-dom';
 
 const Patient = () => {
+  let {id} = useParams();
+
   return (
     <>
       <Title title='DIEGO PEREZ' />
@@ -45,6 +48,7 @@ const Patient = () => {
           margin='5% 2%'
         />
         <Button 
+          path={`/turnos-paciente/${id}`}
           title={'Ver Turnos'} 
           type='button'
           width='20%'

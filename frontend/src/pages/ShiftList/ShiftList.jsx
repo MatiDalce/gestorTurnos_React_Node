@@ -37,111 +37,135 @@ const ShiftList = () => {
         title={'Agregar Turno'} 
         type='button'
         width='30%'
+        path='/agregar-turno'
       />
     </div>
-    <Table headers={['Nombre y Apellido', 'Fecha de turno', 'Horario del turno']} content={[
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs',
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs',
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs',
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-  {
-    name: 'Diego Perez',
-    date: '13/06/2023',
-    time: '19:35hs'
-  },
-]} />
-  </>
+    <Table 
+      staticPath={'/turno'}
+      headers={['ID','Nombre y Apellido', 'Fecha de turno', 'Horario del turno']} 
+      content={[
+        {
+          id: 1,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs',
+        },
+        {
+          id: 2,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 3,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 4,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 5,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 6,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 7,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs',
+        },
+        {
+          id: 8,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 9,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 10,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 11,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 12,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 13,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 14,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 15,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs',
+        },
+        {
+          id: 16,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 17,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 18,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 19,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+        {
+          id: 20,
+          name: 'Diego Perez',
+          date: '13/06/2023',
+          time: '19:35hs'
+        },
+      ]} />
+    </>
   )
 }
 

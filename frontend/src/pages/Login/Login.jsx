@@ -24,6 +24,7 @@ const Login = () => {
             type='button'
             width='30%'
             margin='5% 0'
+            path='/'
           />
         </div>
       </div>

@@ -21,12 +21,16 @@ const Navbar = ({title}) => {
                     <div className="navbar-title-container">
                         <h1 className="navbar-title">{<CurrentPage pathname={location.pathname} id={id} />}</h1>
                     </div>
+                    <button>
+                        
+                    </button>
                 </div>
             }
             {/* PÁGINAS */}
             <main>
                 <Outlet />
             </main>
+
         </>
     )
 }

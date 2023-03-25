@@ -43,103 +43,126 @@ const ShiftPatientList = () => {
           margin='0 4% 0 0'
         />
     </div>
-    <Table headers={['N° de turno', 'Fecha', 'Estado']} content={[
+    <Table 
+      staticPath={'/turno'}
+      headers={['ID', 'N° de turno', 'Fecha', 'Estado']} 
+      content={[
         {
+          id: 1,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Pendiente',
         },
         {
+          id: 2,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Pendiente'
         },
         {
+          id: 3,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Pendiente'
         },
         {
+          id: 4,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Pendiente'
         },
         {
+          id: 5,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Pendiente'
         },
         {
+          id: 6,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Pendiente'
         },
         {
+          id: 7,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Pendiente',
         },
         {
+          id: 8,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Pendiente'
         },
         {
+          id: 9,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Pendiente'
         },
         {
+          id: 10,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Realizado'
         },
         {
+          id: 11,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Realizado'
         },
         {
+          id: 12,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Realizado'
         },
         {
+          id: 1,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Realizado'
         },
         {
+          id: 13,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Realizado'
         },
         {
+          id: 14,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Realizado',
         },
         {
+          id: 15,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Realizado'
         },
         {
+          id: 16,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Realizado'
         },
         {
+          id: 17,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Realizado'
         },
         {
+          id: 18,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Realizado'
         },
         {
+          id: 19,
           shiftNumber: '128523532',
           date: '13/06/2023',
           state: 'Realizado'
