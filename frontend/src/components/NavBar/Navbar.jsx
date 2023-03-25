@@ -2,11 +2,12 @@ import React from 'react'
 import './navbar.css'
 import {CurrentPage} from '../../assets/helpers/CurrentPage';
 import ArrowLogo from '../../assets/icons/arrow-left-solid.svg'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const Navbar = ({title}) => {
     let navigate = useNavigate();
     let location = useLocation();
+    let { id } = useParams();
 
     return (
         <>
@@ -18,7 +19,7 @@ const Navbar = ({title}) => {
                         <img src={ ArrowLogo } alt="Ir hacia atrás" className="navbar-arrow" />
                     </button>
                     <div className="navbar-title-container">
-                        <h1 className="navbar-title">{<CurrentPage pathname={location.pathname} />}</h1>
+                        <h1 className="navbar-title">{<CurrentPage pathname={location.pathname} id={id} />}</h1>
                     </div>
                 </div>
             }

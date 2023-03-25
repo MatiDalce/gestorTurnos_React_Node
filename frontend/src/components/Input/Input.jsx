@@ -12,7 +12,9 @@ const Input = ({
   inputWidth,
   isSearcheable,
   margin,
-  colorLabel
+  colorLabel,
+  value,
+  isDisabled
 }) => {
 
   const labelStyles = {
@@ -41,8 +43,10 @@ const Input = ({
             hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
           }
           <textarea
+            disabled={isDisabled ? true : false}
             className="input-el"
             name={nameProp ? nameProp : ''}
+            value={value ? value : ''}
             placeholder={placeholder}
             style={inputStyles}
             rows={14}

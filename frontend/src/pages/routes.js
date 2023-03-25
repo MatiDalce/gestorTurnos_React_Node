@@ -24,13 +24,13 @@ export const router = createBrowserRouter(
             <Route index element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/listado-pacientes" element={<PatientList />} />
-            <Route path="agregar-paciente" element={<AddPatient />} />
-            <Route path="paciente/:pacienteID" element={<Patient />} />
-            <Route path="mi-calendario" element={<MyCalendar />} />
-            <Route path="listado-turnos" element={<ShiftList />} />
-            <Route path="agregar-turno" element={<AddShift />} />
-            <Route path="turno/:turnoID" element={<Shift />} />
-            <Route path="turnos-paciente/:pacienteID" element={<ShiftPatientList />} />
+            <Route path="/agregar-paciente" element={<AddPatient />} />
+            <Route path="/paciente/:id" element={<Patient />} />
+            <Route path="/mi-calendario" element={<MyCalendar />} />
+            <Route path="/listado-turnos" element={<ShiftList />} />
+            <Route path="/agregar-turno" element={<AddShift />} />
+            <Route path="/turno/:id" element={<Shift />} />
+            <Route path="/turnos-paciente/:id" element={<ShiftPatientList />} />
         </Route>
     )
 );
