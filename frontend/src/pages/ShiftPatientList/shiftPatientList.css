@@ -1,0 +1,7 @@
+.search-patient-shifts {
+    margin: auto;
+    width: 70vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

@@ -23,7 +23,7 @@ const Select = ({
     return (
         <div className="select-container" style={containerStyles}>
             {
-                hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
+                hasLabel && <label style={labelStyles} className="label-select">{ labelTitle }</label>
             }
             <select name={nameProp} className="select-el">
                 {

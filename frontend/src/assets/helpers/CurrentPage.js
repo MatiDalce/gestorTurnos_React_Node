@@ -6,7 +6,7 @@ export const CurrentPage = ({pathname}) => {
         case '/agregar-paciente':
             return 'Agregar Paciente'
             
-        case '/paciente/':
+        case '/paciente/:id':
             return 'Paciente:'
             
         case '/listado-turnos':
@@ -15,7 +15,10 @@ export const CurrentPage = ({pathname}) => {
         case '/agregar-turno':
             return 'Agregar Turno'
             
-        case '/turno/':
+        case '/turno/:id':
+            return 'Turno N°:'
+            
+        case '/turnos-paciente/:id':
             return 'Turno N°:'
             
         case '/mi-calendario':

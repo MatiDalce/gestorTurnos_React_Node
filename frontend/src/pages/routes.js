@@ -14,6 +14,7 @@ import MyCalendar from './MyCalendar/MyCalendar'
 import ShiftList from './ShiftList/ShiftList'
 import AddShift from './AddShift/AddShift'
 import Shift from './Shift/Shift'
+import ShiftPatientList from "./ShiftPatientList/ShiftPatientList";
 
 // RUTAS
 export const router = createBrowserRouter(
@@ -29,6 +30,7 @@ export const router = createBrowserRouter(
             <Route path="listado-turnos" element={<ShiftList />} />
             <Route path="agregar-turno" element={<AddShift />} />
             <Route path="turno/:turnoID" element={<Shift />} />
+            <Route path="turnos-paciente/:pacienteID" element={<ShiftPatientList />} />
         </Route>
     )
 );

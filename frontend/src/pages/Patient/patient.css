@@ -1,0 +1,28 @@
+
+.input-patiente-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 2% 0;
+}
+
+.btn-addPatient-container {
+    display: flex;
+    justify-content: center;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.data-title {
+    font-size: 30px;
+}
+
+.data {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
