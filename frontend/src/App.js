@@ -1,9 +1,6 @@
 import './App.css';
 import AppContainer from './components/AppContainer/AppContainer'
 import Navbar from './components/NavBar/Navbar'
-import Button from './components/Button/Button'
-import Title from './components/Title/Title'
-import Input from './components/Input/Input'
 import Table from './components/Table/Table'
 
 // Tamaños
@@ -20,15 +17,12 @@ function App() {
       <Navbar title='Gestor de turnos' />
 
       <AppContainer>
-        {/* <Title title='Bienvenido' />
 
-        <Input hasLabel isSearcheable labelTitle='Input' placeholder='escribi algo' isLabelCenter />
-
-        <Table headers={['1', '2', '3']} content={[
+        <Table headers={['Nombre', 'DNI', 'Email']} content={[
           {
             name: 'name',
             dni: '2325235',
-            email: 'awfafw@awfafw.com'
+            email: 'awfafw@awfafw.com',
           },
           {
             name: 'name',
@@ -55,7 +49,78 @@ function App() {
             dni: '2325235',
             email: 'awfafw@awfafw.com'
           },
-        ]} /> */}
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com',
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com'
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com'
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com'
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com'
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com'
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com'
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com'
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com',
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com'
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com'
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com'
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com'
+          },
+          {
+            name: 'name',
+            dni: '2325235',
+            email: 'awfafw@awfafw.com'
+          },
+        ]} />
+        
       </AppContainer>
     </div>
   );

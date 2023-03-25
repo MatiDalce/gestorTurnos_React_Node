@@ -5,39 +5,38 @@ const Table = ({
   headers, // Array de strings
   content, // Array de objetos
 }) => {
+  // Obtengo los keys (y su cantidad) existentes en los objetos.
+  const columns = Object.keys(content[0]);
+
+  // Devuelvo las cabeceras
+  const header = headers.map((column) => (
+    <div key={column}>{column}</div>
+  ));
+
+  // Devuelvo las filas
+  const rows = content.map((row, index) => {
+
+    // Color de fila
+    // let colorRow = {
+    //   backgroundColor: index % 2 === 0 ? 'var(--white-bg)' : 'var(--gray-bg)',
+    // };
+
+    const cells = columns.map((column) => (
+      <p className='table-cell' key={column}>{row[column]}</p>
+    ));
+    return <div key={index} /* style={colorRow} */ className='table-row'>{cells}</div>
+  });
 
   return (
     <div className="table-container">
-      <div className='table-table' >
-        <div className="table-headers">
-          {
-            headers.map((header, idx) => {
-              return <p key={idx} className='table-header'>{header}</p>
-            })
-          }
-        </div>
-        <div className="table-content">
-          <ul className="table-content-list">
-            {
-              content.map((cont, idx) => {
-                return <div key={idx} className='table-cell'>
-                  <div className="table-data">
-                    {cont.name}
-                  </div>
-                  <div className="table-data">
-                    {cont.dni}
-                  </div>
-                  <div className="table-data">
-                    {cont.email}
-                  </div>
-                </div>
-              })
-            }
-          </ul>
-        </div>
+      <div className="headers">
+        {header}
+      </div>
+      <div className="table">
+          {rows}
       </div>
     </div>
-  )
+  );
 }
 
 export default Table
