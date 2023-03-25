@@ -1,0 +1,11 @@
+
+.inputRow {
+    display: flex;
+    justify-content: space-around;
+    margin: 2% 0;
+}
+
+.btn-addpatient-container {
+    display: flex;
+    justify-content: center;
+}

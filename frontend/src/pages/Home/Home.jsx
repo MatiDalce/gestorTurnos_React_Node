@@ -1,8 +1,8 @@
 import React from 'react';
-import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import Title from '../../components/Title/Title';
 import './home.css';
+
 const Home = () => {
   
   return (

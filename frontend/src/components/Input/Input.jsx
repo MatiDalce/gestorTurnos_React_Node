@@ -11,11 +11,12 @@ const Input = ({
   placeholder,
   inputWidth,
   isSearcheable,
-  margin
+  margin,
+  colorLabel
 }) => {
 
   const labelStyles = {
-    color: 'var(--skyblue-bg)',
+    color: colorLabel ? colorLabel : 'var(--skyblue-bg)',
     textAlign: isLabelCenter ? 'center' : ''
   }
 
@@ -34,7 +35,7 @@ const Input = ({
   return (
     <div className="input-container" style={containerStyles}>
       {
-        hasLabel && <label style={labelStyles} className="label-el">{labelTitle}</label>
+        hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
       }
       <input
         className="input-el"
