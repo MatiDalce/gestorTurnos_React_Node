@@ -23,6 +23,7 @@
     border-radius: 20px;
     display: flex;
     margin-bottom: 0.6%;
+    padding: 1% 0;
 }
 
 .table-row:hover {

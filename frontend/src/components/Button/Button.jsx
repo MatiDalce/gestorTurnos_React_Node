@@ -5,12 +5,14 @@ const Button = ({
   title,
   type,
   bgColor,
-  width
+  width,
+  margin
 }) => {
 
   const buttonStyle = {
     backgroundColor: `${bgColor ? bgColor : 'var(--skyblue-bg)'}`,
-    width: `${width ? width : '30%'}`
+    width: `${width ? width : '30%'}`,
+    margin: margin ? margin : '0.5em 0',
   };
 
   return (

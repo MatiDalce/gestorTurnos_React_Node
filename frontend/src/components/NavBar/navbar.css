@@ -5,11 +5,11 @@
     align-items: center;
     border-radius: 0 0 20px 20px;
     margin-bottom: 2.5em;
+    height: 10vh;
 }
 
 .navbar-arrow-container {
     width: 10%;
-    padding: 0.1em;
     display: flex;
     justify-content: center;
     border: none;
@@ -22,7 +22,6 @@
 
 .navbar-title-container {
     width: 80%;
-    padding: 0.1em;    
     display: flex;
     justify-content: center;
 }

@@ -28,6 +28,7 @@ const Input = ({
     backgroundRepeat: isSearcheable ? `no-repeat` : '',
     backgroundSize: isSearcheable ? `30px` : '',
     backgroundPosition: isSearcheable ? '98% 50%' : '',
+    margin: margin ? margin : 0
   }
 
   return (

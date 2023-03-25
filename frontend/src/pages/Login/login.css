@@ -1,0 +1,27 @@
+.login-bg {
+    padding: 0;
+    margin: 0;
+    background-color: var(--skyblue-bg);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background-color: var(--white-bg);
+    width: 60vw;
+    height: 60vh;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container-small {
+    width: 70%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -7,6 +7,10 @@
 /* Extra large 1200 a 1399 */
 /* Extra extra large 1400 o mas  */
 
+* {
+  margin: 0;
+  padding: 0;
+}
 
 :root {
   /* USO: var(--color) */

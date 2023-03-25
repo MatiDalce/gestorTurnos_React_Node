@@ -2,11 +2,12 @@ import React from 'react';
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
 import Table from '../../components/Table/Table'
+import './shiftList.css'
 
 const ShiftList = () => {
   return (
     <>
-    <div className="search-patient">
+    <div className="search-shift">
         <Input 
           isSearcheable
           hasLabel
