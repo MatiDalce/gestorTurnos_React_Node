@@ -17,7 +17,6 @@ const Login = () => {
             type='text'
             nameProp='search'
             placeholder={'Ingrese su contraseña'}
-            // inputWidth='16%'
             margin='5% 0'
           />
           <Button 
