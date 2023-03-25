@@ -5,6 +5,9 @@ import Title from '../../components/Title/Title';
 import './login.css';
 
 const Login = () => {
+
+  const handlePassword = () => {}
+
   return (
     <div className='login-bg'>
       <div className="login-container">
@@ -14,6 +17,7 @@ const Login = () => {
             margin='5% 0'
           />
           <Input
+            onChange={handlePassword}
             type='text'
             nameProp='search'
             placeholder={'Ingrese su contraseña'}

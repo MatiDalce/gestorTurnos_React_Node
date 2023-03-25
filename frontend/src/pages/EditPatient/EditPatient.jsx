@@ -5,11 +5,20 @@ import Title from '../../components/Title/Title';
 import './editPatient.css';
 
 const EditPatient = () => {
+
+  const handleName = () => {};
+  const handleLastName = () => {};
+  const handleDNI = () => {};
+  const handleSocialNetwork = () => {};
+  const handleAge = () => {};
+  const handleGenre = () => {};
+
   return (
     <>
       <Title title='EDICIÓN DE DATOS DEL PACIENTE' />
         <div className="input-editPatient-row">
           <Input
+            onChange={handleName}
             value='Diego'
             colorLabel='var(--black-bg)' 
             hasLabel
@@ -21,6 +30,7 @@ const EditPatient = () => {
             inputWidth='30%'
           />
           <Input
+            onChange={handleLastName}
             value='Perez'
             colorLabel='var(--black-bg)' 
             hasLabel
@@ -34,6 +44,7 @@ const EditPatient = () => {
         </div>
         <div className="input-editPatient-row">
           <Input
+            onChange={handleDNI}
             value='46235233'
             colorLabel='var(--black-bg)' 
             hasLabel
@@ -45,6 +56,7 @@ const EditPatient = () => {
             inputWidth='30%'
           />
           <Input
+            onChange={handleSocialNetwork}
             value='OSPERYH'
             colorLabel='var(--black-bg)' 
             hasLabel
@@ -58,6 +70,7 @@ const EditPatient = () => {
         </div>
         <div className="input-editPatient-row">
           <Input
+            onChange={handleAge}
             value='37'
             colorLabel='var(--black-bg)' 
             hasLabel
@@ -69,6 +82,7 @@ const EditPatient = () => {
             inputWidth='30%'
           />
           <Input
+            onChange={handleGenre}
             value='Masculino'
             colorLabel='var(--black-bg)' 
             hasLabel

@@ -1,8 +1,5 @@
 .table-container {
     padding: 1% 2%;
-    border-left: 3px solid var(--skyblue-bg);
-    border-right: 3px solid var(--skyblue-bg);
-    width: 70vw;
     margin: 2% auto;
     height: fit-content;
 }
@@ -13,13 +10,10 @@
     justify-content: space-around;
     margin-bottom: 1%;
     font-size: 2em;
-    position: sticky;
     top: 0;
-    background-color: var(--white-bg);
 }
 
 .table-row {
-    border: 2px solid var(--skyblue-bg);
     border-radius: 20px;
     display: flex;
     margin-bottom: 0.6%;
@@ -28,7 +22,6 @@
 
 .table-row:hover {
     background-color: var(--gray-bg);
-    cursor: pointer;
 }
 
 .table-cell {

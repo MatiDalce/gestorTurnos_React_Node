@@ -6,8 +6,37 @@ const Table = ({
   headers, // Array de strings
   content, // Array de objetos
   staticPath,
+  headerBg,
+  noClickable,
+  textColor,
+  noTableBorders,
+  noCursor,
+  noSticky,
+  separatorsColor,
+  tableWidth
 }) => {
   let navigate = useNavigate();
+
+  const tableContainerStyle = {
+    borderLeft: noTableBorders ? 'none' : '3px solid var(--skyblue-bg)',
+    borderRight: noTableBorders ? 'none' : '3px solid var(--skyblue-bg)',
+    width: tableWidth ? tableWidth : '70%'
+  }
+
+  const headersStyle = {
+    backgroundColor: headerBg ? headerBg : 'var(--white-bg)',
+    color: textColor ? textColor : 'var(--black-bg)',
+    headerPosition: noSticky ? '' : 'sticky'
+  }
+
+  const tableRowStyle = {
+    border: separatorsColor ? separatorsColor : '2px solid var(--skyblue-bg)', 
+    cursor: noCursor ? '' : 'pointer',
+  }
+
+  const rowsStyle = {
+    color: textColor ? textColor : 'var(--black-bg)', 
+  }
 
   // Obtengo los keys (y su cantidad) existentes en los objetos.
   const columns = Object.keys(content[0]);
@@ -31,19 +60,20 @@ const Table = ({
     return <div 
       key={index} 
       /* style={colorRow} */ 
-      className='table-row' 
-      onClick={ () => navigate(`${staticPath}/${cells[0].props.children}`) }
+      className='table-row'
+      style={tableRowStyle}
+      onClick={ noClickable ? () => {} : () => navigate(`${staticPath}/${cells[0].props.children}`) }
     >{cells}</div>
   });
 
   return (
-    <div className="table-container">
-      <div className="headers">
+    <div className="table-container" style={tableContainerStyle}>
+      <div className="headers" style={headersStyle}>
         {
           headers.length > 0 ? header : ''
         }
       </div>
-      <div className="table">
+      <div className="table" style={rowsStyle}>
           {
             content.length > 0 ? rows : ''
           }

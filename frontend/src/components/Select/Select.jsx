@@ -8,7 +8,8 @@ const Select = ({
     labelTitle,
     inputWidth,
     options,
-    nameProp
+    nameProp,
+    onChange
 }) => {
     
     const labelStyles = {
@@ -25,7 +26,7 @@ const Select = ({
             {
                 hasLabel && <label style={labelStyles} className="label-select">{ labelTitle }</label>
             }
-            <select name={nameProp} className="select-el">
+            <select name={nameProp} className="select-el" onChange={onChange}>
                 {
                     options.map((opt,idx) => {
                         return <option key={idx} value={opt.value}>{opt.text}</option>

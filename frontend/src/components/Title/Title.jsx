@@ -3,16 +3,23 @@ import './title.css'
 
 const Title = ({
   title,
-  margin
+  margin,
+  isBold,
+  textColor,
 }) => {
   
-  const TitleStyles = {
-    margin: margin ? margin : '0'
+  const divTitleStyles = {
+    margin: margin ? margin : '0',
   };
 
+  const titleStyle = {
+    color: textColor ? textColor :'',
+    fontWeight: isBold ? 'bold' : ''
+  }
+
   return (
-    <div className='headerTitle-container' style={TitleStyles}>
-      <h1 className='headerTitle'>{title}</h1>
+    <div className='headerTitle-container' style={divTitleStyles}>
+      <h1 className='headerTitle' style={titleStyle}>{title}</h1>
     </div>
   )
 }

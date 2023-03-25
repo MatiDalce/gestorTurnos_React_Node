@@ -5,10 +5,16 @@ import Table from '../../components/Table/Table'
 import './shiftList.css'
 
 const ShiftList = () => {
+
+  const handleName = () => {}
+  const handleDateFrom = () => {}
+  const handleDateUntil = () => {}
+
   return (
     <>
     <div className="search-shift">
         <Input 
+          onChange={handleName}
           isSearcheable
           hasLabel
           labelTitle='Nombre'
@@ -18,6 +24,7 @@ const ShiftList = () => {
           margin='0 4% 0 0'
         />
         <Input 
+          onChange={handleDateFrom}
           hasLabel
           labelTitle='Fecha desde:'
           type='date'
@@ -26,6 +33,7 @@ const ShiftList = () => {
           margin='0 4% 0 0'
         />
         <Input 
+          onChange={handleDateUntil}
           hasLabel
           labelTitle='Fecha hasta:'
           type='date'

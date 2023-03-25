@@ -5,10 +5,17 @@ import Select from '../../components/Select/Select';
 import './addShift.css';
 
 const AddShift = () => {
+
+  const handlePatient = () => {}
+  const handleDate = () => {}
+  const handleTime = () => {}
+  const handleNotes = () => {}
+
   return (
     <>
       <div className="select-patient-input">
         <Select
+          onChange={handlePatient}
           options={[
             {text: 'Diego Perez', value: 'diego-perez'},
             {text: 'Camila Surrey', value: 'camila-surrey'},
@@ -22,6 +29,7 @@ const AddShift = () => {
       </div>
       <div className="input-row-shift">
           <Input
+            onChange={handleDate}
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Fecha'
@@ -31,6 +39,7 @@ const AddShift = () => {
             inputWidth='30%'
           />
           <Input
+            onChange={handleTime}
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Hora'
@@ -43,6 +52,7 @@ const AddShift = () => {
       </div>
       <div className="textarea-input-shift">
         <Input
+          onChange={handleNotes}
           colorLabel='var(--black-bg)' 
           hasLabel
           labelTitle='Notas'

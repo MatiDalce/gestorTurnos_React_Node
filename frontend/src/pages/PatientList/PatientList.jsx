@@ -6,10 +6,13 @@ import './patientList.css'
 
 const PatientList = () => {
 
+  const handleSearch = () => {}
+
   return (
     <>
       <div className="search-patient">
           <Input 
+            onChange={handleSearch}
             isSearcheable
             type='text'
             nameProp='search'

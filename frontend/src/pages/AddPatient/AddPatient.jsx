@@ -4,10 +4,19 @@ import Input from '../../components/Input/Input';
 import './addPatient.css';
 
 const AddPatient = () => {
+  
+  const handleName = () => {};
+  const handleLastName = () => {};
+  const handleDNI = () => {};
+  const handleSocialNetwork = () => {};
+  const handleAge = () => {};
+  const handleGenre = () => {};
+
   return (
     <>
         <div className="input-row">
           <Input
+            onChange={handleName}
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Nombre del paciente'
@@ -18,6 +27,7 @@ const AddPatient = () => {
             inputWidth='30%'
           />
           <Input
+            onChange={handleLastName}
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Apellido del paciente'
@@ -30,6 +40,7 @@ const AddPatient = () => {
         </div>
         <div className="input-row">
           <Input
+            onChange={handleDNI}
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='DNI del paciente'
@@ -40,6 +51,7 @@ const AddPatient = () => {
             inputWidth='30%'
           />
           <Input
+            onChange={handleSocialNetwork}
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Obra Social del paciente'
@@ -52,6 +64,7 @@ const AddPatient = () => {
         </div>
         <div className="input-row">
           <Input
+            onChange={handleAge}
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Edad'
@@ -62,6 +75,7 @@ const AddPatient = () => {
             inputWidth='30%'
           />
           <Input
+            onChange={handleGenre}
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Género'

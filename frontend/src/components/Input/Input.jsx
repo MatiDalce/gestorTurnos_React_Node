@@ -14,7 +14,8 @@ const Input = ({
   margin,
   colorLabel,
   value,
-  isDisabled
+  isDisabled,
+  onChange
 }) => {
 
   const labelStyles = {
@@ -47,6 +48,7 @@ const Input = ({
             className="input-el-textarea"
             name={nameProp ? nameProp : ''}
             value={value ? value : ''}
+            onChange={onChange}
             placeholder={placeholder}
             style={inputStyles}
             rows={14}
@@ -60,6 +62,7 @@ const Input = ({
         <input
           value={value ? value : ''}
           className="input-el"
+          onChange={onChange}
           type={type} 
           name={nameProp ? nameProp : ''}
           placeholder={placeholder}

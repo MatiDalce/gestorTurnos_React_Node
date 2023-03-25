@@ -5,10 +5,16 @@ import Table from '../../components/Table/Table'
 import './shiftPatientList.css'
 
 const ShiftPatientList = () => {
+
+  const handleDateFrom = () => {}
+  const handleDateUntil = () => {}
+  const handleOrder = () => {}
+
   return (
     <>
     <div className="search-patient-shifts">
         <Input 
+          onChange={handleDateFrom}
           hasLabel
           labelTitle='Fecha desde:'
           type='date'
@@ -17,6 +23,7 @@ const ShiftPatientList = () => {
           margin='0 4% 0 0'
         />
         <Input 
+          onChange={handleDateUntil}
           hasLabel
           labelTitle='Fecha hasta:'
           type='date'
@@ -25,6 +32,7 @@ const ShiftPatientList = () => {
           margin='0 4% 0 0'
         />
         <Select
+          onChange={handleOrder}
           options={[
             {
               text: 'De más antiguos a más recientes',
