@@ -33,18 +33,36 @@ const Input = ({
   }
 
   return (
-    <div className="input-container" style={containerStyles}>
+    <>
       {
-        hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
+        type === 'textarea' ?
+        <div className="input-container" style={containerStyles}>
+          {
+            hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
+          }
+          <textarea
+            className="input-el"
+            name={nameProp ? nameProp : ''}
+            placeholder={placeholder}
+            style={inputStyles}
+            rows={14}
+          />
+        </div>
+        :
+        <div className="input-container" style={containerStyles}>
+        {
+          hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
+        }
+        <input
+          className="input-el"
+          type={type} 
+          name={nameProp ? nameProp : ''}
+          placeholder={placeholder}
+          style={inputStyles}
+        />
+      </div>
       }
-      <input
-        className="input-el"
-        type={type} 
-        name={nameProp ? nameProp : ''}
-        placeholder={placeholder}
-        style={inputStyles}
-      />
-    </div>
+    </>
   )
 }
 

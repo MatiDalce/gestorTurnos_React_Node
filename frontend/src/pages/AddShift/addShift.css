@@ -1,0 +1,21 @@
+.select-patient-input {
+    display: flex;
+    justify-content: center;
+}
+
+.input-row-shift {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2% 0;
+}
+
+.btn-addShift-container {
+    display: flex;
+    justify-content: center;
+}
+
+.textarea-input-shift {
+    display: flex;
+    justify-content: center;
+}

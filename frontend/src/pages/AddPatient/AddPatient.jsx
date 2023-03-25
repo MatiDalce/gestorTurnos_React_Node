@@ -8,8 +8,7 @@ const AddPatient = () => {
   return (
     <>
       <Title title='DATOS DEL PACIENTE' />
-      <div className="inputs-patient-container">
-        <div className="inputRow">
+        <div className="input-row">
           <Input
             colorLabel='var(--black-bg)' 
             hasLabel
@@ -74,9 +73,8 @@ const AddPatient = () => {
             nameProp='genre'
             inputWidth='30%'
           />
-        </div>
       </div>
-      <div className='btn-addpatient-container'>
+      <div className='btn-addPatient-container'>
         <Button 
           title={'Registrar'} 
           type='button'
