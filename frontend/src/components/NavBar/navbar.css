@@ -8,6 +8,17 @@
     height: 10vh;
 }
 
+.navbar-home-container {
+    width: 2%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: 2%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
 .navbar-arrow-container {
     width: 10%;
     display: flex;

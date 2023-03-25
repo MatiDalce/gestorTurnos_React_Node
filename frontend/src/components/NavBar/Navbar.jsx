@@ -1,6 +1,7 @@
 import React from 'react'
 import './navbar.css'
 import {CurrentPage} from '../../assets/helpers/CurrentPage';
+import homeLogo from '../../assets/icons/house-solid.svg'
 import ArrowLogo from '../../assets/icons/arrow-left-solid.svg'
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 
@@ -21,8 +22,8 @@ const Navbar = ({title}) => {
                     <div className="navbar-title-container">
                         <h1 className="navbar-title">{<CurrentPage pathname={location.pathname} id={id} />}</h1>
                     </div>
-                    <button>
-                        
+                    <button className="navbar-home-container" onClick={() => navigate('/')}>
+                        <img src={ homeLogo } alt="Ir a la Home" className="navbar-home" />
                     </button>
                 </div>
             }
