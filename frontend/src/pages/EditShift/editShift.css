@@ -1,0 +1,11 @@
+
+.input-editShift-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 2% 0;
+}
+
+.btn-editShift-container {
+    display: flex;
+    justify-content: center;
+}

@@ -6,6 +6,9 @@ export const CurrentPage = ({pathname, id}) => {
         case '/agregar-paciente':
             return 'Agregar Paciente'
             
+        case `/editar-paciente/${id}`:
+            return 'Edición de Paciente'
+            
         case `/paciente/${id}`:
             return `Nombre del Paciente (ID: ${id})`
             
@@ -14,6 +17,9 @@ export const CurrentPage = ({pathname, id}) => {
             
         case '/agregar-turno':
             return 'Agregar Turno'
+            
+        case `/editar-turno/${id}`:
+            return 'Edición del Turno'
             
         case `/turno/${id}`:
             return `Turno N°: ${id}`

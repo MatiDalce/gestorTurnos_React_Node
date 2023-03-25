@@ -44,7 +44,7 @@ const Input = ({
           }
           <textarea
             disabled={isDisabled ? true : false}
-            className="input-el"
+            className="input-el-textarea"
             name={nameProp ? nameProp : ''}
             value={value ? value : ''}
             placeholder={placeholder}
@@ -58,6 +58,7 @@ const Input = ({
           hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
         }
         <input
+          value={value ? value : ''}
           className="input-el"
           type={type} 
           name={nameProp ? nameProp : ''}

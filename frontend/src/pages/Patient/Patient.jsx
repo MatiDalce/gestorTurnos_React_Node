@@ -42,6 +42,7 @@ const Patient = () => {
       </div>
       <div className='btn-addPatient-container'>
         <Button 
+          path={`/editar-turno/${id}`}
           title={'Editar'} 
           type='button'
           width='20%'

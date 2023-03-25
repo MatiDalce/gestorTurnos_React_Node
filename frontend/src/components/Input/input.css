@@ -20,6 +20,8 @@
     transition: ease-in-out 0.3s all;
     font-size: 1.2em;
     width: 100%;
+    align-self: center;
+    text-align: center;
 }
 
 .input-el::placeholder {
@@ -28,6 +30,25 @@
 }
 
 .input-el:focus {
+    border-color: var(--secondary-skyblue-bg);
+}
+
+.input-el-textarea {
+    border-radius: 20px;
+    border: 2px solid var(--skyblue-bg);
+    outline: none;
+    padding: 0.7em;
+    transition: ease-in-out 0.3s all;
+    font-size: 1.2em;
+    width: 100%;
+}
+
+.input-el-textarea::placeholder {
+    color: var(--skyblue-bg);
+    text-align: center;
+}
+
+.input-el-textarea:focus {
     border-color: var(--secondary-skyblue-bg);
 }
 

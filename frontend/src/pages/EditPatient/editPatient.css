@@ -1,0 +1,11 @@
+
+.input-editPatient-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 2% 0;
+}
+
+.btn-editPatient-container {
+    display: flex;
+    justify-content: center;
+}

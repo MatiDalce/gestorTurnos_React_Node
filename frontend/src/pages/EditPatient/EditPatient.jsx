@@ -1,13 +1,16 @@
 import React from 'react';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
-import './addPatient.css';
+import Title from '../../components/Title/Title';
+import './editPatient.css';
 
-const AddPatient = () => {
+const EditPatient = () => {
   return (
     <>
-        <div className="input-row">
+      <Title title='EDICIÓN DE DATOS DEL PACIENTE' />
+        <div className="input-editPatient-row">
           <Input
+            value='Diego'
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Nombre del paciente'
@@ -18,6 +21,7 @@ const AddPatient = () => {
             inputWidth='30%'
           />
           <Input
+            value='Perez'
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Apellido del paciente'
@@ -28,8 +32,9 @@ const AddPatient = () => {
             inputWidth='30%'
           />
         </div>
-        <div className="input-row">
+        <div className="input-editPatient-row">
           <Input
+            value='46235233'
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='DNI del paciente'
@@ -40,6 +45,7 @@ const AddPatient = () => {
             inputWidth='30%'
           />
           <Input
+            value='OSPERYH'
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Obra Social del paciente'
@@ -50,8 +56,9 @@ const AddPatient = () => {
             inputWidth='30%'
           />
         </div>
-        <div className="input-row">
+        <div className="input-editPatient-row">
           <Input
+            value='37'
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Edad'
@@ -62,6 +69,7 @@ const AddPatient = () => {
             inputWidth='30%'
           />
           <Input
+            value='Masculino'
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Género'
@@ -72,9 +80,9 @@ const AddPatient = () => {
             inputWidth='30%'
           />
       </div>
-      <div className='btn-addPatient-container'>
+      <div className='btn-editPatient-container'>
         <Button 
-          title={'Registrar'} 
+          title={'Editar'} 
           type='button'
           width='20%'
           margin='5% 0'
@@ -84,4 +92,4 @@ const AddPatient = () => {
   )
 }
 
-export default AddPatient
+export default EditPatient
