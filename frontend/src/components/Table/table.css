@@ -34,15 +34,30 @@
 
 /* EXTRA SMALL */
 @media screen and (max-width: 576px) {
-
+    .headers {
+        font-size: 1em;
+    }
+    .table-cell {
+        font-size: 0.7em;
+    }
 }
 /* SMALL */
 @media screen and (min-width: 577px) and (max-width: 767px) {
-
+    .headers {
+        font-size: 1.5em;
+    }
+    .table-cell {
+        font-size: 0.8em;
+    }
 }
 /* MEDIUM */
 @media screen and (min-width: 768px) and (max-width: 991px) {
-    
+    .headers {
+        font-size: 1.5em;
+    }
+    .table-cell {
+        font-size: 0.8em;
+    }
 }
 /* LARGE */
 @media screen and (min-width: 992px) and (max-width: 1199px) {

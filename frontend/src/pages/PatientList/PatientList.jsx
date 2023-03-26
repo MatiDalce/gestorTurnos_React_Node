@@ -11,6 +11,7 @@ const PatientList = () => {
   return (
     <>
       <div className="search-patient">
+        <div className="patientList-input">
           <Input 
             onChange={handleSearch}
             isSearcheable
@@ -20,12 +21,15 @@ const PatientList = () => {
             inputWidth='60%'
             margin='0 4% 0 0'
           />
-        <Button 
-          title={'Agregar Paciente'} 
-          type='button'
-          width='30%'
-          path='/agregar-paciente'
-        />
+        </div>
+        <div className="patientList-btn">
+          <Button 
+            title={'Agregar Paciente'} 
+            type='button'
+            width='30%'
+            path='/agregar-paciente'
+          />
+        </div>
       </div>
       <Table 
         staticPath={'/paciente'}

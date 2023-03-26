@@ -6,9 +6,23 @@
     justify-content: space-around;
 }
 
+.patientList-input {
+    width: 60%;
+}
+
+.patientList-btn {
+    width: 30%;
+}
+
 /* EXTRA SMALL */
 @media screen and (max-width: 576px) {
-
+    .patientList-input {
+        width: 60%;
+    }
+    
+    .patientList-btn {
+        width: 30%;
+    }
 }
 /* SMALL */
 @media screen and (min-width: 577px) and (max-width: 767px) {

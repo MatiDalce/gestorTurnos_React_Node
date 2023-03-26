@@ -57,6 +57,7 @@ const Table = ({
     const cells = columns.map((column) => (
       <p className='table-cell' key={column}>{row[column]}</p>
     ));
+    
     return <div 
       key={index} 
       /* style={colorRow} */ 
