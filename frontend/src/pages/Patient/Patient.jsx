@@ -9,8 +9,8 @@ const Patient = () => {
 
   return (
     <>
-      <Title title='DIEGO PEREZ' />
-      <div className="input-patiente-row">
+      <p className='patient-title'>DIEGO PEREZ</p>
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Nombre del Paciente</p>
           <p className="data">Diego</p>
@@ -20,7 +20,7 @@ const Patient = () => {
           <p className="data">Perez</p>
         </div>
       </div>
-      <div className="input-patiente-row">
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">DNI del Paciente</p>
           <p className="data">548458445</p>
@@ -30,7 +30,7 @@ const Patient = () => {
           <p className="data">OSPERYH</p>
         </div>
       </div>
-      <div className="input-patiente-row">
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Edad</p>
           <p className="data">37 años</p>
@@ -40,29 +40,35 @@ const Patient = () => {
           <p className="data">Masculino</p>
         </div>
       </div>
-      <div className='btn-addPatient-container'>
-        <Button 
-          path={`/editar-turno/${id}`}
-          title={'Editar'} 
-          type='button'
-          width='20%'
-          margin='5% 2%'
-        />
-        <Button 
-          path={`/turnos-paciente/${id}`}
-          title={'Ver Turnos'} 
-          type='button'
-          width='20%'
-          margin='5% 2%'
-          bgColor='var(--green-bg)'
-        />
-        <Button 
-          title={'Borrar'} 
-          type='button'
-          width='20%'
-          margin='5% 2%'
-          bgColor='var(--red-bg)'
-        />
+      <div className='btn-patient-container'>
+        <div className="btn-patient-box">
+          <Button 
+            path={`/editar-paciente/${id}`}
+            title={'Editar'} 
+            type='button'
+            width='20%'
+            margin='5% 2%'
+          />
+        </div>
+        <div className="btn-patient-box">
+          <Button 
+            path={`/turnos-paciente/${id}`}
+            title={'Ver Turnos'} 
+            type='button'
+            width='20%'
+            margin='5% 2%'
+            bgColor='var(--green-bg)'
+          />
+        </div>
+        <div className="btn-patient-box">
+          <Button 
+            title={'Borrar'} 
+            type='button'
+            width='20%'
+            margin='5% 2%'
+            bgColor='var(--red-bg)'
+          />
+        </div>
       </div>
     </>
   )

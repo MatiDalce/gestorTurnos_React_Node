@@ -54,6 +54,7 @@
     }
     .navbar-title {
         font-size: 1.5em;
+        text-align:center;
     }
     .navbar-arrow {
         width: 2em;
