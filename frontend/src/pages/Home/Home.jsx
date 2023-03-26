@@ -9,32 +9,32 @@ const Home = () => {
     <div className='home-bg'>
       <div className="home-container">
         <div className="home-container-small">
-          <Title 
+          <Title
             title='Bienvenido'
             margin='5% 0'
           />
           <div className="btn-welcome">
-            <Button 
-              title={'Pacientes'} 
-              type='button'
-              width='30%'
-              margin='5% 0'
-              path='/listado-pacientes'
-            />
-            <Button 
-              title={'Mi Calendario'} 
-              type='button'
-              width='30%'
-              margin='5% 0'
-              path='/mi-calendario'
-            />
-            <Button 
-              title={'Turnos'} 
-              type='button'
-              width='30%'
-              margin='5% 0'
-              path='/listado-turnos'
-            />
+            <div className="btn-box-home">
+              <Button
+                title={'Pacientes'} 
+                type='button'
+                path='/listado-pacientes'
+              />
+            </div>
+            <div className="btn-box-home">
+              <Button
+                title={'Mi Calendario'} 
+                type='button'
+                path='/mi-calendario'
+              />
+            </div>
+            <div className="btn-box-home">
+              <Button
+                title={'Turnos'} 
+                type='button'
+                path='/listado-turnos'
+              />
+            </div>
           </div>
         </div>
       </div>

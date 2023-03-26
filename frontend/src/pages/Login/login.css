@@ -25,3 +25,76 @@
     flex-direction: column;
     align-items: center;
 }
+
+.login-input-box {
+    width: 50%;
+    margin: 10% 0 15% 0;
+}
+
+.login-btn-box {
+    width: 30%;
+}
+
+/* EXTRA SMALL */
+@media screen and (max-width: 576px) {
+    .login-container {
+        width: 70vw;
+        height: 40vh;
+    }
+    .login-input-box {
+        width: 100%;
+        margin: 20% 0 25% 0;
+    }
+    
+    .login-btn-box {
+        width: 90%;
+    }
+}
+/* SMALL */
+@media screen and (min-width: 577px) and (max-width: 767px) {
+    .login-container {
+        width: 70vw;
+        height: 50vh;
+    }
+    .login-input-box {
+        width: 80%;
+        margin: 20% 0 25% 0;
+    }
+    
+    .login-btn-box {
+        width: 60%;
+    }
+}
+/* MEDIUM */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .login-container {
+        width: 70vw;
+        height: 70vh;
+    }
+    .login-input-box {
+        width: 80%;
+        margin: 20% 0 25% 0;
+    }
+    
+    .login-btn-box {
+        width: 60%;
+    }
+}
+/* LARGE */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .login-input-box {
+        width: 60%;
+    }
+    
+    .login-btn-box {
+        width: 40%;
+    }
+}
+/* EXTRA LARGE */
+@media screen and (min-width: 1200px) and (max-width: 1399px) {
+    
+}
+/* EXTRA EXTRA LARGE */
+@media screen and (min-width: 1400px) {
+    
+}

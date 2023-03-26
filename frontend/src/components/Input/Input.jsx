@@ -9,9 +9,7 @@ const Input = ({
   type,
   nameProp,
   placeholder,
-  inputWidth,
   isSearcheable,
-  margin,
   colorLabel,
   value,
   isDisabled,
@@ -23,23 +21,18 @@ const Input = ({
     textAlign: isLabelCenter ? 'center' : ''
   }
 
-  const containerStyles = {
-    width: inputWidth ? inputWidth : '40%',
-  }
-
   const inputStyles = {
     backgroundImage: isSearcheable ? `url(${magnifyingGlass})` : '',
     backgroundRepeat: isSearcheable ? `no-repeat` : '',
     backgroundSize: isSearcheable ? `30px` : '',
     backgroundPosition: isSearcheable ? '98% 50%' : '',
-    margin: margin ? margin : 0
   }
 
   return (
     <>
       {
         type === 'textarea' ?
-        <div className="input-container" style={containerStyles}>
+        <div className="input-container">
           {
             hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
           }
@@ -55,7 +48,7 @@ const Input = ({
           />
         </div>
         :
-        <div className="input-container" style={containerStyles}>
+        <div className="input-container">
         {
           hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
         }

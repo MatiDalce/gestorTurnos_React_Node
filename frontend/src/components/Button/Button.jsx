@@ -6,16 +6,12 @@ const Button = ({
   title,
   type,
   bgColor,
-  width,
-  margin,
   path
 }) => {
   const navigate = useNavigate()
 
   const buttonStyle = {
     backgroundColor: `${bgColor ? bgColor : 'var(--skyblue-bg)'}`,
-    width: `${width ? width : '30%'}`,
-    margin: margin ? margin : '0.5em 0',
   };
 
   return (

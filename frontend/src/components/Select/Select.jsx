@@ -6,7 +6,6 @@ const Select = ({
     isLabelCenter,
     hasLabel,
     labelTitle,
-    inputWidth,
     options,
     nameProp,
     onChange
@@ -16,13 +15,9 @@ const Select = ({
         color: colorLabel ? colorLabel : 'var(--skyblue-bg)',
         textAlign: isLabelCenter ? 'center' : ''
     }
-    
-    const containerStyles = {
-        width: inputWidth ? inputWidth : '40%',
-    }
 
     return (
-        <div className="select-container" style={containerStyles}>
+        <div className="select-container">
             {
                 hasLabel && <label style={labelStyles} className="label-select">{ labelTitle }</label>
             }
