@@ -54,9 +54,9 @@ const Table = ({
     //   backgroundColor: index % 2 === 0 ? 'var(--white-bg)' : 'var(--gray-bg)',
     // };
 
-    const cells = columns.map((column) => (
-      <p className='table-cell' key={column}>{row[column]}</p>
-    ));
+    const cells = columns.map((column) => {
+      return <p className='table-cell' key={column}>{row[column]}</p>
+    });
     
     return <div 
       key={index} 

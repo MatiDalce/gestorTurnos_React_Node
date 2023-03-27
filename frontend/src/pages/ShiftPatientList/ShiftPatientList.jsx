@@ -13,24 +13,25 @@ const ShiftPatientList = () => {
   return (
     <>
     <div className="search-patient-shifts">
+      <div className="shiftPatientList-input-box">
         <Input 
           onChange={handleDateFrom}
           hasLabel
           labelTitle='Fecha desde:'
           type='date'
           nameProp='fromDate'
-          inputWidth='30%'
-          margin='0 4% 0 0'
         />
+      </div>
+      <div className="shiftPatientList-input-box">
         <Input 
           onChange={handleDateUntil}
           hasLabel
           labelTitle='Fecha hasta:'
           type='date'
           nameProp='untilDate'
-          inputWidth='30%'
-          margin='0 4% 0 0'
         />
+      </div>
+      <div className="shiftPatientList-input-box">
         <Select
           onChange={handleOrder}
           options={[
@@ -46,9 +47,8 @@ const ShiftPatientList = () => {
           hasLabel
           labelTitle='Ordenar por:'
           nameProp='untilDate'
-          inputWidth='30%'
-          margin='0 4% 0 0'
         />
+      </div>
     </div>
     <Table 
       staticPath={'/turno'}

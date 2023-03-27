@@ -49,6 +49,9 @@
 
 /* EXTRA SMALL */
 @media screen and (max-width: 576px) {
+    .navbar {
+        margin-bottom: 1em;
+    }
     .navbar-title-container {
         width: 70%;
     }
@@ -65,6 +68,9 @@
 }
 /* SMALL */
 @media screen and (min-width: 577px) and (max-width: 767px) {
+    .navbar {
+        margin-bottom: 1em;
+    }
     .navbar-title {
         font-size: 1.5em;
     }
@@ -77,6 +83,9 @@
 }
 /* MEDIUM */
 @media screen and (min-width: 768px) and (max-width: 991px) {
+    .navbar {
+        margin-bottom: 1em;
+    }
     .navbar-title {
         font-size: 2em;
     }

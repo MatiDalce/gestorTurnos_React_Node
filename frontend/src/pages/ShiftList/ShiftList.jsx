@@ -13,6 +13,7 @@ const ShiftList = () => {
   return (
     <>
     <div className="search-shift">
+      <div className="shiftList-input-box">
         <Input 
           onChange={handleName}
           isSearcheable
@@ -20,33 +21,33 @@ const ShiftList = () => {
           labelTitle='Nombre'
           type='text'
           nameProp='search'
-          inputWidth='16%'
-          margin='0 4% 0 0'
         />
+      </div>
+      <div className="shiftList-input-box">
         <Input 
           onChange={handleDateFrom}
           hasLabel
           labelTitle='Fecha desde:'
           type='date'
           nameProp='fromDate'
-          inputWidth='16%'
-          margin='0 4% 0 0'
         />
+      </div>
+      <div className="shiftList-input-box">
         <Input 
           onChange={handleDateUntil}
           hasLabel
           labelTitle='Fecha hasta:'
           type='date'
           nameProp='untilDate'
-          inputWidth='16%'
-          margin='0 4% 0 0'
         />
-      <Button 
-        title={'Agregar Turno'} 
-        type='button'
-        width='30%'
-        path='/agregar-turno'
-      />
+      </div>
+      <div className="shiftList-btn-box">
+        <Button 
+          title={'Agregar Turno'} 
+          type='button'
+          path='/agregar-turno'
+        />
+      </div>
     </div>
     <Table 
       staticPath={'/turno'}
