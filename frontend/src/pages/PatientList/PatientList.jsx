@@ -3,16 +3,22 @@ import Table from '../../components/Table/Table'
 import Input from '../../components/Input/Input'
 import Button from '../../components/Button/Button'
 import './patientList.css'
+import { useState } from 'react'
 
 const PatientList = () => {
 
-  const handleSearch = () => {}
+  const [search, setSearch] = useState();
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value)
+  }
 
   return (
     <>
       <div className="search-patient">
         <div className="patientList-input">
           <Input 
+            value={search}
             onChange={handleSearch}
             isSearcheable
             type='text'
