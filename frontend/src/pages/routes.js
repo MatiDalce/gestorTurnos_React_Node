@@ -17,24 +17,25 @@ import Shift from './Shift/Shift'
 import ShiftPatientList from "./ShiftPatientList/ShiftPatientList";
 import EditShift from "./EditShift/EditShift";
 import EditPatient from "./EditPatient/EditPatient";
+import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 
 // RUTAS
 export const router = createBrowserRouter(
     createRoutesFromChildren(
         <Route path="/" element={<Navbar />}>
             <Route path="*" element={<Error />} />
-            <Route index element={<Home />} />
+            <Route index element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path="/login" element={<Login />} />
-            <Route path="/listado-pacientes" element={<PatientList />} />
-            <Route path="/agregar-paciente" element={<AddPatient />} />
-            <Route path="/editar-paciente/:id" element={<EditPatient />} />
-            <Route path="/paciente/:id" element={<Patient />} />
-            <Route path="/mi-calendario" element={<MyCalendar />} />
-            <Route path="/listado-turnos" element={<ShiftList />} />
-            <Route path="/agregar-turno" element={<AddShift />} />
-            <Route path="/editar-turno/:id" element={<EditShift />} />
-            <Route path="/turno/:id" element={<Shift />} />
-            <Route path="/turnos-paciente/:id" element={<ShiftPatientList />} />
+            <Route path="/listado-pacientes" element={<ProtectedRoute><PatientList /></ProtectedRoute>} />
+            <Route path="/agregar-paciente" element={<ProtectedRoute><AddPatient /></ProtectedRoute>} />
+            <Route path="/editar-paciente/:id" element={<ProtectedRoute><EditPatient /></ProtectedRoute>} />
+            <Route path="/paciente/:id" element={<ProtectedRoute><Patient /></ProtectedRoute>} />
+            <Route path="/mi-calendario" element={<ProtectedRoute><MyCalendar /></ProtectedRoute>} />
+            <Route path="/listado-turnos" element={<ProtectedRoute><ShiftList /></ProtectedRoute>} />
+            <Route path="/agregar-turno" element={<ProtectedRoute><AddShift /></ProtectedRoute>} />
+            <Route path="/editar-turno/:id" element={<ProtectedRoute><EditShift /></ProtectedRoute>} />
+            <Route path="/turno/:id" element={<ProtectedRoute><Shift /></ProtectedRoute>} />
+            <Route path="/turnos-paciente/:id" element={<ProtectedRoute><ShiftPatientList /></ProtectedRoute>} />
         </Route>
     )
 );

@@ -1,14 +1,12 @@
 import React from 'react'
 import './button.css'
-import { useNavigate } from 'react-router-dom';
 
 const Button = ({
   title,
   type,
   bgColor,
-  path
+  onClick
 }) => {
-  const navigate = useNavigate()
 
   const buttonStyle = {
     backgroundColor: `${bgColor ? bgColor : 'var(--skyblue-bg)'}`,
@@ -19,7 +17,7 @@ const Button = ({
       type={type}
       className="btn"
       style={buttonStyle}
-      onClick={() => navigate(path)}
+      onClick={onClick}
     >
       {title}
     </button>

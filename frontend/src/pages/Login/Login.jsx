@@ -3,12 +3,22 @@ import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import Title from '../../components/Title/Title';
 import './login.css';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [pass, setPass] = useState()
 
   const handlePassword = (e) => {
     setPass(e.target.value);
+  }
+
+  const handleCheckPassword = () => {
+    if (pass !== 'contraseña123') {
+      return;
+    };
+    localStorage.setItem('auth', 'Enabled')
+    navigate('/')
   }
 
   return (
@@ -17,7 +27,6 @@ const Login = () => {
         <div className="login-container-small">
           <Title 
             title='Gestor de Turnos'
-            margin='5% 0'
           />
           <div className="login-input-box">
             <Input
@@ -31,6 +40,7 @@ const Login = () => {
           </div>
           <div className="login-btn-box">
             <Button
+              onClick={handleCheckPassword}
               title={'Ingresar'} 
               type='button'
               width='30%'
