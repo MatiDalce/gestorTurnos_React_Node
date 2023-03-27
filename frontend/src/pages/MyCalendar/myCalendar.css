@@ -1,13 +1,6 @@
-.calendar-bg {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.calendar-container {
-    width: 60%;
-    height: 60%;
-    border: 2px solid var(--skyblue-bg);
+.calendar-box {
+    margin: 5% auto 2% auto;
+    width: 90vw;
 }
 
 /* EXTRA SMALL */
