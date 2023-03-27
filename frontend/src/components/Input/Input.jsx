@@ -44,7 +44,6 @@ const Input = ({
             onChange={onChange}
             placeholder={placeholder}
             style={inputStyles}
-            rows={14}
           />
         </div>
         :
