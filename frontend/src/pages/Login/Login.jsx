@@ -9,6 +9,7 @@ import ErrorMsg from '../../components/ErrorMsg/ErrorMsg';
 const Login = () => {
   const navigate = useNavigate();
   const [pass, setPass] = useState()
+  const [error, setError] = useState(false)
 
   const handlePassword = (e) => {
     setPass(e.target.value);
@@ -16,10 +17,14 @@ const Login = () => {
 
   const handleCheckPassword = () => {
     if (pass !== 'contraseña123') {
-      return;
-    };
-    localStorage.setItem('auth', 'Enabled')
-    navigate('/')
+      setError(true);
+      setTimeout(() => {
+        setError(false)
+      }, 5000);
+    } else {
+      localStorage.setItem('auth', 'Enabled')
+      navigate('/')
+    }
   }
 
   return (
@@ -38,9 +43,7 @@ const Login = () => {
               placeholder={'Ingrese su contraseña'}
               margin='5% 0'
             />
-            <div className="login-error-container">
-              <ErrorMsg text='Contraseña incorrecta' />
-            </div>
+            { error && <ErrorMsg text='Contraseña incorrecta' />}
           </div>
           <div className="login-btn-box">
             <Button
@@ -49,8 +52,8 @@ const Login = () => {
               type='button'
               width='30%'
               margin='5% 0'
-              path='/'
             />
+            {/* <button onClick={handleCheckPassword}>alala</button> */}
           </div>
         </div>
       </div>

@@ -1,18 +1,25 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Table from '../../components/Table/Table'
 import Input from '../../components/Input/Input'
 import Button from '../../components/Button/Button'
 import './patientList.css'
-import { useState } from 'react'
 
 const PatientList = () => {
 
   const [search, setSearch] = useState();
+  const [patients, setPatients] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/patient')
+    .then(res => res.json())
+    .then(res => setPatients(res));
+  }, [])
+
+  console.log(patients);
 
   const handleSearch = (e) => {
     setSearch(e.target.value)
   }
-
   return (
     <>
       <div className="search-patient">
@@ -38,130 +45,10 @@ const PatientList = () => {
         </div>
       </div>
       <Table 
-        staticPath={'/paciente'}
-        headers={['ID','Nombre', 'DNI', 'Email']} 
-        content={[
-          {
-            id: 1,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com',
-          },
-          {
-            id: 2,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 3,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 4,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 5,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 6,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 7,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com',
-          },
-          {
-            id: 8,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 9,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 10,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 11,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 12,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 13,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 14,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 15,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com',
-          },
-          {
-            id: 16,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 17,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 18,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 19,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-          {
-            id: 20,
-            name: 'Diego Perez',
-            dni: '2325235',
-            email: 'diegop@email.com'
-          },
-        ]} 
+        staticPath={'/paciente'} // Parte de la ruta a la que va a redirigir al hacer click en la celda
+        headers={['ID','Nombre', 'DNI', 'Email']} // Cabeceras
+        contentDisplay={['id', 'name', 'dni', 'email']} // Con esto se filtra la data que se requiere en las celdas
+        content={patients} // Celdas
         />
     </>
   )

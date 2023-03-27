@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import './shift.css'
 
-const Shift = () => {
+const Shift = ({shiftID}) => {
   let {id} = useParams();
+  const [shift, setShift] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/${shiftID}`)
+    .then(res => res.json())
+    .then(res => setShift(res));
+  }, [shiftID])
+
   return (
     <>
     <p className='shift-title' >DIEGO PEREZ</p>

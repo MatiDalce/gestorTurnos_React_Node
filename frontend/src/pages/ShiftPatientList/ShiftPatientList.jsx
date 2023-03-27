@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '../../components/Input/Input'
 import Select from '../../components/Select/Select'
 import Table from '../../components/Table/Table'
 import './shiftPatientList.css'
 
 const ShiftPatientList = () => {
+  const [shiftPatientList, setShiftPatientList] = useState([]);
 
   const handleDateFrom = () => {}
   const handleDateUntil = () => {}
   const handleOrder = () => {}
+
+
+  useEffect(() => {
+    fetch('http://localhost:3001/')
+    .then(res => res.json())
+    .then(res => setShiftPatientList(res));
+  }, [])
 
   return (
     <>
@@ -53,6 +61,7 @@ const ShiftPatientList = () => {
     <Table 
       staticPath={'/turno'}
       headers={['ID', 'N° de turno', 'Fecha', 'Estado']} 
+      contentDisplay={['id', 'appointment', 'date', 'status']}
       content={[
         {
           id: 1,

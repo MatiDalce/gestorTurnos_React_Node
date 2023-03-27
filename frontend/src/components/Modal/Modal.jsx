@@ -23,6 +23,7 @@ const Modal = () => {
             <Table 
                 headerBg='var(--skyblue-bg)'
                 headers={['ID','Nombre y Apellido', 'Hora']}
+                contentDisplay={['id', 'name', 'time']}
                 noClickable
                 noSticky
                 noCursor
