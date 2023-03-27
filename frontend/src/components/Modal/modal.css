@@ -1,14 +1,22 @@
+.modal-center {
+  width: 90vw;
+  height: 100vh;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
 .modal-container {
-    height: 30vh;
+    height: 70vh;
     width: 50vw;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
+    top: 270;
     padding: 2% 6% 2% 2%;
     background-color: var(--skyblue-bg);
     overflow-y: scroll;
     overflow-x: hidden;
+    z-index: 1000;
     scroll-behavior: smooth;
     border-radius: 20px 0 0 20px;
 }
@@ -22,7 +30,6 @@
 .closeModal {
     cursor: pointer;
     width: 20px;
-    position: fixed;
     margin-left: 4%;
 }
 
