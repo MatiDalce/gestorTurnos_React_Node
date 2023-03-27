@@ -32,7 +32,7 @@ const Login = () => {
             <Input
               onChange={handlePassword}
               value={pass}
-              type='text'
+              type='password'
               nameProp='search'
               placeholder={'Ingrese su contraseña'}
               margin='5% 0'
