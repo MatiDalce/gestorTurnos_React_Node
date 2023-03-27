@@ -4,6 +4,7 @@ import Button from '../../components/Button/Button';
 import Title from '../../components/Title/Title';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
+import ErrorMsg from '../../components/ErrorMsg/ErrorMsg';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -37,6 +38,9 @@ const Login = () => {
               placeholder={'Ingrese su contraseña'}
               margin='5% 0'
             />
+            <div className="login-error-container">
+              <ErrorMsg text='Contraseña incorrecta' />
+            </div>
           </div>
           <div className="login-btn-box">
             <Button
