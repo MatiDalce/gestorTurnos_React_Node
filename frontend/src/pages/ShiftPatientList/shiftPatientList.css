@@ -20,6 +20,7 @@
     .shiftPatientList-input-box {
         width: 80%;
         margin: 2% 0;
+        text-align: center;
     }
 }
 /* SMALL */
@@ -31,6 +32,7 @@
     }
     .shiftPatientList-input-box {
         width: 80%;
+        text-align: center;
         margin: 2% 0;
     }
 }
@@ -44,6 +46,7 @@
     .shiftPatientList-input-box {
         width: 80%;
         margin: 2% 0;
+        text-align: center;
     }
 }
 /* LARGE */
