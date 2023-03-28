@@ -4,18 +4,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  left: 5%;
+  top: 5%;
+  position: fixed;
+  z-index: 1000;
 }
 
 .modal-container {
     height: 70vh;
     width: 50vw;
-    top: 270;
     padding: 2% 6% 2% 2%;
     background-color: var(--skyblue-bg);
     overflow-y: scroll;
     overflow-x: hidden;
-    z-index: 1000;
     scroll-behavior: smooth;
     border-radius: 20px;
 }
