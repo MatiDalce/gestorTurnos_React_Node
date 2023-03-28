@@ -8,21 +8,21 @@ import './modal.css'
 // EVENT CLICK - https://fullcalendar.io/docs/eventClick
 // EVENT DATA - https://fullcalendar.io/docs/v3/event-data
 
-const Modal = ({title, description}) => {
-    const [openModal, setOpenModal] = useState(false);
+const Modal = ({ title, description, setter }) => {
 
     const closeModal = () => {
-        setOpenModal(!openModal)
+        // setter: Función que viene del padre y abre o cierra el modal
+        setter()
     }
 
     return (
-        <div className="modal-center">
+        <div className={`modal-center`} >
             <div className="modal-container">
                 <div className='divCloseModal' onClick={closeModal}>
                     <img className='closeModal' src={CrossIcon} alt='Cerrar' />
                 </div>
                 <Title 
-                    title={title}
+                    title={ title }
                     isBold
                     textColor='var(--white-bg)'
                 />

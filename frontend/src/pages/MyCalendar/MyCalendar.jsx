@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -6,9 +6,15 @@ import interactionPlugin from '@fullcalendar/interaction';
 import Modal from '../../components/Modal/Modal';
 import './myCalendar.css';
 
-const MyCalendar = ({ eventsList }) => {
+const MyCalendar = () => {
 
-  // FALTA QUE AL HACER CLICK EN UNA FECHA TE DEVUELVA LA DATA DE ESE EVENTO PARA MANDARLA AL MODAL
+  const [eventsList, setEventsList] = useState([])
+
+  useEffect(() => {
+    // fetch('http://localhost:3001/')
+    // .then(res => res.json())
+    // .then(res => setEventsList(res))
+  }, [])
 
   const [openModal, setOpenModal] = useState(false)
   const [modalTitle, setModalTitle] = useState(false)
@@ -40,23 +46,26 @@ const MyCalendar = ({ eventsList }) => {
     },
   ];
 
+  const handleOpenModal = () => {
+    setOpenModal(!openModal)
+  }
+
   const handleDateClick = (e) => {
     console.log(e.date); // Fecha formato largo
     console.log(e.dateStr); // Fecha formato string yyyy-mm-dd
-    
   }
 
   function handleEventOnClick(eventInfo) {
     // console.log('eventInfo => ', eventInfo); // El evento completo
     // console.log('eventInfo => ', eventInfo.el.fcSeg.eventRange.def.title); // Titulo
     setModalTitle(eventInfo.el.fcSeg.eventRange.def.title)
-    setOpenModal(true)
+    handleOpenModal()
   }
 
   return (
         <div className="calendar-box">
           {
-            openModal && <Modal title={modalTitle} />
+            openModal && <Modal setter={handleOpenModal} title={modalTitle} />
           }
           <FullCalendar 
             events={hardcodeEvents}
@@ -69,8 +78,8 @@ const MyCalendar = ({ eventsList }) => {
             }}
             dateClick={handleDateClick} // Da info sobre el día
             eventClick={handleEventOnClick} // Da info sobre el evento
-            // loading={isLoading}
-            // weekends={false} // Si no quiere fines de semana
+            // loading={true}
+            // weekends={false} // Quita los fines de semana
           />
         </div>
   )

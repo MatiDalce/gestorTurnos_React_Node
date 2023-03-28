@@ -1,7 +1,6 @@
 .modal-center {
   width: 90vw;
   height: 100vh;
-  background-color: red;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +17,7 @@
     overflow-x: hidden;
     z-index: 1000;
     scroll-behavior: smooth;
-    border-radius: 20px 0 0 20px;
+    border-radius: 20px;
 }
 
 .divCloseModal {
@@ -31,6 +30,11 @@
     cursor: pointer;
     width: 20px;
     margin-left: 4%;
+}
+
+.displayModal {
+  display: none;
+  pointer-events: none;
 }
 
 /* width */
