@@ -23,8 +23,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/patient', patientRouter);
-app.use('/appointment', appointmentRouter);
+app.use('/patients', patientRouter);
+app.use('/appointments', appointmentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -7,10 +7,31 @@ module.exports = {
     get: async (req, res) => {
         try {
             const appointments = await db.Appointment.findAll({
-                attributes: { exclude: ['updatedAt', 'createdAt'] },
+                attributes: { exclude: ['updatedAt', 'createdAt', 'patientId'] },
                 include: [{
                     association: "patient", as: "Patient",
-                    attributes: { exclude: ['createdAt', 'updatedAt', 'birthday', 'dni', 'email', 'socialService'] }
+                    attributes: { exclude: ['createdAt',
+                     'updatedAt',
+                      'birthday', 
+                      'maritalStatus', 
+                      'email', 
+                      'socialService', 
+                      "maritalStatus", 
+                      "contactPhone",
+                      "personalPhoneNumber",
+                      "academicLevel",
+                      "bloodType",
+                      "takesMedication",
+                      "medication",
+                      "hasAllergies",
+                      "allergies",
+                      "hasChronicDisease",
+                      "chronicDisease",
+                      "familyMembers",
+                      "parents",
+                      "children",
+                      "siblings"
+                    ] }
                 }]
             });
             res.status(200).json(appointments);
@@ -113,5 +134,42 @@ module.exports = {
             console.error(err);
             res.status(500).send('Internal server error');
         }
+    },
+    downloadOne: async (req, res) => {
+
+        try {
+            const appointmentId = req.params.id; // get the appointment ID from request parameter
+            const appointment = await db.Appointment.findOne({
+                where: { id: appointmentId },
+                attributes: { exclude: ['updatedAt', 'createdAt'] },
+                include: [{
+                    model: db.Patient, as: "patient",
+                    attributes: { exclude: ['createdAt', 'updatedAt'] }
+                }]
+            });
+    
+            if (!appointment) {
+                return res.status(404).send('Appointment not found'); // return error if appointment not found
+            }
+    
+            const fileContent = `Nombre: ${appointment.patient.name}\nNota: ${appointment.note}\n\n`;
+            fs.writeFile('appointment.txt', fileContent, (err) => {
+                if (err) throw err;
+                console.log('The file has been saved!');
+                res.download('appointment.txt', 'appointment.txt', () => {
+                    fs.unlink('appointment.txt', (err) => {
+                        if (err) {
+                            console.error(err);
+                            throw err;
+                        }
+                        console.log('The file has been deleted!');
+                    });
+                });
+            });
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal server error');
+        }
     }
+    
 }
