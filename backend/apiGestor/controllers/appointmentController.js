@@ -1,5 +1,6 @@
 const db = require("../database/models");
 const Op = db.Sequelize.Op;
+const fs = require('fs');
 
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
                 attributes: { exclude: ['updatedAt', 'createdAt'] },
                 include: [{
                     association: "patient", as: "Patient",
-                    attributes: { exclude: ['createdAt', 'updatedAt'] }
+                    attributes: { exclude: ['createdAt', 'updatedAt', 'birthday', 'dni', 'email', 'socialService'] }
                 }]
             });
             res.status(200).json(appointments);
@@ -76,6 +77,44 @@ module.exports = {
             console.error(err);
             res.status(500).send('Error deleting Appointment record');
         }
+    },
+
+    download: async (req, res) => {
+
+        try {
+            const appointments = await db.Appointment.findAll({
+                attributes: { exclude: ['updatedAt', 'createdAt'] },
+                include: [{
+                    model: db.Patient, as: "patient",
+                   attributes: { exclude: ['createdAt', 'updatedAt'] }
+                }]
+            });
+        
+            let fileContent = '';
+            for (let appointment of appointments) {
+                fileContent += `Nombre: ${appointment.patient.name}\nNota: ${appointment.note}\n\n`;
+
+            }
+        
+            fs.writeFile('appointments.txt', fileContent, (err) => {
+              if (err) throw err;
+              console.log('The file has been saved!');
+              res.download('appointments.txt', 'appointments.txt', () => {
+                fs.unlink('appointments.txt', (err) => {
+                  if (err) {
+                    console.error(err);
+                    throw err;
+                  }
+                  console.log('The file has been deleted!');
+                });
+              });
+            });
+          } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal server error');
+          }
+
 
     }
+
 }
