@@ -76,8 +76,20 @@ const MyCalendar = () => {
               center: "title",
               end: "dayGridMonth, timeGridWeek, timeGridDay",
             }}
+            footerToolbar={{
+              start: "today prev,next",
+            }}
+            buttonText={{
+              today: 'Hoy',
+              month: 'Mes',
+              week: 'Semana',
+              day: 'Día',
+              list: 'Lista'
+            }}
             dateClick={handleDateClick} // Da info sobre el día
             eventClick={handleEventOnClick} // Da info sobre el evento
+            eventBackgroundColor='var(--skyblue-bg)'
+            // themeSystem='bootstrap5'
             // loading={true}
             // weekends={false} // Quita los fines de semana
           />
