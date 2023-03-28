@@ -86,35 +86,32 @@ module.exports = {
                 attributes: { exclude: ['updatedAt', 'createdAt'] },
                 include: [{
                     model: db.Patient, as: "patient",
-                   attributes: { exclude: ['createdAt', 'updatedAt'] }
+                    attributes: { exclude: ['createdAt', 'updatedAt'] }
                 }]
             });
-        
+
             let fileContent = '';
             for (let appointment of appointments) {
                 fileContent += `Nombre: ${appointment.patient.name}\nNota: ${appointment.note}\n\n`;
 
             }
-        
+
             fs.writeFile('appointments.txt', fileContent, (err) => {
-              if (err) throw err;
-              console.log('The file has been saved!');
-              res.download('appointments.txt', 'appointments.txt', () => {
-                fs.unlink('appointments.txt', (err) => {
-                  if (err) {
-                    console.error(err);
-                    throw err;
-                  }
-                  console.log('The file has been deleted!');
+                if (err) throw err;
+                console.log('The file has been saved!');
+                res.download('appointments.txt', 'appointments.txt', () => {
+                    fs.unlink('appointments.txt', (err) => {
+                        if (err) {
+                            console.error(err);
+                            throw err;
+                        }
+                        console.log('The file has been deleted!');
+                    });
                 });
-              });
             });
-          } catch (err) {
+        } catch (err) {
             console.error(err);
             res.status(500).send('Internal server error');
-          }
-
-
+        }
     }
-
 }
