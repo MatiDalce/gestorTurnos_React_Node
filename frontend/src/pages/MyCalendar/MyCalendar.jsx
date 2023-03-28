@@ -89,7 +89,7 @@ const MyCalendar = () => {
             dateClick={handleDateClick} // Da info sobre el día
             eventClick={handleEventOnClick} // Da info sobre el evento
             eventBackgroundColor='var(--skyblue-bg)'
-            // themeSystem='bootstrap5'
+            stickyHeaderDates // Mantiene pegadas las cabeceras de los días
             // loading={true}
             // weekends={false} // Quita los fines de semana
           />

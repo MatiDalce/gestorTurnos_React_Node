@@ -13,24 +13,26 @@
 .modal-container {
     height: 70vh;
     width: 50vw;
-    padding: 2% 6% 2% 2%;
+    padding: 2%;
     background-color: var(--skyblue-bg);
     overflow-y: scroll;
     overflow-x: hidden;
     scroll-behavior: smooth;
     border-radius: 20px;
-}
+    z-index: 2000;
+  }
 
 .divCloseModal {
-    width: 20px;
-    float: right;
+    width: 2%;
     z-index: 1000;
+    position: relative;
+    top: 0;
+    right: -95%;
 }
 
 .closeModal {
     cursor: pointer;
     width: 20px;
-    margin-left: 4%;
 }
 
 .displayModal {
