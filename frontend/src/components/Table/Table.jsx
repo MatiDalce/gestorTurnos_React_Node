@@ -66,7 +66,6 @@ const Table = ({
         });
       })
 
-      console.log(cells);
       return <div 
         key={index} 
         /* style={colorRow} */ 

@@ -10,12 +10,13 @@ const PatientList = () => {
   const [patients, setPatients] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/patient')
+    fetch('http://localhost:3001/patients')
     .then(res => res.json())
-    .then(res => setPatients(res));
+    .then(res => {
+      console.log(res);
+      setPatients(res)
+    });
   }, [])
-
-  console.log(patients);
 
   const handleSearch = (e) => {
     setSearch(e.target.value)
@@ -46,8 +47,8 @@ const PatientList = () => {
       </div>
       <Table 
         staticPath={'/paciente'} // Parte de la ruta a la que va a redirigir al hacer click en la celda
-        headers={['ID','Nombre', 'DNI', 'Email']} // Cabeceras
-        contentDisplay={['id', 'name', 'dni', 'email']} // Con esto se filtra la data que se requiere en las celdas
+        headers={['ID','Nombre', 'DNI']} // Cabeceras
+        contentDisplay={['id', 'name', 'dni']} // Con esto se filtra la data que se requiere en las celdas
         content={patients} // Celdas
         />
     </>

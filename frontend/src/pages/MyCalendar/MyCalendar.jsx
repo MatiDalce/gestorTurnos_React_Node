@@ -3,6 +3,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import esLocale from '@fullcalendar/core/locales/es'; 
 import Modal from '../../components/Modal/Modal';
 import './myCalendar.css';
 
@@ -34,7 +35,7 @@ const MyCalendar = () => {
     },
     { 
       id: 3,
-      title: 'Evento 2',
+      title: 'Evento 3',
       start: '2023-03-28T14:00:00',
       end: '2023-03-28T16:00:00',
     },
@@ -79,13 +80,7 @@ const MyCalendar = () => {
             footerToolbar={{
               start: "today prev,next",
             }}
-            buttonText={{
-              today: 'Hoy',
-              month: 'Mes',
-              week: 'Semana',
-              day: 'Día',
-              list: 'Lista'
-            }}
+            locale={esLocale} // Idioma
             dateClick={handleDateClick} // Da info sobre el día
             eventClick={handleEventOnClick} // Da info sobre el evento
             eventBackgroundColor='var(--skyblue-bg)'

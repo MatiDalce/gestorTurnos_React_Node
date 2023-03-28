@@ -13,12 +13,13 @@ const ShiftList = () => {
   const [shiftList, setShiftList] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/appointment')
+    fetch('http://localhost:3001/appointments')
     .then(res => res.json())
-    .then(res => setShiftList(res));
+    .then(res => {
+      console.log(res);
+      setShiftList(res)
+    });
   }, [])
-
-  console.log(shiftList);
 
   return (
     <>

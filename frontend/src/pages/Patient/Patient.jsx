@@ -11,24 +11,27 @@ const Patient = () => {
   useEffect(() => {
     fetch(`http://localhost:3001/patient/${id}`)
     .then(res => res.json())
-    .then(res => setPatient(res));
+    .then(res => {
+      console.log(res);
+      setPatient(res)
+    });
   }, [id])
 
-  console.log(patient);
-  
   return (
     <>
       <p className='patient-title'>{patient.name}</p>
+      
       <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Nombre del Paciente</p>
           <p className="data">{patient.name}</p>
         </div>
         <div className="input-box">
-          <p className="data-title">Nombre del Paciente</p>
+          <p className="data-title">Apellido del Paciente</p>
           <p className="data">{patient.lastname}</p>
         </div>
       </div>
+      
       <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">DNI del Paciente</p>
@@ -39,6 +42,7 @@ const Patient = () => {
           <p className="data">{patient.social_network}</p>
         </div>
       </div>
+      
       <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Edad</p>
@@ -49,6 +53,84 @@ const Patient = () => {
           <p className="data">{patient.genre}</p>
         </div>
       </div>
+      
+      <div className="input-patient-row">
+        <div className="input-box">
+          <p className="data-title">Estado civil</p>
+          <p className="data">{patient.maritalStatus}</p>
+        </div>
+        <div className="input-box">
+          <p className="data-title">Fecha de nacimiento</p>
+          <p className="data">{patient.birthday}</p>
+        </div>
+      </div>
+      
+      <div className="input-patient-row">
+        <div className="input-box">
+          <p className="data-title">Miembros de la familia</p>
+          <p className="data">{patient.familyMembers}</p>
+        </div>
+        <div className="input-box">
+          <p className="data-title">Padres</p>
+          <p className="data">{patient.parents}</p>
+        </div>
+      </div>
+      
+      <div className="input-patient-row">
+        <div className="input-box">
+          <p className="data-title">Hijos</p>
+          <p className="data">{patient.children}</p>
+        </div>
+        <div className="input-box">
+          <p className="data-title">Hermanos</p>
+          <p className="data">{patient.siblings}</p>
+        </div>
+      </div>
+      
+      <div className="input-patient-row">
+        <div className="input-box">
+          <p className="data-title">¿Viven sus hermanos?</p>
+          {/* <p className="data">{patient.genre}</p> */}
+        </div>
+        <div className="input-box">
+          <p className="data-title">Teléfono personal</p>
+          <p className="data">{patient.personalPhoneNumber}</p>
+        </div>
+      </div>
+      
+      <div className="input-patient-row">
+        <div className="input-box">
+          <p className="data-title">Teléfono de contacto</p>
+          <p className="data">{patient.contactPhone}</p>
+        </div>
+        <div className="input-box">
+          <p className="data-title">Nivel académico cursado</p>
+          <p className="data">{patient.academicLevel}</p>
+        </div>
+      </div>
+      
+      <div className="input-patient-row">
+        <div className="input-box">
+          <p className="data-title">Grupo sanguíneo</p>
+          <p className="data">{patient.bloodType}</p>
+        </div>
+        <div className="input-box">
+          <p className="data-title">¿Toma algún medicamento?</p>
+          <p className="data">{patient.medication}</p>
+        </div>
+      </div>
+      
+      <div className="input-patient-row">
+        <div className="input-box">
+          <p className="data-title">¿Tiene alguna alergia?</p>
+          <p className="data">{patient.hasAllergies}</p>
+        </div>
+        <div className="input-box">
+          <p className="data-title">¿Tiene alguna enfermedad crónica?</p>
+          <p className="data">{patient.hasChronicDisease}</p>
+        </div>
+      </div>
+
       <div className='btn-patient-container'>
         <div className="btn-patient-box">
           <Button 
