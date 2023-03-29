@@ -66,6 +66,24 @@ const Input = ({
           />
         </div>
       }
+      {/* INPUT PASSWORD */}
+      {
+        (type === 'password') &&
+          <div className="input-container">
+          {
+            hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
+          }
+          <input
+            value={value ? value : ''}
+            className="input-el"
+            onChange={onChange}
+            type={type} 
+            name={nameProp ? nameProp : ''}
+            placeholder={placeholder}
+            style={inputStyles}
+          />
+        </div>
+      }
       {/* INPUT NUMBER */}
       {
         (type === 'number') &&
@@ -83,6 +101,42 @@ const Input = ({
             style={inputStyles}
             min={0}
             max={100}
+          />
+        </div>
+      }
+      {/* INPUT TIME */}
+      {
+        (type === 'time') &&
+          <div className="input-container">
+          {
+            hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
+          }
+          <input
+            value={value ? value : ''}
+            className="input-el"
+            onChange={onChange}
+            type={type} 
+            name={nameProp ? nameProp : ''}
+            placeholder={placeholder}
+            style={inputStyles}
+          />
+        </div>
+      }
+      {/* INPUT DATE */}
+      {
+        (type === 'date') &&
+          <div className="input-container">
+          {
+            hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
+          }
+          <input
+            value={value ? value : ''}
+            className="input-el"
+            onChange={onChange}
+            type={type} 
+            name={nameProp ? nameProp : ''}
+            placeholder={placeholder}
+            style={inputStyles}
           />
         </div>
       }

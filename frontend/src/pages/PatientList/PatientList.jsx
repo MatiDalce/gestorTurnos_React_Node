@@ -47,8 +47,8 @@ const PatientList = () => {
       </div>
       <Table 
         staticPath={'/paciente'} // Parte de la ruta a la que va a redirigir al hacer click en la celda
-        headers={['ID','Nombre', 'DNI']} // Cabeceras
-        contentDisplay={['id', 'name', 'dni']} // Con esto se filtra la data que se requiere en las celdas
+        headers={['ID','Nombre', 'DNI', 'E-mail']} // Cabeceras
+        contentDisplay={['id', 'name', 'dni', 'email']} // Con esto se filtra la data que se requiere en las celdas
         content={patients} // Celdas
         />
     </>

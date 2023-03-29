@@ -64,7 +64,7 @@ const EditPatient = () => {
   const handleForm = (e) => {
     e.preventDefault()
     console.log(patient);
-    
+
     // fetch(`/patient/${id}`, {})
     // .then(res => res.json())
     // .then(res => {
@@ -73,7 +73,6 @@ const EditPatient = () => {
   }
 
   const handleName = (e) => {
-    // setName(e.target.value)
     setPatient({
       ...patient,
       name: e.target.value
@@ -84,126 +83,108 @@ const EditPatient = () => {
       ...patient,
       lastName: e.target.value
     })
-    // setLastName(e.target.value)
   };
   const handleDNI = (e) => {
     setPatient({
       ...patient,
       dni: e.target.value
     })
-    // setDni(e.target.value)
   };
   const handleSocialNetwork = (e) => {
     setPatient({
       ...patient,
       socialNetwork: e.target.value
     })
-    // setSocialNetwork(e.target.value)
   };
   const handleAge = (e) => {
     setPatient({
       ...patient,
       age: e.target.value
     })
-    // setAge(e.target.value)
   };
   const handleGenre = (value) => {
     setPatient({
       ...patient,
       genre: value
     })
-    // setGenre(value)
   };
   const handleMaritalStatus = (value) => {
     setPatient({
       ...patient,
       maritalStatus: value
     })
-    // setMaritalStatus(value)
   }
   const handleBirthday = (e) => {
     setPatient({
       ...patient,
       birthday: e.target.value
     })
-    // setBirthday(e.target.value)
   }
   const handleFather = (e) => {
     setPatient({
       ...patient,
       father: e.target.value
     })
-    // setFather(e.target.value)
   }
   const handleMother = (e) => {
     setPatient({
       ...patient,
       mother: e.target.value
     })
-    // setMother(e.target.value)
   }
   const handleChildren = (e) => {
     setPatient({
       ...patient,
       children: e.target.value
     })
-    // setChildren(e.target.value)
   }
   const handleSiblings = (e) => {
     setPatient({
       ...patient,
       siblings: e.target.value
     })
-    // setSiblings(e.target.value)
   }
   const handleLivingSiblings = (value) => {
     setPatient({
       ...patient,
       livingSiblings: value
     })
-    // setLivingSiblings(value)
   }
   const handlePersonalPhone = (e) => {
     setPatient({
       ...patient,
       personalPhone: e.target.value
     })
-    // setPersonalPhone(e.target.value)
   }
   const handleContactPhone = (e) => {
     setPatient({
       ...patient,
       contactPhone: e.target.value
     })
-    // setContactPhone(e.target.value)
   }
   const handleChronicDisease = (e) => {
     setPatient({
       ...patient,
       chronicDisease: e.target.value
     })
-    // setChronicDisease(e.target.value)
   }
   const handleHasAllergies = (e) => {
     setPatient({
       ...patient,
       hasAllergies: e.target.value
     })
-    // setHasAllergies(e.target.value)
   }
   const handleBloodType = (e) => {
     setPatient({
       ...patient,
       bloodType: e.target.value
     })
-    // setBloodType(e.target.value)
   }
   const handleMedication = (e) => {
     setPatient({
       ...patient,
       medication: e.target.value
     })
-    // setMedication(e.target.value)
   }
 
   return (
@@ -505,8 +486,6 @@ const EditPatient = () => {
           <Button 
             title={'Editar'} 
             type='submit'
-            width='20%'
-            margin='5% 0'
           />
         </div>
       </div>

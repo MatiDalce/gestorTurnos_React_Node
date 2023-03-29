@@ -1,12 +1,20 @@
 import React from 'react';
+import { useState } from 'react';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import './editShift.css';
 
 const EditShift = () => {
 
-  const handleDate = () => {};
-  const handleTime = () => {};
+  const [date, setDate] = useState()
+  const [hour, setHour] = useState()
+
+  const handleDate = (e) => {
+    const date = new Date(e.target.value);
+
+  };
+  const handleTime = (e) => {
+  };
   const handleNotes = () => {};
 
   return (
