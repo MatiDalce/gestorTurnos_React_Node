@@ -40,6 +40,51 @@ module.exports = {
             res.status(500).send('Error al obtener los turnos');
         }
     },
+
+    getOne: async (req, res) => {
+        const { id } = req.params;
+      
+        try {
+          const appointment = await db.Appointment.findOne({
+            where: { id },
+            attributes: { exclude: ['updatedAt', 'createdAt', 'patientId'] },
+            include: [{
+              association: "patient", as: "Patient",
+              attributes: { exclude: ['createdAt',
+               'updatedAt',
+                'birthday', 
+                'maritalStatus', 
+                'email', 
+                'socialService', 
+                "maritalStatus", 
+                "contactPhone",
+                "personalPhoneNumber",
+                "academicLevel",
+                "bloodType",
+                "takesMedication",
+                "medication",
+                "hasAllergies",
+                "allergies",
+                "hasChronicDisease",
+                "chronicDisease",
+                "familyMembers",
+                "parents",
+                "children",
+                "siblings"
+              ] }
+            }]
+          });
+      
+          if (appointment) {
+            res.status(200).json(appointment);
+          } else {
+            res.status(404).json({ message: 'No appointment found for the given ID' });
+          }
+        } catch (err) {
+          console.error(err);
+          res.status(500).send('Error al obtener el turno');
+        }
+      },
     post: async (req, res) => {
         const { day, hour, patient, note } = req.body;
 

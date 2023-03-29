@@ -4,6 +4,7 @@ const patientController = require ('../controllers/patientController') ;
 
 
 router.get ('/', patientController.get) ;
+router.get('/:id', patientController.getOne)
 router.post('/', patientController.post);
 router.put("/:id", patientController.put);
 router.delete("/:id", patientController.delete);
