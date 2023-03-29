@@ -1,12 +1,16 @@
-const express = require ('express') ;
-const router = express.Router () ;
-const patientController = require ('../controllers/patientController') ;
+const express = require('express');
+const router = express.Router();
+const patientController = require('../controllers/patientController');
 
 
-router.get ('/', patientController.get) ;
+router.get('/', patientController.get);
 router.get('/:id', patientController.getOne)
+router.get("/limit/:id", patientController.getOneLimit)
+
 router.post('/', patientController.post);
+
 router.put("/:id", patientController.put);
+
 router.delete("/:id", patientController.delete);
 
 

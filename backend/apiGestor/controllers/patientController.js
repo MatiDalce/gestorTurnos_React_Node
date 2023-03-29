@@ -10,7 +10,7 @@ module.exports = {
       });;
       res.status(200).json(patients);
     } catch (err) {
-      console.error(err);
+      console.error(err);--
       res.status(500).send('Error al obtener los pacientes');
     }
   },
@@ -33,6 +33,44 @@ module.exports = {
       res.status(500).send('Error al obtener el paciente');
     }
   },
+  getOneLimit: async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const patient = await db.Patient.findOne({
+        where: { id },
+        attributes: { exclude: ['updatedAt', 'createdAt',
+        "maritalStatus",
+        "birthday",
+        "familyMembers",
+        "parents",
+        "children",
+        "siblings",
+        "personalPhoneNumber",
+        "contactPhone",
+        "academicLevel",
+        "bloodType",
+        "takesMedication",
+        "medication",
+        "hasAllergies",
+        "allergies",
+        "hasChronicDisease",
+        "chronicDisease"] } 
+      });
+  
+      if (patient) {
+        res.status(200).json(patient);
+      } else {
+        res.status(404).json({ message: 'No patient record found for the given ID' });
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Error al obtener el paciente');
+    }
+  },
+
+
+
   post: async (req, res) => {
     const { name, age, gender, phone, address } = req.body;
 

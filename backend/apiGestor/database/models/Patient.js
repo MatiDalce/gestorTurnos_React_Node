@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
+    email: {type: DataTypes.STRING,
+    allowNull: false,
+  unique: true},
     familyMembers: {
       type: DataTypes.STRING,
       allowNull: true
@@ -73,7 +76,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     hasChronicDisease: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: true
     },
     chronicDisease: {
