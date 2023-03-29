@@ -10,7 +10,7 @@ const PatientList = () => {
   const [patients, setPatients] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/patients')
+    fetch('http://localhost:3001/patients/limit')
     .then(res => res.json())
     .then(res => {
       console.log(res);
