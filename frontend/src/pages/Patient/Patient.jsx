@@ -9,7 +9,7 @@ const Patient = () => {
   const [patient, setPatient] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/patient/${id}`)
+    fetch(`http://localhost:3001/patients/${id}`)
     .then(res => res.json())
     .then(res => {
       console.log(res);
