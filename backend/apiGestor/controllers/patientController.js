@@ -10,19 +10,19 @@ module.exports = {
       });;
       res.status(200).json(patients);
     } catch (err) {
-      console.error(err);--
-      res.status(500).send('Error al obtener los pacientes');
+      console.error(err); --
+        res.status(500).send('Error al obtener los pacientes');
     }
   },
   getOne: async (req, res) => {
     const { id } = req.params;
-  
+
     try {
       const patient = await db.Patient.findOne({
         where: { id },
         attributes: { exclude: ['updatedAt', 'createdAt'] } // exclude createdAt field
       });
-  
+
       if (patient) {
         res.status(200).json(patient);
       } else {
@@ -34,38 +34,52 @@ module.exports = {
     }
   },
   getOneLimit: async (req, res) => {
-   
     try {
-      const patient = await db.Patient.findAll({
-        attributes: { exclude: ['updatedAt', 'createdAt',
-        "maritalStatus",
-        "birthday",
-        "familyMembers",
-        "parents",
-        "children",
-        "siblings",
-        "personalPhoneNumber",
-        "contactPhone",
-        "academicLevel",
-        "bloodType",
-        "takesMedication",
-        "medication",
-        "hasAllergies",
-        "allergies",
-        "hasChronicDisease",
-        "chronicDisease"] } 
+      const patients = await db.Patient.findAll({
+        attributes: {
+          exclude: [
+            'updatedAt',
+            'createdAt',
+            'maritalStatus',
+            'birthday',
+            'familyMembers',
+            'parents',
+            'children',
+            'siblings',
+            'personalPhoneNumber',
+            'contactPhone',
+            'academicLevel',
+            'bloodType',
+            'takesMedication',
+            'medication',
+            'hasAllergies',
+            'allergies',
+            'hasChronicDisease',
+            'chronicDisease'
+          ]
+        }
       });
-  
-      if (patient) {
-        res.status(200).json(patient);
+
+      if (patients) {
+        const patientsWithCompleteName = patients.map(patient => {
+          return {
+            id: patient.id,
+            completeName: `${patient.name} ${patient.lastName}`,
+            email: patient.email,
+            dni: patient.dni
+          };
+        });
+
+        res.status(200).json(patientsWithCompleteName);
       } else {
-        res.status(404).json({ message: ' Erro al obtener los pacientes' });
+        res.status(404).json({ message: 'Error al obtener los pacientes' });
       }
     } catch (err) {
       console.error(err);
-      res.status(500).send('Error al obtener los paciente');
+      res.status(500).send('Error al obtener los pacientes');
     }
   },
+
 
 
 
