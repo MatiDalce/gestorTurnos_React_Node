@@ -30,8 +30,9 @@ const Input = ({
 
   return (
     <>
+      {/* INPUT TEXTAREA */}
       {
-        type === 'textarea' ?
+        type === 'textarea' &&
         <div className="input-container">
           {
             hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
@@ -46,21 +47,44 @@ const Input = ({
             style={inputStyles}
           />
         </div>
-        :
-        <div className="input-container">
-        {
-          hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
-        }
-        <input
-          value={value ? value : ''}
-          className="input-el"
-          onChange={onChange}
-          type={type} 
-          name={nameProp ? nameProp : ''}
-          placeholder={placeholder}
-          style={inputStyles}
-        />
-      </div>
+      }
+      {/* INPUT TEXT */}
+      {
+        (!type || type === 'text') &&
+          <div className="input-container">
+          {
+            hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
+          }
+          <input
+            value={value ? value : ''}
+            className="input-el"
+            onChange={onChange}
+            type={type} 
+            name={nameProp ? nameProp : ''}
+            placeholder={placeholder}
+            style={inputStyles}
+          />
+        </div>
+      }
+      {/* INPUT NUMBER */}
+      {
+        (type === 'number') &&
+          <div className="input-container">
+          {
+            hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
+          }
+          <input
+            value={value ? value : ''}
+            className="input-el"
+            onChange={onChange}
+            type={type} 
+            name={nameProp ? nameProp : ''}
+            placeholder={placeholder}
+            style={inputStyles}
+            min={0}
+            max={100}
+          />
+        </div>
       }
     </>
   )

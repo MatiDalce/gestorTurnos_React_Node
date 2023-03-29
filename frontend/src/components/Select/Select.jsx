@@ -6,7 +6,7 @@ const Select = ({
     isLabelCenter,
     hasLabel,
     labelTitle,
-    options,
+    options, // Espera que cada objeto tenga value y text
     nameProp,
     onChange
 }) => {

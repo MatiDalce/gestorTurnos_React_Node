@@ -1,139 +1,517 @@
 import React, { useState } from 'react';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
+import Select from '../../components/Select/Select';
+import Checkbox from '../../components/Checkbox/Checkbox';
 import './editPatient.css';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const EditPatient = () => {
 
-  const [name, setName] = useState()
-  const [lastName, setLastName] = useState()
-  const [dni, setDni] = useState()
-  const [socialNetwork, setSocialNetwork] = useState()
-  const [age, setAge] = useState()
-  const [genre, setGenre] = useState()
+  const { id } = useParams() 
+
+  const [patient, setPatient] = useState({
+    name: '',
+    lastName: '',
+    dni: '',
+    socialNetwork: '',
+    age: '',
+    genre: '',
+    maritalStatus: '',
+    birthday: '',
+    father: '',
+    mother: '',
+    children: '',
+    siblings: '',
+    livingSiblings: '',
+    personalPhone: '',
+    contactPhone: '',
+    chronicDisease: '',
+    hasAllergies: '',
+    bloodType: '',
+    medication: '',
+  })
+
+  // useEffect(() => {
+  //   fetch(`/patient/${id}`, {})
+  //   .then(res => res.json())
+  //   .then(res => {
+  //     setPatient({
+  //       name: '',
+  //       lastName: '',
+  //       dni: '',
+  //       socialNetwork: '',
+  //       age: '',
+  //       genre: '',
+  //       maritalStatus: '',
+  //       birthday: '',
+  //       father: '',
+  //       mother: '',
+  //       children: '',
+  //       siblings: '',
+  //       livingSiblings: '',
+  //       personalPhone: '',
+  //       contactPhone: '',
+  //       chronicDisease: '',
+  //       hasAllergies: '',
+  //       bloodType: '',
+  //       medication: '',
+  //     })
+  //   })
+  // }, [id])
+
+  const handleForm = (e) => {
+    e.preventDefault()
+    console.log(patient);
+    
+    // fetch(`/patient/${id}`, {})
+    // .then(res => res.json())
+    // .then(res => {
+      
+    // })
+  }
 
   const handleName = (e) => {
-    setName(e.target.value)
+    // setName(e.target.value)
+    setPatient({
+      ...patient,
+      name: e.target.value
+    })
   };
   const handleLastName = (e) => {
-    setLastName(e.target.value)
+    setPatient({
+      ...patient,
+      lastName: e.target.value
+    })
+    // setLastName(e.target.value)
   };
   const handleDNI = (e) => {
-    setDni(e.target.value)
+    setPatient({
+      ...patient,
+      dni: e.target.value
+    })
+    // setDni(e.target.value)
   };
   const handleSocialNetwork = (e) => {
-    setSocialNetwork(e.target.value)
+    setPatient({
+      ...patient,
+      socialNetwork: e.target.value
+    })
+    // setSocialNetwork(e.target.value)
   };
   const handleAge = (e) => {
-    setAge(e.target.value)
+    setPatient({
+      ...patient,
+      age: e.target.value
+    })
+    // setAge(e.target.value)
   };
-  const handleGenre = (e) => {
-    setGenre(e.target.value)
+  const handleGenre = (value) => {
+    setPatient({
+      ...patient,
+      genre: value
+    })
+    // setGenre(value)
   };
+  const handleMaritalStatus = (value) => {
+    setPatient({
+      ...patient,
+      maritalStatus: value
+    })
+    // setMaritalStatus(value)
+  }
+  const handleBirthday = (e) => {
+    setPatient({
+      ...patient,
+      birthday: e.target.value
+    })
+    // setBirthday(e.target.value)
+  }
+  const handleFather = (e) => {
+    setPatient({
+      ...patient,
+      father: e.target.value
+    })
+    // setFather(e.target.value)
+  }
+  const handleMother = (e) => {
+    setPatient({
+      ...patient,
+      mother: e.target.value
+    })
+    // setMother(e.target.value)
+  }
+  const handleChildren = (e) => {
+    setPatient({
+      ...patient,
+      children: e.target.value
+    })
+    // setChildren(e.target.value)
+  }
+  const handleSiblings = (e) => {
+    setPatient({
+      ...patient,
+      siblings: e.target.value
+    })
+    // setSiblings(e.target.value)
+  }
+  const handleLivingSiblings = (value) => {
+    setPatient({
+      ...patient,
+      livingSiblings: value
+    })
+    // setLivingSiblings(value)
+  }
+  const handlePersonalPhone = (e) => {
+    setPatient({
+      ...patient,
+      personalPhone: e.target.value
+    })
+    // setPersonalPhone(e.target.value)
+  }
+  const handleContactPhone = (e) => {
+    setPatient({
+      ...patient,
+      contactPhone: e.target.value
+    })
+    // setContactPhone(e.target.value)
+  }
+  const handleChronicDisease = (e) => {
+    setPatient({
+      ...patient,
+      chronicDisease: e.target.value
+    })
+    // setChronicDisease(e.target.value)
+  }
+  const handleHasAllergies = (e) => {
+    setPatient({
+      ...patient,
+      hasAllergies: e.target.value
+    })
+    // setHasAllergies(e.target.value)
+  }
+  const handleBloodType = (e) => {
+    setPatient({
+      ...patient,
+      bloodType: e.target.value
+    })
+    // setBloodType(e.target.value)
+  }
+  const handleMedication = (e) => {
+    setPatient({
+      ...patient,
+      medication: e.target.value
+    })
+    // setMedication(e.target.value)
+  }
 
   return (
     <>
       <h2 className='editPatient-title'>EDICIÓN DE DATOS DEL PACIENTE</h2>
+      <form onSubmit={handleForm}>
+
         <div className="input-editPatient-row">
           <div className="input-editPatient-box">
             <Input
-              value={name}
+              value={patient.name}
               onChange={handleName}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Nombre del paciente'
               isLabelCenter
               placeholder='Ingrese el nombre'
-              type='text'
               nameProp='name'
-              inputWidth='30%'
             />
           </div>
           <div className="input-editPatient-box">
             <Input
-              value={lastName}
+              value={patient.lastName}
               onChange={handleLastName}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Apellido del paciente'
               isLabelCenter
               placeholder='Ingrese el apellido'
-              type='text'
               nameProp='lastname'
-              inputWidth='30%'
             />
           </div>
         </div>
         <div className="input-editPatient-row">
           <div className="input-editPatient-box">
             <Input
-              value={dni}
+              value={patient.dni}
               onChange={handleDNI}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='DNI del paciente'
               isLabelCenter
               placeholder='Ingrese el DNI'
-              type='text'
               nameProp='dni'
-              inputWidth='30%'
             />
           </div>
           <div className="input-editPatient-box">
             <Input
-              value={socialNetwork}
+              value={patient.socialNetwork}
               onChange={handleSocialNetwork}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Obra Social del paciente'
               isLabelCenter
               placeholder='Ingrese la obra social'
-              type='text'
               nameProp='social-work'
-              inputWidth='30%'
             />
           </div>
         </div>
         <div className="input-editPatient-row">
           <div className="input-editPatient-box">
             <Input
-              value={age}
+              value={patient.age}
               onChange={handleAge}
               colorLabel='var(--black-bg)' 
               hasLabel
+              type={'number'}
               labelTitle='Edad'
               isLabelCenter
               placeholder='Ingrese la edad'
-              type='text'
               nameProp='age'
-              inputWidth='30%'
             />
           </div>
           <div className="input-editPatient-box">
-            <Input
-              value={genre}
-              onChange={handleGenre}
-              colorLabel='var(--black-bg)' 
+            <Checkbox
               hasLabel
               labelTitle='Género'
+              options={['Masculino', 'Femenino', 'Otro']}
+              oneChoice
+              onlyCheckboxes
+              colorLabel='var(--black-bg)'
               isLabelCenter
-              placeholder='Ingrese el género'
-              type='text'
               nameProp='genre'
-              inputWidth='30%'
+              onChange={handleGenre}
             />
           </div>
       </div>
+      <div className="input-editPatient-row">
+        <div className="input-editPatient-box">
+          <Input
+            value={patient.birthday}
+            onChange={handleBirthday}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Fecha de nacimiento'
+            isLabelCenter
+            placeholder='Ingrese la fecha de nacimiento'
+            nameProp='birthday'
+          />
+        </div>
+        <div className="input-editPatient-box">
+          <Checkbox
+            options={['Casado', 'Soltero', 'Divorciado', 'Viudo']}
+            onlyCheckboxes
+            oneChoice
+            onChange={handleMaritalStatus}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Estado civil'
+            isLabelCenter
+            nameProp='maritalStatus'
+          />
+        </div>
+      </div>
+      <div className="input-editPatient-row">
+        <div className="input-editPatient-box">
+          <Input
+            value={patient.personalPhone}
+            onChange={handlePersonalPhone}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Teléfono personal'
+            isLabelCenter
+            placeholder='Ingrese el teléfono personal'
+            nameProp='personalPhone'
+          />
+        </div>
+        <div className="input-editPatient-box">
+          <Input
+            value={patient.contactPhone}
+            onChange={handleContactPhone}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Teléfono de contacto'
+            isLabelCenter
+            placeholder='Ingrese el teléfono de contacto'
+            nameProp='contactPhone'
+          />
+        </div>
+      </div>
+      <div className="input-editPatient-row">
+          <div className="input-editPatient-box">
+            <Checkbox
+              withText={'¿Vive?'}
+              oneChoice
+              value={patient.father}
+              onChange={handleFather}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Padre'
+              isLabelCenter
+              placeholder='Ingrese el nombre del padre'
+              nameProp='father'
+              options={['Sí', 'No']}
+            />
+          </div>
+          <div className="input-editPatient-box">
+            <Checkbox
+              withText={'¿Vive?'}
+              oneChoice
+              value={patient.mother}
+              onChange={handleMother}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Madre'
+              isLabelCenter
+              placeholder='Ingrese el nombre de la madre'
+              nameProp='mother'
+              options={['Sí', 'No']}
+            />
+          </div>
+      </div>
+      <div className="input-editPatient-row">
+          <div className="input-editPatient-box">
+            <Checkbox
+              withText={'Tiene?'}
+              value={patient.children}
+              onChange={handleChildren}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Hijos'
+              isLabelCenter
+              placeholder='Ingrese los nombres de los hijos'
+              nameProp='children'
+              options={['Sí', 'No']}
+            />
+          </div>
+          <div className="input-editPatient-box">
+            <Checkbox
+              withText={'Tiene?'}
+              options={['Sí', 'No']}
+              value={patient.siblings}
+              onChange={handleSiblings}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Hermanos'
+              isLabelCenter
+              placeholder='Ingrese los nombres de los hermanos'
+              nameProp='siblings'
+            />
+          </div>
+      </div>
+      <div className="input-editPatient-row">
+        <div className="input-editPatient-box">
+          <div className="yesOrNoCheckboxes">
+            <Checkbox
+              onlyCheckboxes
+              hasLabel
+              onChange={handleLivingSiblings}
+              labelTitle='¿Viven todos/as sus hermanos/as?'
+              options={['Sí', 'No']}
+              oneChoice
+              colorLabel='var(--black-bg)'
+              isLabelCenter
+              nameProp='livingSiblings'
+            />
+          </div>
+        </div>
+        <div className="input-editPatient-box">
+            <Select
+              isSingle
+              options={[
+                {
+                  value: '',
+                  text: 'Seleccione un valor',
+                },
+                {
+                  value: 'Tipo A',
+                  text: 'Tipo A',
+                },
+                {
+                  value: 'Tipo B',
+                  text: 'Tipo B',
+                },
+                {
+                  value: 'Tipo AB',
+                  text: 'Tipo AB',
+                },
+                {
+                  value: 'Tipo O',
+                  text: 'Tipo O',
+                },
+              ]}
+              onChange={handleBloodType}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Grupo sanguíneo'
+              isLabelCenter
+              nameProp='bloodType'
+            />
+          </div>
+      </div>
+      <div className="input-editPatient-row">
+          <div className="input-editPatient-box">
+            <Checkbox
+              withText
+              options={[]}
+              onChange={handleHasAllergies}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='¿Tiene alguna alergia?'
+              placeholder='Nombre la/as alergia/s'
+              isLabelCenter
+              nameProp='hasAllergies'
+            />
+          </div>
+          <div className="input-editPatient-box">
+            <Checkbox
+              withText
+              options={[]}
+              onChange={handleChronicDisease}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='¿Tiene alguna enfermedad crónica?'
+              placeholder='Nombre la/s enfermedades'
+              isLabelCenter
+              nameProp='chronicDisease'
+            />
+          </div>
+      </div>
+      <div className="input-editPatient-row">
+          <div className="input-editPatient-box">
+            <Checkbox
+              withText
+              options={[]}
+              onChange={handleMedication}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='¿Toma algún medicamento?'
+              placeholder='Nombre los medicamentos'
+              isLabelCenter
+              nameProp='medication'
+            />
+          </div>
+      </div>
+
       <div className="btn-editPatient-center">
         <div className='btn-editPatient-container'>
           <Button 
             title={'Editar'} 
-            type='button'
+            type='submit'
             width='20%'
             margin='5% 0'
           />
         </div>
       </div>
+
+      </form>
     </>
   )
 }
