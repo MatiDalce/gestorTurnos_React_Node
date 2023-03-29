@@ -4,94 +4,217 @@ import Input from '../../components/Input/Input';
 import Select from '../../components/Select/Select';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import './editPatient.css';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const EditPatient = () => {
 
-  const [name, setName] = useState()
-  const [lastName, setLastName] = useState()
-  const [dni, setDni] = useState()
-  const [socialNetwork, setSocialNetwork] = useState()
-  const [age, setAge] = useState()
-  const [genre, setGenre] = useState()
-  const [maritalStatus, setMaritalStatus] = useState();
-  const [birthday, setBirthday] = useState();
-  const [father, setFather] = useState();
-  const [mother, setMother] = useState();
-  const [children, setChildren] = useState();
-  const [siblings, setSiblings] = useState();
-  const [livingSiblings, setLivingSiblings] = useState();
-  const [personalPhone, setPersonalPhone] = useState();
-  const [contactPhone, setContactPhone] = useState();
-  const [chronicDisease, setChronicDisease] = useState();
-  const [hasAllergies, setHasAllergies] = useState();
-  const [bloodType, setBloodType] = useState();
-  const [medication, setMedication] = useState();
+  const { id } = useParams() 
+
+  const [patient, setPatient] = useState({
+    name: '',
+    lastName: '',
+    dni: '',
+    socialNetwork: '',
+    age: '',
+    genre: '',
+    maritalStatus: '',
+    birthday: '',
+    father: '',
+    mother: '',
+    children: '',
+    siblings: '',
+    livingSiblings: '',
+    personalPhone: '',
+    contactPhone: '',
+    chronicDisease: '',
+    hasAllergies: '',
+    bloodType: '',
+    medication: '',
+  })
+
+  // useEffect(() => {
+  //   fetch(`/patient/${id}`, {})
+  //   .then(res => res.json())
+  //   .then(res => {
+  //     setPatient({
+  //       name: '',
+  //       lastName: '',
+  //       dni: '',
+  //       socialNetwork: '',
+  //       age: '',
+  //       genre: '',
+  //       maritalStatus: '',
+  //       birthday: '',
+  //       father: '',
+  //       mother: '',
+  //       children: '',
+  //       siblings: '',
+  //       livingSiblings: '',
+  //       personalPhone: '',
+  //       contactPhone: '',
+  //       chronicDisease: '',
+  //       hasAllergies: '',
+  //       bloodType: '',
+  //       medication: '',
+  //     })
+  //   })
+  // }, [id])
+
+  const handleForm = (e) => {
+    e.preventDefault()
+    console.log(patient);
+    
+    // fetch(`/patient/${id}`, {})
+    // .then(res => res.json())
+    // .then(res => {
+      
+    // })
+  }
 
   const handleName = (e) => {
-    setName(e.target.value)
+    // setName(e.target.value)
+    setPatient({
+      ...patient,
+      name: e.target.value
+    })
   };
   const handleLastName = (e) => {
-    setLastName(e.target.value)
+    setPatient({
+      ...patient,
+      lastName: e.target.value
+    })
+    // setLastName(e.target.value)
   };
   const handleDNI = (e) => {
-    setDni(e.target.value)
+    setPatient({
+      ...patient,
+      dni: e.target.value
+    })
+    // setDni(e.target.value)
   };
   const handleSocialNetwork = (e) => {
-    setSocialNetwork(e.target.value)
+    setPatient({
+      ...patient,
+      socialNetwork: e.target.value
+    })
+    // setSocialNetwork(e.target.value)
   };
   const handleAge = (e) => {
-    setAge(e.target.value)
+    setPatient({
+      ...patient,
+      age: e.target.value
+    })
+    // setAge(e.target.value)
   };
-  const handleGenre = (e) => {
-    setGenre(e.target.value)
+  const handleGenre = (value) => {
+    setPatient({
+      ...patient,
+      genre: value
+    })
+    // setGenre(value)
   };
-  const handleMaritalStatus = (e) => {
-    setMaritalStatus(e.target.value)
+  const handleMaritalStatus = (value) => {
+    setPatient({
+      ...patient,
+      maritalStatus: value
+    })
+    // setMaritalStatus(value)
   }
   const handleBirthday = (e) => {
-    setBirthday(e.target.value)
+    setPatient({
+      ...patient,
+      birthday: e.target.value
+    })
+    // setBirthday(e.target.value)
   }
-  // const handleFamilyMembers = (e) => {
-  //   setFamilyMembers(e.target.value)
-  // }
   const handleFather = (e) => {
-    setFather(e.target.value)
+    setPatient({
+      ...patient,
+      father: e.target.value
+    })
+    // setFather(e.target.value)
   }
   const handleMother = (e) => {
-    setMother(e.target.value)
+    setPatient({
+      ...patient,
+      mother: e.target.value
+    })
+    // setMother(e.target.value)
   }
   const handleChildren = (e) => {
-    setChildren(e.target.value)
+    setPatient({
+      ...patient,
+      children: e.target.value
+    })
+    // setChildren(e.target.value)
   }
   const handleSiblings = (e) => {
-    setSiblings(e.target.value)
+    setPatient({
+      ...patient,
+      siblings: e.target.value
+    })
+    // setSiblings(e.target.value)
+  }
+  const handleLivingSiblings = (value) => {
+    setPatient({
+      ...patient,
+      livingSiblings: value
+    })
+    // setLivingSiblings(value)
   }
   const handlePersonalPhone = (e) => {
-    setPersonalPhone(e.target.value)
+    setPatient({
+      ...patient,
+      personalPhone: e.target.value
+    })
+    // setPersonalPhone(e.target.value)
   }
   const handleContactPhone = (e) => {
-    setContactPhone(e.target.value)
+    setPatient({
+      ...patient,
+      contactPhone: e.target.value
+    })
+    // setContactPhone(e.target.value)
   }
   const handleChronicDisease = (e) => {
-    setChronicDisease(e.target.value)
+    setPatient({
+      ...patient,
+      chronicDisease: e.target.value
+    })
+    // setChronicDisease(e.target.value)
   }
   const handleHasAllergies = (e) => {
-    setHasAllergies(e.target.value)
+    setPatient({
+      ...patient,
+      hasAllergies: e.target.value
+    })
+    // setHasAllergies(e.target.value)
   }
   const handleBloodType = (e) => {
-    setBloodType(e.target.value)
+    setPatient({
+      ...patient,
+      bloodType: e.target.value
+    })
+    // setBloodType(e.target.value)
   }
   const handleMedication = (e) => {
-    setMedication(e.target.value)
+    setPatient({
+      ...patient,
+      medication: e.target.value
+    })
+    // setMedication(e.target.value)
   }
 
   return (
     <>
       <h2 className='editPatient-title'>EDICIÓN DE DATOS DEL PACIENTE</h2>
+      <form onSubmit={handleForm}>
+
         <div className="input-editPatient-row">
           <div className="input-editPatient-box">
             <Input
-              value={name}
+              value={patient.name}
               onChange={handleName}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -103,7 +226,7 @@ const EditPatient = () => {
           </div>
           <div className="input-editPatient-box">
             <Input
-              value={lastName}
+              value={patient.lastName}
               onChange={handleLastName}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -117,7 +240,7 @@ const EditPatient = () => {
         <div className="input-editPatient-row">
           <div className="input-editPatient-box">
             <Input
-              value={dni}
+              value={patient.dni}
               onChange={handleDNI}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -129,7 +252,7 @@ const EditPatient = () => {
           </div>
           <div className="input-editPatient-box">
             <Input
-              value={socialNetwork}
+              value={patient.socialNetwork}
               onChange={handleSocialNetwork}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -143,7 +266,7 @@ const EditPatient = () => {
         <div className="input-editPatient-row">
           <div className="input-editPatient-box">
             <Input
-              value={age}
+              value={patient.age}
               onChange={handleAge}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -164,7 +287,6 @@ const EditPatient = () => {
               colorLabel='var(--black-bg)'
               isLabelCenter
               nameProp='genre'
-              value={genre}
               onChange={handleGenre}
             />
           </div>
@@ -172,7 +294,7 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Input
-            value={birthday}
+            value={patient.birthday}
             onChange={handleBirthday}
             colorLabel='var(--black-bg)' 
             hasLabel
@@ -199,7 +321,7 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Input
-            value={personalPhone}
+            value={patient.personalPhone}
             onChange={handlePersonalPhone}
             colorLabel='var(--black-bg)' 
             hasLabel
@@ -211,7 +333,7 @@ const EditPatient = () => {
         </div>
         <div className="input-editPatient-box">
           <Input
-            value={contactPhone}
+            value={patient.contactPhone}
             onChange={handleContactPhone}
             colorLabel='var(--black-bg)' 
             hasLabel
@@ -227,7 +349,7 @@ const EditPatient = () => {
             <Checkbox
               withText={'¿Vive?'}
               oneChoice
-              value={father}
+              value={patient.father}
               onChange={handleFather}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -242,7 +364,7 @@ const EditPatient = () => {
             <Checkbox
               withText={'¿Vive?'}
               oneChoice
-              value={mother}
+              value={patient.mother}
               onChange={handleMother}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -258,7 +380,7 @@ const EditPatient = () => {
           <div className="input-editPatient-box">
             <Checkbox
               withText={'Tiene?'}
-              value={children}
+              value={patient.children}
               onChange={handleChildren}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -273,7 +395,7 @@ const EditPatient = () => {
             <Checkbox
               withText={'Tiene?'}
               options={['Sí', 'No']}
-              value={siblings}
+              value={patient.siblings}
               onChange={handleSiblings}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -288,13 +410,15 @@ const EditPatient = () => {
         <div className="input-editPatient-box">
           <div className="yesOrNoCheckboxes">
             <Checkbox
+              onlyCheckboxes
               hasLabel
+              onChange={handleLivingSiblings}
               labelTitle='¿Viven todos/as sus hermanos/as?'
               options={['Sí', 'No']}
               oneChoice
-              onlyCheckboxes
               colorLabel='var(--black-bg)'
               isLabelCenter
+              nameProp='livingSiblings'
             />
           </div>
         </div>
@@ -380,12 +504,14 @@ const EditPatient = () => {
         <div className='btn-editPatient-container'>
           <Button 
             title={'Editar'} 
-            type='button'
+            type='submit'
             width='20%'
             margin='5% 0'
           />
         </div>
       </div>
+
+      </form>
     </>
   )
 }

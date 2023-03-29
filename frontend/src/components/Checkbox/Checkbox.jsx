@@ -17,17 +17,17 @@ const Checkbox = ({
 }) => {
     const [selectedOption, setSelectedOption] = useState(oneChoice ? null : []);
     const [activeOptions, setActiveOptions] = useState(false);
-
+    
     const handleSelect = (event) => {
         const { value } = event.target;
         if (oneChoice) {
             setSelectedOption(value);
         } else {
-        if (selectedOption.includes(value)) {
-            setSelectedOption(selectedOption.filter((option) => option !== value));
-        } else {
-            setSelectedOption([...selectedOption, value]);
-        }
+            if (selectedOption.includes(value)) {
+                setSelectedOption(selectedOption.filter((option) => option !== value));
+            } else {
+                setSelectedOption([...selectedOption, value]);
+            }
         }
     };
 
@@ -67,7 +67,7 @@ const Checkbox = ({
                             </div>
                         </div>
                     }
-                    <input className={`text-for-checkbox ${!activeOptions && 'disabled'}`} placeholder={placeholder} type='text' value={activeOptions ? value : ''} onChange={onChange} />
+                    <input className={`text-for-checkbox ${!activeOptions && 'disabled'}`} placeholder={placeholder} type='text' value={value} onChange={onChange} />
                 </div>
             </div>
         }
@@ -81,15 +81,15 @@ const Checkbox = ({
                     {
                         options.map((option) => (
                             <label key={option} className="checkbox-label">
-                            <span className="checkbox-text">{option}</span>
-                            <input
-                                type={oneChoice ? 'radio' : 'checkbox'}
-                                name={nameProp}
-                                value={option}
-                                checked={oneChoice ? selectedOption === option : selectedOption.includes(option)}
-                                onChange={handleSelect}
-                                className="checkbox-input"
-                            />
+                                <span className="checkbox-text">{option}</span>
+                                <input
+                                    type={oneChoice ? 'radio' : 'checkbox'}
+                                    name={nameProp}
+                                    value={option}
+                                    checked={oneChoice ? selectedOption : selectedOption.includes(option)}
+                                    onChange={oneChoice ? (e) => onChange(e.target.value) : handleSelect}
+                                    className="checkbox-input"
+                                />
                             </label>
                         ))
                     }
