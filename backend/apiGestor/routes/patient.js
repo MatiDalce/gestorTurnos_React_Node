@@ -5,7 +5,7 @@ const patientController = require('../controllers/patientController');
 
 router.get('/', patientController.get);
 router.get('/:id', patientController.getOne)
-router.get("/limit/:id", patientController.getOneLimit)
+router.get("/limit", patientController.getOneLimit)
 
 router.post('/', patientController.post);
 
