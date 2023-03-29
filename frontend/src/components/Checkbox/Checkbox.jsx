@@ -22,6 +22,7 @@ const Checkbox = ({
         const { value } = event.target;
         if (oneChoice) {
             setSelectedOption(value);
+            
         } else {
             if (selectedOption.includes(value)) {
                 setSelectedOption(selectedOption.filter((option) => option !== value));

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import Checkbox from '../../components/Checkbox/Checkbox';
 import Input from '../../components/Input/Input';
 import Select from '../../components/Select/Select';
 import Title from '../../components/Title/Title';
@@ -8,379 +10,457 @@ import './addPatient.css';
 
 const AddPatient = () => {
 
-  const [name, setName] = useState();
-  const [lastName, setLastName] = useState();
-  const [dni, setDni] = useState();
-  const [socialNetwork, setSocialNetwork] = useState();
-  const [age, setAge] = useState();
-  const [genre, setGenre] = useState();
-  const [maritalStatus, setMaritalStatus] = useState();
-  const [birthday, setBirthday] = useState();
-  const [familyMembers, setFamilyMembers] = useState();
-  const [parents, setParents] = useState();
-  const [children, setChildren] = useState();
-  const [siblings, setSiblings] = useState();
-  const [livingSiblings, setLivingSiblings] = useState();
-  const [personalPhone, setPersonalPhone] = useState();
-  const [contactPhone, setContactPhone] = useState();
-  const [chronicDisease, setChronicDisease] = useState();
-  const [hasAllergies, setHasAllergies] = useState();
-  const [bloodType, setBloodType] = useState();
-  const [medication, setMedication] = useState();
-  
+  const { id } = useParams()
+
+  const [patient, setPatient] = useState({
+    name: '',
+    lastName: '',
+    dni: '',
+    socialNetwork: '',
+    email: '',
+    genre: '',
+    maritalStatus: '',
+    birthday: '',
+    father: '',
+    mother: '',
+    children: '',
+    siblings: '',
+    livingSiblings: '',
+    personalPhone: '',
+    contactPhone: '',
+    chronicDisease: '',
+    hasAllergies: '',
+    bloodType: '',
+    medication: '',
+  })
+
   const handleName = (e) => {
-    setName(e.target.value)
+    setPatient({
+      ...patient,
+      name: e.target.value
+    })
   };
   const handleLastName = (e) => {
-    setLastName(e.target.value)
+    setPatient({
+      ...patient,
+      lastName: e.target.value
+    })
   };
   const handleDNI = (e) => {
-    setDni(e.target.value)
+    setPatient({
+      ...patient,
+      dni: e.target.value
+    })
   };
   const handleSocialNetwork = (e) => {
-    setSocialNetwork(e.target.value)
+    setPatient({
+      ...patient,
+      socialNetwork: e.target.value
+    })
   };
-  const handleAge = (e) => {
-    setAge(e.target.value)
+  const handleEmail = (e) => {
+    setPatient({
+      ...patient,
+      email: e.target.value
+    })
   };
-  const handleGenre = (e) => {
-    setGenre(e.target.value)
+  const handleGenre = (value) => {
+    setPatient({
+      ...patient,
+      genre: value
+    })
   };
-  const handleMaritalStatus = (e) => {
-    setMaritalStatus(e.target.value)
+  const handleMaritalStatus = (value) => {
+    setPatient({
+      ...patient,
+      maritalStatus: value
+    })
   }
   const handleBirthday = (e) => {
-    setBirthday(e.target.value)
+    setPatient({
+      ...patient,
+      birthday: e.target.value
+    })
   }
-  const handleFamilyMembers = (e) => {
-    setFamilyMembers(e.target.value)
+  const handleFather = (e) => {
+    setPatient({
+      ...patient,
+      father: e.target.value
+    })
   }
-  const handleParents = (e) => {
-    setParents(e.target.value)
+  const handleMother = (e) => {
+    setPatient({
+      ...patient,
+      mother: e.target.value
+    })
   }
   const handleChildren = (e) => {
-    setChildren(e.target.value)
+    setPatient({
+      ...patient,
+      children: e.target.value
+    })
   }
   const handleSiblings = (e) => {
-    setSiblings(e.target.value)
+    setPatient({
+      ...patient,
+      siblings: e.target.value
+    })
   }
-  const handleLivingSiblings = (e) => {
-    setLivingSiblings(e.target.value)
+  const handleLivingSiblings = (value) => {
+    setPatient({
+      ...patient,
+      livingSiblings: value
+    })
   }
   const handlePersonalPhone = (e) => {
-    setPersonalPhone(e.target.value)
+    setPatient({
+      ...patient,
+      personalPhone: e.target.value
+    })
   }
   const handleContactPhone = (e) => {
-    setContactPhone(e.target.value)
+    setPatient({
+      ...patient,
+      contactPhone: e.target.value
+    })
   }
   const handleChronicDisease = (e) => {
-    setChronicDisease(e.target.value)
+    setPatient({
+      ...patient,
+      chronicDisease: e.target.value
+    })
   }
   const handleHasAllergies = (e) => {
-    setHasAllergies(e.target.value)
+    setPatient({
+      ...patient,
+      hasAllergies: e.target.value
+    })
   }
   const handleBloodType = (e) => {
-    setBloodType(e.target.value)
+    setPatient({
+      ...patient,
+      bloodType: e.target.value
+    })
   }
   const handleMedication = (e) => {
-    setMedication(e.target.value)
+    setPatient({
+      ...patient,
+      medication: e.target.value
+    })
+  }
+
+  const handleForm = (e) => {
+    e.preventDefault()
+    // console.log(patient);
+
+    fetch(`http://localhost:3001/patients/${id}`)
+    .then(res => res.json())
+    .then(res => {
+      console.log(id);
+      console.log(res);
+    })
   }
 
   return (
     <>
         <Title title='DATOS DEL PACIENTE' />
+        <form onSubmit={handleForm}>
         <div className="input-row">
           <div className="addPatient-box">
             <Input
-              value={name}
+              value={patient.name}
               onChange={handleName}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Nombre del paciente'
               isLabelCenter
               placeholder='Ingrese el nombre'
-              type='text'
               nameProp='name'
-              inputWidth='30%'
             />
           </div>
           <div className="addPatient-box">
             <Input
-              value={lastName}
+              value={patient.lastName}
               onChange={handleLastName}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Apellido del paciente'
               isLabelCenter
               placeholder='Ingrese el apellido'
-              type='text'
               nameProp='lastname'
-              inputWidth='30%'
             />
           </div>
         </div>
         <div className="input-row">
           <div className="addPatient-box">
             <Input
-              value={dni}
+              value={patient.dni}
               onChange={handleDNI}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='DNI del paciente'
               isLabelCenter
               placeholder='Ingrese el DNI'
-              type='text'
               nameProp='dni'
-              inputWidth='30%'
             />
           </div>
           <div className="addPatient-box">
             <Input
-              value={socialNetwork}
+              value={patient.socialNetwork}
               onChange={handleSocialNetwork}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Obra Social del paciente'
               isLabelCenter
               placeholder='Ingrese la obra social'
-              type='text'
               nameProp='social-work'
-              inputWidth='30%'
             />
           </div>
         </div>
         <div className="input-row">
           <div className="addPatient-box">
             <Input
-              value={age}
-              onChange={handleAge}
+              value={patient.email}
+              onChange={handleEmail}
               colorLabel='var(--black-bg)' 
               hasLabel
-              labelTitle='Edad'
+              labelTitle='Email'
               isLabelCenter
               placeholder='Ingrese la edad'
-              type='text'
-              nameProp='age'
-              inputWidth='30%'
+              nameProp='email'
             />
           </div>
           <div className="addPatient-box">
-            <Select
-              value={genre}
-              onChange={handleGenre}
-              colorLabel='var(--black-bg)' 
+            <Checkbox
               hasLabel
               labelTitle='Género'
+              options={['Masculino', 'Femenino', 'Otro']}
+              oneChoice
+              onlyCheckboxes
+              colorLabel='var(--black-bg)'
               isLabelCenter
-              placeholder='Ingrese el género'
-              type='text'
               nameProp='genre'
-              inputWidth='30%'
+              onChange={handleGenre}
             />
           </div>
       </div>
       <div className="input-row">
           <div className="addPatient-box">
-            <Select
-              value={maritalStatus}
-              onChange={handleMaritalStatus}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Estado civil'
-              isLabelCenter
-              type='text'
-              nameProp='maritalStatus'
-              inputWidth='30%'
-            />
-          </div>
-          <div className="addPatient-box">
             <Input
-              value={birthday}
+              value={patient.birthday}
               onChange={handleBirthday}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Fecha de nacimiento'
               isLabelCenter
               placeholder='Ingrese la fecha de nacimiento'
-              type='text'
               nameProp='birthday'
-              inputWidth='30%'
-            />
-          </div>
-      </div>
-      <div className="input-row">
-          <div className="addPatient-box">
-            <Select
-              value={familyMembers}
-              onChange={handleFamilyMembers}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Miembros de la familia'
-              isLabelCenter
-              type='text'
-              nameProp='familyMembers'
-              inputWidth='30%'
             />
           </div>
           <div className="addPatient-box">
-            <Input
-              value={parents}
-              onChange={handleParents}
+            <Checkbox
+              options={['Casado', 'Soltero', 'Divorciado', 'Viudo']}
+              onlyCheckboxes
+              oneChoice
+              onChange={handleMaritalStatus}
               colorLabel='var(--black-bg)' 
               hasLabel
-              labelTitle='Padres'
+              labelTitle='Estado civil'
               isLabelCenter
-              placeholder='Ingrese el nombre de los padres'
-              type='text'
-              nameProp='parents'
-              inputWidth='30%'
+              nameProp='maritalStatus'
             />
           </div>
       </div>
       <div className="input-row">
           <div className="addPatient-box">
             <Input
-              value={children}
-              onChange={handleChildren}
+              value={patient.personalPhone}
+              onChange={handlePersonalPhone}
               colorLabel='var(--black-bg)' 
               hasLabel
-              labelTitle='Hijos'
+              labelTitle='Teléfono personal'
               isLabelCenter
-              placeholder='Ingrese el nombre de los hijos'
-              type='text'
-              nameProp='children'
-              inputWidth='30%'
+              placeholder='Ingrese el teléfono personal'
+              nameProp='personalPhone'
             />
           </div>
           <div className="addPatient-box">
             <Input
-              value={siblings}
-              onChange={handleSiblings}
+              value={patient.contactPhone}
+              onChange={handleContactPhone}
               colorLabel='var(--black-bg)' 
               hasLabel
-              labelTitle='Hermanos'
+              labelTitle='Teléfono de contacto'
               isLabelCenter
-              placeholder='Ingrese el nombre de los hermanos'
-              type='text'
-              nameProp='siblings'
-              inputWidth='30%'
+              placeholder='Ingrese el teléfono de contacto'
+              nameProp='contactPhone'
             />
           </div>
       </div>
       <div className="input-row">
+          <div className="addPatient-box">
+            <Checkbox
+              withText={'¿Vive?'}
+              oneChoice
+              value={patient.father}
+              onChange={handleFather}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Padre'
+              isLabelCenter
+              placeholder='Ingrese el nombre del padre'
+              nameProp='father'
+              options={['Sí', 'No']}
+            />
+          </div>
+          <div className="addPatient-box">
+          <Checkbox
+              withText={'¿Vive?'}
+              oneChoice
+              value={patient.mother}
+              onChange={handleMother}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Madre'
+              isLabelCenter
+              placeholder='Ingrese el nombre de la madre'
+              nameProp='mother'
+              options={['Sí', 'No']}
+            />
+          </div>
+      </div>
+      <div className="input-row">
+        <div className="addPatient-box">
+          <Checkbox
+            withText={'Tiene?'}
+            value={patient.children}
+            onChange={handleChildren}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Hijos'
+            isLabelCenter
+            placeholder='Ingrese los nombres de los hijos'
+            nameProp='children'
+            options={['Sí', 'No']}
+          />
+        </div>
+        <div className="addPatient-box">
+          <Checkbox
+            withText={'Tiene?'}
+            options={['Sí', 'No']}
+            value={patient.siblings}
+            onChange={handleSiblings}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Hermanos'
+            isLabelCenter
+            placeholder='Ingrese los nombres de los hermanos'
+            nameProp='siblings'
+          />
+        </div>
+      </div>
+      <div className="input-row">
+        <div className="addPatient-box">
+          <Checkbox
+            onlyCheckboxes
+            hasLabel
+            onChange={handleLivingSiblings}
+            labelTitle='¿Viven todos/as sus hermanos/as?'
+            options={['Sí', 'No']}
+            oneChoice
+            colorLabel='var(--black-bg)'
+            isLabelCenter
+            nameProp='livingSiblings'
+          />
+        </div>
         <div className="addPatient-box">
           <Select
-            value={livingSiblings}
-            onChange={handleLivingSiblings}
+            isSingle
+            options={[
+              {
+                value: '',
+                text: 'Seleccione un valor',
+              },
+              {
+                value: 'Tipo A',
+                text: 'Tipo A',
+              },
+              {
+                value: 'Tipo B',
+                text: 'Tipo B',
+              },
+              {
+                value: 'Tipo AB',
+                text: 'Tipo AB',
+              },
+              {
+                value: 'Tipo O',
+                text: 'Tipo O',
+              },
+            ]}
+            onChange={handleBloodType}
             colorLabel='var(--black-bg)' 
             hasLabel
-            labelTitle='¿Viven sus hermanos?'
+            labelTitle='Grupo sanguíneo'
             isLabelCenter
-            placeholder='Ingrese la edad'
-            type='text'
-            nameProp='livingSiblings'
-            inputWidth='30%'
-          />
-        </div>
-      </div>
-      <div className="input-row">
-        <div className="addPatient-box">
-          <Input
-            value={personalPhone}
-            onChange={handlePersonalPhone}
-            colorLabel='var(--black-bg)' 
-            hasLabel
-            labelTitle='Teléfono personal'
-            isLabelCenter
-            placeholder='Ingrese el teléfono personal'
-            type='text'
-            nameProp='personalPhone'
-            inputWidth='30%'
-          />
-        </div>
-        <div className="addPatient-box">
-          <Input
-            value={contactPhone}
-            onChange={handleContactPhone}
-            colorLabel='var(--black-bg)' 
-            hasLabel
-            labelTitle='Teléfono de contacto'
-            isLabelCenter
-            placeholder='Ingrese el teléfono de contacto'
-            type='text'
-            nameProp='contactPhone'
-            inputWidth='30%'
+            nameProp='bloodType'
           />
         </div>
       </div>
       <div className="input-row">
           <div className="addPatient-box">
-            <Select
-              value={hasAllergies}
+            <Checkbox
+              withText
+              options={[]}
               onChange={handleHasAllergies}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='¿Tiene alguna alergia?'
+              placeholder='Nombre la/as alergia/s'
               isLabelCenter
-              type='text'
               nameProp='hasAllergies'
-              inputWidth='30%'
             />
           </div>
           <div className="addPatient-box">
-            <Select
-              value={chronicDisease}
+            <Checkbox
+              withText
+              options={[]}
               onChange={handleChronicDisease}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='¿Tiene alguna enfermedad crónica?'
+              placeholder='Nombre la/s enfermedades'
               isLabelCenter
-              type='text'
               nameProp='chronicDisease'
-              inputWidth='30%'
             />
           </div>
       </div>
       <div className="input-row">
           <div className="addPatient-box">
-            <Select
-              value={bloodType}
-              onChange={handleBloodType}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Grupo sanguíneo'
-              isLabelCenter
-              placeholder='Ingrese el grupo sanguíneo'
-              type='text'
-              nameProp='bloodType'
-              inputWidth='30%'
-            />
-          </div>
-          <div className="addPatient-box">
-            <Select
-              value={medication}
+            <Checkbox
+              withText
+              options={[]}
               onChange={handleMedication}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='¿Toma algún medicamento?'
+              placeholder='Nombre los medicamentos'
               isLabelCenter
-              type='text'
               nameProp='medication'
-              inputWidth='30%'
             />
           </div>
       </div>
-
+      
       <div className="btn-addPatient-center">
         <div className='btn-addPatient-container'>
           <Button 
             title={'Registrar'} 
-            type='button'
-            width='20%'
-            margin='5% 0'
+            type='submit'
           />
         </div>
       </div>
+
+      </form>
     </>
   )
 }

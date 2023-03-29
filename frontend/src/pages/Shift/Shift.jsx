@@ -9,10 +9,31 @@ const Shift = ({shiftID}) => {
   const [shift, setShift] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/${shiftID}`)
-    .then(res => res.json())
-    .then(res => setShift(res));
+    // fetch(`http://localhost:3001/${shiftID}`)
+    // .then(res => res.json())
+    // .then(res => setShift(res));
   }, [shiftID])
+
+  const handleDownloadTxt = () => {
+    fetch(`http://localhost:3001/appointments/download/5`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.blob();
+    })
+    .then(blob => {
+      // Create a URL for the Blob object
+      const url = URL.createObjectURL(blob);
+      // Create a link element and click it to download the file
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'filename.ext';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    })
+  }
 
   return (
     <>
@@ -53,6 +74,16 @@ const Shift = ({shiftID}) => {
           type='button'
           width='20%'
           margin='5% 0'
+        />
+      </div>
+      <div className="shift-btn-box">
+        <Button 
+          onClick={handleDownloadTxt}
+          title={'Descargar'} 
+          type='button'
+          width='20%'
+          margin='5% 0'
+          bgColor={'var(--green-bg)'}
         />
       </div>
       <div className="shift-btn-box">
