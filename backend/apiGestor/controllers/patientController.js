@@ -34,11 +34,9 @@ module.exports = {
     }
   },
   getOneLimit: async (req, res) => {
-    const { id } = req.params;
-  
+   
     try {
-      const patient = await db.Patient.findOne({
-        where: { id },
+      const patient = await db.Patient.findAll({
         attributes: { exclude: ['updatedAt', 'createdAt',
         "maritalStatus",
         "birthday",
@@ -61,11 +59,11 @@ module.exports = {
       if (patient) {
         res.status(200).json(patient);
       } else {
-        res.status(404).json({ message: 'No patient record found for the given ID' });
+        res.status(404).json({ message: ' Erro al obtener los pacientes' });
       }
     } catch (err) {
       console.error(err);
-      res.status(500).send('Error al obtener el paciente');
+      res.status(500).send('Error al obtener los paciente');
     }
   },
 
