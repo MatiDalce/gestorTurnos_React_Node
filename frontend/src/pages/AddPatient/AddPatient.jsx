@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { config } from '../../env/config';
 import Button from '../../components/Button/Button';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import Input from '../../components/Input/Input';
@@ -33,6 +34,7 @@ const AddPatient = () => {
     bloodType: '',
     medication: '',
   })
+
 
   const handleName = (e) => {
     setPatient({
@@ -153,7 +155,7 @@ const AddPatient = () => {
     e.preventDefault()
     // console.log(patient);
 
-    fetch(`http://localhost:3001/patients/${id}`)
+    fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
       console.log(id);

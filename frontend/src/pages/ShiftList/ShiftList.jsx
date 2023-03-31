@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
 import Table from '../../components/Table/Table'
+import { config } from '../../env/config';
 import './shiftList.css'
 
 const ShiftList = () => {
@@ -13,7 +14,7 @@ const ShiftList = () => {
   const [shiftList, setShiftList] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/appointments')
+    fetch(`${config.webAPI}/appointments`)
     .then(res => res.json())
     .then(res => {
       console.log(res);

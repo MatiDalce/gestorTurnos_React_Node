@@ -3,6 +3,7 @@ import Table from '../../components/Table/Table'
 import Input from '../../components/Input/Input'
 import Button from '../../components/Button/Button'
 import './patientList.css'
+import { config } from '../../env/config'
 
 const PatientList = () => {
 
@@ -10,7 +11,7 @@ const PatientList = () => {
   const [patients, setPatients] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/patients/limit')
+    fetch(`${config.webAPI}/patients/limit`)
     .then(res => res.json())
     .then(res => {
       console.log(res);

@@ -6,13 +6,14 @@ import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es'; 
 import Modal from '../../components/Modal/Modal';
 import './myCalendar.css';
+import { config } from '../../env/config';
 
 const MyCalendar = () => {
 
   const [eventsList, setEventsList] = useState([])
 
   useEffect(() => {
-    // fetch('http://localhost:3001/')
+    // fetch(`${config.webAPI}/`)
     // .then(res => res.json())
     // .then(res => setEventsList(res))
   }, [])

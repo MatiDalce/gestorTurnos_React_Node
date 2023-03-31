@@ -3,6 +3,7 @@ import './patient.css';
 import Button from '../../components/Button/Button';
 import { useParams } from 'react-router-dom';
 import { customAlert } from '../../assets/helpers/customAlert';
+import { config } from '../../env/config';
 
 const Patient = () => {
   let {id} = useParams();
@@ -10,7 +11,7 @@ const Patient = () => {
   const [patient, setPatient] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/patients/${id}`)
+    fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
       console.log(res);

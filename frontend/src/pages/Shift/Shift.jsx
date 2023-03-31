@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Accordion from '../../components/Accordion/Accordion';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
+import { config } from '../../env/config';
 import './shift.css'
 
 const Shift = ({shiftID}) => {
@@ -10,13 +11,13 @@ const Shift = ({shiftID}) => {
   const [shift, setShift] = useState([]);
 
   useEffect(() => {
-    // fetch(`http://localhost:3001/${shiftID}`)
+    // fetch(`${config.webAPI}/${shiftID}`)
     // .then(res => res.json())
     // .then(res => setShift(res));
   }, [shiftID])
 
   const handleDownloadTxt = () => {
-    fetch(`http://localhost:3001/appointments/download/5`)
+    fetch(`${config.webAPI}/appointments/download/5`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
