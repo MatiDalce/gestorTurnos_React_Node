@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './navbar.css'
 import {CurrentPage} from '../../assets/helpers/CurrentPage';
 import userLogo from '../../assets/icons/circle-user-solid.svg'
@@ -12,10 +12,22 @@ const Navbar = ({title}) => {
     let navigate = useNavigate();
     let location = useLocation();
     let { id } = useParams();
+    const [watch, setWatch] = useState(false);
+
+    const handleWatch = () => {
+        setWatch(!watch)
+    }
 
     return (
         <>
             {/* NAVBAR */}
+            {
+                watch && <div className='black-screen'>
+                    <button className="navbar-home-container" onClick={handleWatch}>
+                        <img src={ eyeLogo } alt="Volver a ver" className="navbar-icon-item navbar-black-screen-icon" />
+                    </button>
+                </div>
+            }
             {
                 (location.pathname !== '/login' && location.pathname !== '/') &&
                 <div className='navbar'>
@@ -29,11 +41,11 @@ const Navbar = ({title}) => {
                         <button className="navbar-home-container" onClick={() => navigate('/')}>
                             <img src={ homeLogo } alt="Ir a la Home" className="navbar-icon-item" />
                         </button>
-                        <button className="navbar-home-container" onClick={() => navigate('/')}>
-                            <img src={ eyeLogo } alt="Ir a la Home" className="navbar-icon-item" />
+                        <button className="navbar-home-container" onClick={handleWatch}>
+                            <img src={ blindEyeLogo } alt="Volver a ver" className={`navbar-icon-item ${watch && 'navbar-icon-hide'}`} />
                         </button>
                         <button className="navbar-home-container" onClick={() => navigate('/')}>
-                            <img src={ userLogo } alt="Ir a la Home" className="navbar-icon-item" />
+                            <img src={ userLogo } alt="Cerrar sesión" className="navbar-icon-item" />
                         </button>
                     </div>
                 </div>

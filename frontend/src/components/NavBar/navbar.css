@@ -23,6 +23,10 @@
     filter:  drop-shadow(2px 2px 5px var(--white-bg)) invert(0);
 }
 
+.navbar-icon-hide {
+    display: none;
+}
+
 .navbar-icon-group {
     display: flex;
     justify-content: space-evenly;
@@ -57,6 +61,20 @@
 .navbar-title {
     color: var(--white-bg);
     font-size: 3em;
+}
+
+.black-screen {
+    position: absolute;
+    background-color: var(--black-bg);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-black-screen-icon {
+    width: 100%;
 }
 
 /* EXTRA SMALL */
