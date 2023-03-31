@@ -44,7 +44,7 @@ const Navbar = ({title}) => {
                         <button className="navbar-home-container" onClick={handleWatch}>
                             <img src={ blindEyeLogo } alt="Volver a ver" className={`navbar-icon-item ${watch && 'navbar-icon-hide'}`} />
                         </button>
-                        <button className="navbar-home-container" onClick={() => navigate('/')}>
+                        <button className="navbar-home-container" onClick={() => {}}>
                             <img src={ userLogo } alt="Cerrar sesión" className="navbar-icon-item" />
                         </button>
                     </div>

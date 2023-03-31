@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './patient.css';
 import Button from '../../components/Button/Button';
 import { useParams } from 'react-router-dom';
+import { customAlert } from '../../assets/helpers/customAlert';
 
 const Patient = () => {
   let {id} = useParams();
@@ -16,6 +17,17 @@ const Patient = () => {
       setPatient(res)
     });
   }, [id])
+
+  const handleDelete = () => {
+    customAlert(
+      'warning', 
+      'endpoint',
+      'Está por borrar un paciente', 
+      'Esta acción no se puede deshacer ¿Está seguro?', 
+      'Aceptar', 
+      'Cancelar', 
+    )
+  }
 
   return (
     <>
@@ -158,6 +170,7 @@ const Patient = () => {
             width='20%'
             margin='5% 2%'
             bgColor='var(--red-bg)'
+            onClick={handleDelete}
           />
         </div>
       </div>
