@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../Spinner/Spinner';
 import './table.css'
 
 const Table = ({
@@ -41,7 +42,7 @@ const Table = ({
   
   // Si esta vacío...
   if(content.length === 0) {
-    return <p>Obteniendo los datos...</p>
+    return <div className='table-spinner-container'><Spinner /></div>
   } else { // Si no...
 
     // Obtengo los keys (y su cantidad) existentes en los objetos.
