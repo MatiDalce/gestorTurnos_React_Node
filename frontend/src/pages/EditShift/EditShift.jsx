@@ -65,8 +65,6 @@ const EditShift = () => {
           <Button 
             title={'Editar'} 
             type='button'
-            width='20%'
-            margin='5% 0'
           />
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import Accordion from '../../components/Accordion/Accordion';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import './shift.css'
@@ -53,17 +54,13 @@ const Shift = ({shiftID}) => {
 
     <div className="textarea-input-shift-center">
       <div className="textarea-input-box">
-        <Input
-          value=''
-          isDisabled
-          colorLabel='var(--black-bg)' 
-          hasLabel
-          labelTitle='Notas'
-          isLabelCenter
-          type='textarea'
-          nameProp='notes'
-          inputWidth='80%'
-        />
+        <Accordion title='Notas'>
+          <div className="shift-div-answer">
+            <p className="shift-shift-answer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non eaque earum, ut officia expedita magni deleniti nulla ex id dolorum, amet asperiores numquam fugiat veritatis velit similique at repellat consectetur!
+            Cumque magni fuga doloremque perferendis ullam consequatur reprehenderit minima quas repellat quo facere recusandae, placeat voluptatum ipsam ipsa, aliquid numquam illo minus animi, est harum repudiandae? Molestias dolore quaerat nostrum.
+            Minus fugiat excepturi a. Ex cum temporibus odio, voluptas eius eaque. Dolorem consequuntur sunt nisi asperiores eos illum, ratione odit eius maxime quia exercitationem, sit labore facere officia laborum deleniti!</p>
+          </div>
+        </Accordion>
       </div>
     </div>
     <div className='btn-shift-container'>

@@ -38,12 +38,14 @@
     margin: 3% 0;
 }
 
-.data-shift {
-
+.shift-div-answer {
+    background-color: var(--white-bg);
+    border-radius: 20px;
 }
 
-.data {
-
+.shift-shift-answer {
+    color: #000;
+    z-index: 1000;
 }
 
 /* EXTRA SMALL */

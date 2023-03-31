@@ -1,6 +1,9 @@
 import React from 'react'
 import './navbar.css'
 import {CurrentPage} from '../../assets/helpers/CurrentPage';
+import userLogo from '../../assets/icons/circle-user-solid.svg'
+import eyeLogo from '../../assets/icons/eye-solid.svg'
+import blindEyeLogo from '../../assets/icons/eye-slash-solid.svg'
 import homeLogo from '../../assets/icons/house-solid.svg'
 import ArrowLogo from '../../assets/icons/arrow-left-solid.svg'
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -22,9 +25,17 @@ const Navbar = ({title}) => {
                     <div className="navbar-title-container">
                         <h1 className="navbar-title">{<CurrentPage pathname={location.pathname} id={id} />}</h1>
                     </div>
-                    <button className="navbar-home-container" onClick={() => navigate('/')}>
-                        <img src={ homeLogo } alt="Ir a la Home" className="navbar-home" />
-                    </button>
+                    <div className="navbar-icon-group">
+                        <button className="navbar-home-container" onClick={() => navigate('/')}>
+                            <img src={ homeLogo } alt="Ir a la Home" className="navbar-icon-item" />
+                        </button>
+                        <button className="navbar-home-container" onClick={() => navigate('/')}>
+                            <img src={ eyeLogo } alt="Ir a la Home" className="navbar-icon-item" />
+                        </button>
+                        <button className="navbar-home-container" onClick={() => navigate('/')}>
+                            <img src={ userLogo } alt="Ir a la Home" className="navbar-icon-item" />
+                        </button>
+                    </div>
                 </div>
             }
             {/* PÁGINAS */}

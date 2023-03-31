@@ -21,6 +21,7 @@ const PatientList = () => {
   const handleSearch = (e) => {
     setSearch(e.target.value)
   }
+
   return (
     <>
       <div className="search-patient">
@@ -32,15 +33,12 @@ const PatientList = () => {
             type='text'
             nameProp='search'
             placeholder='Buscar'
-            inputWidth='60%'
-            margin='0 4% 0 0'
           />
         </div>
         <div className="patientList-btn">
           <Button 
             title={'Agregar Paciente'} 
             type='button'
-            width='30%'
             path='/agregar-paciente'
           />
         </div>
