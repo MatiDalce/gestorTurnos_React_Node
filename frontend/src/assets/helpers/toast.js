@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 
 // type: STRING | "success" o "error"
 // title: STRING | Es el texto
-export function toast (type, title) {
+export function toast (type = 'error', title = '') {
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',

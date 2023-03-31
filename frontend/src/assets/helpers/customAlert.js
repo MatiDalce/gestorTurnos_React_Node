@@ -4,8 +4,8 @@ import { toast } from './toast';
 export function customAlert(
     type = 'error',
     endpoint = '',
-    title,
-    msg,
+    title = '',
+    msg = '',
     fetchSuccess = 'La operación fue exitosa',
     fetchFailed = 'Se produjo un error',
     textBtnOne = 'Aceptar',

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { config } from '../../env/config';
 import Accordion from '../../components/Accordion/Accordion';
 import Button from '../../components/Button/Button';
-import Input from '../../components/Input/Input';
-import { config } from '../../env/config';
 import './shift.css'
 
 const Shift = ({shiftID}) => {
