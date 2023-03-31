@@ -1,10 +1,13 @@
 import Swal from 'sweetalert2';
+import { toast } from './toast';
 
 export function customAlert(
     type = 'error',
-    endpoint,
+    endpoint = '',
     title,
     msg,
+    fetchSuccess = 'La operación fue exitosa',
+    fetchFailed = 'Se produjo un error',
     textBtnOne = 'Aceptar',
     textBtnTwo = 'Cancelar',
 ) {
@@ -31,10 +34,10 @@ export function customAlert(
                     fetch(endpoint)
                     .then(response => response.json())
                     .then(data => {
-                        
+                        toast('success', fetchSuccess)
                     })
                     .catch(error => {
-                        
+                        toast('error', fetchFailed)
                     });
                 }
             })

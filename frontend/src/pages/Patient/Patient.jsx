@@ -24,8 +24,6 @@ const Patient = () => {
       'endpoint',
       'Está por borrar un paciente', 
       'Esta acción no se puede deshacer ¿Está seguro?', 
-      'Aceptar', 
-      'Cancelar', 
     )
   }
 

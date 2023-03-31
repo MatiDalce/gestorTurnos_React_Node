@@ -8,7 +8,7 @@ import homeLogo from '../../assets/icons/house-solid.svg'
 import ArrowLogo from '../../assets/icons/arrow-left-solid.svg'
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 
-const Navbar = ({title}) => {
+const Navbar = () => {
     let navigate = useNavigate();
     let location = useLocation();
     let { id } = useParams();
