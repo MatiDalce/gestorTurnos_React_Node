@@ -24,8 +24,8 @@ const Input = ({
   const inputStyles = {
     backgroundImage: isSearcheable ? `url(${magnifyingGlass})` : '',
     backgroundRepeat: isSearcheable ? `no-repeat` : '',
-    backgroundSize: isSearcheable ? `30px` : '',
-    backgroundPosition: isSearcheable ? '98% 50%' : '',
+    backgroundSize: isSearcheable ? `18px` : '',
+    backgroundPosition: isSearcheable ? '95% 50%' : '',
   }
 
   return (

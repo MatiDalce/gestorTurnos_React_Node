@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import './navbar.css'
-import {CurrentPage} from '../../assets/helpers/CurrentPage';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { CurrentPage } from '../../assets/helpers/CurrentPage';
 import userLogo from '../../assets/icons/circle-user-solid.svg'
 import eyeLogo from '../../assets/icons/eye-solid.svg'
 import blindEyeLogo from '../../assets/icons/eye-slash-solid.svg'
 import homeLogo from '../../assets/icons/house-solid.svg'
 import ArrowLogo from '../../assets/icons/arrow-left-solid.svg'
-import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import './navbar.css'
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
     let navigate = useNavigate();
@@ -16,6 +17,26 @@ const Navbar = () => {
 
     const handleWatch = () => {
         setWatch(!watch)
+    }
+
+    const handleSession = () => {
+        return Swal.fire({
+            title: 'Está a punto de cerrar sesión',
+            text: '¿Está seguro?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: 'var(--skyblue-bg)',
+            cancelButtonColor: 'var(--red-bg)',
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem('auth')
+                navigate('/login') 
+            } else {
+                return;
+            }
+        })
     }
 
     return (
@@ -44,7 +65,7 @@ const Navbar = () => {
                         <button className="navbar-home-container" onClick={handleWatch}>
                             <img src={ blindEyeLogo } alt="Volver a ver" className={`navbar-icon-item ${watch && 'navbar-icon-hide'}`} />
                         </button>
-                        <button className="navbar-home-container" onClick={() => {}}>
+                        <button className="navbar-home-container" onClick={handleSession}>
                             <img src={ userLogo } alt="Cerrar sesión" className="navbar-icon-item" />
                         </button>
                     </div>
