@@ -7,11 +7,13 @@ module.exports = {
     try {
       const patients = await db.Patient.findAll({
         attributes: { exclude: ['updatedAt', 'createdAt'] } // exclude createdAt field
-      });;
+      });
       res.status(200).json(patients);
+      console.log("GET PatientController : All patients were returned successfully.");
     } catch (err) {
-      console.error(err); --
-        res.status(500).send('Error al obtener los pacientes');
+      console.error(err);
+      res.status(500).send('Error retrieving patients.');
+      console.log("GET : PatientController: An error occurred while retrieving patients.");
     }
   },
   getOne: async (req, res) => {
@@ -25,12 +27,15 @@ module.exports = {
 
       if (patient) {
         res.status(200).json(patient);
+        console.log(`GETOnePatientController s: Patient with ID ${id} was returned successfully.`);
       } else {
         res.status(404).json({ message: 'No patient record found for the given ID' });
+        console.log(`GETOnePatientController : No patient record found for ID ${id}.`);
       }
     } catch (err) {
       console.error(err);
-      res.status(500).send('Error al obtener el paciente');
+      res.status(500).send('Error retrieving patient.');
+      console.log(`getOnePatientController: An error occurred while retrieving patient with ID ${id}.`);
     }
   },
   getOneLimit: async (req, res) => {
@@ -71,24 +76,42 @@ module.exports = {
         });
 
         res.status(200).json(patientsWithCompleteName);
+        console.log("GET : LimitInfoPatientController: The list of patients with the complete name was returned successfully.");
       } else {
-        res.status(404).json({ message: 'Error al obtener los pacientes' });
+        res.status(404).json({ message: 'Error retrieving patients.' });
+        console.log("GET : LimitInfoPatientController: An error occurred while retrieving patients.");
       }
     } catch (err) {
       console.error(err);
-      res.status(500).send('Error al obtener los pacientes');
+      res.status(500).send('Error retrieving patients.');
+      console.log("GET : LimitInfoPatientController: An error occurred while retrieving the list of patients with the complete name.");
     }
   },
-
-
-
-
   post: async (req, res) => {
-    const { name, age, gender, phone, address } = req.body;
+    const { name,
+      lastName,
+      maritalStatus,
+      birthday,
+      dni,
+      familyMembers,
+      parents,
+      children,
+      siblings,
+      personalPhoneNumber,
+      contactPhone,
+      academicLevel,
+      bloodType,
+      takesMedication,
+      medication,
+      hasAllergies,
+      allergies,
+      hasChronicDisease,
+      chronicDisease } = req.body;
 
     try {
       const newPatient = await db.Patient.create({
         name,
+        lastName,
         maritalStatus,
         birthday,
         dni,
@@ -107,10 +130,12 @@ module.exports = {
         hasChronicDisease,
         chronicDisease
       });
+      console.log(`POST patientController : New patient record created: ${newPatient.id}`);
 
       res.status(201).json(newPatient);
     } catch (err) {
       console.error(err);
+      console.log(`POST patientController : Error creating patient record: ${err}`);
       res.status(500).json({ message: 'Error creating patient record' });
     }
   },
@@ -119,6 +144,7 @@ module.exports = {
     const { id } = req.params;
     const {
       name,
+      lastName,
       maritalStatus,
       birthday,
       dni,
@@ -141,6 +167,7 @@ module.exports = {
       const result = await db.Patient.update(
         {
           name,
+          lastName,
           maritalStatus,
           birthday,
           dni,
@@ -180,6 +207,7 @@ module.exports = {
 
       if (result > 0) {
         res.status(200).json({ message: 'Patient record deleted successfully' });
+        
       } else {
         res.status(404).json({ message: 'No patient record found for the given ID' });
       }
@@ -188,7 +216,30 @@ module.exports = {
       res.status(500).send('Error deleting patient record');
     }
 
+  },
+  search: async (req, res) => {
+    try {
+      const patients = await db.Patient.findAll({
+        where: {
+          [Op.or]: [
+            { name: { [Op.like]: `%${req.query.q}%` } },
+            { dni: { [Op.like]: `%${req.query.q}%` } },
+            { lastName: { [Op.like]: `%${req.query.q}%` } }
+          ]
+        },
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
+      });
+      
+      console.log("SEARCH PATIENT: OKK")
+
+      res.json({ patients });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' })
+      console.log("SEARCH PATIENT : ERROR");
+    }
   }
+
 }
 
 
