@@ -28,6 +28,7 @@ const AddShift = () => {
         />
       </div>
       <div className="input-row-shift">
+        <div className="addShift-input-container">
           <Input
             onChange={handleDate}
             colorLabel='var(--black-bg)' 
@@ -36,8 +37,9 @@ const AddShift = () => {
             isLabelCenter
             type='date'
             nameProp='date'
-            inputWidth='30%'
           />
+        </div>
+        <div className="addShift-input-container">
           <Input
             onChange={handleTime}
             colorLabel='var(--black-bg)' 
@@ -47,8 +49,8 @@ const AddShift = () => {
             placeholder='Ingrese la hora'
             type='time'
             nameProp='hour'
-            inputWidth='30%'
           />
+        </div>
       </div>
       <div className="textarea-input-shift">
         <Input
@@ -59,15 +61,12 @@ const AddShift = () => {
           isLabelCenter
           type='textarea'
           nameProp='notes'
-          inputWidth='80%'
         />
       </div>
       <div className='btn-addShift-container'>
         <Button 
           title={'Agregar'} 
           type='button'
-          width='20%'
-          margin='5% 0'
         />
       </div>
     </>

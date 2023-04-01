@@ -1,49 +1,44 @@
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { toast } from './toast';
 
-export function customAlert(
-    type = 'error',
+export function errorAlert(
+    title = '',
+    msg = '',
+) {
+    return Swal.fire({
+        icon: 'error',
+        title: title,
+        text: msg,
+        confirmButtonColor: 'var(--skyblue-bg)',
+    })
+}
+
+export function warningAlert(
     endpoint = '',
     title = '',
     msg = '',
-    fetchSuccess = 'La operación fue exitosa',
-    fetchFailed = 'Se produjo un error',
     textBtnOne = 'Aceptar',
     textBtnTwo = 'Cancelar',
 ) {
-    switch (type) {
-        case 'error':
-            return Swal.fire({
-                icon: 'error',
-                title: title,
-                text: msg,
-                confirmButtonColor: 'var(--skyblue-bg)',
+    return Swal.fire({
+        title: title,
+        text: msg,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'var(--skyblue-bg)',
+        cancelButtonColor: 'var(--red-bg)',
+        confirmButtonText: textBtnOne,
+        cancelButtonText: textBtnTwo
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(endpoint)
+            .then(response => response.json())
+            .then(data => {
+                toast('success', 'La operación fue exitosa')
             })
-        case 'warning':
-            return Swal.fire({
-                title: title,
-                text: msg,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: 'var(--skyblue-bg)',
-                cancelButtonColor: 'var(--red-bg)',
-                confirmButtonText: textBtnOne,
-                cancelButtonText: textBtnTwo
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch(endpoint)
-                    .then(response => response.json())
-                    .then(data => {
-                        toast('success', fetchSuccess)
-                    })
-                    .catch(error => {
-                        toast('error', fetchFailed)
-                    });
-                }
-            })
-    
-        default:
-            return;
-    }
+            .catch(error => {
+                toast('error', 'Se produjo un error')
+            });
+        }
+    })
 }

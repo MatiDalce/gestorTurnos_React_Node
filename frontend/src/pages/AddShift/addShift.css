@@ -10,14 +10,22 @@
     margin: 2% 0;
 }
 
+.addShift-input-container {
+    width: 40%;
+}
+
 .btn-addShift-container {
     display: flex;
     justify-content: center;
+    width: 20%;
+    margin: 2% auto;
 }
 
 .textarea-input-shift {
     display: flex;
     justify-content: center;
+    width: 90%;
+    margin: auto;
 }
 
 /* EXTRA SMALL */

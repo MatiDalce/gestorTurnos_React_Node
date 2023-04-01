@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './patient.css';
 import Button from '../../components/Button/Button';
 import { useParams } from 'react-router-dom';
-import { customAlert } from '../../assets/helpers/customAlert';
+import { warningAlert } from '../../assets/helpers/customAlert';
 import { config } from '../../env/config';
 
 const Patient = () => {
@@ -20,8 +20,7 @@ const Patient = () => {
   }, [id])
 
   const handleDelete = () => {
-    customAlert(
-      'warning', 
+    warningAlert(
       'endpoint',
       'Está por borrar un paciente', 
       'Esta acción no se puede deshacer ¿Está seguro?', 

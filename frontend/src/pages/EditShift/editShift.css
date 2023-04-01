@@ -6,12 +6,16 @@
 }
 
 .editShift-input-box {
-    width: 40%;
+    width: 35%;
 }
 
 .editShift-textarea-box {
     width: 90%;
     margin-bottom: 3%;
+}
+
+.textarea-input-shift {
+    width: 100%;
 }
 
 .btn-editShift-center {
@@ -25,15 +29,46 @@
 
 /* EXTRA SMALL */
 @media screen and (max-width: 576px) {
+    .btn-editShift-container {
+        font-size: 2em;
+        width: 50%;
+        margin-bottom: 2%;
+    }
 
+    .input-row-shift {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .editShift-input-box {
+        margin: 3% 0;
+        width: 80%;
+    }
+    
+    .btn-editShift-center {
+        display: flex;
+        justify-content: center;
+    }
 }
 /* SMALL */
 @media screen and (min-width: 577px) and (max-width: 767px) {
+    .btn-editShift-container {
+        font-size: 1.3em;
+        margin-bottom: 2%;
+    }
+
+    .input-row-shift {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
     .editShift-input-box {
         margin: 3% 0;
-    }
-    .editShift-textarea-box {
-        margin-bottom: 5%;
+        width: 80%;
     }
     
     .btn-editShift-center {
