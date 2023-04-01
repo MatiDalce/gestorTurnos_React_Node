@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { config } from '../../env/config';
 import Accordion from '../../components/Accordion/Accordion';
 import Button from '../../components/Button/Button';
 import './shift.css'
 
 const Shift = ({shiftID}) => {
+  const navigate = useNavigate()
   let {id} = useParams();
   const [shift, setShift] = useState({
     note: '',
@@ -29,7 +30,14 @@ const Shift = ({shiftID}) => {
     });
   }, [id])
 
-  const handleDownloadTxt = () => {
+  const handleDeleteShift = () => {
+    console.log(`${config.webAPI}/appointments/${id}`);
+
+    fetch(`${config.webAPI}/appointments/${id}`, { method: 'DELETE' })
+    .then(() => navigate('/listado-turnos'))
+  } 
+
+  const handleDownloadShift = () => {
     fetch(`${config.webAPI}/appointments/download/5`)
     .then(response => {
       if (!response.ok) {
@@ -81,17 +89,13 @@ const Shift = ({shiftID}) => {
           path={`/editar-turno/${id}`}
           title={'Editar'} 
           type='button'
-          width='20%'
-          margin='5% 0'
         />
       </div>
       <div className="shift-btn-box">
         <Button 
-          onClick={handleDownloadTxt}
+          onClick={handleDownloadShift}
           title={'Descargar'} 
           type='button'
-          width='20%'
-          margin='5% 0'
           bgColor={'var(--green-bg)'}
         />
       </div>
@@ -99,9 +103,8 @@ const Shift = ({shiftID}) => {
         <Button 
           title={'Borrar'} 
           type='button'
-          width='20%'
-          margin='5% 0'
           bgColor={'var(--red-bg)'}
+          onClick={handleDeleteShift}
         />
       </div>
     </div>
