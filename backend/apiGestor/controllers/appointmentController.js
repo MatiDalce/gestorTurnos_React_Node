@@ -105,32 +105,79 @@ module.exports = {
         }
     },
     put: async (req, res) => {
-
-        const { id } = req.params;
-        const { day, hour, patient, note } = req.body;
-
-        try {
-            const result = await db.Appointment.update(
-                {
-                    day,
-                    hour,
-                    patient,
-                    note
-                },
-                { where: { id } }
-            );
-
-            if (result[0] > 0) {
-                res.status(200).json({ message: 'Appointment record updated successfully' });
-            } else {
-                res.status(404).json({ message: 'No Appointment record found for the given ID' });
+      const { id } = req.params;
+      const { day, hour, patientId, note } = req.body;
+    
+      try {
+        const appointment = await db.Appointment.findOne({
+          where: { id },
+          attributes: {
+            exclude: ['createdAt', 'updatedAt']
+          },
+          include: [{
+            association: "patient",
+            as: "patient", // specify the alias here
+            attributes: {
+              exclude: [
+                'createdAt',
+                'updatedAt',
+                'birthday',
+                'maritalStatus',
+                'email',
+                'socialService',
+                "maritalStatus",
+                "contactPhone",
+                "personalPhoneNumber",
+                "academicLevel",
+                "bloodType",
+                "takesMedication",
+                "medication",
+                "hasAllergies",
+                "allergies",
+                "hasChronicDisease",
+                "chronicDisease",
+                "familyMembers",
+                "parents",
+                "children",
+                "siblings"
+              ]
             }
-        } catch (err) {
-            console.error(err);
-            res.status(500).send('Error updating Appointment record');
+          }]
+        });
+    
+        if (!appointment) {
+          return res.status(404).json({ message: 'Appointment not found' });
         }
-
+    
+        await appointment.update({
+          day,
+          hour,
+          note,
+        });
+    
+        if (patientId) {
+          const patient = await db.Patient.findByPk(patientId);
+          if (!patient) {
+            return res.status(404).json({ message: 'Patient not found' });
+          }
+    
+          // Set the associated patient for the appointment
+          await appointment.setPatient(patient);
+        }
+    
+        res.status(200).json({ message: 'Appointment updated successfully' });
+      } catch (err) {
+        console.error(err);
+        res.status(500).send('Error updating appointment record');
+      }
     },
+    
+    
+    
+    
+    
+    
+    
     delete: async (req, res) => {
         const { id } = req.params;
 
