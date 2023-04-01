@@ -7,13 +7,27 @@ import './shift.css'
 
 const Shift = ({shiftID}) => {
   let {id} = useParams();
-  const [shift, setShift] = useState([]);
+  const [shift, setShift] = useState({
+    note: '',
+    date: '',
+    hour: ''
+  });
+
+  // DESCARGAR TURNO - `${config.webAPI}/appointments/download/${id}`
+  // ELIMINAR - `${config.webAPI}/appointments/${id}`
 
   useEffect(() => {
-    // fetch(`${config.webAPI}/${shiftID}`)
-    // .then(res => res.json())
-    // .then(res => setShift(res));
-  }, [shiftID])
+    fetch(`${config.webAPI}/appointments/${id}`)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      setShift({
+        note: res.note,
+        date: res.day,
+        hour: res.hour
+      })
+    });
+  }, [id])
 
   const handleDownloadTxt = () => {
     fetch(`${config.webAPI}/appointments/download/5`)
@@ -43,12 +57,12 @@ const Shift = ({shiftID}) => {
     <div className="data-shift-box-container">
       <div className="data-shift-box">
         <p className="data-shift">Fecha del turno</p>
-        <p className="data">13/05/2023</p>
+        <p className="data">{shift.date}</p>
       </div>
 
       <div className="data-shift-box">
         <p className="data-shift">Horario del turno</p>
-        <p className="data">19:36hs</p>
+        <p className="data">{shift.hour}hs</p>
       </div>
     </div>
 
@@ -56,9 +70,7 @@ const Shift = ({shiftID}) => {
       <div className="textarea-input-box">
         <Accordion title='Notas'>
           <div className="shift-div-answer">
-            <p className="shift-shift-answer">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non eaque earum, ut officia expedita magni deleniti nulla ex id dolorum, amet asperiores numquam fugiat veritatis velit similique at repellat consectetur!
-            Cumque magni fuga doloremque perferendis ullam consequatur reprehenderit minima quas repellat quo facere recusandae, placeat voluptatum ipsam ipsa, aliquid numquam illo minus animi, est harum repudiandae? Molestias dolore quaerat nostrum.
-            Minus fugiat excepturi a. Ex cum temporibus odio, voluptas eius eaque. Dolorem consequuntur sunt nisi asperiores eos illum, ratione odit eius maxime quia exercitationem, sit labore facere officia laborum deleniti!</p>
+            <p className="shift-shift-answer">{ shift.note }</p>
           </div>
         </Accordion>
       </div>

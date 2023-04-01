@@ -14,6 +14,7 @@ const Checkbox = ({
     value, // Para el input texto
     placeholder, // Para el input texto
     onChange, // Para el input texto
+    checkValue,
 }) => {
     const [selectedOption, setSelectedOption] = useState(oneChoice ? null : []);
     const [activeOptions, setActiveOptions] = useState(false);
@@ -86,8 +87,9 @@ const Checkbox = ({
                                 <input
                                     type={oneChoice ? 'radio' : 'checkbox'}
                                     name={nameProp}
+                                    // checked={option === checkValue}
                                     value={option}
-                                    checked={oneChoice ? selectedOption : selectedOption.includes(option)}
+                                    checked={oneChoice ? (checkValue ? option === checkValue : selectedOption) : selectedOption.includes(option)}
                                     onChange={oneChoice ? (e) => onChange(e.target.value) : handleSelect}
                                     className="checkbox-input"
                                 />

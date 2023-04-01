@@ -3,10 +3,10 @@ import './accordion.css';
 
 const Accordion = ({title, children}) => {
     return (
-        <div class="accordion">
+        <div className="accordion">
             <input type="checkbox" id="tab1" className='accordion-input' />
-            <label class="accordion-label" for="tab1">{title}</label>
-            <div class="accordion-content">
+            <label className="accordion-label" htmlFor="tab1">{title}</label>
+            <div className="accordion-content">
                 {children}
             </div>
         </div>

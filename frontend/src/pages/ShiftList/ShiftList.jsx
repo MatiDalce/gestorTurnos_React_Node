@@ -13,6 +13,9 @@ const ShiftList = () => {
 
   const [shiftList, setShiftList] = useState([]);
 
+  // FILTRO: name|lastName|dni `${config.webAPI}/appointments/search?`
+  // Ejemplo - http://localhost:3001/appointments/search?q=J (J de juan)
+
   useEffect(() => {
     fetch(`${config.webAPI}/appointments`)
     .then(res => res.json())

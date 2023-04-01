@@ -6,6 +6,7 @@ import Checkbox from '../../components/Checkbox/Checkbox';
 import './editPatient.css';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { config } from '../../env/config';
 
 const EditPatient = () => {
 
@@ -33,33 +34,34 @@ const EditPatient = () => {
     medication: '',
   })
 
-  // useEffect(() => {
-  //   fetch(`/patient/${id}`, {})
-  //   .then(res => res.json())
-  //   .then(res => {
-  //     setPatient({
-  //       name: '',
-  //       lastName: '',
-  //       dni: '',
-  //       socialNetwork: '',
-  //       age: '',
-  //       genre: '',
-  //       maritalStatus: '',
-  //       birthday: '',
-  //       father: '',
-  //       mother: '',
-  //       children: '',
-  //       siblings: '',
-  //       livingSiblings: '',
-  //       personalPhone: '',
-  //       contactPhone: '',
-  //       chronicDisease: '',
-  //       hasAllergies: '',
-  //       bloodType: '',
-  //       medication: '',
-  //     })
-  //   })
-  // }, [id])
+  useEffect(() => {
+    fetch(`${config.webAPI}/patients/${id}`)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      setPatient({
+        name: res.name,
+        lastName: res.lastName,
+        dni: res.dni,
+        socialNetwork: res.socialNetwork, // No viene desde BE
+        age: res.age, // No viene desde BE
+        genre: res.genre, // No viene desde BE
+        maritalStatus: res.maritalStatus,
+        birthday: res.birthday,
+        father: res.father, // No viene desde BE
+        mother: res.mother, // No viene desde BE
+        children: res.children, 
+        siblings: res.siblings,
+        livingSiblings: res.livingSiblings, // No viene desde BE
+        personalPhone: res.personalPhone,
+        contactPhone: res.contactPhone,
+        chronicDisease: res.hasChronicDisease,
+        hasAllergies: res.hasAllergies,
+        bloodType: res.bloodType,
+        medication: res.medication,
+      })
+    })
+  }, [id])
 
   const handleForm = (e) => {
     e.preventDefault()
@@ -291,11 +293,12 @@ const EditPatient = () => {
             onlyCheckboxes
             oneChoice
             onChange={handleMaritalStatus}
-            colorLabel='var(--black-bg)' 
+            colorLabel='var(--black-bg)'
             hasLabel
             labelTitle='Estado civil'
             isLabelCenter
             nameProp='maritalStatus'
+            checkValue={patient.maritalStatus}
           />
         </div>
       </div>
