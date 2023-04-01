@@ -1,25 +1,73 @@
 import React from 'react';
+import { useState } from 'react';
+import { config } from '../../env/config';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import Select from '../../components/Select/Select';
 import './addShift.css';
+import { useEffect } from 'react';
 
 const AddShift = () => {
 
-  const handlePatient = () => {}
-  const handleDate = () => {}
-  const handleTime = () => {}
-  const handleNotes = () => {}
+  const [patientList, setPatientList] = useState([]);
+  const [selectedPatient, setSelectedPatient] = useState(0);
+  const [date, setDate] = useState(0);
+  const [hour, setHour] = useState(0);
+  const [note, setNote] = useState('');
+
+  useEffect(() => {
+    fetch(`${config.webAPI}/patients/limit`)
+    .then(res => res.json())
+    .then(res => {
+      const patientsListNames = res.map(patient => {return {text:patient.completeName, value:patient.id}});
+      setPatientList(patientsListNames)
+    })
+  }, []);
+
+  const handleSelectPatient = (e) => {
+    console.log(e.target.value);
+    setSelectedPatient(e.target.value)
+  }
+  const handleDate = (e) => {
+    setDate(e.target.value)
+  }
+  const handleTime = (e) => {
+    setHour(e.target.value)
+  }
+  const handleNotes = (e) => {
+    setNote(e.target.value)
+  }
+  const handleAddShift = (e) => {
+    let data = {
+      day: date,
+      hour: hour,
+      patient: selectedPatient,
+      note: note
+    };
+    console.log(data);
+    fetch(`${config.webAPI}/appointments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => {
+      // console.log(res);
+      setDate(res.day);
+      setHour(res.hour);
+      setNote(res.note);
+      setSelectedPatient(res.patient.id)
+    })
+  }
 
   return (
     <>
       <div className="select-patient-input">
         <Select
-          onChange={handlePatient}
-          options={[
-            {text: 'Diego Perez', value: 'diego-perez'},
-            {text: 'Camila Surrey', value: 'camila-surrey'},
-          ]}
+          onChange={handleSelectPatient}
+          options={[{text:'', value:0}, ...patientList]}
           colorLabel='var(--black-bg)' 
           hasLabel
           labelTitle='Seleccione el paciente'
@@ -31,6 +79,7 @@ const AddShift = () => {
         <div className="addShift-input-container">
           <Input
             onChange={handleDate}
+            value={date}
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Fecha'
@@ -42,6 +91,7 @@ const AddShift = () => {
         <div className="addShift-input-container">
           <Input
             onChange={handleTime}
+            value={hour}
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Hora'
@@ -55,6 +105,7 @@ const AddShift = () => {
       <div className="textarea-input-shift">
         <Input
           onChange={handleNotes}
+          value={note}
           colorLabel='var(--black-bg)' 
           hasLabel
           labelTitle='Notas'
@@ -67,6 +118,7 @@ const AddShift = () => {
         <Button 
           title={'Agregar'} 
           type='button'
+          onClick={handleAddShift}
         />
       </div>
     </>
