@@ -24,17 +24,21 @@
 .textarea-input-shift {
     display: flex;
     justify-content: center;
-    width: 90%;
+    width: 90% !important;
     margin: auto;
 }
 
 /* EXTRA SMALL */
 @media screen and (max-width: 576px) {
-
+    .addShift-input-container {
+        width: 70%;
+    }
 }
 /* SMALL */
 @media screen and (min-width: 577px) and (max-width: 767px) {
-
+    .addShift-input-container {
+        width: 70%;
+    }
 }
 /* MEDIUM */
 @media screen and (min-width: 768px) and (max-width: 991px) {

@@ -5,9 +5,9 @@
 
 .btn-shift-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-    font-size: 1.6em;
+    font-size: 1.3em;
 }
 
 .data-shift-box-container {
@@ -34,7 +34,7 @@
 }
 
 .shift-btn-box {
-    width: 30%;
+    width: 20%;
     margin: 3% 0;
 }
 
