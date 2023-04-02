@@ -128,22 +128,21 @@ module.exports = {
      
     
     
-    delete: async (req, res) => {
-        const { id } = req.params;
-
-        try {
-            const result = await db.Appointment.destroy({ where: { id } });
-
-            if (result > 0) {
-                res.status(200).json({ message: 'Appointment record deleted successfully' });
-            } else {
-                res.status(404).json({ message: 'No Appointment record found for the given ID' });
-            }
-        } catch (err) {
-            console.error(err);
-            res.status(500).send('Error deleting Appointment record');
+  delete: async (req, res) => {
+    try {
+      const deletedAppointment = await db.Appointment.destroy({
+        where: {
+          id: req.params.id
         }
-    },
+      });
+      res.status(200).json({ message: 'Appointment deleted successfully' });
+    } catch (err) {
+      console.error(err.message); // log the error message
+      res.status(500).json({ message: 'Error deleting appointment record' });
+    }
+  }
+  
+,
 
     download: async (req, res) => {
         try {
