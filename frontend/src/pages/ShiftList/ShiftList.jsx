@@ -82,7 +82,7 @@ const ShiftList = () => {
           nameProp='search'
         />
       </div>
-      <div className="shiftList-input-box">
+      {/* <div className="shiftList-input-box">
         <Input 
           onChange={handleDateFrom}
           value={filterShift.dateFrom}
@@ -101,7 +101,7 @@ const ShiftList = () => {
           type='date'
           nameProp='untilDate'
         />
-      </div>
+      </div> */}
       <div className="shiftList-btn-box">
         <Button 
           title={'Filtrar Turnos'} 

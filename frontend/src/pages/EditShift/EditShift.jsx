@@ -5,9 +5,11 @@ import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import './editShift.css';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from '../../assets/helpers/toast';
 
 const EditShift = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [ patientID, setPatientID] = useState()
   const [ date, setDate ] = useState()
@@ -51,8 +53,7 @@ const EditShift = () => {
       note: notes,
       patient: patientID
     }
-    console.log(`${config.webAPI}/appointments/${id}`);
-    console.log(data);
+
     fetch(`${config.webAPI}/appointments/${id}`, { // id = id del turno
       method: 'PUT',
       headers: {
@@ -62,7 +63,12 @@ const EditShift = () => {
     })
     .then(res => res.json())
     .then(res => {
-      console.log(res);
+      if(res) {
+        navigate('/listado-turnos')
+        toast('success', 'Se ha editado exitosamente')
+      } else {
+        toast('error', 'No se ha podido editar')
+      }
       setDate(res.day);
       setHour(res.hour);
       setNotes(res.note);
