@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from '../../assets/helpers/toast'
 import { config } from '../../env/config';
 import Accordion from '../../components/Accordion/Accordion';
 import Button from '../../components/Button/Button';
 import './shift.css'
 
-const Shift = ({shiftID}) => {
+const Shift = () => {
   const navigate = useNavigate()
   let {id} = useParams();
   const [shift, setShift] = useState({
+    name: '',
     note: '',
     date: '',
     hour: ''
@@ -23,6 +25,7 @@ const Shift = ({shiftID}) => {
     .then(res => {
       console.log(res);
       setShift({
+        name: res.patient.name,
         note: res.note,
         date: res.day,
         hour: res.hour
@@ -31,10 +34,15 @@ const Shift = ({shiftID}) => {
   }, [id])
 
   const handleDeleteShift = () => {
-    console.log(`${config.webAPI}/appointments/${id}`);
-
     fetch(`${config.webAPI}/appointments/${id}`, { method: 'DELETE' })
-    .then(() => navigate('/listado-turnos'))
+    .then((res) => {
+      if(res) {
+        toast('success', 'Se ha eliminado exitosamente');
+        navigate('/listado-turnos');
+      } else {
+        toast('error', 'No se ha podido eliminar');
+      }
+    })
   } 
 
   const handleDownloadShift = () => {
@@ -60,7 +68,7 @@ const Shift = ({shiftID}) => {
 
   return (
     <>
-    <p className='shift-title' >DIEGO PEREZ</p>
+    <p className='shift-title' >{shift.name}</p>
 
     <div className="data-shift-box-container">
       <div className="data-shift-box">

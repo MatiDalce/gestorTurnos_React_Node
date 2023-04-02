@@ -24,8 +24,7 @@ const PatientList = () => {
     fetch(`${config.webAPI}/patients/search?q=${search}`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
-      if(res.patients.length === 0) return setPatients([])
+      if(res.patients.length === 0) return
       setPatients(res.patients)
     });
   }

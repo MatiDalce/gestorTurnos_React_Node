@@ -55,6 +55,7 @@ const ShiftList = () => {
     fetch(`${config.webAPI}/appointments/search?q=${filterShift.name}`)
     .then(res => res.json())
     .then(res => {
+      if(!res.appointments) return
       const modifiedRes = res.appointments.map(shift => {
         return {
           id: shift.id,
