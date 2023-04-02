@@ -34,3 +34,8 @@
   --fc-button-active-bg-color: #9cd6ef;
   --fc-button-active-border-color: #9cd6ef;
 }
+
+/* Alerta por encima de todo */
+.swal2-container {
+  z-index: 10000 !important;
+}
