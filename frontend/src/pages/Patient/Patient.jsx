@@ -10,9 +10,6 @@ const Patient = () => {
 
   const [patient, setPatient] = useState([]);
 
-  // FILTRO: name|lastName|dni `${config.webAPI}/appointments/search?`
-  // Ejemplo - http://localhost:3001/appointments/search?q=J (J de juan)
-
   useEffect(() => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
@@ -52,10 +49,9 @@ const Patient = () => {
         </div>
         <div className="input-box">
           <p className="data-title">Obra Social del Paciente</p>
-          <p className="data">{patient.social_network}</p>
+          <p className="data">{patient.socialService}</p>
         </div>
       </div>
-      
       <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Edad</p>
@@ -63,7 +59,7 @@ const Patient = () => {
         </div>
         <div className="input-box">
           <p className="data-title">Género</p>
-          <p className="data">{patient.genre}</p>
+          <p className="data">{patient.gender}</p>
         </div>
       </div>
       
@@ -102,38 +98,31 @@ const Patient = () => {
       
       <div className="input-patient-row">
         <div className="input-box">
-          <p className="data-title">¿Viven sus hermanos?</p>
-          {/* <p className="data">{patient.genre}</p> */}
-        </div>
-        <div className="input-box">
           <p className="data-title">Teléfono personal</p>
           <p className="data">{patient.personalPhoneNumber}</p>
         </div>
-      </div>
-      
-      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Teléfono de contacto</p>
           <p className="data">{patient.contactPhone}</p>
         </div>
+      </div>
+      
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Nivel académico cursado</p>
           <p className="data">{patient.academicLevel}</p>
         </div>
-      </div>
-      
-      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Grupo sanguíneo</p>
           <p className="data">{patient.bloodType}</p>
         </div>
+      </div>
+      
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">¿Toma algún medicamento?</p>
           <p className="data">{patient.medication}</p>
         </div>
-      </div>
-      
-      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">¿Tiene alguna alergia?</p>
           <p className="data">{patient.hasAllergies}</p>
