@@ -243,12 +243,40 @@ module.exports = {
             { lastName: { [Op.like]: `%${req.query.q}%` } }
           ]
         },
-        attributes: { exclude: ['createdAt', 'updatedAt'] }
+        attributes: { exclude: [
+          'updatedAt',
+          'createdAt',
+          'maritalStatus',
+          'birthday',
+          'familyMembers',
+          'parents',
+          'children',
+          'siblings',
+          'personalPhoneNumber',
+          'contactPhone',
+          'academicLevel',
+          'bloodType',
+          'takesMedication',
+          'medication',
+          'hasAllergies',
+          'allergies',
+          'hasChronicDisease',
+          'chronicDisease'
+        ] }
       });
       
       console.log("SEARCH PATIENT: OKK")
 
-      res.json({ patients });
+      const patientsWithCompleteName = patients.map(patient => {
+        return {
+          id: patient.id,
+          completeName: `${patient.name} ${patient.lastName}`,
+          email: patient.email,
+          dni: patient.dni
+        };
+      });
+
+      res.json({ patientsWithCompleteName });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Server error' })
