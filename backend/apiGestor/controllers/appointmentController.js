@@ -105,77 +105,27 @@ module.exports = {
         }
     },
     put: async (req, res) => {
-      const { id } = req.params;
-      const { day, hour, patientId, note } = req.body;
-    
+
+      const { day, hour, patient, note } = req.body;
+
       try {
-        const appointment = await db.Appointment.findOne({
-          where: { id },
-          attributes: {
-            exclude: ['createdAt', 'updatedAt']
-          },
-          include: [{
-            association: "patient",
-            as: "patient", // specify the alias here
-            attributes: {
-              exclude: [
-                'createdAt',
-                'updatedAt',
-                'birthday',
-                'maritalStatus',
-                'email',
-                'socialService',
-                "maritalStatus",
-                "contactPhone",
-                "personalPhoneNumber",
-                "academicLevel",
-                "bloodType",
-                "takesMedication",
-                "medication",
-                "hasAllergies",
-                "allergies",
-                "hasChronicDisease",
-                "chronicDisease",
-                "familyMembers",
-                "parents",
-                "children",
-                "siblings"
-              ]
-            }
-          }]
-        });
-    
-        if (!appointment) {
-          return res.status(404).json({ message: 'Appointment not found' });
-        }
-    
-        await appointment.update({
-          day,
-          hour,
-          note,
-        });
-    
-        if (patientId) {
-          const patient = await db.Patient.findByPk(patientId);
-          if (!patient) {
-            return res.status(404).json({ message: 'Patient not found' });
-          }
-    
-          // Set the associated patient for the appointment
-          await appointment.setPatient(patient);
-        }
-    
-        res.status(200).json({ message: 'Appointment updated successfully' });
+          const editedAppointment = await db.Appointment.update({
+              day,
+              hour,
+              patient,
+              note, 
+          },{
+            where:{
+                id:req.params.id
+            }});
+          res.status(201).json(editedAppointment);
       } catch (err) {
-        console.error(err);
-        res.status(500).send('Error updating appointment record');
+          console.error(err);
+          res.status(500).json({ message: 'Error editing appointment record' });
       }
-    },
+  },
     
-    
-    
-    
-    
+     
     
     
     delete: async (req, res) => {
