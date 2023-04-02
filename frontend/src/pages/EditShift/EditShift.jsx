@@ -46,8 +46,8 @@ const EditShift = () => {
 
   const handleChangeShift = () => {
     let data = {
-      day: 1234567891,
-      hour: 1234567891,
+      day: '1234567891',
+      hour: '1234567891',
       note: notes,
       patient: patientID
     }

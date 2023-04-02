@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { config } from '../../env/config';
+import { toast } from '../../assets/helpers/toast';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import Select from '../../components/Select/Select';
 import './addShift.css';
-import { useEffect } from 'react';
 
 const AddShift = () => {
-
+  const navigate = useNavigate()
   const [patientList, setPatientList] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState(0);
   const [date, setDate] = useState(0);
@@ -25,7 +26,6 @@ const AddShift = () => {
   }, []);
 
   const handleSelectPatient = (e) => {
-    console.log(e.target.value);
     setSelectedPatient(e.target.value)
   }
   const handleDate = (e) => {
@@ -38,13 +38,13 @@ const AddShift = () => {
     setNote(e.target.value)
   }
   const handleAddShift = (e) => {
+
     let data = {
       day: date,
       hour: hour,
-      patient: selectedPatient,
+      patient: Number(selectedPatient),
       note: note
     };
-    console.log(data);
     fetch(`${config.webAPI}/appointments`, {
       method: 'POST',
       headers: {
@@ -53,12 +53,13 @@ const AddShift = () => {
       body: JSON.stringify(data)
     })
     .then(res => res.json())
-    .then(res => {
-      // console.log(res);
-      setDate(res.day);
-      setHour(res.hour);
-      setNote(res.note);
-      setSelectedPatient(res.patient.id)
+    .then((res) => {
+      if(res) {
+        toast('success', 'Turno agregado exitosamente');
+        navigate('/listado-turnos')
+      } else {
+        toast('error', 'No se pudo agregar el turno');
+      }
     })
   }
 
