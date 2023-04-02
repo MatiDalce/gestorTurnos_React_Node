@@ -5,11 +5,11 @@ import Select from '../../components/Select/Select';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import './editPatient.css';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { config } from '../../env/config';
 
 const EditPatient = () => {
-
+  const navigate = useNavigate()
   const { id } = useParams() 
 
   const [patient, setPatient] = useState({
@@ -186,6 +186,46 @@ const EditPatient = () => {
     setPatient({
       ...patient,
       medication: e.target.value
+    })
+  }
+  const handleEditPatient = (e) => {
+    e.preventDefault()
+    let data = {
+      name: 'el nombre',
+      lastName: 'el apellido',
+      maritalStatus: 'casado',
+      birthday: 1234567891,
+      dni: 1234567892,
+      familyMembers: 'personas de familia',
+      parents: 'mis papis',
+      gender: 'masculine',
+      father: 'padre',
+      mother: 'madre',
+      children: 'mis hijos',
+      siblings: 'mis hermanos',
+      personalPhoneNumber: 1234567815,
+      contactPhone: '16346346',
+      academicLevel: 'Secundario completo',
+      bloodType: 'Grupo A',
+      takesMedication: '0',
+      medication: 'Ibuprofeno',
+      hasAllergies: '0',
+      allergies: 'Polen',
+      hasChronicDisease: '0',
+      chronicDisease: 'Muerte',
+      email: 'email@email.com'
+    }
+
+    fetch(`${config.webAPI}/patients/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => {
+      navigate('/listado-pacientes')
     })
   }
 
@@ -489,6 +529,7 @@ const EditPatient = () => {
           <Button 
             title={'Editar'} 
             type='submit'
+            onClick={handleEditPatient}
           />
         </div>
       </div>

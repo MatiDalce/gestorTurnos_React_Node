@@ -183,7 +183,7 @@ const AddPatient = () => {
       chronicDisease: 'Muerte',
       email: 'email@email.com'
     }
-    console.log(data);
+
     fetch(`${config.webAPI}/patients`, {
       method: 'POST',
       headers: {

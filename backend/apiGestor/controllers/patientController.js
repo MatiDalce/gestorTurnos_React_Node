@@ -171,7 +171,9 @@ module.exports = {
       hasAllergies,
       allergies,
       hasChronicDisease,
-      chronicDisease } = req.body;
+      chronicDisease,
+      email
+    } = req.body;
 
     try {
       const result = await db.Patient.update(
@@ -197,7 +199,8 @@ module.exports = {
           hasAllergies,
           allergies,
           hasChronicDisease,
-          chronicDisease
+          chronicDisease,
+          email
         }, { where: { id } }
       );
 
