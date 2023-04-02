@@ -135,6 +135,8 @@ const Patient = () => {
           <p className="data-title">¿Tiene alguna alergia?</p>
           <p className="data">{patient.hasAllergies}</p>
         </div>
+      </div>
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">¿Tiene alguna enfermedad crónica?</p>
           <p className="data">{patient.hasChronicDisease}</p>
