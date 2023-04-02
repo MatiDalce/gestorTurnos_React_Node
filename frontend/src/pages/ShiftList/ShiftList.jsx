@@ -18,7 +18,15 @@ const ShiftList = () => {
     fetch(`${config.webAPI}/appointments`)
     .then(res => res.json())
     .then(res => {
-      setShiftList(res);
+      const modifiedRes = res.map(shift => {
+        return {
+          id: shift.id,
+          completeName: `${shift.patient.name} ${shift.patient.lastName}`,
+          day: shift.day,
+          hour: shift.hour
+        }
+      })
+      setShiftList(modifiedRes);
     });
   }, [])
 
@@ -47,7 +55,15 @@ const ShiftList = () => {
     fetch(`${config.webAPI}/appointments/search?q=${filterShift.name}`)
     .then(res => res.json())
     .then(res => {
-      setShiftList(res.appointments)
+      const modifiedRes = res.appointments.map(shift => {
+        return {
+          id: shift.id,
+          completeName: `${shift.patient.name} ${shift.patient.lastName}`,
+          day: shift.day,
+          hour: shift.hour
+        }
+      })
+      setShiftList(modifiedRes);
     });
   }
 
@@ -103,7 +119,7 @@ const ShiftList = () => {
     <Table 
       staticPath={'/turno'}
       headers={['ID','Nombre y Apellido', 'Fecha de turno', 'Horario del turno']} 
-      contentDisplay={['id', 'name', 'day', 'hour']}
+      contentDisplay={['id', 'completeName', 'day', 'hour']}
       content={shiftList} />
     </>
   )

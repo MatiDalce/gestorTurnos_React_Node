@@ -46,14 +46,15 @@ const EditShift = () => {
 
   const handleChangeShift = () => {
     let data = {
-      day: date,
-      hour: hour,
+      day: 1234567891,
+      hour: 1234567891,
       note: notes,
       patient: patientID
     }
-
+    console.log(`${config.webAPI}/appointments/${id}`);
+    console.log(data);
     fetch(`${config.webAPI}/appointments/${id}`, { // id = id del turno
-      method: 'put',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },

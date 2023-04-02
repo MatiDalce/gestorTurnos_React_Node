@@ -109,7 +109,7 @@ module.exports = {
     put: async (req, res) => {
 
       const { day, hour, patient, note } = req.body;
-
+      console.log('BE => ', day, hour, patient, note);
       try {
           const editedAppointment = await db.Appointment.update({
               day,

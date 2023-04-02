@@ -41,7 +41,7 @@ const Shift = ({shiftID}) => {
     fetch(`${config.webAPI}/appointments/download/5`)
     .then(response => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Falló la descarga');
       }
       return response.blob();
     })
@@ -51,7 +51,7 @@ const Shift = ({shiftID}) => {
       // Create a link element and click it to download the file
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'filename.ext';
+      link.download = 'filename.txt';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
