@@ -21,11 +21,15 @@ const MyCalendar = () => {
   const [openModal, setOpenModal] = useState(false)
   const [modalTitle, setModalTitle] = useState(false)
 
+
+  // Esto convierte al formato que necesita el calendario
+  // new Date(la fecha).toISOString()
+
   const hardcodeEvents = [
     { 
       id: 1,
       title: 'Evento 1',
-      start: '2023-03-27T10:00:00',
+      start: '2023-04-27T00:00:00.000Z',
     },
     { 
       id: 2,
