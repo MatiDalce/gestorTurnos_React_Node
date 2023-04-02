@@ -291,7 +291,7 @@ module.exports = {
         where: {
           patientId: patient,
         },
-        order: [['appointmentDate', 'ASC']],
+        order: [['id', 'ASC']],
       });
   
       return res.status(200).json(hisAppointments);
@@ -308,7 +308,7 @@ module.exports = {
         where: {
           patientId: patient,
         },
-        order: [["appointmentDate", "DESC"]],
+        order: [["id", "DESC"]],
       });;
   
       return res.status(200).json(hisAppointments);
