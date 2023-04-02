@@ -16,7 +16,10 @@ const ShiftPatientList = () => {
   useEffect(() => {
     fetch(`${config.webAPI}/`)
     .then(res => res.json())
-    .then(res => setShiftPatientList(res));
+    .then(res => {
+      console.log(res);
+      setShiftPatientList(res)
+    });
   }, [])
 
   return (
@@ -61,7 +64,7 @@ const ShiftPatientList = () => {
     </div>
     <Table 
       staticPath={'/turno'}
-      headers={['ID', 'N° de turno', 'Fecha', 'Estado']} 
+      headers={['N° de turno', 'Fecha', 'Estado']} 
       contentDisplay={['id', 'appointment', 'date', 'status']}
       content={[
         {

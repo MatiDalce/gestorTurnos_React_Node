@@ -55,14 +55,13 @@ const Table = ({
 
     // Devuelvo las filas
     const rows = content.map((row, index) => {
-
-      // Color de fila alternada
-      // let colorRow = {
-      //   backgroundColor: index % 2 === 0 ? 'var(--white-bg)' : 'var(--gray-bg)',
-      // };
-
+      let idCell = 0;
       const cells = contentDisplay.map(allowedData => {
         return columns.map((column) => {
+          if(column === 'id') { 
+            idCell = row[column]
+            return <React.Fragment key={column}></React.Fragment>
+          }
           return allowedData === column ? <p className='table-cell' key={column}>{row[column]}</p> : null
         });
       })
@@ -72,7 +71,7 @@ const Table = ({
         /* style={colorRow} */ 
         className='table-row'
         style={tableRowStyle}
-        onClick={ noClickable ? () => {} : () => navigate(`${staticPath}/${cells[0][0].props.children}`) }
+        onClick={ noClickable ? () => {} : () => navigate(`${staticPath}/${idCell}`) }
       >
         {cells}
       </div>
