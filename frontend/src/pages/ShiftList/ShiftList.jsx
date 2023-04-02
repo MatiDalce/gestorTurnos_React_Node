@@ -82,7 +82,7 @@ const ShiftList = () => {
           nameProp='search'
         />
       </div>
-      <div className="shiftList-input-box">
+      {/* <div className="shiftList-input-box">
         <Input 
           onChange={handleDateFrom}
           value={filterShift.dateFrom}
@@ -101,7 +101,7 @@ const ShiftList = () => {
           type='date'
           nameProp='untilDate'
         />
-      </div>
+      </div> */}
       <div className="shiftList-btn-box">
         <Button 
           title={'Filtrar Turnos'} 
@@ -119,7 +119,7 @@ const ShiftList = () => {
     </div>
     <Table 
       staticPath={'/turno'}
-      headers={['ID','Nombre y Apellido', 'Fecha de turno', 'Horario del turno']} 
+      headers={['Nombre y Apellido', 'Fecha de turno', 'Horario del turno']} 
       contentDisplay={['id', 'completeName', 'day', 'hour']}
       content={shiftList} />
     </>
