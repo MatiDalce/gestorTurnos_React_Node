@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     birthday: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false
     },
     dni: {
@@ -28,14 +28,20 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
-    email: {type: DataTypes.STRING,
-    allowNull: false,
-  unique: true},
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
     familyMembers: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    parents: {
+    mother: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    father: {
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -79,7 +85,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    socialService: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     hasChronicDisease: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    gender: {
       type: DataTypes.STRING,
       allowNull: true
     },
