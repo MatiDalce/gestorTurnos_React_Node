@@ -5,6 +5,7 @@ import { config } from '../../env/config';
 import Accordion from '../../components/Accordion/Accordion';
 import Button from '../../components/Button/Button';
 import './shift.css'
+import { warningDeleteAlert } from '../../assets/helpers/customAlert';
 
 const Shift = () => {
   const navigate = useNavigate()
@@ -30,13 +31,17 @@ const Shift = () => {
   }, [id])
 
   const handleDeleteShift = () => {
-    fetch(`${config.webAPI}/appointments/${id}`, { method: 'DELETE' })
-    .then((res) => {
-      if(res) {
-        toast('success', 'Se ha eliminado exitosamente');
-        navigate('/listado-turnos');
+    warningDeleteAlert(
+      `${config.webAPI}/appointments/${id}`,
+      'Está por borrar un turno', 
+      'Esta acción no se puede deshacer ¿Está seguro?', 
+    ).then((res) => {
+      console.log(res);
+      if(!res) {
+        toast('success', 'Turno eliminado exitosamente')
+        navigate('/listado-turnos')
       } else {
-        toast('error', 'No se ha podido eliminar');
+        toast('error', 'No se pudo eliminar el turno')
       }
     })
   } 

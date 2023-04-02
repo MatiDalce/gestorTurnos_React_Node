@@ -7,6 +7,7 @@ import Select from '../../components/Select/Select';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import './editPatient.css';
 import { config } from '../../env/config';
+import { warningEditAlert } from '../../assets/helpers/customAlert';
 
 const EditPatient = () => {
   const navigate = useNavigate()
@@ -178,7 +179,7 @@ const EditPatient = () => {
   }
   const handleEditPatient = (e) => {
     e.preventDefault()
-    let data = {
+    let body = {
       name: 'EL ELEGIDO',
       lastName: 'el apellido',
       maritalStatus: 'casado',
@@ -204,20 +205,17 @@ const EditPatient = () => {
       email: 'email@email.com'
     }
 
-    fetch(`${config.webAPI}/patients/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(res => {
-      if(res) {
-        toast('success', 'Se ha editado exitosamente')
+    warningEditAlert(
+      `${config.webAPI}/patients/${id}`,
+      body,
+      'Esta por editar el paciente',
+      'Esta acción no se puede deshacer ¿Está seguro?'
+    ).then(res => {
+      if(!res) {
         navigate('/listado-pacientes')
+        toast('success', 'Se ha editado exitosamente')
       } else {
-        toast('error', 'No se pudo editar el paciente')
+        toast('error', 'No se ha podido editar')
       }
     })
   }

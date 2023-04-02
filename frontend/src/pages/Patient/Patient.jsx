@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './patient.css';
 import Button from '../../components/Button/Button';
 import { useNavigate, useParams } from 'react-router-dom';
-import { warningAlert } from '../../assets/helpers/customAlert';
+import { warningDeleteAlert } from '../../assets/helpers/customAlert';
 import { config } from '../../env/config';
 import { toast } from '../../assets/helpers/toast';
 
@@ -20,12 +20,13 @@ const Patient = () => {
   }, [id])
 
   const handleDelete = () => {
-    warningAlert(
+    warningDeleteAlert(
       `${config.webAPI}/patients/${id}`,
       'Está por borrar un paciente', 
       'Esta acción no se puede deshacer ¿Está seguro?', 
     ).then((res) => {
-      if(res) {
+      console.log(res);
+      if(!res) {
         toast('success', 'Paciente eliminado exitosamente')
         navigate('/listado-pacientes')
       } else {

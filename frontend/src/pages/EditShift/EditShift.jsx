@@ -5,6 +5,7 @@ import { config } from '../../env/config';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import './editShift.css';
+import { warningEditAlert } from '../../assets/helpers/customAlert';
 
 const EditShift = () => {
   const navigate = useNavigate();
@@ -42,31 +43,25 @@ const EditShift = () => {
   };
 
   const handleChangeShift = () => {
-    let data = {
-      day: 1234567891,
-      hour: 1234567891,
+    let body = {
+      day: date,
+      hour: hour,
       note: notes,
       patient: patientID
     }
 
-    fetch(`${config.webAPI}/appointments/${id}`, { // id = id del turno
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(res => {
-      if(res) {
+    warningEditAlert(
+      `${config.webAPI}/appointments/${id}`,
+      body,
+      'Esta por editar el turno',
+      'Esta acción no se puede deshacer ¿Está seguro?'
+    ).then(res => {
+      if(!res) {
         navigate('/listado-turnos')
         toast('success', 'Se ha editado exitosamente')
       } else {
         toast('error', 'No se ha podido editar')
       }
-      setDate(res.day);
-      setHour(res.hour);
-      setNotes(res.note);
     })
   };
 
