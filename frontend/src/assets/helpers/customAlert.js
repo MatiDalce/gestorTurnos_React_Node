@@ -20,7 +20,6 @@ export function warningAlert(
     textBtnOne = 'Aceptar',
     textBtnTwo = 'Cancelar',
 ) {
-    console.log(endpoint);
     return Swal.fire({
         title: title,
         text: msg,

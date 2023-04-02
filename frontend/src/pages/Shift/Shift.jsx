@@ -16,9 +16,6 @@ const Shift = () => {
     hour: ''
   });
 
-  // DESCARGAR TURNO - `${config.webAPI}/appointments/download/${id}`
-  // ELIMINAR - `${config.webAPI}/appointments/${id}`
-
   useEffect(() => {
     fetch(`${config.webAPI}/appointments/${id}`)
     .then(res => res.json())
@@ -48,20 +45,26 @@ const Shift = () => {
     fetch(`${config.webAPI}/appointments/download/${id}`)
     .then(response => {
       if (!response.ok) {
+        toast('error', 'Ha ocurrido un error en la descarga')
         throw new Error('Falló la descarga');
       }
       return response.blob();
     })
     .then(blob => {
-      // Create a URL for the Blob object
-      const url = URL.createObjectURL(blob);
-      // Create a link element and click it to download the file
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'filename.txt';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      if(blob) {
+        // Create a URL for the Blob object
+        const url = URL.createObjectURL(blob);
+        // Create a link element and click it to download the file
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'filename.txt';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        toast('success', 'Documento descargado exitosamente');
+      } else {
+        toast('error', 'Ha ocurrido un error en la descarga')
+      }
     })
   }
 

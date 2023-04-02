@@ -4,6 +4,7 @@ import Button from '../../components/Button/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import { warningAlert } from '../../assets/helpers/customAlert';
 import { config } from '../../env/config';
+import { toast } from '../../assets/helpers/toast';
 
 const Patient = () => {
   let {id} = useParams();
@@ -23,8 +24,13 @@ const Patient = () => {
       `${config.webAPI}/patients/${id}`,
       'Está por borrar un paciente', 
       'Esta acción no se puede deshacer ¿Está seguro?', 
-    ).then(() => {
-      navigate('/listado-pacientes')
+    ).then((res) => {
+      if(res) {
+        toast('success', 'Paciente eliminado exitosamente')
+        navigate('/listado-pacientes')
+      } else {
+        toast('error', 'No se pudo eliminar el paciente')
+      }
     })
   }
 

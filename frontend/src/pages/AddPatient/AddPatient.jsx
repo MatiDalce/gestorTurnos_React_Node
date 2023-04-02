@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from '../../assets/helpers/toast'
 import { config } from '../../env/config';
 import Button from '../../components/Button/Button';
 import Checkbox from '../../components/Checkbox/Checkbox';
@@ -193,7 +194,12 @@ const AddPatient = () => {
     })
     .then(res => res.json())
     .then(res => {
-      navigate('/listado-pacientes')
+      if(res) {
+        toast('success', 'Paciente agregado exitosamente')
+        navigate('/listado-pacientes')
+      } else {
+        toast('error', 'No se pudo agregar el paciente')
+      }
     })
   }
 

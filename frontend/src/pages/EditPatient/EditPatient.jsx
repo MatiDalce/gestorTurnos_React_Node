@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from '../../assets/helpers/toast';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import Select from '../../components/Select/Select';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import './editPatient.css';
-import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 import { config } from '../../env/config';
 
 const EditPatient = () => {
@@ -38,7 +38,6 @@ const EditPatient = () => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       setPatient({
         name: res.name,
         lastName: res.lastName,
@@ -62,17 +61,6 @@ const EditPatient = () => {
       })
     })
   }, [id])
-
-  const handleForm = (e) => {
-    e.preventDefault()
-    console.log(patient);
-
-    // fetch(`/patient/${id}`, {})
-    // .then(res => res.json())
-    // .then(res => {
-      
-    // })
-  }
 
   const handleName = (e) => {
     setPatient({
@@ -225,14 +213,19 @@ const EditPatient = () => {
     })
     .then(res => res.json())
     .then(res => {
-      navigate('/listado-pacientes')
+      if(res) {
+        toast('success', 'Se ha editado exitosamente')
+        navigate('/listado-pacientes')
+      } else {
+        toast('error', 'No se pudo editar el paciente')
+      }
     })
   }
 
   return (
     <>
       <h2 className='editPatient-title'>EDICIÓN DE DATOS DEL PACIENTE</h2>
-      <form onSubmit={handleForm}>
+      <form>
 
         <div className="input-editPatient-row">
           <div className="input-editPatient-box">

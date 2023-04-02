@@ -1,12 +1,10 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from '../../assets/helpers/toast';
 import { config } from '../../env/config';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import './editShift.css';
-import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { toast } from '../../assets/helpers/toast';
 
 const EditShift = () => {
   const navigate = useNavigate();
