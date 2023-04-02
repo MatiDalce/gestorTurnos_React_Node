@@ -91,11 +91,13 @@ module.exports = {
     post: async (req, res) => {
         const { day, hour, patient, note } = req.body;
 
+        console.log(req.body)
+
         try {
             const newAppointment = await db.Appointment.create({
                 day,
                 hour,
-                patient,
+                patientId : patient,
                 note
             });
             res.status(201).json(newAppointment);
