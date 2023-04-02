@@ -28,9 +28,6 @@ const EditShift = () => {
     })
   }, [id])
 
-  // UPDATE: `${config.webAPI}/appointments/${id-del-turno}`
-  // Parametros obligatorio: id-del-turno
-
   const handleDate = (e) => {
     let inputValue = e.target.value;
     setDate(inputValue)
