@@ -16,6 +16,7 @@ router.put("/:id", patientController.put);
 
 router.delete("/:id", patientController.delete);
 router.get("/patient-appointments/:id", patientController.patientApointments)
+router.get("/patient-appointmentsDSC/:id", patientController.patientApointmentsDSC)
 
 
 module.exports = router

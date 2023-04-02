@@ -299,6 +299,23 @@ module.exports = {
       console.error(error);
       return res.status(500).json({ message: 'Internal server error' });
     }
+  },
+  patientApointmentsDSC: async (req, res) => {
+    const patient = req.params.id;
+  
+    try {
+      const hisAppointments = await db.Appointment.findAll({
+        where: {
+          patientId: patient,
+        },
+        order: [['appointmentDate', 'DSC']],
+      });
+  
+      return res.status(200).json(hisAppointments);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
   }
   
   
