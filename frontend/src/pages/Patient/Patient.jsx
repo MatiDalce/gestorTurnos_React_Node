@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import './patient.css';
 import Button from '../../components/Button/Button';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { warningAlert } from '../../assets/helpers/customAlert';
 import { config } from '../../env/config';
 
 const Patient = () => {
   let {id} = useParams();
-
+  const navigate = useNavigate()
   const [patient, setPatient] = useState([]);
 
   useEffect(() => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       setPatient(res)
     });
   }, [id])
 
   const handleDelete = () => {
     warningAlert(
-      'endpoint',
+      `${config.webAPI}/patients/${id}`,
       'Está por borrar un paciente', 
       'Esta acción no se puede deshacer ¿Está seguro?', 
-    )
+    ).then(() => {
+      navigate('/listado-pacientes')
+    })
   }
 
   return (

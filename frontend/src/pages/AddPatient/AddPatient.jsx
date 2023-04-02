@@ -159,8 +159,8 @@ const AddPatient = () => {
   const handleAddPatient = (e) => {
     e.preventDefault()
     let data = {
-      name: 'el nombre',
-      lastName: 'el apellido',
+      name: 'EL ELEGIDISIMO',
+      lastName: 'ELEGIDISIMO MAL',
       maritalStatus: 'casado',
       birthday: 1234567891,
       dni: 1234567892,

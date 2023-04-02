@@ -20,6 +20,7 @@ export function warningAlert(
     textBtnOne = 'Aceptar',
     textBtnTwo = 'Cancelar',
 ) {
+    console.log(endpoint);
     return Swal.fire({
         title: title,
         text: msg,
@@ -31,14 +32,10 @@ export function warningAlert(
         cancelButtonText: textBtnTwo
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch(endpoint)
-            .then(response => response.json())
-            .then(data => {
-                toast('success', 'La operación fue exitosa')
+            fetch(endpoint, {
+                method: 'DELETE'
             })
-            .catch(error => {
-                toast('error', 'Se produjo un error')
-            });
+            .then(response => response.json())
         }
     })
 }

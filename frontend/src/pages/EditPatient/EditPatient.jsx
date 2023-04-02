@@ -191,7 +191,7 @@ const EditPatient = () => {
   const handleEditPatient = (e) => {
     e.preventDefault()
     let data = {
-      name: 'el nombre',
+      name: 'EL ELEGIDO',
       lastName: 'el apellido',
       maritalStatus: 'casado',
       birthday: 1234567891,
