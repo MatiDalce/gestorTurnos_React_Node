@@ -12,7 +12,7 @@ router.get("/:id", appointmentController.getOne)
 router.post("/", appointmentController.post)
 router.put("/:id", appointmentController.put)
 
-router.delete("/", appointmentController.delete)
+router.delete("/:id", appointmentController.delete)
 
 
 module.exports = router
