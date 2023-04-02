@@ -109,8 +109,8 @@ module.exports = {
       hasAllergies,
       allergies,
       hasChronicDisease,
-      chronicDisease } = req.body;
-
+      chronicDisease, email } = req.body;
+      
     try {
       const newPatient = await db.Patient.create({
         name,
@@ -134,7 +134,8 @@ module.exports = {
         hasAllergies,
         allergies,
         hasChronicDisease,
-        chronicDisease
+        chronicDisease,
+        email
       });
       console.log(`POST patientController : New patient record created: ${newPatient.id}`);
 

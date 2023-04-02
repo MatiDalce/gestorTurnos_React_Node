@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { config } from '../../env/config';
 import Button from '../../components/Button/Button';
 import Checkbox from '../../components/Checkbox/Checkbox';
@@ -10,8 +10,14 @@ import Title from '../../components/Title/Title';
 import './addPatient.css';
 
 const AddPatient = () => {
+  const navigate = useNavigate()
 
-  const { id } = useParams()
+    // familyMembers,
+    // parents,
+    // academicLevel, agregar
+    // takesMedication,
+    // allergies,
+    // hasChronicDisease,
 
   const [patient, setPatient] = useState({
     name: '',
@@ -19,7 +25,7 @@ const AddPatient = () => {
     dni: '',
     socialNetwork: '',
     email: '',
-    genre: '',
+    gender: '',
     maritalStatus: '',
     birthday: '',
     father: '',
@@ -27,14 +33,13 @@ const AddPatient = () => {
     children: '',
     siblings: '',
     livingSiblings: '',
-    personalPhone: '',
+    personalPhoneNumber: '',
     contactPhone: '',
     chronicDisease: '',
     hasAllergies: '',
     bloodType: '',
     medication: '',
   })
-
 
   const handleName = (e) => {
     setPatient({
@@ -66,10 +71,10 @@ const AddPatient = () => {
       email: e.target.value
     })
   };
-  const handleGenre = (value) => {
+  const handleGender = (value) => {
     setPatient({
       ...patient,
-      genre: value
+      gender: value
     })
   };
   const handleMaritalStatus = (value) => {
@@ -114,10 +119,10 @@ const AddPatient = () => {
       livingSiblings: value
     })
   }
-  const handlePersonalPhone = (e) => {
+  const handlePersonalPhoneNumber = (e) => {
     setPatient({
       ...patient,
-      personalPhone: e.target.value
+      personalPhoneNumber: e.target.value
     })
   }
   const handleContactPhone = (e) => {
@@ -154,26 +159,31 @@ const AddPatient = () => {
   const handleAddPatient = (e) => {
     e.preventDefault()
     let data = {
-      // name: name
-      // lastName: lastName
-      // maritalStatus: maritalStatus
-      // birthday: birthday
-      // dni: dni
-      // familyMembers: familyMembers
-      // parents: parents
-      // children: children
-      // siblings: siblings
-      // personalPhoneNumber: personalPhoneNumber
-      // contactPhone: contactPhone
-      // academicLevel: academicLevel
-      // bloodType: bloodType
-      // takesMedication: takesMedication
-      // medication: medication
-      // hasAllergies: hasAllergies
-      // allergies: allergies
-      // hasChronicDisease: hasChronicDisease
-      // chronicDisease: chronicDisease
+      name: 'el nombre',
+      lastName: 'el apellido',
+      maritalStatus: 'casado',
+      birthday: 1234567891,
+      dni: 1234567892,
+      familyMembers: 'personas de familia',
+      parents: 'mis papis',
+      gender: 'masculine',
+      father: 'padre',
+      mother: 'madre',
+      children: 'mis hijos',
+      siblings: 'mis hermanos',
+      personalPhoneNumber: 1234567815,
+      contactPhone: '16346346',
+      academicLevel: 'Secundario completo',
+      bloodType: 'Grupo A',
+      takesMedication: '0',
+      medication: 'Ibuprofeno',
+      hasAllergies: '0',
+      allergies: 'Polen',
+      hasChronicDisease: '0',
+      chronicDisease: 'Muerte',
+      email: 'email@email.com'
     }
+    console.log(data);
     fetch(`${config.webAPI}/patients`, {
       method: 'POST',
       headers: {
@@ -183,8 +193,7 @@ const AddPatient = () => {
     })
     .then(res => res.json())
     .then(res => {
-      console.log(id);
-      console.log(res);
+      navigate('/listado-pacientes')
     })
   }
 
@@ -266,8 +275,8 @@ const AddPatient = () => {
               onlyCheckboxes
               colorLabel='var(--black-bg)'
               isLabelCenter
-              nameProp='genre'
-              onChange={handleGenre}
+              nameProp='gender'
+              onChange={handleGender}
             />
           </div>
       </div>
@@ -301,14 +310,14 @@ const AddPatient = () => {
       <div className="input-row">
           <div className="addPatient-box">
             <Input
-              value={patient.personalPhone}
-              onChange={handlePersonalPhone}
+              value={patient.personalPhoneNumber}
+              onChange={handlePersonalPhoneNumber}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Teléfono personal'
               isLabelCenter
               placeholder='Ingrese el teléfono personal'
-              nameProp='personalPhone'
+              nameProp='personalPhoneNumber'
             />
           </div>
           <div className="addPatient-box">
