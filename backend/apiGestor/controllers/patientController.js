@@ -308,8 +308,8 @@ module.exports = {
         where: {
           patientId: patient,
         },
-        order: [['appointmentDate', 'DSC']],
-      });
+        order: [["appointmentDate", "DESC"]],
+      });;
   
       return res.status(200).json(hisAppointments);
     } catch (error) {
