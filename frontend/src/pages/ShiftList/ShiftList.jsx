@@ -7,23 +7,49 @@ import './shiftList.css'
 
 const ShiftList = () => {
 
-  const handleName = () => {}
-  const handleDateFrom = () => {}
-  const handleDateUntil = () => {}
-
   const [shiftList, setShiftList] = useState([]);
-
-  // FILTRO: name|lastName|dni `${config.webAPI}/appointments/search?`
-  // Ejemplo - http://localhost:3001/appointments/search?q=J (J de juan)
+  const [filterShift, setFilterShift] = useState({
+    name: '',
+    dateFrom: '',
+    dateUntil: ''
+  });
 
   useEffect(() => {
     fetch(`${config.webAPI}/appointments`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
-      setShiftList(res)
+      setShiftList(res);
     });
   }, [])
+
+  const handleName = (e) => {
+    setFilterShift({
+      ...filterShift,
+      name: e.target.value
+    })
+  }
+
+  const handleDateFrom = (e) => {
+    setFilterShift({
+      ...filterShift,
+      dateFrom: e.target.value
+    })
+  }
+
+  const handleDateUntil = (e) => {
+    setFilterShift({
+      ...filterShift,
+      dateUntil: e.target.value
+    })
+  }
+
+  const handleShiftSearch = () => {
+    fetch(`${config.webAPI}/appointments/search?q=${filterShift.name}`)
+    .then(res => res.json())
+    .then(res => {
+      setShiftList(res.appointments)
+    });
+  }
 
   return (
     <>
@@ -31,6 +57,7 @@ const ShiftList = () => {
       <div className="shiftList-input-box">
         <Input 
           onChange={handleName}
+          value={filterShift.name}
           isSearcheable
           hasLabel
           labelTitle='Nombre'
@@ -41,6 +68,7 @@ const ShiftList = () => {
       <div className="shiftList-input-box">
         <Input 
           onChange={handleDateFrom}
+          value={filterShift.dateFrom}
           hasLabel
           labelTitle='Fecha desde:'
           type='date'
@@ -50,10 +78,18 @@ const ShiftList = () => {
       <div className="shiftList-input-box">
         <Input 
           onChange={handleDateUntil}
+          value={filterShift.dateUntil}
           hasLabel
           labelTitle='Fecha hasta:'
           type='date'
           nameProp='untilDate'
+        />
+      </div>
+      <div className="shiftList-btn-box">
+        <Button 
+          title={'Filtrar Turnos'} 
+          type='button'
+          onClick={handleShiftSearch}
         />
       </div>
       <div className="shiftList-btn-box">

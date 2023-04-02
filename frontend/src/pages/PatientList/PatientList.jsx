@@ -21,10 +21,11 @@ const PatientList = () => {
 
   // Filtro de pacientes
   const handleFilterPatients = (e) => {
-    console.log(`${config.webAPI}/patients/search?q=${search}`);
     fetch(`${config.webAPI}/patients/search?q=${search}`)
     .then(res => res.json())
     .then(res => {
+      console.log(res);
+      if(res.patients.length === 0) return setPatients([])
       setPatients(res.patients)
     });
   }
@@ -38,7 +39,7 @@ const PatientList = () => {
     <>
       <div className="search-patient">
         <div className="patientList-input">
-          <Input 
+          <Input
             value={search}
             onChange={handleSearch}
             isSearcheable
@@ -64,7 +65,7 @@ const PatientList = () => {
       </div>
       <Table 
         staticPath={'/paciente'} // Parte de la ruta a la que va a redirigir al hacer click en la celda
-        headers={['ID','Nombre', 'DNI', 'E-mail']} // Cabeceras
+        headers={['ID','Nombre y Apellido', 'DNI', 'E-mail']} // Cabeceras
         contentDisplay={['id', 'completeName', 'dni', 'email']} // Con esto se filtra la data que se requiere en las celdas
         content={patients || []} // Celdas
         />
