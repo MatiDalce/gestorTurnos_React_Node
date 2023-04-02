@@ -9,10 +9,10 @@ import { useParams } from 'react-router-dom';
 
 const EditShift = () => {
   const { id } = useParams();
-  const [patientID, setPatientID] = useState()
-  const [date, setDate] = useState()
-  const [hour, setHour] = useState()
-  const [notes, setNotes] = useState()
+  const [ patientID, setPatientID] = useState()
+  const [ date, setDate ] = useState()
+  const [ hour, setHour ] = useState()
+  const [ notes, setNotes ] = useState()
 
   useEffect(() => {
     fetch(`${config.webAPI}/appointments/${id}`)
@@ -51,7 +51,7 @@ const EditShift = () => {
       note: notes,
       patient: patientID
     }
-    
+
     fetch(`${config.webAPI}/appointments/${id}`, { // id = id del turno
       method: 'put',
       headers: {

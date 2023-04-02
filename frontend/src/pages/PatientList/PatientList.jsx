@@ -7,21 +7,29 @@ import { config } from '../../env/config'
 
 const PatientList = () => {
 
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState('');
   const [patients, setPatients] = useState([]);
 
-  // FILTRO: name|lastName|dni `${config.webAPI}/patients/search?`
-  // Ejemplo - http://localhost:3001/patients/search?q=J (J de juan)
-
   useEffect(() => {
+    // Listado de pacientes
     fetch(`${config.webAPI}/patients/limit`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       setPatients(res)
     });
   }, [])
-  console.log(`${config.webAPI}/patients/limit`);
+
+  // Filtro de pacientes
+  const handleFilterPatients = (e) => {
+    console.log(`${config.webAPI}/patients/search?q=${search}`);
+    fetch(`${config.webAPI}/patients/search?q=${search}`)
+    .then(res => res.json())
+    .then(res => {
+      setPatients(res.patients)
+    });
+  }
+
+  // Input de búsqueda
   const handleSearch = (e) => {
     setSearch(e.target.value)
   }
@@ -36,19 +44,19 @@ const PatientList = () => {
             isSearcheable
             type='text'
             nameProp='search'
-            placeholder='Buscar'
+            placeholder='Buscar por nombre, apellido o DNI'
           />
         </div>
         <div className="patientList-btn">
           <Button 
             title={'Filtrar pacientes'} 
             type='button'
-            path='/agregar-paciente'
+            onClick={handleFilterPatients}
           />
         </div>
         <div className="patientList-btn">
           <Button 
-            title={'Agregar Paciente'} 
+            title={'Agregar Paciente'}
             type='button'
             path='/agregar-paciente'
           />
@@ -58,7 +66,7 @@ const PatientList = () => {
         staticPath={'/paciente'} // Parte de la ruta a la que va a redirigir al hacer click en la celda
         headers={['ID','Nombre', 'DNI', 'E-mail']} // Cabeceras
         contentDisplay={['id', 'completeName', 'dni', 'email']} // Con esto se filtra la data que se requiere en las celdas
-        content={patients} // Celdas
+        content={patients || []} // Celdas
         />
     </>
   )

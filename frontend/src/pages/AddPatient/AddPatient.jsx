@@ -151,11 +151,36 @@ const AddPatient = () => {
     })
   }
 
-  const handleForm = (e) => {
+  const handleAddPatient = (e) => {
     e.preventDefault()
-    // console.log(patient);
-
-    fetch(`${config.webAPI}/patients/${id}`)
+    let data = {
+      // name: name
+      // lastName: lastName
+      // maritalStatus: maritalStatus
+      // birthday: birthday
+      // dni: dni
+      // familyMembers: familyMembers
+      // parents: parents
+      // children: children
+      // siblings: siblings
+      // personalPhoneNumber: personalPhoneNumber
+      // contactPhone: contactPhone
+      // academicLevel: academicLevel
+      // bloodType: bloodType
+      // takesMedication: takesMedication
+      // medication: medication
+      // hasAllergies: hasAllergies
+      // allergies: allergies
+      // hasChronicDisease: hasChronicDisease
+      // chronicDisease: chronicDisease
+    }
+    fetch(`${config.webAPI}/patients`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
     .then(res => res.json())
     .then(res => {
       console.log(id);
@@ -166,7 +191,7 @@ const AddPatient = () => {
   return (
     <>
         <Title title='DATOS DEL PACIENTE' />
-        <form onSubmit={handleForm}>
+        <form onSubmit={handleAddPatient}>
         <div className="input-row">
           <div className="addPatient-box">
             <Input
