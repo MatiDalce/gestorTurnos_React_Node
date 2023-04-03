@@ -279,34 +279,40 @@ module.exports = {
         }
     }
     ,
+  
     search: async (req, res) => {
-        try {
-          const appointments = await db.Appointment.findAll({
-            include: {
+      try {
+        const appointments = await db.Appointment.findAll({
+          include: [
+            {
               model: db.Patient,
-              attributes: ['first_name', 'last_name']
-            },
-            where: {
-              [Op.or]: [
-                { '$Patient.first_name$': { [Op.like]: `%${req.query.q}%` } },
-                { '$Patient.last_name$': { [Op.like]: `%${req.query.q}%` } },
-                { '$Patient.dni$': { [Op.like]: `%${req.query.q}%` } },
-                { name: { [Op.like]: `%${req.query.q}%` } },
-                { lastName: { [Op.like]: `%${req.query.q}%` } }
-              ]
-            },
-            attributes: { exclude: ['createdAt', 'updatedAt'] }
-          });
-      
-          console.log("SEARCH APPOINTMENT: OKK")
-      
-          res.json({ appointments });
-        } catch (error) {
-          console.error(error);
-          res.status(500).json({ message: 'Server error' })
-          console.log("SEARCH APPOINTMENT : ERROR");
-        }
+              as: "patient",
+              attributes: ['id', 'name', 'lastName']
+            }
+          ],
+          where: {
+            [Op.or]: [
+              { '$patient.name$': { [Op.like]: `%${req.query.q}%` } },
+              { '$patient.lastName$': { [Op.like]: `%${req.query.q}%` } },
+              { '$patient.dni$': { [Op.like]: `%${req.query.q}%` } },
+              //{ name: { [Op.like]: `%${req.query.q}%` } },
+            //  { lastName: { [Op.like]: `%${req.query.q}%` } }
+            ]
+          },
+          attributes: { exclude: ['createdAt', 'updatedAt'] }
+        });
+  
+        console.log("SEARCH APPOINTMENT: OKK")
+  
+        res.json({ appointments });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' })
+        console.log("SEARCH APPOINTMENT : ERROR");
       }
+    }
+  
+    
       
     
 }
