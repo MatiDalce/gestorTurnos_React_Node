@@ -6,97 +6,44 @@ import './table.css'
 const Table = ({
   headers, // Array de strings
   content, // Array de objetos
-  contentDisplay, // Array que dice qué datos mostrar en las celdas (Para que sea igual que los headers)
   staticPath, // Parte de la ruta a la que va a redirigir
-  headerBg,
-  noClickable,
-  textColor,
-  noTableBorders,
-  noCursor,
-  noSticky,
-  separatorsColor,
-  tableWidth
 }) => {
   let navigate = useNavigate();
 
-  const tableContainerStyle = {
-    borderLeft: noTableBorders ? 'none' : '3px solid var(--skyblue-bg)',
-    borderRight: noTableBorders ? 'none' : '3px solid var(--skyblue-bg)',
-    width: tableWidth ? tableWidth : '70%'
-  }
+  const renderHeading = ([key, value]) => {
+    return <th className="table__heading" role="columnheader" key={key}>
+      {value}
+    </th>
+  };
 
-  const headersStyle = {
-    backgroundColor: headerBg ? headerBg : 'var(--white-bg)',
-    color: textColor ? textColor : 'var(--black-bg)',
-    headerPosition: noSticky ? '' : 'sticky'
-  }
+  const renderHead = () => (
+    <thead className="table__head">
+      <tr className="table__row" role="row">
+        {Object.entries(headers).map(renderHeading)}
+      </tr>
+    </thead>
+  );
 
-  const tableRowStyle = {
-    border: separatorsColor ? separatorsColor : '2px solid var(--skyblue-bg)', 
-    cursor: noCursor ? '' : 'pointer',
-  }
+  const renderRow = row => {
+    return <tr className="table__row" role="row" key={row.id} onClick={staticPath ? () => navigate(`${staticPath}/${row.id}`) : () => {}}>
+      {Object.entries(headers).map(([key, value]) => (
+        <td className="table__cell" role="cell" data-label={value} key={key}>
+          {row[key]}
+        </td>
+      ))}
+    </tr>
+  };
 
-  const rowsStyle = {
-    color: textColor ? textColor : 'var(--black-bg)', 
-  }
-  
-  // Si esta vacío...
-  if(content.length === 0) {
-    return <div className='table-spinner-container'><Spinner /></div>
-  } else { // Si no...
+  const renderBody = () => (
+    <tbody className="table__body">{content.map(renderRow)}</tbody>
+  );
 
-    // Obtengo los keys (y su cantidad) existentes en los objetos.
-    const columns = Object.keys(content[0]);
-    
-    // Devuelvo las cabeceras
-    const header = headers.map((column) => (
-      <div key={column}>{column}</div>
-    ));
-
-    // Devuelvo las filas
-    const rows = content.map((row, index) => {
-      let idCell = 0;
-      const cells = contentDisplay.map(allowedData => {
-        return columns.map((column) => {
-          if(column === 'id') { 
-            idCell = row[column]
-            return <React.Fragment key={column}></React.Fragment>
-          }
-          return allowedData === column ? <p className='table-cell' key={column}>{row[column]}</p> : null
-        });
-      })
-
-      return <div 
-        key={index} 
-        /* style={colorRow} */ 
-        className='table-row'
-        style={tableRowStyle}
-        onClick={ noClickable ? () => {} : () => navigate(`${staticPath}/${idCell}`) }
-      >
-        {cells}
-      </div>
-    });
-
-    return (
-      <div className="table-container" style={tableContainerStyle}>
-        <div className="headers" style={headersStyle}>
-          {
-            headers.length > 0 ? header : ''
-          }
-        </div>
-        
-        {
-          content.length > 0 && <div className="table" style={rowsStyle}>
-          {
-            content.length > 0 ? rows : []
-          }
-      </div>
-        }
-        
-      </div>
-    );
-  }
-
+  return (
+    <table className="table" role="table">
+      { renderHead() }
+      { renderBody() }
+    </table>
+  );
 }
 
 export default Table

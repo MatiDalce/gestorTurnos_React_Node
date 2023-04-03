@@ -119,8 +119,7 @@ const ShiftList = () => {
     </div>
     <Table 
       staticPath={'/turno'}
-      headers={['Nombre y Apellido', 'Fecha de turno', 'Horario del turno']} 
-      contentDisplay={['id', 'completeName', 'day', 'hour']}
+      headers={{completeName: 'Nombre y Apellido', day: 'Fecha de turno', hour: 'Horario del turno'}}
       content={shiftList} />
     </>
   )

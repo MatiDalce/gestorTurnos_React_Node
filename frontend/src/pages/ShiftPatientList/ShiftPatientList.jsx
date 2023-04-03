@@ -39,7 +39,7 @@ const ShiftPatientList = () => {
       setShiftPatientList(res)
     });
   }, [id])
-
+  console.log(shiftPatientList);
   return (
     <>
     <div className="search-patient-shifts">
@@ -86,8 +86,7 @@ const ShiftPatientList = () => {
     </div>
     <Table 
       staticPath={'/turno'}
-      headers={['Fecha', 'Hora']} 
-      contentDisplay={['day', 'hour']}
+      headers={{day: 'Fecha', hour: 'Hora'}}
       content={shiftPatientList || []} 
     />
   </>

@@ -28,15 +28,7 @@ const Modal = ({ title, description, setter }) => {
                 />
                 <p className='appointment'>{description || ''}</p>
                 {/* <Table 
-                    headerBg='var(--skyblue-bg)'
-                    headers={['ID','Nombre y Apellido', 'Hora']}
-                    contentDisplay={['id', 'name', 'time']}
-                    noClickable
-                    noSticky
-                    noCursor
-                    tableWidth={'100%'}
-                    textColor='var(--white-bg)'
-                    noTableBorders
+                    headers={{id: 'ID', completeName: 'Nombre y Apellido', hour: 'Hora'}}
                     content={[
                         {
                             id: 1,
