@@ -41,6 +41,10 @@
     .editPatient-title{
         font-size: 1.3em;
     }
+    .btn-editPatient-container {
+        font-size: 1.5em;
+        width: 40%;
+    }
 }
 /* SMALL */
 @media screen and (min-width: 577px) and (max-width: 767px) {
@@ -56,6 +60,10 @@
     .editPatient-title{
         font-size: 1.6em;
     }
+    .btn-editPatient-container {
+        font-size: 1.5em;
+        width: 40%;
+    }
 }
 /* MEDIUM */
 @media screen and (min-width: 768px) and (max-width: 991px) {
@@ -70,6 +78,10 @@
     }
     .editPatient-title{
         font-size: 2em;
+    }
+    .btn-editPatient-container {
+        font-size: 1.5em;
+        width: 40%;
     }
 }
 /* LARGE */
