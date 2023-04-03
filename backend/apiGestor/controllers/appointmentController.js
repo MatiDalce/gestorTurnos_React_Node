@@ -292,11 +292,11 @@ module.exports = {
           ],
           where: {
             [Op.or]: [
-              { '$patient.name$': { [Op.like]: `%${req.query.q}%` } },
+              { '$patient.name$': { [Op.like]: `%${req.query.q}%` } }, //EJECUTA SOBRE PATIENT
               { '$patient.lastName$': { [Op.like]: `%${req.query.q}%` } },
               { '$patient.dni$': { [Op.like]: `%${req.query.q}%` } },
-              //{ name: { [Op.like]: `%${req.query.q}%` } },
-            //  { lastName: { [Op.like]: `%${req.query.q}%` } }
+              //{ name: { [Op.like]: `%${req.query.q}%` } },  EJECUTA SOBRE APPOINTMENTS
+       
             ]
           },
           attributes: { exclude: ['createdAt', 'updatedAt'] }

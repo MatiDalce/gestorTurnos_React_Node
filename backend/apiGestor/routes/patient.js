@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const patientController = require('../controllers/patientController');
+const { validatePatientFields } = require('../middlewares/patientValidation');
 
 
 router.get('/', patientController.get);
@@ -10,9 +11,9 @@ router.get('/:id', patientController.getOne)
 
 
 
-router.post('/', patientController.post);
+router.post('/', validatePatientFields, patientController.post);
 
-router.put("/:id", patientController.put);
+router.put("/:id", validatePatientFields, patientController.put);
 
 router.delete("/:id", patientController.delete);
 router.get("/patient-appointments/:id", patientController.patientApointments)
