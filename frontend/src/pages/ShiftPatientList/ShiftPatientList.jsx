@@ -39,7 +39,7 @@ const ShiftPatientList = () => {
       setShiftPatientList(res)
     });
   }, [id])
-  console.log(shiftPatientList);
+
   return (
     <>
     <div className="search-patient-shifts">

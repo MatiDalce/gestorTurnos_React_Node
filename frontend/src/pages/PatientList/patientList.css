@@ -5,9 +5,20 @@
     align-items: center;
     justify-content: space-around;
 }
+.input-btn-search-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 70%;
+}
 
 .patientList-input {
-    width: 60%;
+    width: 50%;
+    margin-right: 2%;
+}
+
+.patientList-btn-search {
+    width: 40%;
 }
 
 .patientList-btn {
@@ -17,18 +28,20 @@
 
 /* EXTRA SMALL */
 @media screen and (max-width: 576px) {
+    .input-btn-search-container {
+        width: 90%;
+    }
+
     .patientList-input {
         width: 80%;
-        margin: 2% 0;
     }
     .patientList-btn {
         width: 50%;
         font-size: 1.3em;
-        margin: 2% 0;
+        margin-top: 2%;
     }
     .patientList-input {
         width: 80%;
-        margin: 2% 0;
     }
     .search-patient {
         justify-content: center;
@@ -39,6 +52,10 @@
 }
 /* SMALL */
 @media screen and (min-width: 577px) and (max-width: 767px) {
+    .input-btn-search-container {
+        width: 85%;
+    }
+
     .search-patient {
         width: 100%;
         justify-content: center;
@@ -46,7 +63,6 @@
     }
     .patientList-input {
         width: 80%;
-        margin: 2% 0;
     }
     .patientList-btn {
         width: auto;
@@ -59,9 +75,6 @@
     .search-patient {
         width: 80%;
         justify-content: space-between;
-    }
-    .patientList-btn {
-        width: auto;
     }
 }
 /* LARGE */

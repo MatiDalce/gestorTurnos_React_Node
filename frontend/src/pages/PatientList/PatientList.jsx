@@ -36,22 +36,25 @@ const PatientList = () => {
   return (
     <>
       <div className="search-patient">
-        <div className="patientList-input">
-          <Input
-            value={search}
-            onChange={handleSearch}
-            isSearcheable
-            type='text'
-            nameProp='search'
-            placeholder='Buscar por nombre, apellido o DNI'
-          />
-        </div>
-        <div className="patientList-btn">
-          <Button 
-            title={'Filtrar pacientes'} 
-            type='button'
-            onClick={handleFilterPatients}
-          />
+        <div className="input-btn-search-container">
+          <div className="patientList-input">
+            <Input
+              value={search}
+              onChange={handleSearch}
+              isSearcheable
+              type='text'
+              nameProp='search'
+              placeholder='Buscar por nombre, apellido o DNI'
+            />
+          </div>
+
+            <div className="patientList-btn-search">
+              <Button 
+                title={'Filtrar pacientes'} 
+                type='button'
+                onClick={handleFilterPatients}
+              />
+            </div>
         </div>
         <div className="patientList-btn">
           <Button 
