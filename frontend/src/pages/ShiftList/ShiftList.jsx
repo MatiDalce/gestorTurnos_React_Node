@@ -71,16 +71,26 @@ const ShiftList = () => {
   return (
     <>
     <div className="search-shift">
-      <div className="shiftList-input-box">
-        <Input 
-          onChange={handleName}
-          value={filterShift.name}
-          isSearcheable
-          hasLabel
-          labelTitle='Nombre'
-          type='text'
-          nameProp='search'
-        />
+      <div className="shiftList-input-btn-container">
+        <div className="shiftList-input-box">
+          <Input 
+            onChange={handleName}
+            value={filterShift.name}
+            isSearcheable
+            hasLabel
+            labelTitle='Nombre'
+            type='text'
+            nameProp='search'
+            placeholder={'Buscar por nombre'}
+          />
+        </div>
+        <div className="shiftList-btn-box-search">
+          <Button 
+            title={'Filtrar Turnos'} 
+            type='button'
+            onClick={handleShiftSearch}
+          />
+        </div>
       </div>
       {/* <div className="shiftList-input-box">
         <Input 
@@ -102,13 +112,7 @@ const ShiftList = () => {
           nameProp='untilDate'
         />
       </div> */}
-      <div className="shiftList-btn-box">
-        <Button 
-          title={'Filtrar Turnos'} 
-          type='button'
-          onClick={handleShiftSearch}
-        />
-      </div>
+
       <div className="shiftList-btn-box">
         <Button 
           title={'Agregar Turno'} 
