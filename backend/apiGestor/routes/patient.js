@@ -13,7 +13,7 @@ router.get('/:id', patientController.getOne)
 
 router.post('/', validatePatientFields, patientController.post);
 
-router.put("/:id", validatePatientFields, patientController.put);
+router.put("/:id",  validatePatientFields,  patientController.put);
 
 router.delete("/:id", patientController.delete);
 router.get("/patient-appointments/:id", patientController.patientApointments)
