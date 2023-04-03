@@ -23,9 +23,11 @@ const Table = ({
       </tr>
     </thead>
   );
-
+  const rowStyles = {
+    cursor: staticPath ? 'pointer' : ''
+  }
   const renderRow = row => {
-    return <tr className="table__row" role="row" key={row.id} onClick={staticPath ? () => navigate(`${staticPath}/${row.id}`) : () => {}}>
+    return <tr className="table__row" style={rowStyles} role="row" key={row.id} onClick={staticPath ? () => navigate(`${staticPath}/${row.id}`) : () => {}}>
       {Object.entries(headers).map(([key, value]) => (
         <td className="table__cell" role="cell" data-label={value} key={key}>
           {row[key]}
