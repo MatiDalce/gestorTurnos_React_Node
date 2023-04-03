@@ -1,6 +1,7 @@
 .select-patient-input {
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .input-row-shift {
@@ -33,16 +34,35 @@
     .addShift-input-container {
         width: 70%;
     }
+    .select-patient-input {
+        width: 80%;
+        margin: auto;
+    }
+    .btn-addShift-container {
+        width: 40%;
+        font-size: 1.3em;
+    }
 }
 /* SMALL */
 @media screen and (min-width: 577px) and (max-width: 767px) {
     .addShift-input-container {
         width: 70%;
     }
+    .select-patient-input {
+        width: 80%;
+        margin: auto;
+    }
+    .btn-addShift-container {
+        width: 40%;
+        font-size: 1.3em;
+    }
 }
 /* MEDIUM */
 @media screen and (min-width: 768px) and (max-width: 991px) {
-    
+    .btn-addShift-container {
+        width: 40%;
+        font-size: 1.3em;
+    }
 }
 /* LARGE */
 @media screen and (min-width: 992px) and (max-width: 1199px) {

@@ -33,6 +33,9 @@
         width: 90%;
         margin: 3% 0;
     }
+    .btn-addPatient-container {
+        font-size: 1.3em;
+    }
 }
 /* SMALL */
 @media screen and (min-width: 577px) and (max-width: 767px) {
@@ -43,6 +46,9 @@
     .addPatient-box {
         width: 90%;
         margin: 3% 0;
+    }
+    .btn-addPatient-container {
+        font-size: 1.3em;
     }
 }
 /* MEDIUM */
@@ -57,8 +63,10 @@
     }
     .btn-addPatient-container {
         margin-bottom: 5%;
+        font-size: 1.5em;
     }
 }
+
 /* LARGE */
 @media screen and (min-width: 992px) and (max-width: 1199px) {
     
