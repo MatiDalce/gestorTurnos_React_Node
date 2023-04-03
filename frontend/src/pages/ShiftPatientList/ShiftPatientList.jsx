@@ -84,11 +84,18 @@ const ShiftPatientList = () => {
         />
       </div>
     </div>
-    <Table 
+    {
+      shiftPatientList.length > 0 ? <Table 
       staticPath={'/turno'}
       headers={{day: 'Fecha', hour: 'Hora'}}
       content={shiftPatientList || []} 
     />
+      :
+      <div style={{display:'flex', justifyContent: 'center', marginTop: '5%'}}>
+        <p className='noContent-text'>Este paciente no tiene turnos</p>
+      </div>
+    }
+    
   </>
   )
 }

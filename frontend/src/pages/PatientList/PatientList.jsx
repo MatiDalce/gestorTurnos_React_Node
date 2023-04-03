@@ -64,11 +64,18 @@ const PatientList = () => {
           />
         </div>
       </div>
-      <Table 
-        content={patients} 
-        headers={{completeName: 'Nombre y Apellido', dni: 'DNI', email: 'E-mail'}}
-        staticPath={'/paciente'} // Parte de la ruta a la que va a redirigir al hacer click en la celda
-      />
+      {
+        patients.length > 0 ? <Table 
+          content={patients} 
+          headers={{completeName: 'Nombre y Apellido', dni: 'DNI', email: 'E-mail'}}
+          staticPath={'/paciente'} // Parte de la ruta a la que va a redirigir al hacer click en la celda
+        />
+        :
+        <div style={{display:'flex', justifyContent: 'center', marginTop: '5%'}}>
+          <p className='noContent-text'>No hay pacientes</p>
+        </div>
+      }
+      
     </>
   )
 }

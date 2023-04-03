@@ -60,9 +60,15 @@
     background: #555; 
   }
 
+  .noContent-text {
+    font-size: 2em;
+  }
+
   /* EXTRA SMALL */
 @media screen and (max-width: 576px) {
-
+  .noContent-text {
+    font-size: 1.4em;
+}
 }
 /* SMALL */
 @media screen and (min-width: 577px) and (max-width: 767px) {

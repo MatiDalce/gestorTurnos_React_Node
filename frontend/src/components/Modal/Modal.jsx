@@ -27,71 +27,78 @@ const Modal = ({ title, description, setter }) => {
                     textColor='var(--white-bg)'
                 />
                 <p className='appointment'>{description || ''}</p>
-                {/* <Table 
-                    headers={{id: 'ID', completeName: 'Nombre y Apellido', hour: 'Hora'}}
-                    content={[
-                        {
-                            id: 1,
-                            name: 'Diego Perez',
-                            time: '13:30hs'
-                        },
-                        {
-                            id: 2,
-                            name: 'Diego Perez',
-                            time: '13:30hs'
-                        },
-                        {
-                            id: 3,
-                            name: 'Diego Perez',
-                            time: '13:30hs'
-                        },
-                        {
-                            id: 4,
-                            name: 'Diego Perez',
-                            time: '13:30hs'
-                        },
-                        {
-                            id: 5,
-                            name: 'Diego Perez',
-                            time: '13:30hs'
-                        },
-                        {
-                            id: 6,
-                            name: 'Diego Perez',
-                            time: '13:30hs'
-                        },
-                        {
-                            id: 1,
-                            name: 'Diego Perez',
-                            time: '13:30hs'
-                        },
-                        {
-                            id: 2,
-                            name: 'Diego Perez',
-                            time: '13:30hs'
-                        },
-                        {
-                            id: 3,
-                            name: 'Diego Perez',
-                            time: '13:30hs'
-                        },
-                        {
-                            id: 4,
-                            name: 'Diego Perez',
-                            time: '13:30hs'
-                        },
-                        {
-                            id: 5,
-                            name: 'Diego Perez',
-                            time: '13:30hs'
-                        },
-                        {
-                            id: 6,
-                            name: 'Diego Perez',
-                            time: '13:30hs'
-                        },
-                    ]}
-                /> */}
+                {/* {
+                    tableContent.length > 0 ? <Table 
+                        headers={{id: 'ID', completeName: 'Nombre y Apellido', hour: 'Hora'}}
+                        content={[
+                            {
+                                id: 1,
+                                name: 'Diego Perez',
+                                time: '13:30hs'
+                            },
+                            {
+                                id: 2,
+                                name: 'Diego Perez',
+                                time: '13:30hs'
+                            },
+                            {
+                                id: 3,
+                                name: 'Diego Perez',
+                                time: '13:30hs'
+                            },
+                            {
+                                id: 4,
+                                name: 'Diego Perez',
+                                time: '13:30hs'
+                            },
+                            {
+                                id: 5,
+                                name: 'Diego Perez',
+                                time: '13:30hs'
+                            },
+                            {
+                                id: 6,
+                                name: 'Diego Perez',
+                                time: '13:30hs'
+                            },
+                            {
+                                id: 1,
+                                name: 'Diego Perez',
+                                time: '13:30hs'
+                            },
+                            {
+                                id: 2,
+                                name: 'Diego Perez',
+                                time: '13:30hs'
+                            },
+                            {
+                                id: 3,
+                                name: 'Diego Perez',
+                                time: '13:30hs'
+                            },
+                            {
+                                id: 4,
+                                name: 'Diego Perez',
+                                time: '13:30hs'
+                            },
+                            {
+                                id: 5,
+                                name: 'Diego Perez',
+                                time: '13:30hs'
+                            },
+                            {
+                                id: 6,
+                                name: 'Diego Perez',
+                                time: '13:30hs'
+                            },
+                        ]}
+                    />
+                    :
+                    <div style={{display:'flex', justifyContent: 'center', marginTop: '5%'}}>
+                        <p className='noContent-text'>No hay información</p>
+                    </div>
+                } */}
+                
             </div>
         </div>
     )

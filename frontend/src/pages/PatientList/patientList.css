@@ -25,6 +25,9 @@
     width: 30%;
     margin-left: 2%;
 }
+.noContent-text {
+    font-size: 2em;
+}
 
 /* EXTRA SMALL */
 @media screen and (max-width: 576px) {
@@ -48,6 +51,9 @@
         width: 100%;
         justify-content: center;
         flex-direction: column;
+    }
+    .noContent-text {
+        font-size: 1.4em;
     }
 }
 /* SMALL */
