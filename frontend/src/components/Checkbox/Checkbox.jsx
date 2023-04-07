@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import './checkbox.css';
 
 const Checkbox = ({
@@ -6,47 +7,41 @@ const Checkbox = ({
     withText, // IMPORTANTE: Checkbox y text (sino no aparece nada)
     nameProp, // IMPORTANTE: Es el name y es necesaria para diferenciar los inputs checkbox
     options, // IMPORTANTE: Las opciones
-    oneChoice, // Si solo se puede elegir una opción
+    onChange, // IMPORTANTE: Para el input texto (withText)
+    onChangeOnlyBoxes, // IMPORTANTE: Para cambio de checkbox (onlyCheckboes)
     colorLabel,
     hasLabel, // Si tiene o no label
     labelTitle,
     isLabelCenter, // Label centrado
-    value, // Para el input texto
+    value, // Para el input texto o cuando son varios checkbox que envían el texto de su label
     placeholder, // Para el input texto
-    onChange, // Para el input texto
-    checkValue,
     isRequired,
 }) => {
-    const [selectedOption, setSelectedOption] = useState(oneChoice ? null : []);
     const [activeOptions, setActiveOptions] = useState(false);
-    const [inputValue, setInputValue] = useState(value || '');
-    
+    const [checkValue, setCheckValue] = useState();
+
+    useEffect(() => {
+        console.log(value === '' || value === undefined || value === null)
+        if(value === undefined || value === null) setActiveOptions(true);
+        if(value !== '' || value !== undefined || value!== null) setCheckValue(value);
+    }, [value])
+
     const handleText = (e) => {
         const newValue = e.target.value;
-        setInputValue(newValue);
         onChange(newValue);
     }
-
-    const handleSelect = (event) => {
-        const { value } = event.target;
-        if (oneChoice) {
-            setSelectedOption(value);
-            
-        } else {
-            if (selectedOption.includes(value)) {
-                setSelectedOption(selectedOption.filter((option) => option !== value));
-            } else {
-                setSelectedOption([...selectedOption, value]);
-            }
-        }
-    };
 
     const handleYesOrNo = (value) => {
         if(value === 'yes') {
             setActiveOptions(true);
-        } else {
+        } else if(value === 'no') {
             setActiveOptions(false);
-        }
+        } else {}
+    }
+
+    const changeCheckValue = (value) => {
+        onChangeOnlyBoxes(value);
+        setCheckValue(value)
     }
 
     const labelStyles = {
@@ -72,7 +67,8 @@ const Checkbox = ({
                                 <input 
                                     name={`yesOrNo` + nameProp} 
                                     type="radio" 
-                                    onClick={() => handleYesOrNo('yes')} 
+                                    checked={activeOptions}
+                                    onChange={() => handleYesOrNo('yes')} 
                                     className="checkbox-input" 
                                     required={isRequired ? true : false}
                                 />
@@ -81,8 +77,9 @@ const Checkbox = ({
                                 <label className='labelYesOrNo'> No </label>
                                 <input 
                                     name={`yesOrNo` + nameProp} 
+                                    checked={!activeOptions}
                                     type="radio" 
-                                    onClick={() => handleYesOrNo('no')} 
+                                    onChange={() => handleYesOrNo('no')} 
                                     className="checkbox-input" 
                                     required={isRequired ? true : false}
                                 />
@@ -93,7 +90,7 @@ const Checkbox = ({
                         className={`text-for-checkbox ${!activeOptions && 'disabled'}`} 
                         placeholder={placeholder} 
                         type='text' 
-                        value={activeOptions ? inputValue : ''} 
+                        value={activeOptions ? value : ''} 
                         onChange={handleText} 
                         required={isRequired ? true : false}
                     />
@@ -108,20 +105,18 @@ const Checkbox = ({
                 <label style={labelStyles} className="label-checkbox">{ labelTitle }</label>
                 <div className='option-box'>
                     {
-                        options.map((option) => (
-                            <label key={option} className="checkbox-label">
+                        options.map((option, idx) => {
+                            return <label key={option} className="checkbox-label">
                                 <span className="checkbox-text">{option}</span>
                                 <input
-                                    type={oneChoice ? 'radio' : 'checkbox'}
-                                    name={nameProp}
-                                    // checked={option === checkValue}
-                                    value={option}
-                                    checked={oneChoice ? (checkValue ? option === checkValue : selectedOption) : selectedOption.includes(option)}
-                                    onChange={oneChoice ? (e) => onChange(e.target.value) : handleSelect}
+                                    type={'radio'}
+                                    name={`${nameProp}`}
+                                    checked={option === checkValue}
+                                    onChange={() => changeCheckValue(option)}
                                     className="checkbox-input"
                                 />
                             </label>
-                        ))
+                        })
                     }
                 </div>
             </div>

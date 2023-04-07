@@ -2,7 +2,7 @@
 .input-row {
     display: flex;
     justify-content: space-around;
-    align-items: baseline;
+    align-items: flex-end;
     margin: 5% 0;
 }
 

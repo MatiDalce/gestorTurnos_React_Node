@@ -36,7 +36,6 @@ const Shift = () => {
       'Está por borrar un turno', 
       'Esta acción no se puede deshacer ¿Está seguro?', 
     ).then((res) => {
-      console.log(res);
       if(!res) {
         toast('success', 'Turno eliminado exitosamente')
         navigate('/listado-turnos')
@@ -63,7 +62,7 @@ const Shift = () => {
         // Create a link element and click it to download the file
         const link = document.createElement('a');
         link.href = url;
-        link.download = `${shift.name}${shift.date}.txt`;
+        link.download = `${shift.name}_${shift.date}.txt`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);

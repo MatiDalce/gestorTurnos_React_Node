@@ -292,12 +292,11 @@ const AddPatient = () => {
               labelTitle='Género'
               options={['Masculino', 'Femenino', 'Otro']}
               isRequired
-              oneChoice
               onlyCheckboxes
               colorLabel='var(--black-bg)'
               isLabelCenter
               nameProp='gender'
-              onChange={handleGender}
+              onChangeOnlyBoxes={handleGender}
             />
           </div>
       </div>
@@ -319,8 +318,7 @@ const AddPatient = () => {
             <Checkbox
               options={['Casado', 'Soltero', 'Divorciado', 'Viudo']}
               onlyCheckboxes
-              oneChoice
-              onChange={handleMaritalStatus}
+              onChangeOnlyBoxes={handleMaritalStatus}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Estado civil'
@@ -361,7 +359,6 @@ const AddPatient = () => {
           <div className="addPatient-box">
             <Checkbox
               withText={'¿Vive?'}
-              oneChoice
               value={patient.father}
               onChange={handleFather}
               colorLabel='var(--black-bg)' 
@@ -376,7 +373,6 @@ const AddPatient = () => {
           <div className="addPatient-box">
           <Checkbox
               withText={'¿Vive?'}
-              oneChoice
               value={patient.mother}
               onChange={handleMother}
               colorLabel='var(--black-bg)' 
@@ -424,10 +420,9 @@ const AddPatient = () => {
           <Checkbox
             onlyCheckboxes
             hasLabel
-            onChange={handleLivingSiblings}
+            onChangeOnlyBoxes={handleLivingSiblings}
             labelTitle='¿Viven todos/as sus hermanos/as?'
             options={['Sí', 'No']}
-            oneChoice
             colorLabel='var(--black-bg)'
             isLabelCenter
             nameProp='livingSiblings'
@@ -522,10 +517,10 @@ const AddPatient = () => {
           <div className="addPatient-box">
             <Checkbox
               withText
-              options={[]}
               onChange={handleHasAllergies}
               colorLabel='var(--black-bg)' 
               hasLabel
+              value={patient.allergies}
               labelTitle='¿Tiene alguna alergia?'
               placeholder='Nombre la/as alergia/s'
               isLabelCenter
@@ -537,8 +532,8 @@ const AddPatient = () => {
         <div className="addPatient-box">
           <Checkbox
             withText
-            options={[]}
             onChange={handleMedication}
+            value={patient.medication}
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='¿Toma algún medicamento?'
@@ -550,8 +545,8 @@ const AddPatient = () => {
         <div className="addPatient-box">
             <Checkbox
               withText
-              options={[]}
               onChange={handleChronicDisease}
+              value={patient.chronicDisease}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='¿Tiene alguna enfermedad crónica?'

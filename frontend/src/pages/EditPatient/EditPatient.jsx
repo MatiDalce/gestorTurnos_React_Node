@@ -17,8 +17,8 @@ const EditPatient = () => {
     name: '',
     lastName: '',
     dni: '',
-    socialNetwork: '',
-    age: '',
+    socialService: '',
+    email: '',
     gender: '',
     maritalStatus: '',
     birthday: '',
@@ -29,9 +29,13 @@ const EditPatient = () => {
     livingSiblings: '',
     personalPhoneNumber: '',
     contactPhone: '',
+    academicLevel: '',
+    hasChronicDisease: '',
     chronicDisease: '',
     hasAllergies: '',
+    allergies: '',
     bloodType: '',
+    takesMedication: '',
     medication: '',
   })
 
@@ -39,8 +43,6 @@ const EditPatient = () => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
-
       // EDAD: Convertir formato unixtime a número
         function convertUnixtimeToAge(date) {
           const hoy = new Date();
@@ -52,14 +54,15 @@ const EditPatient = () => {
           return edad;
         }
       // FECHA DE NACIMIENTO: Convertir formato unixtime a fecha
-        function convertUnixtimeToDate(date) {
-          const dateObj = new Date(date * 1000);
-          const formattedDate = dateObj.toLocaleDateString('es-ES', {
-            day: '2-digit', month: '2-digit', year: 'numeric'
-          });
-          return formattedDate
-        }
-
+      function convertUnixtimeToDate(date) {
+        const dateObj = new Date(date * 1000);
+        const options = { timeZone: 'America/Argentina/Buenos_Aires', day: '2-digit', month: '2-digit', year: 'numeric' };
+        dateObj.setDate(dateObj.getDate() + 1);
+        const formattedDate = dateObj.toLocaleDateString('es-AR', options);
+        return formattedDate;
+      }
+      console.log(res);
+      // SETEO ESTADO
       setPatient({
         name: res.name,
         lastName: res.lastName,
@@ -76,9 +79,12 @@ const EditPatient = () => {
         livingSiblings: res.livingSiblings, // No viene desde BE
         personalPhoneNumber: res.personalPhoneNumber,
         contactPhone: res.contactPhone,
-        chronicDisease: res.hasChronicDisease,
-        hasAllergies: res.hasAllergies,
         bloodType: res.bloodType,
+        hasChronicDisease: res.hasChronicDisease,
+        chronicDisease: res.chronicDisease,
+        hasAllergies: res.hasAllergies,
+        allergies: res.allergies,
+        takesMedication: res.takesMedication,
         medication: res.medication,
       })
     })
@@ -114,7 +120,7 @@ const EditPatient = () => {
       age: e.target.value
     })
   };
-  const handleGenre = (value) => {
+  const handleGender = (value) => {
     setPatient({
       ...patient,
       gender: value
@@ -132,28 +138,28 @@ const EditPatient = () => {
       birthday: e.target.value
     })
   }
-  const handleFather = (e) => {
+  const handleFather = (value) => {
     setPatient({
       ...patient,
-      father: e.target.value
+      father: value
     })
   }
-  const handleMother = (e) => {
+  const handleMother = (value) => {
     setPatient({
       ...patient,
-      mother: e.target.value
+      mother: value
     })
   }
-  const handleChildren = (e) => {
+  const handleChildren = (value) => {
     setPatient({
       ...patient,
-      children: e.target.value
+      children: value
     })
   }
-  const handleSiblings = (e) => {
+  const handleSiblings = (value) => {
     setPatient({
       ...patient,
-      siblings: e.target.value
+      siblings: value
     })
   }
   const handleLivingSiblings = (value) => {
@@ -174,16 +180,16 @@ const EditPatient = () => {
       contactPhone: e.target.value
     })
   }
-  const handleChronicDisease = (e) => {
+  const handleChronicDisease = (value) => {
     setPatient({
       ...patient,
-      chronicDisease: e.target.value
+      chronicDisease: value
     })
   }
-  const handleHasAllergies = (e) => {
+  const handleHasAllergies = (value) => {
     setPatient({
       ...patient,
-      hasAllergies: e.target.value
+      hasAllergies: value
     })
   }
   const handleBloodType = (e) => {
@@ -192,12 +198,13 @@ const EditPatient = () => {
       bloodType: e.target.value
     })
   }
-  const handleMedication = (e) => {
+  const handleMedication = (value) => {
     setPatient({
       ...patient,
-      medication: e.target.value
+      medication: value
     })
   }
+
   const handleEditPatient = (e) => {
     e.preventDefault()
     let body = {
@@ -319,13 +326,13 @@ const EditPatient = () => {
               hasLabel
               labelTitle='Género'
               options={['Masculino', 'Femenino', 'Otro']}
-              oneChoice
+              value={patient.gender}
               onlyCheckboxes
               colorLabel='var(--black-bg)'
               isLabelCenter
               nameProp='genre'
-              onChange={handleGenre}
-              checkValue={patient.gender}
+              onChangeOnlyBoxes={handleGender}
+              isChecked={patient.gender}
             />
           </div>
       </div>
@@ -346,14 +353,14 @@ const EditPatient = () => {
           <Checkbox
             options={['Casado', 'Soltero', 'Divorciado', 'Viudo']}
             onlyCheckboxes
-            oneChoice
-            onChange={handleMaritalStatus}
+            value={patient.maritalStatus}
+            onChangeOnlyBoxes={handleMaritalStatus}
             colorLabel='var(--black-bg)'
             hasLabel
             labelTitle='Estado civil'
             isLabelCenter
             nameProp='maritalStatus'
-            checkValue={patient.maritalStatus}
+            isChecked={patient.maritalStatus}
           />
         </div>
       </div>
@@ -388,8 +395,8 @@ const EditPatient = () => {
           <div className="input-editPatient-box">
             <Checkbox
               withText={'¿Vive?'}
-              oneChoice
               value={patient.father}
+              isChecked={patient.father !== ''}
               onChange={handleFather}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -403,8 +410,8 @@ const EditPatient = () => {
           <div className="input-editPatient-box">
             <Checkbox
               withText={'¿Vive?'}
-              oneChoice
               value={patient.mother}
+              isChecked={patient.mother !== ''}
               onChange={handleMother}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -421,6 +428,7 @@ const EditPatient = () => {
             <Checkbox
               withText={'Tiene?'}
               value={patient.children}
+              isChecked={patient.children !== ''}
               onChange={handleChildren}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -435,6 +443,7 @@ const EditPatient = () => {
             <Checkbox
               withText={'Tiene?'}
               options={['Sí', 'No']}
+              isChecked={patient.siblings !== ''}
               value={patient.siblings}
               onChange={handleSiblings}
               colorLabel='var(--black-bg)' 
@@ -452,10 +461,10 @@ const EditPatient = () => {
             <Checkbox
               onlyCheckboxes
               hasLabel
-              onChange={handleLivingSiblings}
+              onChangeOnlyBoxes={handleLivingSiblings}
+              value={patient.livingSiblings}
               labelTitle='¿Viven todos/as sus hermanos/as?'
               options={['Sí', 'No']}
-              oneChoice
               colorLabel='var(--black-bg)'
               isLabelCenter
               nameProp='livingSiblings'
@@ -464,7 +473,6 @@ const EditPatient = () => {
         </div>
         <div className="input-editPatient-box">
             <Select
-              isSingle
               options={[
                 {
                   value: '',
@@ -487,6 +495,7 @@ const EditPatient = () => {
                   text: 'Tipo O',
                 },
               ]}
+              value={patient.bloodType}
               onChange={handleBloodType}
               colorLabel='var(--black-bg)' 
               hasLabel
@@ -500,8 +509,9 @@ const EditPatient = () => {
           <div className="input-editPatient-box">
             <Checkbox
               withText
-              options={[]}
               onChange={handleHasAllergies}
+              isChecked={patient.hasAllergies === '1'}
+              value={patient.allergies}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='¿Tiene alguna alergia?'
@@ -513,8 +523,9 @@ const EditPatient = () => {
           <div className="input-editPatient-box">
             <Checkbox
               withText
-              options={[]}
               onChange={handleChronicDisease}
+              isChecked={patient.hasChronicDisease === '1'}
+              value={patient.chronicDisease}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='¿Tiene alguna enfermedad crónica?'
@@ -528,8 +539,9 @@ const EditPatient = () => {
           <div className="input-editPatient-box">
             <Checkbox
               withText
-              options={[]}
               onChange={handleMedication}
+              isChecked={patient.takesMedication === '1'}
+              value={patient.medication}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='¿Toma algún medicamento?'
