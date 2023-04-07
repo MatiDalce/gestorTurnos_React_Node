@@ -7,12 +7,16 @@ const Button = ({
   type,
   bgColor,
   path,
-  onClick
+  onClick,
+  isDisabled
 }) => {
   const navigate = useNavigate()
 
   const buttonStyle = {
     backgroundColor: `${bgColor ? bgColor : 'var(--skyblue-bg)'}`,
+    pointerEvent: `${isDisabled ? 'none' : 'auto'}`,
+    cursor: `${isDisabled ? 'auto' : 'pointer'}`,
+    opacity: `${isDisabled ? '0.6' : '1'}`,
   };
 
   // Si llega el path es porque solo es un botón que redirige.

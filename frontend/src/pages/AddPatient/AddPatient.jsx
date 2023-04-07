@@ -573,6 +573,13 @@ const AddPatient = () => {
           <Button 
             title={'Registrar'} 
             type='submit'
+            isDisabled={
+              patient.name === '' ||
+              patient.lastName === '' ||
+              patient.email === '' ||
+              patient.dni === '' ||
+              patient.gender === ''
+            }
           />
         </div>
       </div>

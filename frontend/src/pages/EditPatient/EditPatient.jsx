@@ -264,6 +264,7 @@ const EditPatient = () => {
               isLabelCenter
               placeholder='Ingrese el nombre'
               nameProp='name'
+              isRequired
             />
           </div>
           <div className="input-editPatient-box">
@@ -276,6 +277,7 @@ const EditPatient = () => {
               isLabelCenter
               placeholder='Ingrese el apellido'
               nameProp='lastname'
+              isRequired
             />
           </div>
         </div>
@@ -291,6 +293,7 @@ const EditPatient = () => {
               isLabelCenter
               placeholder='Ingrese el DNI'
               nameProp='dni'
+              isRequired
             />
           </div>
           <div className="input-editPatient-box">
@@ -331,9 +334,10 @@ const EditPatient = () => {
               onlyCheckboxes
               colorLabel='var(--black-bg)'
               isLabelCenter
-              nameProp='genre'
+              nameProp='gender'
               onChangeOnlyBoxes={handleGender}
               isChecked={patient.gender}
+              isRequired
             />
           </div>
       </div>
@@ -623,6 +627,13 @@ const EditPatient = () => {
             title={'Editar'} 
             type='submit'
             onClick={handleEditPatient}
+            isDisabled={
+              patient.name === '' ||
+              patient.lastName === '' ||
+              patient.email === '' ||
+              patient.dni === '' ||
+              patient.gender === ''
+            }
           />
         </div>
       </div>
