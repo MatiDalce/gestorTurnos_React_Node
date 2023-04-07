@@ -29,22 +29,22 @@ const MyCalendar = () => {
     { 
       id: 1,
       title: 'Evento 1',
-      start: '2023-04-27T00:00:00.000Z',
+      start: '2023-04-01T00:00:00.000Z',
     },
     { 
       id: 2,
       title: 'Evento 2',
-      start: '2023-03-27T14:00:00',
+      start: '2023-04-02T14:00:00',
     },
     { 
       id: 3,
       title: 'Evento 3',
-      start: '2023-03-28T14:00:00',
+      start: '2023-04-03T14:00:00',
     },
     { 
       id: 4,
       title: 'Evento 4',
-      start: '2023-03-29T17:00:00',
+      start: '2023-04-04T17:00:00',
     },
   ];
 
