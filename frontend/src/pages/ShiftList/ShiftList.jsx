@@ -77,8 +77,6 @@ const ShiftList = () => {
             onChange={handleName}
             value={filterShift.name}
             isSearcheable
-            hasLabel
-            labelTitle='Nombre'
             type='text'
             nameProp='search'
             placeholder={'Buscar por nombre'}

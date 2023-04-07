@@ -82,6 +82,9 @@
         width: 80%;
         justify-content: space-between;
     }
+    .patientList-btn-search, .patientList-btn {
+        font-size: 0.9em;
+    }
 }
 /* LARGE */
 @media screen and (min-width: 992px) and (max-width: 1199px) {
