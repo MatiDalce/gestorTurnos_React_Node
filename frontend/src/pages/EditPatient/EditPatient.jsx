@@ -27,7 +27,7 @@ const EditPatient = () => {
     mother: '',
     children: '',
     siblings: '',
-    livingSiblings: '',
+    // livingSiblings: '',
     personalPhoneNumber: '',
     contactPhone: '',
     academicLevel: '',
@@ -59,7 +59,7 @@ const EditPatient = () => {
         mother: res.mother, // No viene desde BE
         children: res.children, 
         siblings: res.siblings,
-        livingSiblings: res.livingSiblings, // No viene desde BE
+        // livingSiblings: res.livingSiblings, // No viene desde BE
         personalPhoneNumber: res.personalPhoneNumber,
         contactPhone: res.contactPhone,
         bloodType: res.bloodType,
@@ -151,12 +151,12 @@ const EditPatient = () => {
       academicLevel: e.target.value
     })
   }
-  const handleLivingSiblings = (value) => {
-    setPatient({
-      ...patient,
-      livingSiblings: value
-    })
-  }
+  // const handleLivingSiblings = (value) => {
+  //   setPatient({
+  //     ...patient,
+  //     livingSiblings: value
+  //   })
+  // }
   const handlePersonalPhone = (e) => {
     setPatient({
       ...patient,
@@ -457,7 +457,7 @@ const EditPatient = () => {
           </div>
       </div>
       <div className="input-editPatient-row input-editPatient-row-extra">
-        <div className="input-editPatient-box">
+        {/* <div className="input-editPatient-box">
             <div className="yesOrNoCheckboxes">
               <Checkbox
                 formType='edit'
@@ -472,7 +472,7 @@ const EditPatient = () => {
                 nameProp='livingSiblings'
               />
             </div>
-        </div>
+        </div> */}
         <div className="input-editPatient-box">
           <Select
             options={[
@@ -526,8 +526,6 @@ const EditPatient = () => {
             nameProp='academicLevel'
           />
         </div>
-      </div>
-      <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Select
             options={[
@@ -561,6 +559,8 @@ const EditPatient = () => {
             nameProp='bloodType'
           />
         </div>
+      </div>
+      <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Checkbox
             formType='edit'
@@ -576,8 +576,6 @@ const EditPatient = () => {
             nameProp='hasAllergies'
           />
         </div>
-      </div>
-      <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Checkbox
             formType='edit'
@@ -593,6 +591,8 @@ const EditPatient = () => {
             nameProp='medication'
           />
         </div>
+      </div>
+      <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Checkbox
             formType='edit'

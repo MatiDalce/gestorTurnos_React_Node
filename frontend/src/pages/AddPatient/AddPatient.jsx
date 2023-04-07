@@ -27,7 +27,7 @@ const AddPatient = () => {
     mother: '',
     children: '',
     siblings: '',
-    livingSiblings: '',
+    // livingSiblings: '',
     personalPhoneNumber: '',
     contactPhone: '',
     academicLevel: '',
@@ -112,12 +112,12 @@ const AddPatient = () => {
       siblings: value
     })
   }
-  const handleLivingSiblings = (value) => {
-    setPatient({
-      ...patient,
-      livingSiblings: value
-    })
-  }
+  // const handleLivingSiblings = (value) => {
+  //   setPatient({
+  //     ...patient,
+  //     livingSiblings: value
+  //   })
+  // }
   const handlePersonalPhoneNumber = (e) => {
     setPatient({
       ...patient,
@@ -423,7 +423,7 @@ const AddPatient = () => {
         </div>
       </div>
       <div className="input-row">
-        <div className="addPatient-box">
+        {/* <div className="addPatient-box">
           <Checkbox
             formType='new'
             onlyCheckboxes
@@ -435,7 +435,7 @@ const AddPatient = () => {
             isLabelCenter
             nameProp='livingSiblings'
           />
-        </div>
+        </div> */}
         <div className="addPatient-box">
           <Select
             options={[
@@ -488,8 +488,6 @@ const AddPatient = () => {
             nameProp='academicLevel'
           />
         </div>
-      </div>
-      <div className="input-row">
         <div className="addPatient-box">
             <Select
               options={[
@@ -522,6 +520,8 @@ const AddPatient = () => {
               nameProp='bloodType'
             />
           </div>
+      </div>
+      <div className="input-row">
           <div className="addPatient-box">
             <Checkbox
               formType='new'
@@ -536,8 +536,6 @@ const AddPatient = () => {
               nameProp='hasAllergies'
             />
           </div>
-      </div>
-      <div className="input-row">
         <div className="addPatient-box">
           <Checkbox
             formType='new'
@@ -552,6 +550,8 @@ const AddPatient = () => {
             nameProp='medication'
           />
         </div>
+      </div>
+      <div className="input-row">
         <div className="addPatient-box">
             <Checkbox
               formType='new'
