@@ -7,8 +7,12 @@
 .input-editPatient-row {
     display: flex;
     justify-content: space-around;
-    align-items: baseline;
-    margin: 5% 0;
+    align-items: flex-end;
+    margin: 4% 0;
+}
+
+.input-editPatient-row-extra {
+    align-items: center !important;
 }
 
 .input-editPatient-box {

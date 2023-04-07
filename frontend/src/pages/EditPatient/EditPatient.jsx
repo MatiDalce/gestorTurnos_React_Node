@@ -43,23 +43,15 @@ const EditPatient = () => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
-      // EDAD: Convertir formato unixtime a número
-        function convertUnixtimeToAge(date) {
-          const hoy = new Date();
-          let edad = hoy.getFullYear() - date.getFullYear();
-          const mes = hoy.getMonth() - date.getMonth();
-          if (mes < 0 || (mes === 0 && hoy.getDate() < date.getDate())) {
-            edad--;
-          }
-          return edad;
-        }
       // FECHA DE NACIMIENTO: Convertir formato unixtime a fecha
       function convertUnixtimeToDate(date) {
         const dateObj = new Date(date * 1000);
-        const options = { timeZone: 'America/Argentina/Buenos_Aires', day: '2-digit', month: '2-digit', year: 'numeric' };
+        const options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: '2-digit', day: '2-digit' };
+        // const options = { timeZone: 'America/Argentina/Buenos_Aires', day: '2-digit', month: '2-digit', year: 'numeric' };
         dateObj.setDate(dateObj.getDate() + 1);
-        const formattedDate = dateObj.toLocaleDateString('es-AR', options);
-        return formattedDate;
+        const formattedDate = dateObj.toLocaleDateString('es-AR', options).replace(/\//g, "-");;
+        const [day, month, year] = formattedDate.split('-');
+        return `${year}-${month}-${day}`;
       }
       console.log(res);
 
@@ -69,10 +61,11 @@ const EditPatient = () => {
         lastName: res.lastName,
         dni: res.dni,
         socialNetwork: res.socialService, // No viene desde BE
-        age: convertUnixtimeToAge(new Date(res.birthday * 1000)), // No viene desde BE
         gender: res.gender, // No viene desde BE
         maritalStatus: res.maritalStatus,
+        email: res.email,
         birthday: convertUnixtimeToDate(res.birthday),
+        academicLevel: res.academicLevel,
         father: res.father, // No viene desde BE
         mother: res.mother, // No viene desde BE
         children: res.children, 
@@ -115,10 +108,10 @@ const EditPatient = () => {
       socialNetwork: e.target.value
     })
   };
-  const handleAge = (e) => {
+  const handleEmail = (e) => {
     setPatient({
       ...patient,
-      age: e.target.value
+      email: e.target.value
     })
   };
   const handleGender = (value) => {
@@ -163,6 +156,12 @@ const EditPatient = () => {
       siblings: value
     })
   }
+  const handleAcademicLevel = (e) => {
+    setPatient({
+      ...patient,
+      academicLevel: e.target.value
+    })
+  }
   const handleLivingSiblings = (value) => {
     setPatient({
       ...patient,
@@ -187,10 +186,10 @@ const EditPatient = () => {
       chronicDisease: value
     })
   }
-  const handleHasAllergies = (value) => {
+  const handleAllergies = (value) => {
     setPatient({
       ...patient,
-      hasAllergies: value
+      allergies: value
     })
   }
   const handleBloodType = (e) => {
@@ -212,10 +211,10 @@ const EditPatient = () => {
       name: patient.name,
       lastName: patient.lastName,
       dni: patient.dni, // Number
-      socialService: patient.socialNetwork,
+      socialService: patient.socialService,
       email: patient.email,
       gender: patient.gender,
-      birthday: patient.birthday, // Number
+      birthday: patient.birthday ? Date.parse(patient.birthday) / 1000 : 0, // Number
       maritalStatus: patient.maritalStatus,
       personalPhoneNumber: patient.personalPhoneNumber, // Number
       contactPhone: patient.contactPhone,
@@ -234,7 +233,6 @@ const EditPatient = () => {
       hasChronicDisease: patient.hasChronicDisease, // Boolean pero con 0 o 1
       chronicDisease: patient.chronicDisease,
     }
-
     warningEditAlert(
       `${config.webAPI}/patients/${id}`,
       body,
@@ -304,23 +302,24 @@ const EditPatient = () => {
               labelTitle='Obra Social del paciente'
               isLabelCenter
               placeholder='Ingrese la obra social'
-              nameProp='social-work'
+              nameProp='socialService'
             />
           </div>
         </div>
         <div className="input-editPatient-row">
           <div className="input-editPatient-box">
-            <Input
-              value={patient.age}
-              onChange={handleAge}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              type={'number'}
-              labelTitle='Edad'
-              isLabelCenter
-              placeholder='Ingrese la edad'
-              nameProp='age'
-            />
+              <Input
+                value={patient.email}
+                onChange={handleEmail}
+                type={'email'}
+                colorLabel='var(--black-bg)' 
+                isRequired
+                hasLabel
+                labelTitle='Email'
+                isLabelCenter
+                placeholder='Ingrese el email'
+                nameProp='email'
+              />
           </div>
           <div className="input-editPatient-box">
             <Checkbox
@@ -344,6 +343,7 @@ const EditPatient = () => {
             value={patient.birthday}
             onChange={handleBirthday}
             colorLabel='var(--black-bg)' 
+            type={'date'}
             hasLabel
             labelTitle='Fecha de nacimiento'
             isLabelCenter
@@ -395,22 +395,22 @@ const EditPatient = () => {
         </div>
       </div>
       <div className="input-editPatient-row">
-          <div className="input-editPatient-box">
-            <Checkbox
-              formType='edit'
-              withText={'¿Vive?'}
-              value={patient.father}
-              isChecked={patient.father !== ''}
-              onChange={handleFather}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Padre'
-              isLabelCenter
-              placeholder='Ingrese el nombre del padre'
-              nameProp='father'
-              options={['Sí', 'No']}
-            />
-          </div>
+        <div className="input-editPatient-box">
+          <Checkbox
+            formType='edit'
+            withText={'¿Vive?'}
+            value={patient.father}
+            isChecked={patient.father !== ''}
+            onChange={handleFather}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Padre'
+            isLabelCenter
+            placeholder='Ingrese el nombre del padre'
+            nameProp='father'
+            options={['Sí', 'No']}
+          />
+        </div>
           <div className="input-editPatient-box">
             <Checkbox
               formType='edit'
@@ -427,9 +427,10 @@ const EditPatient = () => {
               options={['Sí', 'No']}
             />
           </div>
+          
       </div>
       <div className="input-editPatient-row">
-          <div className="input-editPatient-box">
+        <div className="input-editPatient-box">
             <Checkbox
               formType='edit'
               withText={'Tiene?'}
@@ -462,105 +463,158 @@ const EditPatient = () => {
             />
           </div>
       </div>
-      <div className="input-editPatient-row">
+      <div className="input-editPatient-row input-editPatient-row-extra">
         <div className="input-editPatient-box">
-          <div className="yesOrNoCheckboxes">
-            <Checkbox
-              formType='edit'
-              onlyCheckboxes
-              hasLabel
-              onChangeOnlyBoxes={handleLivingSiblings}
-              value={patient.livingSiblings}
-              labelTitle='¿Viven todos/as sus hermanos/as?'
-              options={['Sí', 'No']}
-              colorLabel='var(--black-bg)'
-              isLabelCenter
-              nameProp='livingSiblings'
-            />
-          </div>
+            <div className="yesOrNoCheckboxes">
+              <Checkbox
+                formType='edit'
+                onlyCheckboxes
+                hasLabel
+                onChangeOnlyBoxes={handleLivingSiblings}
+                value={patient.livingSiblings}
+                labelTitle='¿Viven todos/as sus hermanos/as?'
+                options={['Sí', 'No']}
+                colorLabel='var(--black-bg)'
+                isLabelCenter
+                nameProp='livingSiblings'
+              />
+            </div>
         </div>
         <div className="input-editPatient-box">
-            <Select
-              options={[
-                {
-                  value: '',
-                  text: 'Seleccione un valor',
-                },
-                {
-                  value: 'Tipo A',
-                  text: 'Tipo A',
-                },
-                {
-                  value: 'Tipo B',
-                  text: 'Tipo B',
-                },
-                {
-                  value: 'Tipo AB',
-                  text: 'Tipo AB',
-                },
-                {
-                  value: 'Tipo O',
-                  text: 'Tipo O',
-                },
-              ]}
-              value={patient.bloodType}
-              onChange={handleBloodType}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Grupo sanguíneo'
-              isLabelCenter
-              nameProp='bloodType'
-            />
-          </div>
+          <Select
+            options={[
+              {
+                value: '',
+                text: 'Seleccione un valor',
+              },
+              {
+                value: 'Primaria incompleta',
+                text: 'Primaria incompleta',
+              },
+              {
+                value: 'Primaria en curso',
+                text: 'Primaria en curso',
+              },
+              {
+                value: 'Primaria completa',
+                text: 'Primaria completa',
+              },
+              {
+                value: 'Secundaria incompleta',
+                text: 'Secundaria incompleta',
+              },
+              {
+                value: 'Secundaria en curso',
+                text: 'Secundaria en curso',
+              },
+              {
+                value: 'Secundaria completa',
+                text: 'Secundaria completa',
+              },
+              {
+                value: 'Universidad incompleta',
+                text: 'Universidad incompleta',
+              },
+              {
+                value: 'Universidad en curso',
+                text: 'Universidad en curso',
+              },
+              {
+                value: 'Universidad completa',
+                text: 'Universidad completa',
+              },
+            ]}
+            value={patient.academicLevel}
+            onChange={handleAcademicLevel}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Nivel académico'
+            isLabelCenter
+            nameProp='academicLevel'
+          />
+        </div>
       </div>
       <div className="input-editPatient-row">
-          <div className="input-editPatient-box">
-            <Checkbox
-              formType='edit'
-              withText
-              onChange={handleHasAllergies}
-              isChecked={patient.hasAllergies === '1'}
-              value={patient.allergies}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='¿Tiene alguna alergia?'
-              placeholder='Nombre la/as alergia/s'
-              isLabelCenter
-              nameProp='hasAllergies'
-            />
-          </div>
-          <div className="input-editPatient-box">
-            <Checkbox
-              formType='edit'
-              withText
-              onChange={handleChronicDisease}
-              isChecked={patient.hasChronicDisease === '1'}
-              value={patient.chronicDisease}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='¿Tiene alguna enfermedad crónica?'
-              placeholder='Nombre la/s enfermedades'
-              isLabelCenter
-              nameProp='chronicDisease'
-            />
-          </div>
+        <div className="input-editPatient-box">
+          <Select
+            options={[
+              {
+                value: '',
+                text: 'Seleccione un valor',
+              },
+              {
+                value: 'Tipo A',
+                text: 'Tipo A',
+              },
+              {
+                value: 'Tipo B',
+                text: 'Tipo B',
+              },
+              {
+                value: 'Tipo AB',
+                text: 'Tipo AB',
+              },
+              {
+                value: 'Tipo O',
+                text: 'Tipo O',
+              },
+            ]}
+            value={patient.bloodType}
+            onChange={handleBloodType}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Grupo sanguíneo'
+            isLabelCenter
+            nameProp='bloodType'
+          />
+        </div>
+        <div className="input-editPatient-box">
+          <Checkbox
+            formType='edit'
+            withText
+            onChange={handleAllergies}
+            isChecked={patient.hasAllergies === '1'}
+            value={patient.allergies}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='¿Tiene alguna alergia?'
+            placeholder='Nombre la/as alergia/s'
+            isLabelCenter
+            nameProp='hasAllergies'
+          />
+        </div>
       </div>
       <div className="input-editPatient-row">
-          <div className="input-editPatient-box">
-            <Checkbox
-              formType='edit'
-              withText
-              onChange={handleMedication}
-              isChecked={patient.takesMedication === '1'}
-              value={patient.medication}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='¿Toma algún medicamento?'
-              placeholder='Nombre los medicamentos'
-              isLabelCenter
-              nameProp='medication'
-            />
-          </div>
+        <div className="input-editPatient-box">
+          <Checkbox
+            formType='edit'
+            withText
+            onChange={handleMedication}
+            isChecked={patient.takesMedication === '1'}
+            value={patient.medication}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='¿Toma algún medicamento?'
+            placeholder='Nombre los medicamentos'
+            isLabelCenter
+            nameProp='medication'
+          />
+        </div>
+        <div className="input-editPatient-box">
+          <Checkbox
+            formType='edit'
+            withText
+            onChange={handleChronicDisease}
+            isChecked={patient.hasChronicDisease === '1'}
+            value={patient.chronicDisease}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='¿Tiene alguna enfermedad crónica?'
+            placeholder='Nombre la/s enfermedades'
+            isLabelCenter
+            nameProp='chronicDisease'
+          />
+        </div>
       </div>
 
       <div className="btn-editPatient-center">

@@ -11,6 +11,18 @@ const Patient = () => {
   const navigate = useNavigate()
   const [patient, setPatient] = useState([]);
 
+        // // EDAD: Convertir formato unixtime a número
+        // function convertUnixtimeToAge(date) {
+        //   const hoy = new Date();
+        //   let edad = hoy.getFullYear() - date.getFullYear();
+        //   const mes = hoy.getMonth() - date.getMonth();
+        //   if (mes < 0 || (mes === 0 && hoy.getDate() < date.getDate())) {
+        //     edad--;
+        //   }
+        //   return edad;
+        // }
+        // convertUnixtimeToAge(new Date(res.birthday * 1000)),
+
   useEffect(() => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())

@@ -70,6 +70,26 @@ const Input = ({
           />
         </div>
       }
+      {/* INPUT EMAIL */}
+      {
+        (type === 'email') &&
+          <div className="input-container">
+          {
+            hasLabel && <label style={labelStyles} className="label-el">{ labelTitle }</label>
+          }
+          <input
+            value={value ? value : ''}
+            className="input-el"
+            onChange={onChange}
+            type={type} 
+            name={nameProp ? nameProp : ''}
+            placeholder={placeholder}
+            style={inputStyles}
+            required={isRequired ? true : false}
+            title='No puede usar símbolos.'
+          />
+        </div>
+      }
       {/* INPUT PASSWORD */}
       {
         (type === 'password') &&

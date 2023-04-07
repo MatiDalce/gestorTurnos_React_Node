@@ -8,9 +8,9 @@ const Select = ({
     labelTitle,
     options, // Espera que cada objeto tenga value y text
     nameProp,
-    onChange
+    onChange,
+    value
 }) => {
-    
     const labelStyles = {
         color: colorLabel ? colorLabel : 'var(--skyblue-bg)',
         display: 'block',
@@ -22,10 +22,10 @@ const Select = ({
             {
                 hasLabel && <label style={labelStyles} className="label-select">{ labelTitle }</label>
             }
-            <select name={nameProp} className="select-el" onChange={onChange}>
+            <select name={nameProp} className="select-el" value={value} onChange={onChange} >
                 {
                     options.map((opt,idx) => {
-                        return <option key={idx} value={opt.value}>{opt.text}</option>
+                        return <option key={idx}  value={opt.value}>{opt.text}</option>
                     })
                 }
             </select>

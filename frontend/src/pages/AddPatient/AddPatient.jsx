@@ -278,6 +278,7 @@ const AddPatient = () => {
               value={patient.email}
               onChange={handleEmail}
               colorLabel='var(--black-bg)' 
+              type={'email'}
               isRequired
               hasLabel
               labelTitle='Email'
