@@ -2,12 +2,12 @@
 .input-row {
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    margin: 2% 0;
+    align-items: baseline;
+    margin: 5% 0;
 }
 
 .addPatient-box {
-    width: 30%;
+    width: 40%;
 }
 
 .btn-addPatient-center {
