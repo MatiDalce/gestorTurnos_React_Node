@@ -29,11 +29,9 @@ const AddShift = () => {
     setSelectedPatient(e.target.value)
   }
   const handleDate = (e) => {
-    console.log(e.target.value);
     setDate(e.target.value)
   }
   const handleTime = (e) => {
-    console.log(e.target.value);
     setHour(e.target.value)
   }
   const handleNotes = (e) => {
@@ -41,15 +39,17 @@ const AddShift = () => {
   }
   const handleAddShift = (e) => {
 
-    // const dateTime = new Date(`${date}T${hour}`); // Creamos un objeto Date con la fecha y la hora
-    // const formattedDateTime = dateTime.toISOString(); // Obtenemos la fecha y hora formateada como string
+    const dateTime = new Date(`${date}T${hour}`); // Creamos un objeto Date con la fecha y la hora
+    const formattedDateTime = dateTime.toISOString(); // Obtenemos la fecha y hora formateada como string
 
     let data = {
-      day: date,
-      hour: hour,
+      day: formattedDateTime,
       patient: Number(selectedPatient),
       note: note
     };
+
+    console.log(data);
+
     fetch(`${config.webAPI}/appointments`, {
       method: 'POST',
       headers: {
