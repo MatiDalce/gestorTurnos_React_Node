@@ -6,9 +6,11 @@ const { appointmentValidationPost } = require("../middlewares/appointmentsValida
 
 router.get("/", appointmentController.get);
 router.get("/search", appointmentController.search)
+router.get("/calendar", appointmentController.calendar)
 router.get('/download', appointmentController.download);
 router.get('/download/:id', appointmentController.downloadOne);
 router.get("/:id", appointmentController.getOne)
+
 
 
 router.post("/", appointmentValidationPost ,appointmentController.post)
