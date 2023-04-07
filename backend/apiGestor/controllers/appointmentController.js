@@ -241,43 +241,51 @@ module.exports = {
       ,
       downloadOne: async (req, res) => {
         try {
-            const appointmentId = req.params.id; // get the appointment ID from request parameter
-            const appointment = await db.Appointment.findOne({
-                where: { id: appointmentId },
-                attributes: { exclude: ['updatedAt', 'createdAt'] },
-                include: [{
-                    model: db.Patient, as: "patient",
-                    attributes: { exclude: ['createdAt', 'updatedAt'] }
-                }]
-            });
-    
-            if (!appointment) {
-                return res.status(404).send('Appointment not found'); // return error if appointment not found
+          const appointmentId = req.params.id;
+          const appointment = await db.Appointment.findOne({
+            where: { id: appointmentId },
+            attributes: { exclude: ['updatedAt', 'createdAt'] },
+            include: [{
+              model: db.Patient,
+              as: "patient",
+              attributes: ['id', 'name', 'lastName']
+            }]
+          });
+      
+          if (!appointment) {
+            console.log(`Appointment with id ${appointmentId} not found`);
+            return res.status(404).send('Appointment not found');
+          }
+      
+          const patientName = appointment.patient.name;
+          const patientLastName = appointment.patient.lastName;
+          const appointmentDate = moment(appointment.date).format('YYYY-MM-DD');
+          const fileName = `${patientName} ${patientLastName} - ${appointmentDate}.txt`.replace(/\//g, '-');
+          const fileContent = `Nombre: ${patientName}\nNota: ${appointment.note}\n\n`;
+      
+          const outputFilePath = path.join(__dirname, fileName);
+          fs.writeFile(outputFilePath, fileContent, (err) => {
+            if (err) {
+              console.error(`Error writing to file ${outputFilePath}:`, err);
+              throw err;
             }
-    
-            const patientFullName = `${appointment.patient.name} ${appointment.patient.lastName}`;
-            const appointmentDate = appointment.date;
-            const fileName = `${patientFullName} - ${appointmentDate}.txt`;
-    
-            const fileContent = `Nombre: ${appointment.patient.name}\nNota: ${appointment.note}\n\n`;
-            fs.writeFile(fileName, fileContent, (err) => {
-                if (err) throw err;
-                console.log('The file has been saved!');
-                res.download(fileName, fileName, () => {
-                    fs.unlink(fileName, (err) => {
-                        if (err) {
-                            console.error(err);
-                            throw err;
-                        }
-                        console.log('The file has been deleted!');
-                    });
-                });
+            console.log(`The file ${fileName} has been saved!`);
+            res.download(outputFilePath, fileName, () => {
+              fs.unlink(outputFilePath, (err) => {
+                if (err) {
+                  console.error(`Error deleting file ${outputFilePath}:`, err);
+                  throw err;
+                }
+                console.log(`The file ${fileName} has been deleted!`);
+              });
             });
+          });
         } catch (err) {
-            console.error(err);
-            res.status(500).send('Internal server error');
+          console.error(err);
+          res.status(500).send('Internal server error');
         }
-    }
+      }
+      
     ,
   
     search: async (req, res) => {
