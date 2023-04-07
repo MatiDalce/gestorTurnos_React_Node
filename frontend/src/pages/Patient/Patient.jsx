@@ -11,23 +11,26 @@ const Patient = () => {
   const navigate = useNavigate()
   const [patient, setPatient] = useState([]);
 
-        // // EDAD: Convertir formato unixtime a número
-        // function convertUnixtimeToAge(date) {
-        //   const hoy = new Date();
-        //   let edad = hoy.getFullYear() - date.getFullYear();
-        //   const mes = hoy.getMonth() - date.getMonth();
-        //   if (mes < 0 || (mes === 0 && hoy.getDate() < date.getDate())) {
-        //     edad--;
-        //   }
-        //   return edad;
-        // }
-        // convertUnixtimeToAge(new Date(res.birthday * 1000)),
+  // EDAD: Convertir formato unixtime a número
+  function convertUnixtimeToAge(date) {
+    const hoy = new Date();
+    let edad = hoy.getFullYear() - date.getFullYear();
+    const mes = hoy.getMonth() - date.getMonth();
+    if (mes < 0 || (mes === 0 && hoy.getDate() < date.getDate())) {
+      edad--;
+    }
+    return edad;
+  }
 
   useEffect(() => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
-      setPatient(res)
+      console.log(res);
+      setPatient({
+        ...res,
+        age: convertUnixtimeToAge(new Date(res.birthday * 1000))
+      })
     });
   }, [id])
 
@@ -49,7 +52,7 @@ const Patient = () => {
 
   return (
     <>
-      <p className='patient-title'>{patient.name}</p>
+      <p className='patient-title'>{patient.name} {patient.lastName}</p>
       
       <div className="input-patient-row">
         <div className="input-box">
@@ -68,18 +71,30 @@ const Patient = () => {
           <p className="data">{patient.dni}</p>
         </div>
         <div className="input-box">
+          <p className="data-title">Email</p>
+          <p className="data">{patient.email}</p>
+        </div>
+      </div>
+
+      <div className="input-patient-row">
+        <div className="input-box">
+          <p className="data-title">Género</p>
+          <p className="data">{patient.gender}</p>
+        </div>
+        <div className="input-box">
           <p className="data-title">Obra Social del Paciente</p>
           <p className="data">{patient.socialService}</p>
         </div>
       </div>
+
       <div className="input-patient-row">
         <div className="input-box">
-          <p className="data-title">Edad</p>
-          <p className="data">{patient.age} años</p>
+          <p className="data-title">Fecha de nacimiento</p>
+          <p className="data">{patient.birthday}</p>
         </div>
         <div className="input-box">
-          <p className="data-title">Género</p>
-          <p className="data">{patient.gender}</p>
+          <p className="data-title">Edad</p>
+          <p className="data">{(patient.age)} años</p>
         </div>
       </div>
       
@@ -89,69 +104,63 @@ const Patient = () => {
           <p className="data">{patient.maritalStatus}</p>
         </div>
         <div className="input-box">
-          <p className="data-title">Fecha de nacimiento</p>
-          <p className="data">{patient.birthday}</p>
+          <p className="data-title">Padre</p>
+          <p className="data">{patient.father}</p>
         </div>
       </div>
       
       <div className="input-patient-row">
         <div className="input-box">
-          <p className="data-title">Miembros de la familia</p>
-          <p className="data">{patient.familyMembers}</p>
+          <p className="data-title">Madre</p>
+          <p className="data">{patient.mother}</p>
         </div>
-        <div className="input-box">
-          <p className="data-title">Padres</p>
-          <p className="data">{patient.parents}</p>
-        </div>
-      </div>
-      
-      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Hijos</p>
           <p className="data">{patient.children}</p>
         </div>
+      </div>
+      
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Hermanos</p>
           <p className="data">{patient.siblings}</p>
         </div>
-      </div>
-      
-      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Teléfono personal</p>
           <p className="data">{patient.personalPhoneNumber}</p>
         </div>
+      </div>
+      
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Teléfono de contacto</p>
           <p className="data">{patient.contactPhone}</p>
         </div>
-      </div>
-      
-      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Nivel académico cursado</p>
           <p className="data">{patient.academicLevel}</p>
         </div>
+      </div>
+      
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Grupo sanguíneo</p>
           <p className="data">{patient.bloodType}</p>
+        </div>
+        <div className="input-box">
+          <p className="data-title">¿Toma algún medicamento?</p>
+          <p className="data">{patient.medication}</p>
         </div>
       </div>
       
       <div className="input-patient-row">
         <div className="input-box">
-          <p className="data-title">¿Toma algún medicamento?</p>
-          <p className="data">{patient.medication}</p>
-        </div>
-        <div className="input-box">
           <p className="data-title">¿Tiene alguna alergia?</p>
-          <p className="data">{patient.hasAllergies}</p>
+          <p className="data">{patient.allergies}</p>
         </div>
-      </div>
-      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">¿Tiene alguna enfermedad crónica?</p>
-          <p className="data">{patient.hasChronicDisease}</p>
+          <p className="data">{patient.chronicDisease}</p>
         </div>
       </div>
 
