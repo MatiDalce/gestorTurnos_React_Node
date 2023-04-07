@@ -316,9 +316,52 @@ module.exports = {
         res.status(500).json({ message: 'Server error' })
         console.log("SEARCH APPOINTMENT : ERROR");
       }
+    },
+
+    calendar: async (req,res) => {
+
+      const appointments =  await db.Appointment.findAll({
+        attributes: { exclude: ['updatedAt', 'createdAt', 'patientId'] },
+        include: [{
+            association: "patient", as: "Patient",
+            attributes: { exclude: ['createdAt',
+             'updatedAt',
+              'birthday', 
+              'maritalStatus', 
+              'email', 
+              'socialService', 
+              "maritalStatus", 
+              "contactPhone",
+              "personalPhoneNumber",
+              "academicLevel",
+              "bloodType",
+              "takesMedication",
+              "medication",
+              "hasAllergies",
+              "allergies",
+              "hasChronicDisease",
+              "chronicDisease",
+              "familyMembers",
+              "parents",
+              "children",
+              "siblings"
+            ] }
+        }]
+    });
+
+      if (appointments) {
+        const appointmentsCalendar = appointments.map(appointment => {
+          return {
+            id: appointment.id,
+            start: appointment.day,
+            note: appointment.note,
+            name: appointment.patient.name + appointment.patient.lastName
+          };
+        });
+        res.json({appointmentsCalendar})
+
+
     }
   
     
-      
-    
-}
+}}
