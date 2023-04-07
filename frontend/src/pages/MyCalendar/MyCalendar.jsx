@@ -19,7 +19,11 @@ const MyCalendar = () => {
   }, [])
 
   const [openModal, setOpenModal] = useState(false)
-  const [modalTitle, setModalTitle] = useState(false)
+  const [modalData, setModalData] = useState({
+    title: 'TITULO',
+    date: '2023/05/12',
+    description: 'The specified value "9" does not conform to the required format.  The format is "HH:mm", "HH:mm:ss" or "HH:mm:ss.SSS" where HH is 00-23, mm is 00-59, ss is 00-59, and SSS is 000-999.',
+  })
 
 
   // Esto convierte al formato que necesita el calendario
@@ -60,14 +64,14 @@ const MyCalendar = () => {
   function handleEventOnClick(eventInfo) {
     // console.log('eventInfo => ', eventInfo); // El evento completo
     // console.log('eventInfo => ', eventInfo.el.fcSeg.eventRange.def.title); // Titulo
-    setModalTitle(eventInfo.el.fcSeg.eventRange.def.title)
+    setModalData({ ...modalData, title: eventInfo.el.fcSeg.eventRange.def.title })
     handleOpenModal()
   }
 
   return (
         <div className="calendar-box">
           {
-            openModal && <Modal setter={handleOpenModal} title={modalTitle} />
+            openModal && <Modal setter={handleOpenModal} isOpen={openModal} onClose={setOpenModal} title={modalData.title} description={modalData.description} date={modalData.date} />
           }
           <FullCalendar 
             events={hardcodeEvents}

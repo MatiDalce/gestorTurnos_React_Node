@@ -8,97 +8,27 @@ import './modal.css'
 // EVENT CLICK - https://fullcalendar.io/docs/eventClick
 // EVENT DATA - https://fullcalendar.io/docs/v3/event-data
 
-const Modal = ({ title, description, setter }) => {
+const Modal = ({ title, description, date, setter, isOpen }) => {
+    const [show, setShow] = useState(true);
 
-    const closeModal = () => {
-        // setter: Función que viene del padre y abre o cierra el modal
-        setter()
+    const openCloseModal = () => {
+        setShow(false)
+        setTimeout(() => {
+            // setter: Función que viene del padre y abre o cierra el modal
+            setter();
+        }, 300);
     }
 
     return (
-        <div className={`modal-center`} >
+        <div className={`modal-center ${!show ? 'modal-fade-out' : 'modal-fade-in'}`} >
             <div className="modal-container">
-                <div className='divCloseModal' onClick={closeModal}>
+                <div className='divCloseModal' onClick={openCloseModal}>
                     <img className='closeModal' src={CrossIcon} alt='Cerrar' />
                 </div>
-                <Title 
-                    title={ title }
-                    isBold
-                    textColor='var(--white-bg)'
-                />
-                <p className='appointment'>{description || ''}</p>
-                {/* {
-                    tableContent.length > 0 ? <Table 
-                        headers={{id: 'ID', completeName: 'Nombre y Apellido', hour: 'Hora'}}
-                        content={[
-                            {
-                                id: 1,
-                                name: 'Diego Perez',
-                                time: '13:30hs'
-                            },
-                            {
-                                id: 2,
-                                name: 'Diego Perez',
-                                time: '13:30hs'
-                            },
-                            {
-                                id: 3,
-                                name: 'Diego Perez',
-                                time: '13:30hs'
-                            },
-                            {
-                                id: 4,
-                                name: 'Diego Perez',
-                                time: '13:30hs'
-                            },
-                            {
-                                id: 5,
-                                name: 'Diego Perez',
-                                time: '13:30hs'
-                            },
-                            {
-                                id: 6,
-                                name: 'Diego Perez',
-                                time: '13:30hs'
-                            },
-                            {
-                                id: 1,
-                                name: 'Diego Perez',
-                                time: '13:30hs'
-                            },
-                            {
-                                id: 2,
-                                name: 'Diego Perez',
-                                time: '13:30hs'
-                            },
-                            {
-                                id: 3,
-                                name: 'Diego Perez',
-                                time: '13:30hs'
-                            },
-                            {
-                                id: 4,
-                                name: 'Diego Perez',
-                                time: '13:30hs'
-                            },
-                            {
-                                id: 5,
-                                name: 'Diego Perez',
-                                time: '13:30hs'
-                            },
-                            {
-                                id: 6,
-                                name: 'Diego Perez',
-                                time: '13:30hs'
-                            },
-                        ]}
-                    />
-                    :
-                    <div style={{display:'flex', justifyContent: 'center', marginTop: '5%'}}>
-                        <p className='noContent-text'>No hay información</p>
-                    </div>
-                } */}
-                
+                <h3 className='appointment-title'>{title || ''}</h3>
+                <p className='appointment-date'>Fecha: {date || ''}</p>
+                <p className='appointment-desc-title'>Descripción</p>
+                <p className='appointment-desc'>{description || ''}</p>
             </div>
         </div>
     )

@@ -1,3 +1,4 @@
+
 .modal-center {
   width: 90vw;
   height: 100vh;
@@ -8,7 +9,19 @@
   top: 5%;
   position: fixed;
   z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
 }
+
+.modal-fade-in {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal-fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
 
 .modal-container {
     height: 70vh;
@@ -63,6 +76,33 @@
   .noContent-text {
     font-size: 2em;
   }
+
+  .appointment-title {
+    font-size: 3em;
+    text-align: center;
+    color: var(--white-bg);
+    margin-bottom: 5%;
+  }
+
+  .appointment-date {
+    font-size: 1.6em;
+    margin-bottom: 5%;
+    color: var(--white-bg);
+    text-align: center;
+  }
+
+  .appointment-desc-title {
+    font-size: 1.6em;
+    color: var(--white-bg);
+    margin-bottom: 5%;
+    text-align: center;
+  }
+  
+  .appointment-desc {
+    color: var(--gray-bg);
+    font-size: 1.3em;
+  }
+  
 
   /* EXTRA SMALL */
 @media screen and (max-width: 576px) {
