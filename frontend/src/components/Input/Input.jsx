@@ -3,17 +3,19 @@ import './input.css'
 import magnifyingGlass from '../../assets/icons/magnifying-glass-solid.svg'
 
 const Input = ({
-  hasLabel,
+  hasLabel, // Tiene label o no
   labelTitle,
-  isLabelCenter,
+  isLabelCenter, // Está centrado o no
   type,
   nameProp,
   placeholder,
-  isSearcheable,
-  colorLabel,
+  isSearcheable, // Tiene lupa o no
+  colorLabel, // Color del label
   value,
-  isDisabled,
-  onChange
+  isRequired, // Es requerido o no
+  isDisabled, // Está habilitado o no
+  onChange,
+  limitNumber // Máximo de número para input number
 }) => {
 
   const labelStyles = {
@@ -45,6 +47,7 @@ const Input = ({
             onChange={onChange}
             placeholder={placeholder}
             style={inputStyles}
+            required={isRequired ? true : false}
           />
         </div>
       }
@@ -63,6 +66,7 @@ const Input = ({
             name={nameProp ? nameProp : ''}
             placeholder={placeholder}
             style={inputStyles}
+            required={isRequired ? true : false}
           />
         </div>
       }
@@ -81,6 +85,7 @@ const Input = ({
             name={nameProp ? nameProp : ''}
             placeholder={placeholder}
             style={inputStyles}
+            required={isRequired ? true : false}
           />
         </div>
       }
@@ -100,7 +105,8 @@ const Input = ({
             placeholder={placeholder}
             style={inputStyles}
             min={0}
-            max={100}
+            max={limitNumber ? limitNumber : null}
+            required={isRequired ? true : false}
           />
         </div>
       }
@@ -119,6 +125,7 @@ const Input = ({
             name={nameProp ? nameProp : ''}
             placeholder={placeholder}
             style={inputStyles}
+            required={isRequired ? true : false}
           />
         </div>
       }
@@ -137,6 +144,7 @@ const Input = ({
             name={nameProp ? nameProp : ''}
             placeholder={placeholder}
             style={inputStyles}
+            required={isRequired ? true : false}
           />
         </div>
       }
