@@ -288,6 +288,7 @@ const AddPatient = () => {
           </div>
           <div className="addPatient-box">
             <Checkbox
+              formType='new'
               hasLabel
               labelTitle='Género'
               options={['Masculino', 'Femenino', 'Otro']}
@@ -316,6 +317,7 @@ const AddPatient = () => {
           </div>
           <div className="addPatient-box">
             <Checkbox
+              formType='new'
               options={['Casado', 'Soltero', 'Divorciado', 'Viudo']}
               onlyCheckboxes
               onChangeOnlyBoxes={handleMaritalStatus}
@@ -358,6 +360,7 @@ const AddPatient = () => {
       <div className="input-row">
           <div className="addPatient-box">
             <Checkbox
+              formType='new'
               withText={'¿Vive?'}
               value={patient.father}
               onChange={handleFather}
@@ -372,6 +375,7 @@ const AddPatient = () => {
           </div>
           <div className="addPatient-box">
           <Checkbox
+            formType='new'
               withText={'¿Vive?'}
               value={patient.mother}
               onChange={handleMother}
@@ -388,6 +392,7 @@ const AddPatient = () => {
       <div className="input-row">
         <div className="addPatient-box">
           <Checkbox
+            formType='new'
             withText={'Tiene?'}
             value={patient.children}
             onChange={handleChildren}
@@ -402,6 +407,7 @@ const AddPatient = () => {
         </div>
         <div className="addPatient-box">
           <Checkbox
+            formType='new'
             withText={'Tiene?'}
             options={['Sí', 'No']}
             value={patient.siblings}
@@ -418,6 +424,7 @@ const AddPatient = () => {
       <div className="input-row">
         <div className="addPatient-box">
           <Checkbox
+            formType='new'
             onlyCheckboxes
             hasLabel
             onChangeOnlyBoxes={handleLivingSiblings}
@@ -516,6 +523,7 @@ const AddPatient = () => {
           </div>
           <div className="addPatient-box">
             <Checkbox
+              formType='new'
               withText
               onChange={handleHasAllergies}
               colorLabel='var(--black-bg)' 
@@ -531,6 +539,7 @@ const AddPatient = () => {
       <div className="input-row">
         <div className="addPatient-box">
           <Checkbox
+            formType='new'
             withText
             onChange={handleMedication}
             value={patient.medication}
@@ -544,6 +553,7 @@ const AddPatient = () => {
         </div>
         <div className="addPatient-box">
             <Checkbox
+              formType='new'
               withText
               onChange={handleChronicDisease}
               value={patient.chronicDisease}

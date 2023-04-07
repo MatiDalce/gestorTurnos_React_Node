@@ -62,6 +62,7 @@ const EditPatient = () => {
         return formattedDate;
       }
       console.log(res);
+
       // SETEO ESTADO
       setPatient({
         name: res.name,
@@ -323,6 +324,7 @@ const EditPatient = () => {
           </div>
           <div className="input-editPatient-box">
             <Checkbox
+              formType='edit'
               hasLabel
               labelTitle='Género'
               options={['Masculino', 'Femenino', 'Otro']}
@@ -351,6 +353,7 @@ const EditPatient = () => {
         </div>
         <div className="input-editPatient-box">
           <Checkbox
+            formType='edit'
             options={['Casado', 'Soltero', 'Divorciado', 'Viudo']}
             onlyCheckboxes
             value={patient.maritalStatus}
@@ -394,6 +397,7 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
           <div className="input-editPatient-box">
             <Checkbox
+              formType='edit'
               withText={'¿Vive?'}
               value={patient.father}
               isChecked={patient.father !== ''}
@@ -409,6 +413,7 @@ const EditPatient = () => {
           </div>
           <div className="input-editPatient-box">
             <Checkbox
+              formType='edit'
               withText={'¿Vive?'}
               value={patient.mother}
               isChecked={patient.mother !== ''}
@@ -426,6 +431,7 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
           <div className="input-editPatient-box">
             <Checkbox
+              formType='edit'
               withText={'Tiene?'}
               value={patient.children}
               isChecked={patient.children !== ''}
@@ -441,6 +447,7 @@ const EditPatient = () => {
           </div>
           <div className="input-editPatient-box">
             <Checkbox
+              formType='edit'
               withText={'Tiene?'}
               options={['Sí', 'No']}
               isChecked={patient.siblings !== ''}
@@ -459,6 +466,7 @@ const EditPatient = () => {
         <div className="input-editPatient-box">
           <div className="yesOrNoCheckboxes">
             <Checkbox
+              formType='edit'
               onlyCheckboxes
               hasLabel
               onChangeOnlyBoxes={handleLivingSiblings}
@@ -508,6 +516,7 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
           <div className="input-editPatient-box">
             <Checkbox
+              formType='edit'
               withText
               onChange={handleHasAllergies}
               isChecked={patient.hasAllergies === '1'}
@@ -522,6 +531,7 @@ const EditPatient = () => {
           </div>
           <div className="input-editPatient-box">
             <Checkbox
+              formType='edit'
               withText
               onChange={handleChronicDisease}
               isChecked={patient.hasChronicDisease === '1'}
@@ -538,6 +548,7 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
           <div className="input-editPatient-box">
             <Checkbox
+              formType='edit'
               withText
               onChange={handleMedication}
               isChecked={patient.takesMedication === '1'}

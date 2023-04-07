@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import './checkbox.css';
 
 const Checkbox = ({
+    formType, // IMPORTANTE: Si es formulario de creación o edición
     onlyCheckboxes, // IMPORTANTE: Solo checkboxes (sino no aparece nada)
     withText, // IMPORTANTE: Checkbox y text (sino no aparece nada)
     nameProp, // IMPORTANTE: Es el name y es necesaria para diferenciar los inputs checkbox
@@ -21,9 +22,13 @@ const Checkbox = ({
     const [checkValue, setCheckValue] = useState();
 
     useEffect(() => {
-        console.log(value === '' || value === undefined || value === null)
-        if(value === undefined || value === null) setActiveOptions(true);
-        if(value !== '' || value !== undefined || value!== null) setCheckValue(value);
+        if(formType === 'new') {
+            if(value === undefined || value === null) setActiveOptions(true);
+            if(value !== undefined || value!== null) setCheckValue(value);
+        } else {
+            if(value === '' || value === undefined || value === null) setActiveOptions(true);
+            if(value !== '' || value !== undefined || value!== null) setCheckValue(value);
+        }
     }, [value])
 
     const handleText = (e) => {
