@@ -8,6 +8,7 @@ import Checkbox from '../../components/Checkbox/Checkbox';
 import './editPatient.css';
 import { config } from '../../env/config';
 import { warningEditAlert } from '../../assets/helpers/customAlert';
+import { convertUnixtimeToDate } from '../../assets/helpers/unixToDate';
 
 const EditPatient = () => {
   const navigate = useNavigate()
@@ -43,18 +44,6 @@ const EditPatient = () => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
-      // FECHA DE NACIMIENTO: Convertir formato unixtime a fecha
-      function convertUnixtimeToDate(date) {
-        const dateObj = new Date(date * 1000);
-        const options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: '2-digit', day: '2-digit' };
-        // const options = { timeZone: 'America/Argentina/Buenos_Aires', day: '2-digit', month: '2-digit', year: 'numeric' };
-        dateObj.setDate(dateObj.getDate() + 1);
-        const formattedDate = dateObj.toLocaleDateString('es-AR', options).replace(/\//g, "-");;
-        const [day, month, year] = formattedDate.split('-');
-        return `${year}-${month}-${day}`;
-      }
-      console.log(res);
-
       // SETEO ESTADO
       setPatient({
         name: res.name,

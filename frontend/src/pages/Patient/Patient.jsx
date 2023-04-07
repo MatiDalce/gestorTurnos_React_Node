@@ -3,6 +3,7 @@ import './patient.css';
 import Button from '../../components/Button/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import { warningDeleteAlert } from '../../assets/helpers/customAlert';
+import { convertUnixtimeToAge } from '../../assets/helpers/unixToAge';
 import { config } from '../../env/config';
 import { toast } from '../../assets/helpers/toast';
 
@@ -10,17 +11,6 @@ const Patient = () => {
   let {id} = useParams();
   const navigate = useNavigate()
   const [patient, setPatient] = useState([]);
-
-  // EDAD: Convertir formato unixtime a número
-  function convertUnixtimeToAge(date) {
-    const hoy = new Date();
-    let edad = hoy.getFullYear() - date.getFullYear();
-    const mes = hoy.getMonth() - date.getMonth();
-    if (mes < 0 || (mes === 0 && hoy.getDate() < date.getDate())) {
-      edad--;
-    }
-    return edad;
-  }
 
   useEffect(() => {
     fetch(`${config.webAPI}/patients/${id}`)
