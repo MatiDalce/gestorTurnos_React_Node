@@ -52,6 +52,7 @@ const ShiftList = () => {
   }
 
   const handleShiftSearch = () => {
+    console.log(`${config.webAPI}/appointments/search?q=${filterShift.name}`);
     fetch(`${config.webAPI}/appointments/search?q=${filterShift.name}`)
     .then(res => res.json())
     .then(res => {

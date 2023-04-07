@@ -6,6 +6,7 @@ import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import './editShift.css';
 import { warningEditAlert } from '../../assets/helpers/customAlert';
+import { convertUnixtimeToDate } from '../../assets/helpers/unixtimeToSomething';
 
 const EditShift = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const EditShift = () => {
     .then(res => res.json())
     .then(res => {
       console.log(res);
-      setDate(res.day);
+      setDate(convertUnixtimeToDate(res.day));
       setHour(res.hour);
       setNotes(res.note);
       setPatientID(res.patient.id)

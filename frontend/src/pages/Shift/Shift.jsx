@@ -23,6 +23,7 @@ const Shift = () => {
     .then(res => {
       setShift({
         name: res.patient.name,
+        lastName: res.patient.lastName,
         note: res.note,
         date: res.day,
         hour: res.hour
@@ -74,7 +75,7 @@ const Shift = () => {
 
   return (
     <>
-    <p className='shift-title' >{shift.name}</p>
+    <p className='shift-title' >{shift.name} {shift.lastName}</p>
 
     <div className="data-shift-box-container">
       <div className="data-shift-box">
