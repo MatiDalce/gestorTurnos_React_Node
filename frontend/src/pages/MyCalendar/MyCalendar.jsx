@@ -10,71 +10,71 @@ import { config } from '../../env/config';
 
 const MyCalendar = () => {
 
-  const [eventsList, setEventsList] = useState([])
-
-  useEffect(() => {
-    // fetch(`${config.webAPI}/`)
-    // .then(res => res.json())
-    // .then(res => setEventsList(res))
-  }, [])
-
   const [openModal, setOpenModal] = useState(false)
+  const [eventsList, setEventsList] = useState([])
   const [modalData, setModalData] = useState({
-    title: 'TITULO',
-    date: '2023/05/12',
-    description: 'The specified value "9" does not conform to the required format.  The format is "HH:mm", "HH:mm:ss" or "HH:mm:ss.SSS" where HH is 00-23, mm is 00-59, ss is 00-59, and SSS is 000-999.',
+    id: 0,
+    title: '',
+    date: '',
+    description: '',
   })
 
+  useEffect(() => {
+    fetch(`${config.webAPI}/appointments/calendar`)
+    .then(res => res.json())
+    .then(res => {
+      // Esto modifica el array para que se coloquen los títulos en el calendario
+      const appointmentsCalendarWithTitles = res.appointmentsCalendar.map((obj) => {
+        return {
+          ...obj,
+          title: obj.name
+        }
+      })
+      setEventsList(appointmentsCalendarWithTitles)
+    })
+  }, [])
 
   // Esto convierte al formato que necesita el calendario
   // new Date(la fecha).toISOString()
-
-  const hardcodeEvents = [
-    { 
-      id: 1,
-      title: 'Evento 1',
-      start: '2023-04-01T00:00:00.000Z',
-    },
-    { 
-      id: 2,
-      title: 'Evento 2',
-      start: '2023-04-02T14:00:00',
-    },
-    { 
-      id: 3,
-      title: 'Evento 3',
-      start: '2023-04-03T14:00:00',
-    },
-    { 
-      id: 4,
-      title: 'Evento 4',
-      start: '2023-04-04T17:00:00',
-    },
-  ];
 
   const handleOpenModal = () => {
     setOpenModal(!openModal)
   }
 
   const handleDateClick = (e) => {
-    console.log(e.date); // Fecha formato largo
-    console.log(e.dateStr); // Fecha formato string yyyy-mm-dd
+  //   console.log(e.date); // Fecha formato largo
+  //   console.log(e.dateStr); // Fecha formato string yyyy-mm-dd
   }
 
   function handleEventOnClick(eventInfo) {
-    // console.log('eventInfo => ', eventInfo); // El evento completo
-    // console.log('eventInfo => ', eventInfo.el.fcSeg.eventRange.def.title); // Titulo
-    setModalData({ ...modalData, title: eventInfo.el.fcSeg.eventRange.def.title })
+    const date = new Date(eventInfo.el.fcSeg.eventRange.range.start);
+    const day = date.getDate() + 1;
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    setModalData({
+      id: eventInfo.el.fcSeg.eventRange.def.id,
+      title: eventInfo.event._def.extendedProps.name,
+      date: `${day < 10 ? '0' + day : day}-${month < 10 ? '0' + month : month}-${year}`,
+      description: eventInfo.event._def.extendedProps.note,
+    })
     handleOpenModal()
   }
 
   return (
         <div className="calendar-box">
           {
-            openModal && <Modal setter={handleOpenModal} isOpen={openModal} onClose={setOpenModal} title={modalData.title} description={modalData.description} date={modalData.date} />
+            openModal && <Modal 
+              setter={handleOpenModal} 
+              isOpen={openModal} 
+              onClose={setOpenModal} 
+              title={modalData.title} 
+              description={modalData.description} 
+              date={modalData.date} 
+            />
           }
           <FullCalendar 
-            events={hardcodeEvents}
+            events={eventsList}
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             initialView={"dayGridMonth"}
             headerToolbar={{
