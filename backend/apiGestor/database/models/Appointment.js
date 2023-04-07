@@ -8,11 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     day: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    hour: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false
     },
     note: {
