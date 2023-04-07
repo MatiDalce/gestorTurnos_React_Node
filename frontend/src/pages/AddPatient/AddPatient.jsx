@@ -18,7 +18,7 @@ const AddPatient = () => {
     name: '',
     lastName: '',
     dni: '',
-    socialNetwork: '',
+    socialService: '',
     email: '',
     gender: '',
     maritalStatus: '',
@@ -34,6 +34,7 @@ const AddPatient = () => {
     hasChronicDisease: '0',
     chronicDisease: '',
     hasAllergies: '0',
+    allergies: '',
     bloodType: '',
     takesMedication: '0',
     medication: '',
@@ -57,10 +58,10 @@ const AddPatient = () => {
       dni: e.target.value
     })
   };
-  const handleSocialNetwork = (e) => {
+  const handleSocialService = (e) => {
     setPatient({
       ...patient,
-      socialNetwork: e.target.value
+      socialService: e.target.value
     })
   };
   const handleEmail = (e) => {
@@ -169,10 +170,10 @@ const AddPatient = () => {
       name: patient.name,
       lastName: patient.lastName,
       dni: patient.dni, // Number
-      socialService: patient.socialNetwork,
+      socialService: patient.socialService,
       email: patient.email,
       gender: patient.gender,
-      birthday: patient.birthday, // Number
+      birthday: patient.birthday ? Date.parse(patient.birthday) / 1000 : 0, // Number
       maritalStatus: patient.maritalStatus,
       personalPhoneNumber: patient.personalPhoneNumber, // Number
       contactPhone: patient.contactPhone,
@@ -260,8 +261,8 @@ const AddPatient = () => {
           </div>
           <div className="addPatient-box">
             <Input
-              value={patient.socialNetwork}
-              onChange={handleSocialNetwork}
+              value={patient.socialService}
+              onChange={handleSocialService}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Obra Social del paciente'

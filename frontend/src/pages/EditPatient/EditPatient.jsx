@@ -19,7 +19,7 @@ const EditPatient = () => {
     dni: '',
     socialNetwork: '',
     age: '',
-    genre: '',
+    gender: '',
     maritalStatus: '',
     birthday: '',
     father: '',
@@ -27,7 +27,7 @@ const EditPatient = () => {
     children: '',
     siblings: '',
     livingSiblings: '',
-    personalPhone: '',
+    personalPhoneNumber: '',
     contactPhone: '',
     chronicDisease: '',
     hasAllergies: '',
@@ -39,21 +39,42 @@ const EditPatient = () => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
+      console.log(res);
+
+      // EDAD: Convertir formato unixtime a número
+        function convertUnixtimeToAge(date) {
+          const hoy = new Date();
+          let edad = hoy.getFullYear() - date.getFullYear();
+          const mes = hoy.getMonth() - date.getMonth();
+          if (mes < 0 || (mes === 0 && hoy.getDate() < date.getDate())) {
+            edad--;
+          }
+          return edad;
+        }
+      // FECHA DE NACIMIENTO: Convertir formato unixtime a fecha
+        function convertUnixtimeToDate(date) {
+          const dateObj = new Date(date * 1000);
+          const formattedDate = dateObj.toLocaleDateString('es-ES', {
+            day: '2-digit', month: '2-digit', year: 'numeric'
+          });
+          return formattedDate
+        }
+
       setPatient({
         name: res.name,
         lastName: res.lastName,
         dni: res.dni,
-        socialNetwork: res.socialNetwork, // No viene desde BE
-        age: res.age, // No viene desde BE
-        genre: res.genre, // No viene desde BE
+        socialNetwork: res.socialService, // No viene desde BE
+        age: convertUnixtimeToAge(new Date(res.birthday * 1000)), // No viene desde BE
+        gender: res.gender, // No viene desde BE
         maritalStatus: res.maritalStatus,
-        birthday: res.birthday,
+        birthday: convertUnixtimeToDate(res.birthday),
         father: res.father, // No viene desde BE
         mother: res.mother, // No viene desde BE
         children: res.children, 
         siblings: res.siblings,
         livingSiblings: res.livingSiblings, // No viene desde BE
-        personalPhone: res.personalPhone,
+        personalPhoneNumber: res.personalPhoneNumber,
         contactPhone: res.contactPhone,
         chronicDisease: res.hasChronicDisease,
         hasAllergies: res.hasAllergies,
@@ -96,7 +117,7 @@ const EditPatient = () => {
   const handleGenre = (value) => {
     setPatient({
       ...patient,
-      genre: value
+      gender: value
     })
   };
   const handleMaritalStatus = (value) => {
@@ -144,7 +165,7 @@ const EditPatient = () => {
   const handlePersonalPhone = (e) => {
     setPatient({
       ...patient,
-      personalPhone: e.target.value
+      personalPhoneNumber: e.target.value
     })
   }
   const handleContactPhone = (e) => {
@@ -180,29 +201,30 @@ const EditPatient = () => {
   const handleEditPatient = (e) => {
     e.preventDefault()
     let body = {
-      name: 'EL ELEGIDO',
-      lastName: 'el apellido',
-      maritalStatus: 'casado',
-      birthday: 1234567891,
-      dni: 1234567892,
-      familyMembers: 'personas de familia',
-      parents: 'mis papis',
-      gender: 'masculine',
-      father: 'padre',
-      mother: 'madre',
-      children: 'mis hijos',
-      siblings: 'mis hermanos',
-      personalPhoneNumber: 1234567815,
-      contactPhone: '16346346',
-      academicLevel: 'Secundario completo',
-      bloodType: 'Grupo A',
-      takesMedication: '0',
-      medication: 'Ibuprofeno',
-      hasAllergies: '0',
-      allergies: 'Polen',
-      hasChronicDisease: '0',
-      chronicDisease: 'Muerte',
-      email: 'email@email.com'
+      name: patient.name,
+      lastName: patient.lastName,
+      dni: patient.dni, // Number
+      socialService: patient.socialNetwork,
+      email: patient.email,
+      gender: patient.gender,
+      birthday: patient.birthday, // Number
+      maritalStatus: patient.maritalStatus,
+      personalPhoneNumber: patient.personalPhoneNumber, // Number
+      contactPhone: patient.contactPhone,
+      familyMembers: '', // ! ESTE VA?
+      parents: '', // ! ESTE VA?
+      father: patient.father,
+      mother: patient.mother,
+      children: patient.children,
+      siblings: patient.siblings,
+      academicLevel: patient.academicLevel,
+      bloodType: patient.bloodType,
+      hasAllergies: patient.hasAllergies, // Boolean pero con 0 o 1
+      allergies: patient.allergies,
+      takesMedication: patient.takesMedication, // Boolean pero con 0 o 1
+      medication: patient.medication,
+      hasChronicDisease: patient.hasChronicDisease, // Boolean pero con 0 o 1
+      chronicDisease: patient.chronicDisease,
     }
 
     warningEditAlert(
@@ -256,6 +278,7 @@ const EditPatient = () => {
             <Input
               value={patient.dni}
               onChange={handleDNI}
+              type='number'
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='DNI del paciente'
@@ -302,6 +325,7 @@ const EditPatient = () => {
               isLabelCenter
               nameProp='genre'
               onChange={handleGenre}
+              checkValue={patient.gender}
             />
           </div>
       </div>
@@ -336,14 +360,15 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Input
-            value={patient.personalPhone}
+            value={patient.personalPhoneNumber}
             onChange={handlePersonalPhone}
             colorLabel='var(--black-bg)' 
+            type='number'
             hasLabel
             labelTitle='Teléfono personal'
             isLabelCenter
             placeholder='Ingrese el teléfono personal'
-            nameProp='personalPhone'
+            nameProp='personalPhoneNumber'
           />
         </div>
         <div className="input-editPatient-box">
