@@ -1,3 +1,11 @@
+// UNE FECHA Y HORA Y LOS CONVIERTE A ISOString
+export function joinDateTime(date, hour) {
+    console.log('ANTES => ', hour);
+    const dateTime = new Date(`${date}T${hour}:03-00:00`);
+    console.log('DESPUES => ', hour);
+    console.log(dateTime.toISOString().slice(0, -1));
+    return dateTime.toISOString().slice(0, -8);
+}
 
 // EDAD: Convertir formato unixtime a número
 export function convertUnixtimeToAge(date) {
@@ -19,4 +27,20 @@ export function convertUnixtimeToDate(date) {
     const formattedDate = dateObj.toLocaleDateString('es-AR', options).replace(/\//g, "-");;
     const [day, month, year] = formattedDate.split('-');
     return `${year}-${month}-${day}`;
+}
+
+// FORMATO ISO A FECHA Y HORA
+export function convertISOStringtoDateTime(dateTime, get) {
+    const dateString = dateTime;
+    const dateObj = new Date(dateString);
+    if(get === 'date') { // FECHA
+        const year = dateObj.getFullYear();
+        const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+        const day = String(dateObj.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    } else { // HORA
+        const hours = String(dateObj.getHours()).padStart(2, "0");
+        const minutes = String(dateObj.getMinutes()).padStart(2, "0");
+        return `${hours}:${minutes}`;
+    }
 }

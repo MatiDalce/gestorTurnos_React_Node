@@ -4,8 +4,9 @@ import { toast } from '../../assets/helpers/toast'
 import { config } from '../../env/config';
 import Accordion from '../../components/Accordion/Accordion';
 import Button from '../../components/Button/Button';
-import './shift.css'
 import { warningDeleteAlert } from '../../assets/helpers/customAlert';
+import { convertISOStringtoDateTime } from '../../assets/helpers/unixtimeToSomething';
+import './shift.css'
 
 const Shift = () => {
   const navigate = useNavigate()
@@ -25,8 +26,8 @@ const Shift = () => {
         name: res.patient.name,
         lastName: res.patient.lastName,
         note: res.note,
-        date: res.day,
-        hour: res.hour
+        date: convertISOStringtoDateTime(res.day, 'date'),
+        hour: convertISOStringtoDateTime(res.day, 'hour')
       })
     });
   }, [id])

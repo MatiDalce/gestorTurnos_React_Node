@@ -6,7 +6,7 @@ import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import './editShift.css';
 import { warningEditAlert } from '../../assets/helpers/customAlert';
-import { convertUnixtimeToDate } from '../../assets/helpers/unixtimeToSomething';
+import { convertISOStringtoDateTime, joinDateTime } from '../../assets/helpers/unixtimeToSomething';
 
 const EditShift = () => {
   const navigate = useNavigate();
@@ -20,9 +20,8 @@ const EditShift = () => {
     fetch(`${config.webAPI}/appointments/${id}`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
-      setDate(convertUnixtimeToDate(res.day));
-      setHour(res.hour);
+      setDate(convertISOStringtoDateTime(res.day, 'date'));
+      setHour(convertISOStringtoDateTime(res.day, 'hour'));
       setNotes(res.note);
       setPatientID(res.patient.id)
     })
@@ -43,10 +42,13 @@ const EditShift = () => {
     setNotes(inputValue)
   };
 
+
   const handleChangeShift = () => {
+
+    const dateTime = joinDateTime(date, hour);
+
     let body = {
-      day: date,
-      hour: hour,
+      day: dateTime,
       note: notes,
       patient: patientID
     }
