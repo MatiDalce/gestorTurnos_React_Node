@@ -8,7 +8,7 @@ import Checkbox from '../../components/Checkbox/Checkbox';
 import './editPatient.css';
 import { config } from '../../env/config';
 import { warningEditAlert } from '../../assets/helpers/customAlert';
-import { convertUnixtimeToDate } from '../../assets/helpers/unixToDate';
+import { convertUnixtimeToDate } from '../../assets/helpers/unixtimeToSomething';
 
 const EditPatient = () => {
   const navigate = useNavigate()

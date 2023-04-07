@@ -56,7 +56,6 @@ const Shift = () => {
     })
     .then(blob => {
       if(blob) {
-        console.log(blob);
         // Create a URL for the Blob object
         const url = URL.createObjectURL(blob);
         // Create a link element and click it to download the file

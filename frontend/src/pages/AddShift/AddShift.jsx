@@ -29,15 +29,20 @@ const AddShift = () => {
     setSelectedPatient(e.target.value)
   }
   const handleDate = (e) => {
+    console.log(e.target.value);
     setDate(e.target.value)
   }
   const handleTime = (e) => {
+    console.log(e.target.value);
     setHour(e.target.value)
   }
   const handleNotes = (e) => {
     setNote(e.target.value)
   }
   const handleAddShift = (e) => {
+
+    // const dateTime = new Date(`${date}T${hour}`); // Creamos un objeto Date con la fecha y la hora
+    // const formattedDateTime = dateTime.toISOString(); // Obtenemos la fecha y hora formateada como string
 
     let data = {
       day: date,

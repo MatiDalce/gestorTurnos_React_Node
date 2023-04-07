@@ -3,7 +3,7 @@ import './patient.css';
 import Button from '../../components/Button/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import { warningDeleteAlert } from '../../assets/helpers/customAlert';
-import { convertUnixtimeToAge } from '../../assets/helpers/unixToAge';
+import { convertUnixtimeToAge } from '../../assets/helpers/unixtimeToSomething';
 import { config } from '../../env/config';
 import { toast } from '../../assets/helpers/toast';
 
@@ -51,7 +51,7 @@ const Patient = () => {
         </div>
         <div className="input-box">
           <p className="data-title">Apellido del Paciente</p>
-          <p className="data">{patient.lastname}</p>
+          <p className="data">{patient.lastName}</p>
         </div>
       </div>
       
