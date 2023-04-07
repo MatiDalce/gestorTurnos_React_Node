@@ -57,12 +57,13 @@ const Shift = () => {
     })
     .then(blob => {
       if(blob) {
+        console.log(blob);
         // Create a URL for the Blob object
         const url = URL.createObjectURL(blob);
         // Create a link element and click it to download the file
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'filename.txt';
+        link.download = `${shift.name}${shift.date}.txt`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);

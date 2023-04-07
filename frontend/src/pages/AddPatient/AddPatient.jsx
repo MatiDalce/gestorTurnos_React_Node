@@ -13,18 +13,12 @@ import './addPatient.css';
 const AddPatient = () => {
   const navigate = useNavigate()
 
-    // familyMembers,
-    // parents,
-    // academicLevel, agregar
-    // takesMedication,
-    // allergies,
-    // hasChronicDisease,
-
+  
   const [patient, setPatient] = useState({
     name: '',
     lastName: '',
     dni: '',
-    socialNetwork: '',
+    socialService: '',
     email: '',
     gender: '',
     maritalStatus: '',
@@ -36,9 +30,13 @@ const AddPatient = () => {
     livingSiblings: '',
     personalPhoneNumber: '',
     contactPhone: '',
+    academicLevel: '',
+    hasChronicDisease: '0',
     chronicDisease: '',
-    hasAllergies: '',
+    hasAllergies: '0',
+    allergies: '',
     bloodType: '',
+    takesMedication: '0',
     medication: '',
   })
 
@@ -60,10 +58,10 @@ const AddPatient = () => {
       dni: e.target.value
     })
   };
-  const handleSocialNetwork = (e) => {
+  const handleSocialService = (e) => {
     setPatient({
       ...patient,
-      socialNetwork: e.target.value
+      socialService: e.target.value
     })
   };
   const handleEmail = (e) => {
@@ -90,28 +88,28 @@ const AddPatient = () => {
       birthday: e.target.value
     })
   }
-  const handleFather = (e) => {
+  const handleFather = (value) => {
     setPatient({
       ...patient,
-      father: e.target.value
+      father: value
     })
   }
-  const handleMother = (e) => {
+  const handleMother = (value) => {
     setPatient({
       ...patient,
-      mother: e.target.value
+      mother: value
     })
   }
-  const handleChildren = (e) => {
+  const handleChildren = (value) => {
     setPatient({
       ...patient,
-      children: e.target.value
+      children: value
     })
   }
-  const handleSiblings = (e) => {
+  const handleSiblings = (value) => {
     setPatient({
       ...patient,
-      siblings: e.target.value
+      siblings: value
     })
   }
   const handleLivingSiblings = (value) => {
@@ -126,22 +124,30 @@ const AddPatient = () => {
       personalPhoneNumber: e.target.value
     })
   }
+  const handleAcademicLevel = (e) => {
+    setPatient({
+      ...patient,
+      academicLevel: e.target.value
+    })
+  }
   const handleContactPhone = (e) => {
     setPatient({
       ...patient,
       contactPhone: e.target.value
     })
   }
-  const handleChronicDisease = (e) => {
+  const handleChronicDisease = (value) => {
     setPatient({
       ...patient,
-      chronicDisease: e.target.value
+      hasChronicDisease: value !== '' ? true : false, 
+      chronicDisease: value
     })
   }
-  const handleHasAllergies = (e) => {
+  const handleHasAllergies = (value) => {
     setPatient({
       ...patient,
-      hasAllergies: e.target.value
+      hasAllergies: value !== '' ? true : false, 
+      allergies: value
     })
   }
   const handleBloodType = (e) => {
@@ -150,39 +156,41 @@ const AddPatient = () => {
       bloodType: e.target.value
     })
   }
-  const handleMedication = (e) => {
+  const handleMedication = (value) => {
     setPatient({
       ...patient,
-      medication: e.target.value
+      takesMedication: value !== '' ? true : false, 
+      medication: value
     })
   }
 
   const handleAddPatient = (e) => {
     e.preventDefault()
     let data = {
-      name: 'EL ELEGIDISIMO',
-      lastName: 'ELEGIDISIMO MAL',
-      maritalStatus: 'casado',
-      birthday: 1234567891,
-      dni: 1234567892,
-      familyMembers: 'personas de familia',
-      parents: 'mis papis',
-      gender: 'masculine',
-      father: 'padre',
-      mother: 'madre',
-      children: 'mis hijos',
-      siblings: 'mis hermanos',
-      personalPhoneNumber: 1234567815,
-      contactPhone: '16346346',
-      academicLevel: 'Secundario completo',
-      bloodType: 'Grupo A',
-      takesMedication: '0',
-      medication: 'Ibuprofeno',
-      hasAllergies: '0',
-      allergies: 'Polen',
-      hasChronicDisease: '0',
-      chronicDisease: 'Muerte',
-      email: 'email@email.com'
+      name: patient.name,
+      lastName: patient.lastName,
+      dni: patient.dni, // Number
+      socialService: patient.socialService,
+      email: patient.email,
+      gender: patient.gender,
+      birthday: patient.birthday ? Date.parse(patient.birthday) / 1000 : 0, // Number
+      maritalStatus: patient.maritalStatus,
+      personalPhoneNumber: patient.personalPhoneNumber, // Number
+      contactPhone: patient.contactPhone,
+      familyMembers: '', // ! ESTE VA?
+      parents: '', // ! ESTE VA?
+      father: patient.father,
+      mother: patient.mother,
+      children: patient.children,
+      siblings: patient.siblings,
+      academicLevel: patient.academicLevel,
+      bloodType: patient.bloodType,
+      hasAllergies: patient.hasAllergies, // Boolean pero con 0 o 1
+      allergies: patient.allergies,
+      takesMedication: patient.takesMedication, // Boolean pero con 0 o 1
+      medication: patient.medication,
+      hasChronicDisease: patient.hasChronicDisease, // Boolean pero con 0 o 1
+      chronicDisease: patient.chronicDisease,
     }
 
     fetch(`${config.webAPI}/patients`, {
@@ -216,6 +224,7 @@ const AddPatient = () => {
               hasLabel
               labelTitle='Nombre del paciente'
               isLabelCenter
+              isRequired
               placeholder='Ingrese el nombre'
               nameProp='name'
             />
@@ -227,6 +236,7 @@ const AddPatient = () => {
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Apellido del paciente'
+              isRequired
               isLabelCenter
               placeholder='Ingrese el apellido'
               nameProp='lastname'
@@ -238,6 +248,9 @@ const AddPatient = () => {
             <Input
               value={patient.dni}
               onChange={handleDNI}
+              isRequired
+              type='number'
+              limitNumber={99999999999}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='DNI del paciente'
@@ -248,8 +261,8 @@ const AddPatient = () => {
           </div>
           <div className="addPatient-box">
             <Input
-              value={patient.socialNetwork}
-              onChange={handleSocialNetwork}
+              value={patient.socialService}
+              onChange={handleSocialService}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Obra Social del paciente'
@@ -265,6 +278,7 @@ const AddPatient = () => {
               value={patient.email}
               onChange={handleEmail}
               colorLabel='var(--black-bg)' 
+              isRequired
               hasLabel
               labelTitle='Email'
               isLabelCenter
@@ -277,6 +291,7 @@ const AddPatient = () => {
               hasLabel
               labelTitle='Género'
               options={['Masculino', 'Femenino', 'Otro']}
+              isRequired
               oneChoice
               onlyCheckboxes
               colorLabel='var(--black-bg)'
@@ -291,7 +306,8 @@ const AddPatient = () => {
             <Input
               value={patient.birthday}
               onChange={handleBirthday}
-              colorLabel='var(--black-bg)' 
+              type='date'
+              colorLabel='var(--black-bg)'
               hasLabel
               labelTitle='Fecha de nacimiento'
               isLabelCenter
@@ -318,6 +334,8 @@ const AddPatient = () => {
             <Input
               value={patient.personalPhoneNumber}
               onChange={handlePersonalPhoneNumber}
+              type='number'
+              limitNumber={9999999999}
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Teléfono personal'
@@ -417,39 +435,90 @@ const AddPatient = () => {
         </div>
         <div className="addPatient-box">
           <Select
-            isSingle
             options={[
               {
                 value: '',
                 text: 'Seleccione un valor',
               },
               {
-                value: 'Tipo A',
-                text: 'Tipo A',
+                value: 'Primaria incompleta',
+                text: 'Primaria incompleta',
               },
               {
-                value: 'Tipo B',
-                text: 'Tipo B',
+                value: 'Primaria en curso',
+                text: 'Primaria en curso',
               },
               {
-                value: 'Tipo AB',
-                text: 'Tipo AB',
+                value: 'Primaria completa',
+                text: 'Primaria completa',
               },
               {
-                value: 'Tipo O',
-                text: 'Tipo O',
+                value: 'Secundaria incompleta',
+                text: 'Secundaria incompleta',
+              },
+              {
+                value: 'Secundaria en curso',
+                text: 'Secundaria en curso',
+              },
+              {
+                value: 'Secundaria completa',
+                text: 'Secundaria completa',
+              },
+              {
+                value: 'Universidad incompleta',
+                text: 'Universidad incompleta',
+              },
+              {
+                value: 'Universidad en curso',
+                text: 'Universidad en curso',
+              },
+              {
+                value: 'Universidad completa',
+                text: 'Universidad completa',
               },
             ]}
-            onChange={handleBloodType}
+            onChange={handleAcademicLevel}
             colorLabel='var(--black-bg)' 
             hasLabel
-            labelTitle='Grupo sanguíneo'
+            labelTitle='Nivel académico'
             isLabelCenter
-            nameProp='bloodType'
+            nameProp='academicLevel'
           />
         </div>
       </div>
       <div className="input-row">
+        <div className="addPatient-box">
+            <Select
+              options={[
+                {
+                  value: '',
+                  text: 'Seleccione un valor',
+                },
+                {
+                  value: 'Tipo A',
+                  text: 'Tipo A',
+                },
+                {
+                  value: 'Tipo B',
+                  text: 'Tipo B',
+                },
+                {
+                  value: 'Tipo AB',
+                  text: 'Tipo AB',
+                },
+                {
+                  value: 'Tipo O',
+                  text: 'Tipo O',
+                },
+              ]}
+              onChange={handleBloodType}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              isLabelCenter
+              labelTitle='Grupo sanguíneo'
+              nameProp='bloodType'
+            />
+          </div>
           <div className="addPatient-box">
             <Checkbox
               withText
@@ -463,7 +532,22 @@ const AddPatient = () => {
               nameProp='hasAllergies'
             />
           </div>
-          <div className="addPatient-box">
+      </div>
+      <div className="input-row">
+        <div className="addPatient-box">
+          <Checkbox
+            withText
+            options={[]}
+            onChange={handleMedication}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='¿Toma algún medicamento?'
+            placeholder='Nombre los medicamentos'
+            isLabelCenter
+            nameProp='medication'
+          />
+        </div>
+        <div className="addPatient-box">
             <Checkbox
               withText
               options={[]}
@@ -474,21 +558,6 @@ const AddPatient = () => {
               placeholder='Nombre la/s enfermedades'
               isLabelCenter
               nameProp='chronicDisease'
-            />
-          </div>
-      </div>
-      <div className="input-row">
-          <div className="addPatient-box">
-            <Checkbox
-              withText
-              options={[]}
-              onChange={handleMedication}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='¿Toma algún medicamento?'
-              placeholder='Nombre los medicamentos'
-              isLabelCenter
-              nameProp='medication'
             />
           </div>
       </div>

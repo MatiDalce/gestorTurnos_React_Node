@@ -13,6 +13,7 @@ const Select = ({
     
     const labelStyles = {
         color: colorLabel ? colorLabel : 'var(--skyblue-bg)',
+        display: 'block',
         textAlign: isLabelCenter ? 'center' : ''
     }
 

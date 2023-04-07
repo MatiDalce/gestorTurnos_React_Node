@@ -15,10 +15,18 @@ const Checkbox = ({
     placeholder, // Para el input texto
     onChange, // Para el input texto
     checkValue,
+    isRequired,
 }) => {
     const [selectedOption, setSelectedOption] = useState(oneChoice ? null : []);
     const [activeOptions, setActiveOptions] = useState(false);
+    const [inputValue, setInputValue] = useState(value || '');
     
+    const handleText = (e) => {
+        const newValue = e.target.value;
+        setInputValue(newValue);
+        onChange(newValue);
+    }
+
     const handleSelect = (event) => {
         const { value } = event.target;
         if (oneChoice) {
@@ -61,15 +69,34 @@ const Checkbox = ({
                             <label className='labelWithText'>{withText}</label>
                             <div className="yesOrNoCheckBox">
                                 <label className='labelYesOrNo'> Sí </label>
-                                <input name={`yesOrNo` + nameProp} type="radio" onClick={() => handleYesOrNo('yes')} className="checkbox-input" />
+                                <input 
+                                    name={`yesOrNo` + nameProp} 
+                                    type="radio" 
+                                    onClick={() => handleYesOrNo('yes')} 
+                                    className="checkbox-input" 
+                                    required={isRequired ? true : false}
+                                />
                             </div>
                             <div className="yesOrNoCheckBox">
                                 <label className='labelYesOrNo'> No </label>
-                                <input name={`yesOrNo` + nameProp} type="radio" onClick={() => handleYesOrNo('no')} className="checkbox-input" />
+                                <input 
+                                    name={`yesOrNo` + nameProp} 
+                                    type="radio" 
+                                    onClick={() => handleYesOrNo('no')} 
+                                    className="checkbox-input" 
+                                    required={isRequired ? true : false}
+                                />
                             </div>
                         </div>
                     }
-                    <input className={`text-for-checkbox ${!activeOptions && 'disabled'}`} placeholder={placeholder} type='text' value={value} onChange={onChange} />
+                    <input 
+                        className={`text-for-checkbox ${!activeOptions && 'disabled'}`} 
+                        placeholder={placeholder} 
+                        type='text' 
+                        value={activeOptions ? inputValue : ''} 
+                        onChange={handleText} 
+                        required={isRequired ? true : false}
+                    />
                 </div>
             </div>
         }
