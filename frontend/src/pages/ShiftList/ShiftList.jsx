@@ -13,6 +13,7 @@ const ShiftList = () => {
     dateFrom: '',
     dateUntil: ''
   });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch(`${config.webAPI}/appointments`)
@@ -49,6 +50,28 @@ const ShiftList = () => {
       ...filterShift,
       dateUntil: e.target.value
     })
+  }
+
+  // Input de refresh
+  const handleRefresh = (e) => {
+    fetch(`${config.webAPI}/appointments`)
+    .then(res => res.json())
+    .then(res => {
+      if(res) {
+        setLoading(true)
+        const modifiedRes = res.map(shift => {
+          return {
+            id: shift.id,
+            completeName: `${shift.patient.name} ${shift.patient.lastName}`,
+            day: shift.day,
+            hour: shift.hour
+          }
+        })
+        setShiftList(modifiedRes);
+        setLoading(false)
+      } else {
+      }
+    });
   }
 
   const handleShiftSearch = () => {
@@ -121,11 +144,23 @@ const ShiftList = () => {
       </div>
     </div>
     {
-      shiftList.length > 0 ? <Table 
+      shiftList.length > 0 ? <><Table 
         staticPath={'/turno'}
         headers={{completeName: 'Nombre y Apellido', day: 'Fecha de turno', hour: 'Horario del turno'}}
         content={shiftList} 
       />
+        <div className="addPatient-refresh-center">
+          <div className="patientList-refresh-btn">
+            <Button 
+              title={'Refrescar'}
+              type='button'
+              onClick={handleRefresh}
+              bgColor='var(--green-bg)'
+              isDisabled={loading}
+            />
+          </div>
+        </div>
+      </>
       :
       <div style={{display:'flex', justifyContent: 'center', marginTop: '5%'}}>
         <p className='noContent-text'>No hay turnos</p>

@@ -24,6 +24,12 @@
     width: 30%;
 }
 
+.addPatient-error {
+    color: var(--red-bg);
+    text-align: center;
+    margin-top: 1%;
+}
+
 /* EXTRA SMALL */
 @media screen and (max-width: 576px) {
     .input-row {

@@ -29,6 +29,18 @@
     font-size: 2em;
 }
 
+.addPatient-refresh-center {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 5%;
+}
+
+.patientList-refresh-btn {
+    width: 10%;
+
+}
+
 /* EXTRA SMALL */
 @media screen and (max-width: 576px) {
     .input-btn-search-container {

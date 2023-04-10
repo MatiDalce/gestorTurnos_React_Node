@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input'
 import Select from '../../components/Select/Select'
 import Table from '../../components/Table/Table'
@@ -11,6 +12,17 @@ const ShiftPatientList = () => {
   const { id } = useParams()
 
   const [shiftPatientList, setShiftPatientList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true)
+    fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
+    .then(res => res.json())
+    .then(res => {
+      setShiftPatientList(res)
+      setLoading(false)
+    });
+  }, [id])
 
   const handleDateFrom = () => {}
 
@@ -32,13 +44,16 @@ const ShiftPatientList = () => {
     } else return;
   }
 
-  useEffect(() => {
-    fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
-    .then(res => res.json())
-    .then(res => {
-      setShiftPatientList(res)
-    });
-  }, [id])
+    // Input de refresh
+    const handleRefresh = (e) => {
+      setLoading(true)
+      fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        setShiftPatientList(res)
+        setLoading(false)
+      });
+    }
 
   return (
     <>
@@ -85,15 +100,27 @@ const ShiftPatientList = () => {
       </div>
     </div>
     {
-      shiftPatientList.length > 0 ? <Table 
+      shiftPatientList.length > 0 ? <><Table 
       staticPath={'/turno'}
       headers={{day: 'Fecha', hour: 'Hora'}}
       content={shiftPatientList || []} 
     />
-      :
-      <div style={{display:'flex', justifyContent: 'center', marginTop: '5%'}}>
-        <p className='noContent-text'>Este paciente no tiene turnos</p>
+      <div className="addPatient-refresh-center">
+        <div className="patientList-refresh-btn">
+          <Button 
+            title={'Refrescar'}
+            type='button'
+            onClick={handleRefresh}
+            bgColor='var(--green-bg)'
+            isDisabled={loading}
+          />
+        </div>
       </div>
+    </>
+    :
+    <div style={{display:'flex', justifyContent: 'center', marginTop: '5%'}}>
+      <p className='noContent-text'>Este paciente no tiene turnos</p>
+    </div>
     }
     
   </>

@@ -9,13 +9,16 @@ const PatientList = () => {
 
   const [search, setSearch] = useState('');
   const [patients, setPatients] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Listado de pacientes
+    setLoading(true)
     fetch(`${config.webAPI}/patients/limit`)
     .then(res => res.json())
     .then(res => {
       setPatients(res)
+      setLoading(false)
     });
   }, [])
 
@@ -33,6 +36,16 @@ const PatientList = () => {
   const handleSearch = (e) => {
     setSearch(e.target.value)
   }
+
+  // Input de refresh
+  const handleRefresh = (e) => {
+    fetch(`${config.webAPI}/patients/limit`)
+    .then(res => res.json())
+    .then(res => {
+      setPatients(res)
+    });
+  }
+
   return (
     <>
       <div className="search-patient">
@@ -53,6 +66,7 @@ const PatientList = () => {
                 title={'Filtrar pacientes'} 
                 type='button'
                 onClick={handleFilterPatients}
+                isDisabled={loading}
               />
             </div>
         </div>
@@ -61,21 +75,33 @@ const PatientList = () => {
             title={'Agregar Paciente'}
             type='button'
             path='/agregar-paciente'
+            isDisabled={loading}
           />
         </div>
       </div>
       {
-        patients.length > 0 ? <Table 
+        patients.length > 0 ? <><Table 
           content={patients} 
           headers={{completeName: 'Nombre y Apellido', dni: 'DNI', email: 'E-mail'}}
           staticPath={'/paciente'} // Parte de la ruta a la que va a redirigir al hacer click en la celda
         />
+        <div className="addPatient-refresh-center">
+          <div className="patientList-refresh-btn">
+            <Button 
+              title={'Refrescar'}
+              type='button'
+              onClick={handleRefresh}
+              bgColor='var(--green-bg)'
+              isDisabled={loading}
+            />
+          </div>
+        </div>
+        </>
         :
         <div style={{display:'flex', justifyContent: 'center', marginTop: '5%'}}>
           <p className='noContent-text'>No hay pacientes</p>
         </div>
       }
-      
     </>
   )
 }

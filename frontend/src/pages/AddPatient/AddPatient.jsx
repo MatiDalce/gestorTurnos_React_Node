@@ -14,6 +14,8 @@ const AddPatient = () => {
   const navigate = useNavigate()
 
   
+  const [error, setError] = useState(false);
+
   const [patient, setPatient] = useState({
     name: '',
     lastName: '',
@@ -207,6 +209,7 @@ const AddPatient = () => {
         navigate('/listado-pacientes')
       } else {
         toast('error', 'No se pudo agregar el paciente')
+        setError(true)
       }
     })
   }
@@ -228,6 +231,7 @@ const AddPatient = () => {
               placeholder='Ingrese el nombre'
               nameProp='name'
             />
+            { error && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
           <div className="addPatient-box">
             <Input
@@ -241,6 +245,7 @@ const AddPatient = () => {
               placeholder='Ingrese el apellido'
               nameProp='lastname'
             />
+            { error && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
         </div>
         <div className="input-row">
@@ -258,6 +263,7 @@ const AddPatient = () => {
               placeholder='Ingrese el DNI'
               nameProp='dni'
             />
+            { error && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
           <div className="addPatient-box">
             <Input
@@ -300,6 +306,7 @@ const AddPatient = () => {
               nameProp='gender'
               onChangeOnlyBoxes={handleGender}
             />
+            { error && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
       </div>
       <div className="input-row">
