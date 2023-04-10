@@ -112,7 +112,7 @@
 /* EXTRA LARGE */
 @media screen and (min-width: 1200px) and (max-width: 1399px) {
     .home-container {
-        height: 40vh;
+        height: 50vh;
     }
 }
 /* EXTRA EXTRA LARGE */

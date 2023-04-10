@@ -200,6 +200,10 @@
     .navbar-home-container {
         width: 2em;
     }
+    .menu__btn {
+        top: 25px;
+        right: 50px;
+    }
 }
 /* SMALL */
 @media screen and (min-width: 577px) and (max-width: 767px) {
@@ -239,7 +243,18 @@
 @media screen and (min-width: 1200px) and (max-width: 1399px) {
     
 }
+
+@media screen and (min-width: 1366px) {
+    .menu__btn {
+        top: 25px;
+        right: 60px;
+    }
+}
+
 /* EXTRA EXTRA LARGE */
 @media screen and (min-width: 1400px) {
-    
+    .menu__btn {
+        top: 32px;
+        right: 60px;
+    }
 }
