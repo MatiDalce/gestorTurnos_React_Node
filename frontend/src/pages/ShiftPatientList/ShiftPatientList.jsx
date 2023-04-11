@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { convertISOStringtoDateTime } from '../../assets/helpers/unixtimeToSomething';
 import Button from '../../components/Button/Button';
 import Select from '../../components/Select/Select'
 import Table from '../../components/Table/Table'
@@ -19,7 +20,16 @@ const ShiftPatientList = () => {
     .then(res => {
       console.log(res);
       if(res.length > 0) {
-        setShiftPatientList(res)
+        const modifiedRes = res.map(shift => {
+          return {
+            id: shift.id,
+            patientId: shift.patientId,
+            day: convertISOStringtoDateTime(shift.day, 'date'),
+            hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs',
+            note: shift.note
+          }
+        })
+        setShiftPatientList(modifiedRes)
       }
     })
     .finally(() => setLoading(false));
@@ -37,21 +47,39 @@ const ShiftPatientList = () => {
       .then(res => {
         console.log(res);
         if(res.length > 0) {
-          setShiftPatientList(res)
+          const modifiedRes = res.map(shift => {
+            return {
+              id: shift.id,
+              patientId: shift.patientId,
+              day: convertISOStringtoDateTime(shift.day, 'date'),
+              hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs',
+              note: shift.note
+            }
+          })
+          setShiftPatientList(modifiedRes)
         }
       })
       .finally(() => setLoading(false));
-    } else if(e.target.value === 'antiguos') {
+    } else {
       fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
       .then(res => res.json())
       .then(res => {
         console.log(res);
         if(res.length > 0) {
-          setShiftPatientList(res)
+          const modifiedRes = res.map(shift => {
+            return {
+              id: shift.id,
+              patientId: shift.patientId,
+              day: convertISOStringtoDateTime(shift.day, 'date'),
+              hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs',
+              note: shift.note
+            }
+          })
+          setShiftPatientList(modifiedRes)
         }
       })
       .finally(() => setLoading(false));
-    } else return setLoading(false);
+    }
   }
 
     // Input de refresh
@@ -60,9 +88,20 @@ const ShiftPatientList = () => {
       fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
       .then(res => res.json())
       .then(res => {
-        setShiftPatientList(res)
-        setLoading(false)
-      });
+        if(res.length > 0) {
+          const modifiedRes = res.map(shift => {
+            return {
+              id: shift.id,
+              patientId: shift.patientId,
+              day: convertISOStringtoDateTime(shift.day, 'date'),
+              hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs',
+              note: shift.note
+            }
+          })
+          setShiftPatientList(modifiedRes)
+        }
+      })
+      .finally(() => setLoading(false));
     }
 
   return (

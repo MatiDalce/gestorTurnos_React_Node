@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { convertISOStringtoDateTime } from '../../assets/helpers/unixtimeToSomething';
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
 import Table from '../../components/Table/Table'
@@ -24,8 +25,8 @@ const ShiftList = () => {
           return {
             id: shift.id,
             completeName: `${shift.patient.name} ${shift.patient.lastName}`,
-            day: shift.day,
-            hour: shift.hour
+            day: convertISOStringtoDateTime(shift.day, 'date'),
+            hour: convertISOStringtoDateTime(shift.day, 'hour')+' hs'
           }
         })
         setShiftList(modifiedRes);
@@ -60,14 +61,15 @@ const ShiftList = () => {
     fetch(`${config.webAPI}/appointments`)
     .then(res => res.json())
     .then(res => {
+      console.log(res);
       if(res) {
         setLoading(true)
         const modifiedRes = res.map(shift => {
           return {
             id: shift.id,
             completeName: `${shift.patient.name} ${shift.patient.lastName}`,
-            day: shift.day,
-            hour: shift.hour
+            day: convertISOStringtoDateTime(shift.day, 'date'),
+            hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs'
           }
         })
         setShiftList(modifiedRes);
@@ -88,8 +90,8 @@ const ShiftList = () => {
         return {
           id: shift.id,
           completeName: `${shift.patient.name} ${shift.patient.lastName}`,
-          day: shift.day,
-          hour: shift.hour
+          day: convertISOStringtoDateTime(shift.day, 'date'),
+          hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs'
         }
       })
       setShiftList(modifiedRes);
