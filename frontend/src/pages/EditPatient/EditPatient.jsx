@@ -261,7 +261,7 @@ const EditPatient = () => {
               placeholder='Ingrese el nombre'
               nameProp='name'
             />
-          { error && <p className='addPatient-error'>Este campo es requerido.</p> }
+          { (error && !patient.name) && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
           <div className="input-editPatient-box">
             <Input
@@ -274,7 +274,7 @@ const EditPatient = () => {
               placeholder='Ingrese el apellido'
               nameProp='lastname'
             />
-            { error && <p className='addPatient-error'>Este campo es requerido.</p> }
+            { (error && !patient.lastName) && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
         </div>
         <div className="input-editPatient-row">
@@ -290,7 +290,7 @@ const EditPatient = () => {
               placeholder='Ingrese el DNI'
               nameProp='dni'
             />
-            { error && <p className='addPatient-error'>Este campo es requerido.</p> }
+            { (error && !patient.dni) && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
           <div className="input-editPatient-box">
             <Checkbox
@@ -306,7 +306,7 @@ const EditPatient = () => {
               onChangeOnlyBoxes={handleGender}
               isChecked={patient.gender}
             />
-            { error && <p className='addPatient-error'>Este campo es requerido.</p> }
+            { (error && !patient.gender) && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
         </div>
         <div className="input-editPatient-row">
