@@ -8,6 +8,7 @@ import Modal from '../../components/Modal/Modal';
 import './myCalendar.css';
 import { config } from '../../env/config';
 import Spinner from '../../components/Spinner/Spinner';
+import { addOneHourISOString } from '../../assets/helpers/unixtimeToSomething';
 
 const MyCalendar = () => {
 
@@ -30,6 +31,7 @@ const MyCalendar = () => {
         const appointmentsCalendarWithTitles = res.appointmentsCalendar.map((obj) => {
           return {
             ...obj,
+            end: addOneHourISOString(obj.start), // Fecha de finalización del evento
             title: obj.name
           }
         })

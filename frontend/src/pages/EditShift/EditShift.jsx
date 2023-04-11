@@ -6,7 +6,7 @@ import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import './editShift.css';
 import { warningEditAlert } from '../../assets/helpers/customAlert';
-import { convertISOStringtoDateTime, joinDateTime } from '../../assets/helpers/unixtimeToSomething';
+import { convertISOStringtoDateTime, joinDateTimeToISOString } from '../../assets/helpers/unixtimeToSomething';
 
 const EditShift = () => {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ const EditShift = () => {
 
   const handleChangeShift = () => {
 
-    const dateTime = (date && hour) ? joinDateTime(date, hour) : '';
+    const dateTime = (date && hour) ? joinDateTimeToISOString(date, hour) : '';
 
     let body = {
       day: dateTime,

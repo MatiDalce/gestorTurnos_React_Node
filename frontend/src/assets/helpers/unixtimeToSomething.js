@@ -1,5 +1,5 @@
 // UNE FECHA Y HORA Y LOS CONVIERTE A ISOString
-export function joinDateTime(date, hour) {
+export function joinDateTimeToISOString(date, hour) {
     const dateTime = new Date(`${date}T${hour}:03-00:00`);
     return dateTime.toISOString().slice(0, -8);
 }
@@ -15,7 +15,7 @@ export function convertUnixtimeToAge(date) {
     return age;
 }
 
-// FECHA DE NACIMIENTO: Convertir formato unixtime a fecha yyyy-mm-dd
+// FECHA DE NACIMIENTO: Convertir formato unixtime a fecha yyyy-mm-dd (es para mostrarse en inputs date)
 export function convertUnixtimeToDate(date) {
     const dateObj = new Date(date * 1000);
     const options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -26,10 +26,11 @@ export function convertUnixtimeToDate(date) {
     return `${year}-${month}-${day}`;
 }
 
-// FORMATO ISO A FECHA Y HORA
+// FORMATO ISO A FECHA Y HORA - dateTime = fecha formato ISO string | get = 'date' o 'hour'
 export function convertISOStringtoDateTime(dateTime, get) {
     const dateString = dateTime;
     const dateObj = new Date(dateString);
+    // joinDateTimeToISOString
     if(get === 'date') { // FECHA
         const year = dateObj.getFullYear();
         const month = String(dateObj.getMonth() + 1).padStart(2, "0");
@@ -40,4 +41,21 @@ export function convertISOStringtoDateTime(dateTime, get) {
         const minutes = String(dateObj.getMinutes()).padStart(2, "0");
         return `${hours}:${minutes}`;
     }
+}
+
+// FORMATO ISO A FECHA Y HORA - dateTime = fecha formato ISO string | get = 'date' o 'hour'
+export function addOneHourISOString(date) {
+    const dateString = date;
+    const dateObj = new Date(dateString);
+
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObj.getDate()).padStart(2, "0");
+
+    const hours = String(dateObj.getHours() + 1).padStart(2, "0");
+    const minutes = String(dateObj.getMinutes()).padStart(2, "0");
+    
+    const oneHourLater = new Date(`${year}-${month}-${day}T${hours}:${minutes}:03-00:00`);
+
+    return oneHourLater.toISOString().slice(0, -8);
 }
