@@ -25,7 +25,7 @@ export const CurrentPage = ({pathname, id}) => {
             return `Turno N°: ${id}`
             
         case `/turnos-paciente/${id}`:
-            return `Turnos de: Nombre del Paciente (ID: ${id})`
+            return `Turnos del Paciente`
             
         case '/mi-calendario':
             return 'Mi Calendario'

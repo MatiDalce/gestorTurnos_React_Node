@@ -75,12 +75,11 @@ const EditPatient = () => {
           takesMedication: res.takesMedication,
           medication: res.medication,
         })
-        setLoading(false)
       } else {
         setError(true)
-        setLoading(false)
       }
     })
+    .finally(() => setLoading(false));
   }, [id])
 
   const handleName = (e) => {

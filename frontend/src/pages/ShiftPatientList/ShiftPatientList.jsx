@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { convertISOStringtoDateTime } from '../../assets/helpers/unixtimeToSomething';
+import { config } from '../../env/config';
 import Button from '../../components/Button/Button';
+import Title from '../../components/Title/Title'
 import Select from '../../components/Select/Select'
 import Table from '../../components/Table/Table'
-import { config } from '../../env/config';
 import './shiftPatientList.css'
 
 const ShiftPatientList = () => {
@@ -12,7 +13,22 @@ const ShiftPatientList = () => {
   const { id } = useParams()
 
   const [shiftPatientList, setShiftPatientList] = useState([]);
+  const [patientCompleteName, setPatientCompleteName] = useState('');
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${config.webAPI}/patients/${id}`)
+    .then(res => res.json())
+    .then(res => {
+      if(!res.errors) {
+        // SETEO DE ESTADO
+        setPatientCompleteName(`${res.name} ${res.lastName}`)
+        setLoading(false)
+      } else {
+        setLoading(false)
+      }
+    })
+  }, [id])
 
   useEffect(() => {
     fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
@@ -103,6 +119,7 @@ const ShiftPatientList = () => {
 
   return (
     <>
+    <Title title={patientCompleteName} margin={'0 0 2% 0'} />
     <div className="search-patient-shifts">
       {/* <div className="shiftPatientList-input-box">
         <Input 

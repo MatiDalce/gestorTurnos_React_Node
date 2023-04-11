@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { CurrentPage } from '../../assets/helpers/CurrentPage';
-import userLogo from '../../assets/icons/circle-user-solid.svg'
-import eyeLogo from '../../assets/icons/eye-solid.svg'
-import blindEyeLogo from '../../assets/icons/eye-slash-solid.svg'
-import homeLogo from '../../assets/icons/house-solid.svg'
-import ArrowLogo from '../../assets/icons/arrow-left-solid.svg'
-import './navbar.css'
+import ArrowLogo from '../../assets/icons/arrow-left-solid.svg';
+import eyeLogo from '../../assets/icons/eye-solid.svg';
+import './navbar.css';
 
 const Navbar = () => {
     let navigate = useNavigate();

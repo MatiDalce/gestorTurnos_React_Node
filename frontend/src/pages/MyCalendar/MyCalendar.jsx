@@ -4,11 +4,11 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es'; 
-import Modal from '../../components/Modal/Modal';
-import './myCalendar.css';
-import { config } from '../../env/config';
-import Spinner from '../../components/Spinner/Spinner';
 import { addOneHourISOString } from '../../assets/helpers/unixtimeToSomething';
+import { config } from '../../env/config';
+import Modal from '../../components/Modal/Modal';
+import Spinner from '../../components/Spinner/Spinner';
+import './myCalendar.css';
 
 const MyCalendar = () => {
 
