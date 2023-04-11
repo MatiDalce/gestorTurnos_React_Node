@@ -15,7 +15,7 @@ const EditShift = () => {
   const [ date, setDate ] = useState()
   const [ hour, setHour ] = useState()
   const [ notes, setNotes ] = useState()
-  const [ loading, setLoading ] = useState()
+  const [ loading, setLoading ] = useState(true)
   const [ error, setError ] = useState()
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const EditShift = () => {
         setPatientID(res.patient.id)
         setLoading(false)
       } else {
-        toast('error', 'Algo salió mal. Refresque la pestaña.')
+        toast('error', 'Algo salió mal, por favor recargue la página.')
       }
     })
   }, [id])
@@ -83,6 +83,7 @@ const EditShift = () => {
       <div className="input-row-shift">
         <div className="editShift-input-box">
           <Input
+            isDisabled={loading}
             onChange={handleDate}
             value={date}
             colorLabel='var(--black-bg)' 
@@ -96,6 +97,7 @@ const EditShift = () => {
         </div>
         <div className="editShift-input-box">
           <Input
+            isDisabled={loading}
             onChange={handleTime}
             value={hour} // hh:mm:ss.ms
             colorLabel='var(--black-bg)' 
@@ -112,6 +114,7 @@ const EditShift = () => {
       <div className="textarea-input-shift">
         <div className="editShift-textarea-box">
           <Input
+            isDisabled={loading}
             onChange={handleNotes}
             value={notes}
             colorLabel='var(--black-bg)' 
@@ -130,6 +133,7 @@ const EditShift = () => {
             title={'Editar'} 
             type='button'
             onClick={handleChangeShift}
+            isDisabled={loading}
           />
         </div>
       </div>

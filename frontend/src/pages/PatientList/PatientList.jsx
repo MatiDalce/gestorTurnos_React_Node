@@ -9,7 +9,7 @@ const PatientList = () => {
 
   const [search, setSearch] = useState('');
   const [patients, setPatients] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Listado de pacientes
@@ -17,9 +17,12 @@ const PatientList = () => {
     fetch(`${config.webAPI}/patients/limit`)
     .then(res => res.json())
     .then(res => {
-      setPatients(res)
-      setLoading(false)
-    });
+      console.log(res);
+      if(res.length > 0) {
+        setPatients(res)
+      }
+    })
+    .finally(() => setLoading(false));
   }, [])
 
   // Filtro de pacientes
@@ -53,6 +56,7 @@ const PatientList = () => {
           <div className="patientList-input">
             <Input
               value={search}
+              isDisabled={loading}
               onChange={handleSearch}
               isSearcheable
               type='text'
@@ -75,7 +79,6 @@ const PatientList = () => {
             title={'Agregar Paciente'}
             type='button'
             path='/agregar-paciente'
-            isDisabled={loading}
           />
         </div>
       </div>

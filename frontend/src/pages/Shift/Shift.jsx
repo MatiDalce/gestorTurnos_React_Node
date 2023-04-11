@@ -17,19 +17,24 @@ const Shift = () => {
     date: '',
     hour: ''
   });
+  const [ loading, setLoading ] = useState(true)
 
   useEffect(() => {
     fetch(`${config.webAPI}/appointments/${id}`)
     .then(res => res.json())
     .then(res => {
-      setShift({
-        name: res.patient.name,
-        lastName: res.patient.lastName,
-        note: res.note,
-        date: convertISOStringtoDateTime(res.day, 'date'),
-        hour: convertISOStringtoDateTime(res.day, 'hour')
-      })
-    });
+      console.log(res);
+      if(res) {
+        setShift({
+          name: res.patient.name,
+          lastName: res.patient.lastName,
+          note: res.note,
+          date: convertISOStringtoDateTime(res.day, 'date'),
+          hour: convertISOStringtoDateTime(res.day, 'hour')
+        })
+      }
+    })
+    .finally(() => setLoading(false));
   }, [id])
 
   const handleDeleteShift = () => {
@@ -77,17 +82,17 @@ const Shift = () => {
 
   return (
     <>
-    <p className='shift-title' >{shift.name} {shift.lastName}</p>
+    <p className='shift-title' >{shift.name || '-'} {shift.lastName || '-'}</p>
 
     <div className="data-shift-box-container">
       <div className="data-shift-box">
         <p className="data-shift">Fecha del turno</p>
-        <p className="data">{shift.date}</p>
+        <p className="data">{shift.date || '-' }</p>
       </div>
 
       <div className="data-shift-box">
         <p className="data-shift">Horario del turno</p>
-        <p className="data">{shift.hour}hs</p>
+        <p className="data">{`${shift.hour}` || '-'}hs</p>
       </div>
     </div>
 
@@ -95,7 +100,7 @@ const Shift = () => {
       <div className="textarea-input-box">
         <Accordion title='Notas'>
           <div className="shift-div-answer">
-            <p className="shift-shift-answer">{ shift.note }</p>
+            <p className="shift-shift-answer">{ shift.note || '-' }</p>
           </div>
         </Accordion>
       </div>
@@ -106,6 +111,7 @@ const Shift = () => {
           path={`/editar-turno/${id}`}
           title={'Editar'} 
           type='button'
+          isDisabled={loading}
         />
       </div>
       <div className="shift-btn-box">
@@ -114,6 +120,7 @@ const Shift = () => {
           title={'Descargar'} 
           type='button'
           bgColor={'var(--green-bg)'}
+          isDisabled={loading}
         />
       </div>
       <div className="shift-btn-box">
@@ -122,6 +129,7 @@ const Shift = () => {
           type='button'
           bgColor={'var(--red-bg)'}
           onClick={handleDeleteShift}
+          isDisabled={loading}
         />
       </div>
     </div>

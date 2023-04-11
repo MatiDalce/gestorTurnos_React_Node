@@ -11,16 +11,18 @@ const ShiftPatientList = () => {
   const { id } = useParams()
 
   const [shiftPatientList, setShiftPatientList] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true)
     fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
     .then(res => res.json())
     .then(res => {
-      setShiftPatientList(res)
-      setLoading(false)
-    });
+      console.log(res);
+      if(res.length > 0) {
+        setShiftPatientList(res)
+      }
+    })
+    .finally(() => setLoading(false));
   }, [id])
 
   const handleDateFrom = () => {}
@@ -28,19 +30,28 @@ const ShiftPatientList = () => {
   const handleDateUntil = () => {}
 
   const handleOrder = (e) => {
+    setLoading(true)
     if(e.target.value === 'recientes') {
       fetch(`${config.webAPI}/patients/patient-appointmentsDSC/${id}`)
       .then(res => res.json())
       .then(res => {
-        setShiftPatientList(res)
-      });
+        console.log(res);
+        if(res.length > 0) {
+          setShiftPatientList(res)
+        }
+      })
+      .finally(() => setLoading(false));
     } else if(e.target.value === 'antiguos') {
       fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
       .then(res => res.json())
       .then(res => {
-        setShiftPatientList(res)
-      });
-    } else return;
+        console.log(res);
+        if(res.length > 0) {
+          setShiftPatientList(res)
+        }
+      })
+      .finally(() => setLoading(false));
+    } else return setLoading(false);
   }
 
     // Input de refresh
@@ -78,6 +89,7 @@ const ShiftPatientList = () => {
       <div className="shiftPatientList-input-box">
         <Select
           onChange={handleOrder}
+          isDisabled={loading}
           options={[
             {
               text: 'Seleccione',

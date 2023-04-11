@@ -7,11 +7,13 @@ import esLocale from '@fullcalendar/core/locales/es';
 import Modal from '../../components/Modal/Modal';
 import './myCalendar.css';
 import { config } from '../../env/config';
+import Spinner from '../../components/Spinner/Spinner';
 
 const MyCalendar = () => {
 
   const [openModal, setOpenModal] = useState(false)
   const [eventsList, setEventsList] = useState([])
+  const [loading, setLoading] = useState(true)
   const [modalData, setModalData] = useState({
     id: 0,
     title: '',
@@ -23,15 +25,19 @@ const MyCalendar = () => {
     fetch(`${config.webAPI}/appointments/calendar`)
     .then(res => res.json())
     .then(res => {
-      // Esto modifica el array para que se coloquen los títulos en el calendario
-      const appointmentsCalendarWithTitles = res.appointmentsCalendar.map((obj) => {
-        return {
-          ...obj,
-          title: obj.name
-        }
-      })
-      setEventsList(appointmentsCalendarWithTitles)
+      console.log(res);
+      if(res && res.appointmentsCalendar > 0) {
+        // Esto modifica el array para que se coloquen los títulos en el calendario
+        const appointmentsCalendarWithTitles = res.appointmentsCalendar.map((obj) => {
+          return {
+            ...obj,
+            title: obj.name
+          }
+        })
+        setEventsList(appointmentsCalendarWithTitles)
+      }
     })
+    .finally(() => setLoading(false))
   }, [])
 
   // Esto convierte al formato que necesita el calendario
@@ -73,26 +79,29 @@ const MyCalendar = () => {
               date={modalData.date} 
             />
           }
-          <FullCalendar 
-            events={eventsList}
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            initialView={"dayGridMonth"}
-            headerToolbar={{
-              start: "today prev,next",
-              center: "title",
-              end: "dayGridMonth, timeGridWeek, timeGridDay",
-            }}
-            footerToolbar={{
-              start: "today prev,next",
-            }}
-            locale={esLocale} // Idioma
-            dateClick={handleDateClick} // Da info sobre el día
-            eventClick={handleEventOnClick} // Da info sobre el evento
-            eventBackgroundColor='var(--skyblue-bg)'
-            stickyHeaderDates // Mantiene pegadas las cabeceras de los días
-            // loading={true}
-            // weekends={false} // Quita los fines de semana
-          />
+          {
+            loading ? <div className="spinner-centered"><Spinner /></div>
+            :
+            <FullCalendar 
+              events={eventsList}
+              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              initialView={"dayGridMonth"}
+              headerToolbar={{
+                start: "today prev,next",
+                center: "title",
+                end: "dayGridMonth, timeGridWeek, timeGridDay",
+              }}
+              footerToolbar={{
+                start: "today prev,next",
+              }}
+              locale={esLocale} // Idioma
+              dateClick={handleDateClick} // Da info sobre el día
+              eventClick={handleEventOnClick} // Da info sobre el evento
+              eventBackgroundColor='var(--skyblue-bg)'
+              stickyHeaderDates // Mantiene pegadas las cabeceras de los días
+              // weekends={false} // Quita los fines de semana
+            />
+          }
         </div>
   )
 }

@@ -16,6 +16,8 @@ const EditPatient = () => {
 
   const [error, setError] = useState(false);
 
+  const [loading, setLoading] = useState(true);
+
   const [patient, setPatient] = useState({
     name: '',
     lastName: '',
@@ -73,8 +75,10 @@ const EditPatient = () => {
           takesMedication: res.takesMedication,
           medication: res.medication,
         })
+        setLoading(false)
       } else {
         setError(true)
+        setLoading(false)
       }
     })
   }, [id])
@@ -252,6 +256,7 @@ const EditPatient = () => {
         <div className="input-editPatient-row">
           <div className="input-editPatient-box">
             <Input
+              isDisabled={loading}
               value={patient.name}
               onChange={handleName}
               colorLabel='var(--black-bg)' 
@@ -265,6 +270,7 @@ const EditPatient = () => {
           </div>
           <div className="input-editPatient-box">
             <Input
+              isDisabled={loading}
               value={patient.lastName}
               onChange={handleLastName}
               colorLabel='var(--black-bg)' 
@@ -280,6 +286,7 @@ const EditPatient = () => {
         <div className="input-editPatient-row">
           <div className="input-editPatient-box">
             <Input
+              isDisabled={loading}
               value={patient.dni}
               onChange={handleDNI}
               type='number'
@@ -294,6 +301,7 @@ const EditPatient = () => {
           </div>
           <div className="input-editPatient-box">
             <Checkbox
+              isDisabled={loading}
               formType='edit'
               hasLabel
               labelTitle='Género'
@@ -312,6 +320,7 @@ const EditPatient = () => {
         <div className="input-editPatient-row">
           <div className="input-editPatient-box">
               <Input
+                isDisabled={loading}
                 value={patient.email}
                 onChange={handleEmail}
                 type={'email'}
@@ -325,6 +334,7 @@ const EditPatient = () => {
           </div>
           <div className="input-editPatient-box">
             <Input
+              isDisabled={loading}
               value={patient.socialNetwork}
               onChange={handleSocialNetwork}
               colorLabel='var(--black-bg)' 
@@ -339,6 +349,7 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Input
+            isDisabled={loading}
             value={patient.birthday}
             onChange={handleBirthday}
             colorLabel='var(--black-bg)' 
@@ -352,6 +363,7 @@ const EditPatient = () => {
         </div>
         <div className="input-editPatient-box">
           <Checkbox
+            isDisabled={loading}
             formType='edit'
             options={['Casado', 'Soltero', 'Divorciado', 'Viudo']}
             onlyCheckboxes
@@ -369,6 +381,7 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Input
+            isDisabled={loading}
             value={patient.personalPhoneNumber}
             onChange={handlePersonalPhone}
             colorLabel='var(--black-bg)' 
@@ -382,6 +395,7 @@ const EditPatient = () => {
         </div>
         <div className="input-editPatient-box">
           <Input
+            isDisabled={loading}
             value={patient.contactPhone}
             onChange={handleContactPhone}
             colorLabel='var(--black-bg)' 
@@ -396,6 +410,7 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Checkbox
+            isDisabled={loading}
             formType='edit'
             withText={'¿Vive?'}
             value={patient.father}
@@ -412,6 +427,7 @@ const EditPatient = () => {
         </div>
           <div className="input-editPatient-box">
             <Checkbox
+              isDisabled={loading}
               formType='edit'
               withText={'¿Vive?'}
               value={patient.mother}
@@ -431,6 +447,7 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
         <div className="input-editPatient-box">
             <Checkbox
+              isDisabled={loading}
               formType='edit'
               withText={'Tiene?'}
               value={patient.children}
@@ -447,6 +464,7 @@ const EditPatient = () => {
           </div>
           <div className="input-editPatient-box">
             <Checkbox
+              isDisabled={loading}
               formType='edit'
               withText={'Tiene?'}
               options={['Sí', 'No']}
@@ -466,6 +484,7 @@ const EditPatient = () => {
         {/* <div className="input-editPatient-box">
             <div className="yesOrNoCheckboxes">
               <Checkbox
+                isDisabled={loading}
                 formType='edit'
                 onlyCheckboxes
                 hasLabel
@@ -481,6 +500,7 @@ const EditPatient = () => {
         </div> */}
         <div className="input-editPatient-box">
           <Select
+            isDisabled={loading}
             options={[
               {
                 value: '',
@@ -534,6 +554,7 @@ const EditPatient = () => {
         </div>
         <div className="input-editPatient-box">
           <Select
+            isDisabled={loading}
             options={[
               {
                 value: '',
@@ -569,6 +590,7 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Checkbox
+            isDisabled={loading}
             formType='edit'
             withText
             onChange={handleAllergies}
@@ -584,6 +606,7 @@ const EditPatient = () => {
         </div>
         <div className="input-editPatient-box">
           <Checkbox
+            isDisabled={loading}
             formType='edit'
             withText
             onChange={handleMedication}
@@ -601,6 +624,7 @@ const EditPatient = () => {
       <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Checkbox
+            isDisabled={loading}
             formType='edit'
             withText
             onChange={handleChronicDisease}
@@ -627,7 +651,8 @@ const EditPatient = () => {
               patient.lastName === '' ||
               patient.email === '' ||
               patient.dni === '' ||
-              patient.gender === ''
+              patient.gender === '' ||
+              loading
             }
           />
         </div>

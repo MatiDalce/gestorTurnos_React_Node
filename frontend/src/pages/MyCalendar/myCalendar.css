@@ -3,6 +3,12 @@
     width: 90vw;
 }
 
+.spinner-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* EXTRA SMALL */
 @media screen and (max-width: 576px) {
 

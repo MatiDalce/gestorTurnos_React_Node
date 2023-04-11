@@ -17,6 +17,7 @@ const Checkbox = ({
     value, // Para el input texto o cuando son varios checkbox que envían el texto de su label
     placeholder, // Para el input texto
     isRequired,
+    isDisabled
 }) => {
     const [activeOptions, setActiveOptions] = useState(false);
     const [checkValue, setCheckValue] = useState();
@@ -29,7 +30,7 @@ const Checkbox = ({
             if(value === '' || value === undefined || value === null) setActiveOptions(true);
             if(value !== '' || value !== undefined || value!== null) setCheckValue(value);
         }
-    }, [value])
+    }, [value, formType])
 
     const handleText = (e) => {
         const newValue = e.target.value;
@@ -53,6 +54,10 @@ const Checkbox = ({
         color: colorLabel ? colorLabel : 'var(--skyblue-bg)',
         textAlign: isLabelCenter ? 'center' : ''
     }
+    const inputStyles = {
+        backgroundColor: isDisabled ? 'var(--gray-bg)' : '',
+        PointerEvent: isDisabled ? 'none' : '',
+    }
 
     return (
         <>
@@ -69,7 +74,8 @@ const Checkbox = ({
                             <label className='labelWithText'>{withText}</label>
                             <div className="yesOrNoCheckBox">
                                 <label className='labelYesOrNo'> Sí </label>
-                                <input 
+                                <input
+                                    style={inputStyles} 
                                     name={`yesOrNo` + nameProp} 
                                     type="radio" 
                                     checked={activeOptions}
@@ -80,7 +86,8 @@ const Checkbox = ({
                             </div>
                             <div className="yesOrNoCheckBox">
                                 <label className='labelYesOrNo'> No </label>
-                                <input 
+                                <input
+                                    style={inputStyles} 
                                     name={`yesOrNo` + nameProp} 
                                     checked={!activeOptions}
                                     type="radio" 
@@ -91,7 +98,8 @@ const Checkbox = ({
                             </div>
                         </div>
                     }
-                    <input 
+                    <input
+                        style={inputStyles} 
                         className={`text-for-checkbox ${!activeOptions && 'disabled'}`} 
                         placeholder={placeholder} 
                         type='text' 
@@ -114,6 +122,7 @@ const Checkbox = ({
                             return <label key={option} className="checkbox-label">
                                 <span className="checkbox-text">{option}</span>
                                 <input
+                                    style={inputStyles}
                                     type={'radio'}
                                     name={`${nameProp}`}
                                     checked={option === checkValue}

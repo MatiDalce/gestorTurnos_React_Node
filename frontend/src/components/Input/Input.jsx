@@ -28,7 +28,11 @@ const Input = ({
     backgroundRepeat: isSearcheable ? `no-repeat` : '',
     backgroundSize: isSearcheable ? `18px` : '',
     backgroundPosition: isSearcheable ? '95% 50%' : '',
+    backgroundColor: isDisabled ? 'var(--gray-bg)' : '',
+    PointerEvent: isDisabled ? 'none' : '',
   }
+
+
 
   return (
     <>
@@ -60,6 +64,7 @@ const Input = ({
           }
           <input
             value={value ? value : ''}
+            disabled={isDisabled ? true : false}
             className="input-el"
             onChange={onChange}
             type={type} 
@@ -79,6 +84,7 @@ const Input = ({
           }
           <input
             value={value ? value : ''}
+            disabled={isDisabled ? true : false}
             className="input-el"
             onChange={onChange}
             type={type} 
@@ -99,6 +105,7 @@ const Input = ({
           }
           <input
             value={value ? value : ''}
+            disabled={isDisabled ? true : false}
             className="input-el"
             onChange={onChange}
             type={type} 
@@ -118,6 +125,7 @@ const Input = ({
           }
           <input
             value={value ? value : ''}
+            disabled={isDisabled ? true : false}
             className="input-el"
             onChange={onChange}
             type={type} 
@@ -139,6 +147,7 @@ const Input = ({
           }
           <input
             value={value ? value : ''}
+            disabled={isDisabled ? true : false}
             className="input-el"
             onChange={onChange}
             type={type} 
@@ -158,6 +167,7 @@ const Input = ({
           }
           <input
             value={value ? value : ''}
+            disabled={isDisabled ? true : false}
             className="input-el"
             onChange={onChange}
             type={type} 

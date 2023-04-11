@@ -16,17 +16,19 @@ const AddShift = () => {
   const [hour, setHour] = useState(0);
   const [note, setNote] = useState('');
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true)
     fetch(`${config.webAPI}/patients/limit`)
     .then(res => res.json())
     .then(res => {
-      const patientsListNames = res.map(patient => {return {text:patient.completeName, value:patient.id}});
-      setPatientList(patientsListNames)
-      setLoading(false)
+      console.log(res);
+      if(res.length > 0) {
+        const patientsListNames = res.map(patient => {return {text:patient.completeName, value:patient.id}});
+        setPatientList(patientsListNames)
+      }
     })
+    .finally(() => setLoading(false))
   }, []);
 
   const handleSelectPatient = (e) => {
