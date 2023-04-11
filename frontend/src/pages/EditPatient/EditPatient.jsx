@@ -238,7 +238,6 @@ const EditPatient = () => {
       'Esta por editar el paciente',
       'Esta acción no se puede deshacer ¿Está seguro?'
     ).then(res => {
-      console.log(res);
       if(!res.errors) {
         navigate('/listado-pacientes')
         toast('success', 'Se ha editado exitosamente')

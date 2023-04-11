@@ -61,7 +61,6 @@ const ShiftList = () => {
     fetch(`${config.webAPI}/appointments`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       if(res) {
         setLoading(true)
         const modifiedRes = res.map(shift => {
@@ -80,7 +79,6 @@ const ShiftList = () => {
   }
 
   const handleShiftSearch = () => {
-    console.log(`${config.webAPI}/appointments/search?q=${filterShift.name}`);
     setLoading(true)
     fetch(`${config.webAPI}/appointments/search?q=${filterShift.name}`)
     .then(res => res.json())

@@ -1,9 +1,6 @@
 // UNE FECHA Y HORA Y LOS CONVIERTE A ISOString
 export function joinDateTime(date, hour) {
-    console.log('ANTES => ', hour);
     const dateTime = new Date(`${date}T${hour}:03-00:00`);
-    console.log('DESPUES => ', hour);
-    console.log(dateTime.toISOString().slice(0, -1));
     return dateTime.toISOString().slice(0, -8);
 }
 

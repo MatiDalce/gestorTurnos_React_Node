@@ -67,7 +67,6 @@ const EditShift = () => {
       'Esta por editar el turno',
       'Esta acción no se puede deshacer ¿Está seguro?'
     ).then(res => {
-      console.log(res);
       if(!res.errors) {
         navigate('/listado-turnos')
         toast('success', 'Se ha editado exitosamente')

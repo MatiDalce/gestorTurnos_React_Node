@@ -25,9 +25,7 @@ const MyCalendar = () => {
     fetch(`${config.webAPI}/appointments/calendar`)
     .then(res => res.json())
     .then(res => {
-      console.log(res.appointmentsCalendar);
       if(res && res.appointmentsCalendar.length > 0) {
-        console.log('EEEEEEEEEEEEEEEEEEEEEEEE');
         // Esto modifica el array para que se coloquen los títulos en el calendario
         const appointmentsCalendarWithTitles = res.appointmentsCalendar.map((obj) => {
           return {

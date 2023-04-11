@@ -18,7 +18,6 @@ const ShiftPatientList = () => {
     fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       if(res.length > 0) {
         const modifiedRes = res.map(shift => {
           return {
@@ -45,7 +44,6 @@ const ShiftPatientList = () => {
       fetch(`${config.webAPI}/patients/patient-appointmentsDSC/${id}`)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if(res.length > 0) {
           const modifiedRes = res.map(shift => {
             return {
@@ -64,7 +62,6 @@ const ShiftPatientList = () => {
       fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if(res.length > 0) {
           const modifiedRes = res.map(shift => {
             return {

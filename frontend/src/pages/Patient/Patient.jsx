@@ -18,7 +18,6 @@ const Patient = () => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       if(res){
         setPatient({
           ...res,
@@ -37,7 +36,6 @@ const Patient = () => {
       'Está por borrar un paciente', 
       'Esta acción no se puede deshacer ¿Está seguro?', 
     ).then((res) => {
-      console.log(res);
       if(!res.errors) {
         toast('success', 'Paciente eliminado exitosamente');
         navigate('/listado-pacientes');

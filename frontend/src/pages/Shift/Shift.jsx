@@ -23,7 +23,6 @@ const Shift = () => {
     fetch(`${config.webAPI}/appointments/${id}`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       if(res) {
         setShift({
           name: res.patient.name,
@@ -55,7 +54,6 @@ const Shift = () => {
   const handleDownloadShift = () => {
     fetch(`${config.webAPI}/appointments/download/${id}`)
     .then(response => {
-      console.log(response);
       if (!response.ok) {
         toast('error', 'Ha ocurrido un error en la descarga')
         throw new Error('Falló la descarga');

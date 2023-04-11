@@ -22,7 +22,6 @@ const AddShift = () => {
     fetch(`${config.webAPI}/patients/limit`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       if(res.length > 0) {
         const patientsListNames = res.map(patient => {return {text:patient.completeName, value:patient.id}});
         setPatientList(patientsListNames)
@@ -63,7 +62,6 @@ const AddShift = () => {
     })
     .then(res => res.json())
     .then((res) => {
-      console.log(res);
       if(!res.errors) {
         toast('success', 'Turno agregado exitosamente');
         navigate('/listado-turnos')

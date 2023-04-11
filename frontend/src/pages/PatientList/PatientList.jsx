@@ -17,7 +17,6 @@ const PatientList = () => {
     fetch(`${config.webAPI}/patients/limit`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       if(res.length > 0) {
         setPatients(res)
       }
