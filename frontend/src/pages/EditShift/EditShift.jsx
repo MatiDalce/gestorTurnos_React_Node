@@ -15,15 +15,23 @@ const EditShift = () => {
   const [ date, setDate ] = useState()
   const [ hour, setHour ] = useState()
   const [ notes, setNotes ] = useState()
+  const [ loading, setLoading ] = useState()
+  const [ error, setError ] = useState()
 
   useEffect(() => {
+    setLoading(true)
     fetch(`${config.webAPI}/appointments/${id}`)
     .then(res => res.json())
     .then(res => {
-      setDate(convertISOStringtoDateTime(res.day, 'date'));
-      setHour(convertISOStringtoDateTime(res.day, 'hour'));
-      setNotes(res.note);
-      setPatientID(res.patient.id)
+      if(res) {
+        setDate(convertISOStringtoDateTime(res.day, 'date'));
+        setHour(convertISOStringtoDateTime(res.day, 'hour'));
+        setNotes(res.note);
+        setPatientID(res.patient.id)
+        setLoading(false)
+      } else {
+        toast('error', 'Algo salió mal. Refresque la pestaña.')
+      }
     })
   }, [id])
 
@@ -45,7 +53,7 @@ const EditShift = () => {
 
   const handleChangeShift = () => {
 
-    const dateTime = joinDateTime(date, hour);
+    const dateTime = (date && hour) ? joinDateTime(date, hour) : '';
 
     let body = {
       day: dateTime,
@@ -59,11 +67,13 @@ const EditShift = () => {
       'Esta por editar el turno',
       'Esta acción no se puede deshacer ¿Está seguro?'
     ).then(res => {
-      if(!res) {
+      console.log(res);
+      if(!res.errors) {
         navigate('/listado-turnos')
         toast('success', 'Se ha editado exitosamente')
       } else {
         toast('error', 'No se ha podido editar')
+        setError(true)
       }
     })
   };
@@ -82,6 +92,7 @@ const EditShift = () => {
             type='date'
             nameProp='date'
           />
+          { (error && !date) && <p className='addShift-error'>Este campo es requerido.</p> }
         </div>
         <div className="editShift-input-box">
           <Input
@@ -95,6 +106,7 @@ const EditShift = () => {
             type='time'
             nameProp='hour'
           />
+          { (error && !hour) && <p className='addShift-error'>Este campo es requerido.</p> }
         </div>
       </div>
       <div className="textarea-input-shift">
@@ -109,6 +121,7 @@ const EditShift = () => {
             type='textarea'
             nameProp='notes'
           />
+          { (error && !notes) && <p className='addShift-error'>Este campo es requerido.</p> }
         </div>
       </div>
       <div className="btn-editShift-center">

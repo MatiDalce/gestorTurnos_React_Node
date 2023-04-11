@@ -12,7 +12,6 @@ import './addPatient.css';
 
 const AddPatient = () => {
   const navigate = useNavigate()
-
   
   const [error, setError] = useState(false);
 
@@ -204,7 +203,7 @@ const AddPatient = () => {
     })
     .then(res => res.json())
     .then(res => {
-      if(res) {
+      if(!res.errors) {
         toast('success', 'Paciente agregado exitosamente')
         navigate('/listado-pacientes')
       } else {
@@ -227,7 +226,6 @@ const AddPatient = () => {
               hasLabel
               labelTitle='Nombre del paciente'
               isLabelCenter
-              isRequired
               placeholder='Ingrese el nombre'
               nameProp='name'
             />
@@ -240,7 +238,6 @@ const AddPatient = () => {
               colorLabel='var(--black-bg)' 
               hasLabel
               labelTitle='Apellido del paciente'
-              isRequired
               isLabelCenter
               placeholder='Ingrese el apellido'
               nameProp='lastname'
@@ -253,7 +250,6 @@ const AddPatient = () => {
             <Input
               value={patient.dni}
               onChange={handleDNI}
-              isRequired
               type='number'
               limitNumber={99999999999}
               colorLabel='var(--black-bg)' 
@@ -266,6 +262,35 @@ const AddPatient = () => {
             { error && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
           <div className="addPatient-box">
+            <Checkbox
+              formType='new'
+              hasLabel
+              labelTitle='Género'
+              options={['Masculino', 'Femenino', 'Otro']}
+              onlyCheckboxes
+              colorLabel='var(--black-bg)'
+              isLabelCenter
+              nameProp='gender'
+              onChangeOnlyBoxes={handleGender}
+            />
+            { error && <p className='addPatient-error'>Este campo es requerido.</p> }
+          </div>
+        </div>
+        <div className="input-row">
+          <div className="addPatient-box">
+            <Input
+              value={patient.email}
+              onChange={handleEmail}
+              colorLabel='var(--black-bg)' 
+              type={'email'}
+              hasLabel
+              labelTitle='Email'
+              isLabelCenter
+              placeholder='Ingrese la edad'
+              nameProp='email'
+            />
+          </div>
+          <div className="addPatient-box">
             <Input
               value={patient.socialService}
               onChange={handleSocialService}
@@ -276,37 +301,6 @@ const AddPatient = () => {
               placeholder='Ingrese la obra social'
               nameProp='social-work'
             />
-          </div>
-        </div>
-        <div className="input-row">
-          <div className="addPatient-box">
-            <Input
-              value={patient.email}
-              onChange={handleEmail}
-              colorLabel='var(--black-bg)' 
-              type={'email'}
-              isRequired
-              hasLabel
-              labelTitle='Email'
-              isLabelCenter
-              placeholder='Ingrese la edad'
-              nameProp='email'
-            />
-          </div>
-          <div className="addPatient-box">
-            <Checkbox
-              formType='new'
-              hasLabel
-              labelTitle='Género'
-              options={['Masculino', 'Femenino', 'Otro']}
-              isRequired
-              onlyCheckboxes
-              colorLabel='var(--black-bg)'
-              isLabelCenter
-              nameProp='gender'
-              onChangeOnlyBoxes={handleGender}
-            />
-            { error && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
       </div>
       <div className="input-row">

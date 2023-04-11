@@ -16,6 +16,7 @@
 
 .textarea-input-shift {
     width: 100%;
+    align-items: center;
 }
 
 .btn-editShift-center {
@@ -25,6 +26,12 @@
 
 .btn-editShift-container {
     width: 30%;
+}
+
+.editShift-error {
+    color: var(--red-bg);
+    text-align: center;
+    margin-top: 1%;
 }
 
 /* EXTRA SMALL */

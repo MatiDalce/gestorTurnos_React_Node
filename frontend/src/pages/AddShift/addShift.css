@@ -1,7 +1,14 @@
-.select-patient-input {
+.select-shift-center {
     display: flex;
     justify-content: center;
+}
+
+.select-shift-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
+    width: 20%;
 }
 
 .input-row-shift {
@@ -24,9 +31,16 @@
 
 .textarea-input-shift {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     width: 90% !important;
     margin: auto;
+}
+
+.addShift-error {
+    color: var(--red-bg);
+    text-align: center;
+    margin-top: 1%;
 }
 
 /* EXTRA SMALL */

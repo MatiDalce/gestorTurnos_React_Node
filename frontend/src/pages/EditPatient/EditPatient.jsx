@@ -14,6 +14,8 @@ const EditPatient = () => {
   const navigate = useNavigate()
   const { id } = useParams() 
 
+  const [error, setError] = useState(false);
+
   const [patient, setPatient] = useState({
     name: '',
     lastName: '',
@@ -44,32 +46,36 @@ const EditPatient = () => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
-      // SETEO ESTADO
-      setPatient({
-        name: res.name,
-        lastName: res.lastName,
-        dni: res.dni,
-        socialNetwork: res.socialService, // No viene desde BE
-        gender: res.gender, // No viene desde BE
-        maritalStatus: res.maritalStatus,
-        email: res.email,
-        birthday: convertUnixtimeToDate(res.birthday),
-        academicLevel: res.academicLevel,
-        father: res.father, // No viene desde BE
-        mother: res.mother, // No viene desde BE
-        children: res.children, 
-        siblings: res.siblings,
-        // livingSiblings: res.livingSiblings, // No viene desde BE
-        personalPhoneNumber: res.personalPhoneNumber,
-        contactPhone: res.contactPhone,
-        bloodType: res.bloodType,
-        hasChronicDisease: res.hasChronicDisease,
-        chronicDisease: res.chronicDisease,
-        hasAllergies: res.hasAllergies,
-        allergies: res.allergies,
-        takesMedication: res.takesMedication,
-        medication: res.medication,
-      })
+      if(!res.errors) {
+        // SETEO DE ESTADO
+        setPatient({
+          name: res.name,
+          lastName: res.lastName,
+          dni: res.dni,
+          socialNetwork: res.socialService, // No viene desde BE
+          gender: res.gender, // No viene desde BE
+          maritalStatus: res.maritalStatus,
+          email: res.email,
+          birthday: convertUnixtimeToDate(res.birthday),
+          academicLevel: res.academicLevel,
+          father: res.father, // No viene desde BE
+          mother: res.mother, // No viene desde BE
+          children: res.children, 
+          siblings: res.siblings,
+          // livingSiblings: res.livingSiblings, // No viene desde BE
+          personalPhoneNumber: res.personalPhoneNumber,
+          contactPhone: res.contactPhone,
+          bloodType: res.bloodType,
+          hasChronicDisease: res.hasChronicDisease,
+          chronicDisease: res.chronicDisease,
+          hasAllergies: res.hasAllergies,
+          allergies: res.allergies,
+          takesMedication: res.takesMedication,
+          medication: res.medication,
+        })
+      } else {
+        setError(true)
+      }
     })
   }, [id])
 
@@ -228,7 +234,8 @@ const EditPatient = () => {
       'Esta por editar el paciente',
       'Esta acción no se puede deshacer ¿Está seguro?'
     ).then(res => {
-      if(!res) {
+      console.log(res);
+      if(!res.errors) {
         navigate('/listado-pacientes')
         toast('success', 'Se ha editado exitosamente')
       } else {
@@ -253,8 +260,8 @@ const EditPatient = () => {
               isLabelCenter
               placeholder='Ingrese el nombre'
               nameProp='name'
-              isRequired
             />
+          { error && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
           <div className="input-editPatient-box">
             <Input
@@ -266,8 +273,8 @@ const EditPatient = () => {
               isLabelCenter
               placeholder='Ingrese el apellido'
               nameProp='lastname'
-              isRequired
             />
+            { error && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
         </div>
         <div className="input-editPatient-row">
@@ -282,36 +289,8 @@ const EditPatient = () => {
               isLabelCenter
               placeholder='Ingrese el DNI'
               nameProp='dni'
-              isRequired
             />
-          </div>
-          <div className="input-editPatient-box">
-            <Input
-              value={patient.socialNetwork}
-              onChange={handleSocialNetwork}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Obra Social del paciente'
-              isLabelCenter
-              placeholder='Ingrese la obra social'
-              nameProp='socialService'
-            />
-          </div>
-        </div>
-        <div className="input-editPatient-row">
-          <div className="input-editPatient-box">
-              <Input
-                value={patient.email}
-                onChange={handleEmail}
-                type={'email'}
-                colorLabel='var(--black-bg)' 
-                isRequired
-                hasLabel
-                labelTitle='Email'
-                isLabelCenter
-                placeholder='Ingrese el email'
-                nameProp='email'
-              />
+            { error && <p className='addPatient-error'>Este campo es requerido.</p> }
           </div>
           <div className="input-editPatient-box">
             <Checkbox
@@ -326,7 +305,34 @@ const EditPatient = () => {
               nameProp='gender'
               onChangeOnlyBoxes={handleGender}
               isChecked={patient.gender}
-              isRequired
+            />
+            { error && <p className='addPatient-error'>Este campo es requerido.</p> }
+          </div>
+        </div>
+        <div className="input-editPatient-row">
+          <div className="input-editPatient-box">
+              <Input
+                value={patient.email}
+                onChange={handleEmail}
+                type={'email'}
+                colorLabel='var(--black-bg)' 
+                hasLabel
+                labelTitle='Email'
+                isLabelCenter
+                placeholder='Ingrese el email'
+                nameProp='email'
+              />
+          </div>
+          <div className="input-editPatient-box">
+            <Input
+              value={patient.socialNetwork}
+              onChange={handleSocialNetwork}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Obra Social del paciente'
+              isLabelCenter
+              placeholder='Ingrese la obra social'
+              nameProp='socialService'
             />
           </div>
       </div>

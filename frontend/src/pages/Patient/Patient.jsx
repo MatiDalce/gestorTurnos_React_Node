@@ -31,11 +31,11 @@ const Patient = () => {
       'Esta acción no se puede deshacer ¿Está seguro?', 
     ).then((res) => {
       console.log(res);
-      if(!res) {
-        toast('success', 'Paciente eliminado exitosamente')
-        navigate('/listado-pacientes')
+      if(!res.errors) {
+        toast('success', 'Paciente eliminado exitosamente');
+        navigate('/listado-pacientes');
       } else {
-        toast('error', 'No se pudo eliminar el paciente')
+        toast('error', 'No se pudo eliminar el paciente');
       }
     })
   }

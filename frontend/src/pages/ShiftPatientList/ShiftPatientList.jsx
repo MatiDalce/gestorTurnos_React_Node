@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import Input from '../../components/Input/Input'
 import Select from '../../components/Select/Select'
 import Table from '../../components/Table/Table'
 import { config } from '../../env/config';

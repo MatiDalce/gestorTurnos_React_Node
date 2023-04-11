@@ -38,7 +38,7 @@ const Shift = () => {
       'Está por borrar un turno', 
       'Esta acción no se puede deshacer ¿Está seguro?', 
     ).then((res) => {
-      if(!res) {
+      if(!res.errors) {
         toast('success', 'Turno eliminado exitosamente')
         navigate('/listado-turnos')
       } else {
@@ -50,6 +50,7 @@ const Shift = () => {
   const handleDownloadShift = () => {
     fetch(`${config.webAPI}/appointments/download/${id}`)
     .then(response => {
+      console.log(response);
       if (!response.ok) {
         toast('error', 'Ha ocurrido un error en la descarga')
         throw new Error('Falló la descarga');

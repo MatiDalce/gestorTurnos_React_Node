@@ -15,13 +15,17 @@ const AddShift = () => {
   const [date, setDate] = useState(0);
   const [hour, setHour] = useState(0);
   const [note, setNote] = useState('');
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true)
     fetch(`${config.webAPI}/patients/limit`)
     .then(res => res.json())
     .then(res => {
       const patientsListNames = res.map(patient => {return {text:patient.completeName, value:patient.id}});
       setPatientList(patientsListNames)
+      setLoading(false)
     })
   }, []);
 
@@ -40,15 +44,13 @@ const AddShift = () => {
   const handleAddShift = (e) => {
 
     const dateTime = new Date(`${date}T${hour}`); // Creamos un objeto Date con la fecha y la hora
-    const formattedDateTime = dateTime.toISOString(); // Obtenemos la fecha y hora formateada como string
+    const formattedDateTime = date && hour ? dateTime.toISOString() : ''; // Si date y hour existen, las formateamos como string
 
     let data = {
       day: formattedDateTime,
       patient: Number(selectedPatient),
       note: note
     };
-
-    console.log(data);
 
     fetch(`${config.webAPI}/appointments`, {
       method: 'POST',
@@ -59,27 +61,32 @@ const AddShift = () => {
     })
     .then(res => res.json())
     .then((res) => {
-      if(res) {
+      console.log(res);
+      if(!res.errors) {
         toast('success', 'Turno agregado exitosamente');
         navigate('/listado-turnos')
       } else {
         toast('error', 'No se pudo agregar el turno');
+        setError(true)
       }
     })
   }
 
   return (
     <>
-      <div className="select-patient-input">
-        <Select
-          onChange={handleSelectPatient}
-          options={[{text:'', value:0}, ...patientList]}
-          colorLabel='var(--black-bg)' 
-          hasLabel
-          labelTitle='Seleccione el paciente'
-          isLabelCenter
-          nameProp='patients'
-        />
+      <div className="select-shift-center">
+        <div className="select-shift-input">
+          <Select
+            onChange={handleSelectPatient}
+            options={[{text:'', value:0}, ...patientList]}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Seleccione el paciente'
+            isLabelCenter
+            nameProp='patients'
+          />
+          { (error && !selectedPatient) && <p className='addShift-error'>Este campo es requerido.</p> }
+        </div>
       </div>
       <div className="input-row-shift">
         <div className="addShift-input-container">
@@ -93,6 +100,7 @@ const AddShift = () => {
             type='date'
             nameProp='date'
           />
+          { (error && !date) && <p className='addShift-error'>Este campo es requerido.</p> }
         </div>
         <div className="addShift-input-container">
           <Input
@@ -106,6 +114,7 @@ const AddShift = () => {
             type='time'
             nameProp='hour'
           />
+          { (error && !hour) && <p className='addShift-error'>Este campo es requerido.</p> }
         </div>
       </div>
       <div className="textarea-input-shift">
@@ -119,12 +128,14 @@ const AddShift = () => {
           type='textarea'
           nameProp='notes'
         />
+        { (error && !note) && <p className='addShift-error'>Este campo es requerido.</p> }
       </div>
       <div className='btn-addShift-container'>
         <Button 
           title={'Agregar'} 
           type='button'
           onClick={handleAddShift}
+          isDisabled={loading}
         />
       </div>
     </>
