@@ -211,7 +211,7 @@ module.exports = {
       if (!result) {
         res.status(404).json({ message: 'No patient record found for the given ID' });
       } else {
-        res.status(202).json({ message: 'Patient record updated successfully' });
+        res.status(202).json(result);
       }
     } catch (err) {
       console.error(err);
