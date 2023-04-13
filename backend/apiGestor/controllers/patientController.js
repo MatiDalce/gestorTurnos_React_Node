@@ -209,7 +209,7 @@ module.exports = {
       );
 
       if (result[0] > 0) {
-        res.status(200).json({ message: 'Patient record updated successfully' });
+        res.status(200).json({ message: 'Patient record updated successfully' }, result);
       } else {
         res.status(404).json({ message: 'No patient record found for the given ID' });
       }
