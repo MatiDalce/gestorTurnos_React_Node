@@ -231,9 +231,9 @@ module.exports = {
       } else {
         res.status(404).json({ message: 'No patient record found for the given ID' });
       }
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('Error deleting patient record');
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Internal server error" });
     }
 
   },

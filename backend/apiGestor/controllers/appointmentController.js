@@ -355,7 +355,7 @@ module.exports = {
             id: appointment.id,
             start: appointment.day,
             note: appointment.note,
-            name: appointment.patient.name + appointment.patient.lastName
+            name: appointment.patient.name + " " +appointment.patient.lastName
           };
         });
         res.json({appointmentsCalendar})
