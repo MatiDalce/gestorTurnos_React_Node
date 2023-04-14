@@ -7,6 +7,7 @@ import Button from '../../components/Button/Button';
 import { warningDeleteAlert } from '../../assets/helpers/customAlert';
 import { convertISOStringtoDateTime } from '../../assets/helpers/unixtimeToSomething';
 import './shift.css'
+import Swal from 'sweetalert2';
 
 const Shift = () => {
   const navigate = useNavigate()
@@ -37,18 +38,53 @@ const Shift = () => {
   }, [id])
 
   const handleDeleteShift = () => {
-    warningDeleteAlert(
-      `${config.webAPI}/appointments/${id}`,
-      'Está por borrar un turno', 
-      'Esta acción no se puede deshacer ¿Está seguro?', 
-    ).then((res) => {
-      if(!res.errors) {
-        toast('success', 'Turno eliminado exitosamente')
-        navigate('/listado-turnos')
-      } else {
-        toast('error', 'No se pudo eliminar el turno')
-      }
+
+    // ! VER SI SE PUEDE USAR SINO YA FUE
+    // warningDeleteAlert(
+    //   `${config.webAPI}/appointments/${id}`,
+    //   'Está por borrar un turno', 
+    //   'Esta acción no se puede deshacer ¿Está seguro?', 
+    // ).then((res) => {
+    //   console.log(res);
+    //   if(res) {
+    //     toast('success', 'Turno eliminado exitosamente')
+    //     navigate('/listado-turnos')
+    //   } else {
+    //     toast('error', 'No se pudo eliminar el turno')
+    //   }
+    // })
+
+    Swal.fire({
+        title: 'Está por borrar este turno',
+        text: 'Esta acción no se puede deshacer ¿Está seguro?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'var(--skyblue-bg)',
+        cancelButtonColor: 'var(--red-bg)',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`${config.webAPI}/appointments/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+              if (!response.ok) {
+                toast('error', 'No se ha podido eliminar el turno')
+                return Promise.reject(new Error("FALLÓ"))
+              } else return response.json();
+            })
+            .then((res) => {
+              if(res) {
+                toast('success', 'Turno eliminado exitosamente')
+                navigate('/listado-turnos')
+              } else {
+                toast('error', 'No se ha podido eliminar el turno')
+              }
+            })
+        }
     })
+
   } 
 
   const handleDownloadShift = () => {

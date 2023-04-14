@@ -68,7 +68,13 @@ export function warningDeleteAlert(
             fetch(endpoint, {
                 method: 'DELETE'
             })
-            .then(response => response.json())
-        }
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    return null
+                }
+            })
+        } else return null
     })
 }

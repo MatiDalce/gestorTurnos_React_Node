@@ -6,6 +6,7 @@ import { warningDeleteAlert } from '../../assets/helpers/customAlert';
 import { convertUnixtimeToAge } from '../../assets/helpers/unixtimeToSomething';
 import { config } from '../../env/config';
 import { toast } from '../../assets/helpers/toast';
+import Swal from 'sweetalert2';
 
 const Patient = () => {
   let {id} = useParams();
@@ -31,19 +32,53 @@ const Patient = () => {
   }, [id])
 
   const handleDelete = () => {
-    warningDeleteAlert(
-      `${config.webAPI}/patients/${id}`,
-      'Está por borrar un paciente', 
-      'Esta acción no se puede deshacer ¿Está seguro?', 
-    ).then((res) => {
-      console.log(res);
-      if(res === undefined) {
-        toast('success', 'Paciente eliminado exitosamente');
-        navigate('/listado-pacientes');
-      } else {
-        toast('error', 'No se pudo eliminar el paciente');
+
+    // ! VER SI SE PUEDE USAR SINO YA FUE
+    // warningDeleteAlert(
+    //   `${config.webAPI}/patients/${id}`,
+    //   'Está por borrar un paciente', 
+    //   'Esta acción no se puede deshacer ¿Está seguro?', 
+    // ).then((res) => {
+    //   console.log(res);
+    //   if(res === undefined) {
+    //     toast('success', 'Paciente eliminado exitosamente');
+    //     navigate('/listado-pacientes');
+    //   } else {
+    //     toast('error', 'No se pudo eliminar el paciente');
+    //   }
+    // })
+
+    Swal.fire({
+      title: 'Está por borrar este paciente',
+      text: 'Esta acción no se puede deshacer ¿Está seguro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'var(--skyblue-bg)',
+      cancelButtonColor: 'var(--red-bg)',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+          fetch(`${config.webAPI}/patients/${id}`, {
+              method: 'DELETE'
+          })
+          .then(response => {
+            if (!response.ok) {
+              toast('error', 'No se ha podido eliminar el paciente')
+              return Promise.reject(new Error("FALLÓ"))
+            } else return response.json();
+          })
+          .then((res) => {
+            if(res) {
+              toast('success', 'Paciente eliminado exitosamente')
+              navigate('/listado-pacientes')
+            } else {
+              toast('error', 'No se ha podido eliminar el paciente')
+            }
+          })
       }
     })
+
   }
 
   return (

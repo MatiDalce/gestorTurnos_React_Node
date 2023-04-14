@@ -260,10 +260,10 @@ const EditPatient = () => {
             body: JSON.stringify(body)
         })
         .then(res => {
-            if (!res.ok) {
-                toast('error', 'No se ha podido editar al paciente')
-                return Promise.reject(new Error("FALLÓ"))
-            } else return res.json();
+          if (!res.ok) {
+              toast('error', 'No se ha podido editar al paciente')
+              return Promise.reject(new Error("FALLÓ"))
+          } else return res.json();
         })
         .then(res => {
           if(res) {
