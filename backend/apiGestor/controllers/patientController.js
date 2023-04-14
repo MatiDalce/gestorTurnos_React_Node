@@ -214,13 +214,13 @@ module.exports = {
       });
 
       if (!patientUp) {
-       return  res.status(404).json({ message: 'ERROR' });
+       return  res.status(404).send({ message: 'ERROR' });
       } else {
-        return res.status(201).json(patientUp);
+        return res.status(201).send(patientUp);
       }
     } catch (err) {
       console.error(err);
-      return res.status(500).json('Error updating patient record');
+      return res.status(500).send('Error updating patient record');
     }
 
   },
