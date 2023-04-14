@@ -208,14 +208,13 @@ module.exports = {
         }, { where: { id } }
       );
 
-      if (!result) {
-        res.status(404).json({ message: 'No patient record found for the given ID' });
-      } else {
-        res.status(202).json(result);
-      }
+      console.log(`PUT patientController : New patient record created: ${result.id}`);
+
+      res.status(201).json(result);
     } catch (err) {
       console.error(err);
-      res.status(500).send('Error updating patient record');
+      console.log(`PUT patientController : Error creating patient record: ${err}`);
+      res.status(500).json({ message: 'Error creating patient record' });
     }
 
   },
