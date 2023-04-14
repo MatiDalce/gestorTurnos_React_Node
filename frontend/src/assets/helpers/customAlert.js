@@ -1,5 +1,4 @@
 import Swal from 'sweetalert2';
-import { toast } from './toast';
 
 export function errorAlert(
     title = '',
@@ -39,8 +38,12 @@ export function warningEditAlert(
                 },
                 body: JSON.stringify(body)
             })
-            .then(res => res.json())
-        } else return
+            .then(res => {
+                if (!res.ok) {
+                    return null
+                } else return res.json();
+            })
+        } else return null
     })
 }
 

@@ -9,6 +9,7 @@ import './editPatient.css';
 import { config } from '../../env/config';
 import { warningEditAlert } from '../../assets/helpers/customAlert';
 import { convertUnixtimeToDate } from '../../assets/helpers/unixtimeToSomething';
+import Swal from 'sweetalert2';
 
 const EditPatient = () => {
   const navigate = useNavigate()
@@ -231,18 +232,46 @@ const EditPatient = () => {
       hasChronicDisease: patient.hasChronicDisease, // Boolean pero con 0 o 1
       chronicDisease: patient.chronicDisease,
     }
-    warningEditAlert(
-      `${config.webAPI}/patients/${id}`,
-      body,
-      'Esta por editar el paciente',
-      'Esta acción no se puede deshacer ¿Está seguro?'
-    ).then(res => {
-      if(!res.errors) {
-        navigate('/listado-pacientes')
-        toast('success', 'Se ha editado exitosamente')
-      } else {
-        toast('error', 'No se ha podido editar')
-      }
+    
+    // ! VER SI SE PUEDE USAR SINO YA FUE
+    // warningEditAlert(
+    //   `${config.webAPI}/patients/${id}`,
+    //   body,
+    //   'Esta por editar el paciente',
+    //   'Esta acción no se puede deshacer ¿Está seguro?'
+    // )
+
+    Swal.fire({
+      title: 'Esta por editar el paciente',
+      text: 'Esta acción no se puede deshacer ¿Está seguro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'var(--skyblue-bg)',
+      cancelButtonColor: 'var(--red-bg)',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${config.webAPI}/patients/${id}`, { // id = id del turno
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+        .then(res => {
+            if (!res.ok) {
+                toast('error', 'No se ha podido editar al paciente')
+                return Promise.reject(new Error("FALLÓ"))
+            } else return res.json();
+        })
+        .then(res => {
+          if(res) {
+            navigate('/listado-pacientes')
+            toast('success', 'Se ha editado exitosamente')
+          }
+        })
+      } else return null
     })
   }
 

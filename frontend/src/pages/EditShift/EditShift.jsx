@@ -7,6 +7,7 @@ import Input from '../../components/Input/Input';
 import './editShift.css';
 import { warningEditAlert } from '../../assets/helpers/customAlert';
 import { convertISOStringtoDateTime, joinDateTimeToISOString } from '../../assets/helpers/unixtimeToSomething';
+import Swal from 'sweetalert2';
 
 const EditShift = () => {
   const navigate = useNavigate();
@@ -24,8 +25,10 @@ const EditShift = () => {
     .then(res => res.json())
     .then(res => {
       if(res) {
-        setDate(convertISOStringtoDateTime(res.day, 'date'));
-        setHour(convertISOStringtoDateTime(res.day, 'hour'));
+        let date = convertISOStringtoDateTime(res.day, 'date')
+        let hour = convertISOStringtoDateTime(res.day, 'hour')
+        setDate(date);
+        setHour(hour);
         setNotes(res.note);
         setPatientID(res.patient.id)
         setLoading(false)
@@ -61,20 +64,55 @@ const EditShift = () => {
       patient: patientID
     }
 
-    warningEditAlert(
-      `${config.webAPI}/appointments/${id}`,
-      body,
-      'Esta por editar el turno',
-      'Esta acción no se puede deshacer ¿Está seguro?'
-    ).then(res => {
-      if(!res.errors) {
-        navigate('/listado-turnos')
-        toast('success', 'Se ha editado exitosamente')
-      } else {
-        toast('error', 'No se ha podido editar')
-        setError(true)
-      }
+    // ! VER SI SE PUEDE USAR SINO YA FUE
+    // warningEditAlert(
+    //   `${config.webAPI}/appointments/${id}`,
+    //   body,
+    //   'Esta por editar el turno',
+    //   'Esta acción no se puede deshacer ¿Está seguro?'
+    // ).then(res => {
+    //   if(res === undefined) {
+    //     navigate('/listado-turnos')
+    //     toast('success', 'Se ha editado exitosamente')
+    //   } else {
+    //     toast('error', 'No se ha podido editar')
+    //     setError(true)
+    //   }
+    // })
+
+    Swal.fire({
+      title: 'Esta por editar el turno',
+      text: 'Esta acción no se puede deshacer ¿Está seguro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'var(--skyblue-bg)',
+      cancelButtonColor: 'var(--red-bg)',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${config.webAPI}/appointments/${id}`, { // id = id del turno
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+        .then(res => {
+            if (!res.ok) {
+                toast('error', 'No se ha podido editar el turno')
+                return Promise.reject(new Error("FALLÓ"))
+            } else return res.json();
+        })
+        .then(res => {
+          if(res) {
+            navigate('/listado-turnos')
+            toast('success', 'Se ha editado exitosamente')
+          }
+        })
+      } else return null
     })
+
   };
 
   return (

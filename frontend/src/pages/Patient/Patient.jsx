@@ -36,7 +36,8 @@ const Patient = () => {
       'Está por borrar un paciente', 
       'Esta acción no se puede deshacer ¿Está seguro?', 
     ).then((res) => {
-      if(!res.errors) {
+      console.log(res);
+      if(res === undefined) {
         toast('success', 'Paciente eliminado exitosamente');
         navigate('/listado-pacientes');
       } else {

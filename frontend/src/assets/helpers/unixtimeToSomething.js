@@ -26,6 +26,7 @@ export function convertUnixtimeToDate(date) {
     return `${year}-${month}-${day}`;
 }
 
+// ESTO ES PARA INPUTS DE FECHA
 // FORMATO ISO A FECHA Y HORA - dateTime = fecha formato ISO string | get = 'date' o 'hour'
 export function convertISOStringtoDateTime(dateTime, get) {
     const dateString = dateTime;
@@ -35,7 +36,8 @@ export function convertISOStringtoDateTime(dateTime, get) {
         const year = dateObj.getFullYear();
         const month = String(dateObj.getMonth() + 1).padStart(2, "0");
         const day = String(dateObj.getDate()).padStart(2, "0");
-        return `${day}-${month}-${year}`;
+        // return `${day}-${month}-${year}`;
+        return `${year}-${month}-${day}`;
     } else { // HORA
         const hours = String(dateObj.getHours()).padStart(2, "0");
         const minutes = String(dateObj.getMinutes()).padStart(2, "0");
