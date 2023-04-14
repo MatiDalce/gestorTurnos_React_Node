@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import './patient.css';
 import Button from '../../components/Button/Button';
+import Spinner from '../../components/Spinner/Spinner';
 import { useNavigate, useParams } from 'react-router-dom';
 import { warningDeleteAlert } from '../../assets/helpers/customAlert';
-import { convertUnixtimeToAge } from '../../assets/helpers/unixtimeToSomething';
+import { convertUnixtimeToAge, convertUnixtimeToDate } from '../../assets/helpers/unixtimeToSomething';
 import { config } from '../../env/config';
 import { toast } from '../../assets/helpers/toast';
 import Swal from 'sweetalert2';
@@ -22,6 +23,7 @@ const Patient = () => {
       if(res){
         setPatient({
           ...res,
+          birthday: convertUnixtimeToDate(res.birthday),
           age: convertUnixtimeToAge(new Date(res.birthday * 1000))
         })
       } else {
@@ -81,10 +83,10 @@ const Patient = () => {
 
   }
 
+  if(loading) return <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', width: '100%'}}><Spinner /></div>
   return (
     <>
       <p className='patient-title'>{patient.name} {patient.lastName}</p>
-      
       <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Nombre del Paciente</p>

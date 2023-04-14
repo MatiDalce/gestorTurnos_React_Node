@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from '../../assets/helpers/toast';
 import Button from '../../components/Button/Button';
+import Spinner from '../../components/Spinner/Spinner';
 import Input from '../../components/Input/Input';
 import Select from '../../components/Select/Select';
 import Checkbox from '../../components/Checkbox/Checkbox';
@@ -59,7 +60,7 @@ const EditPatient = () => {
           gender: res.gender, // No viene desde BE
           maritalStatus: res.maritalStatus,
           email: res.email,
-          birthday: convertUnixtimeToDate(res.birthday),
+          birthday: convertUnixtimeToDate(res.birthday, true),
           academicLevel: res.academicLevel,
           father: res.father, // No viene desde BE
           mother: res.mother, // No viene desde BE
@@ -275,6 +276,7 @@ const EditPatient = () => {
     })
   }
 
+  if(loading) return <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', width: '100%'}}><Spinner /></div>
   return (
     <>
       <h2 className='editPatient-title'>EDICIÓN DE DATOS DEL PACIENTE</h2>
