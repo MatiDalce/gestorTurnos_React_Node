@@ -208,10 +208,15 @@ module.exports = {
         }, { where: { id } }
       );
 
-      if (result[0] > 0) {
-        res.status(200).json({ message: 'Patient record updated successfully' });
+      const patientUp = await db.Patient.findOne({
+        where: { id },
+        attributes: { exclude: ['updatedAt', 'createdAt'] } // exclude createdAt field
+      });
+
+      if (!patientUp) {
+        res.status(404).json({ message: 'ERROR' });
       } else {
-        res.status(404).json({ message: 'No patient record found for the given ID' });
+        res.status(201).json(patientUp);
       }
     } catch (err) {
       console.error(err);
