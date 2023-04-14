@@ -14,7 +14,6 @@ const Button = ({
 
   const buttonStyle = {
     backgroundColor: `${bgColor ? bgColor : 'var(--skyblue-bg)'}`,
-    pointerEvent: `${isDisabled ? 'none' : 'auto'}`,
     cursor: `${isDisabled ? 'auto' : 'pointer'}`,
     opacity: `${isDisabled ? '0.6' : '1'}`,
   };
@@ -36,7 +35,7 @@ const Button = ({
   return (
     <button 
       type={type}
-      className="btn"
+      className={`btn ${isDisabled && 'disabled-btn'}`}
       style={buttonStyle}
       onClick={onClick}
     >

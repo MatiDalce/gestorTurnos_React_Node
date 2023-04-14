@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from '../../assets/helpers/toast';
 import { config } from '../../env/config';
 import Button from '../../components/Button/Button';
+import Spinner from '../../components/Spinner/Spinner';
 import Input from '../../components/Input/Input';
 import './editShift.css';
 import { warningEditAlert } from '../../assets/helpers/customAlert';
@@ -25,7 +26,7 @@ const EditShift = () => {
     .then(res => res.json())
     .then(res => {
       if(res) {
-        let date = convertISOStringtoDateTime(res.day, 'date')
+        let date = convertISOStringtoDateTime(res.day, 'date', true)
         let hour = convertISOStringtoDateTime(res.day, 'hour')
         setDate(date);
         setHour(hour);
@@ -101,6 +102,7 @@ const EditShift = () => {
         .then(res => {
             if (!res.ok) {
                 toast('error', 'No se ha podido editar el turno')
+                setError(true)
                 return Promise.reject(new Error("FALLÓ"))
             } else return res.json();
         })
@@ -115,6 +117,7 @@ const EditShift = () => {
 
   };
 
+  if(loading) return <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', width: '100%'}}><Spinner /></div>
   return (
     <>
       <div className="input-row-shift">

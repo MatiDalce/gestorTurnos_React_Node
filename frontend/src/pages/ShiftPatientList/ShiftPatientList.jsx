@@ -146,7 +146,7 @@ const ShiftPatientList = () => {
           options={[
             {
               text: 'Seleccione',
-              value: ''
+              value: null
             },
             {
               text: 'De más antiguos a más recientes',

@@ -262,7 +262,7 @@ const EditPatient = () => {
         })
         .then(res => {
           if (!res.ok) {
-              toast('error', 'No se ha podido editar al paciente')
+              toast('error', 'No se pudo editar al paciente')
               return Promise.reject(new Error("FALLÓ"))
           } else return res.json();
         })
@@ -270,6 +270,9 @@ const EditPatient = () => {
           if(res) {
             navigate('/listado-pacientes')
             toast('success', 'Se ha editado exitosamente')
+          } else {
+            toast('error', 'No se pudo editar el paciente. Revise los datos.')
+            setError(true)
           }
         })
       } else return null
@@ -532,7 +535,7 @@ const EditPatient = () => {
             isDisabled={loading}
             options={[
               {
-                value: '',
+                value: null,
                 text: 'Seleccione un valor',
               },
               {
@@ -586,7 +589,7 @@ const EditPatient = () => {
             isDisabled={loading}
             options={[
               {
-                value: '',
+                value: null,
                 text: 'Seleccione un valor',
               },
               {

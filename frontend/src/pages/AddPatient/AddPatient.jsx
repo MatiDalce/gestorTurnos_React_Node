@@ -207,7 +207,7 @@ const AddPatient = () => {
         toast('success', 'Paciente agregado exitosamente')
         navigate('/listado-pacientes')
       } else {
-        toast('error', 'No se pudo agregar el paciente')
+        toast('error', 'No se pudo agregar el paciente. Revise los datos.')
         setError(true)
       }
     })
@@ -441,7 +441,7 @@ const AddPatient = () => {
           <Select
             options={[
               {
-                value: '',
+                value: null,
                 text: 'Seleccione un valor',
               },
               {
@@ -493,7 +493,7 @@ const AddPatient = () => {
             <Select
               options={[
                 {
-                  value: '',
+                  value: null,
                   text: 'Seleccione un valor',
                 },
                 {

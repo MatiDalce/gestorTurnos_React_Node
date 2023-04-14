@@ -11,7 +11,7 @@ import './addShift.css';
 const AddShift = () => {
   const navigate = useNavigate()
   const [patientList, setPatientList] = useState([]);
-  const [selectedPatient, setSelectedPatient] = useState(0);
+  const [selectedPatient, setSelectedPatient] = useState('');
   const [date, setDate] = useState(0);
   const [hour, setHour] = useState(0);
   const [note, setNote] = useState('');
@@ -78,7 +78,7 @@ const AddShift = () => {
         <div className="select-shift-input">
           <Select
             onChange={handleSelectPatient}
-            options={[{text:'', value:0}, ...patientList]}
+            options={[{text:'', value:null}, ...patientList]}
             colorLabel='var(--black-bg)' 
             hasLabel
             labelTitle='Seleccione el paciente'
@@ -135,7 +135,13 @@ const AddShift = () => {
           title={'Agregar'} 
           type='button'
           onClick={handleAddShift}
-          isDisabled={loading}
+          isDisabled={
+            selectedPatient === '' ||
+            date === 0 ||
+            hour === 0 ||
+            note === '' ||
+            loading
+          }
         />
       </div>
     </>

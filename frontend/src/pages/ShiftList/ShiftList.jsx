@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { convertISOStringtoDateTime } from '../../assets/helpers/unixtimeToSomething';
 import Button from '../../components/Button/Button'
+import Spinner from '../../components/Spinner/Spinner'
 import Input from '../../components/Input/Input'
 import Table from '../../components/Table/Table'
 import { config } from '../../env/config';
@@ -97,6 +98,7 @@ const ShiftList = () => {
     });
   }
 
+  if(loading) return <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', width: '100%'}}><Spinner /></div>
   return (
     <>
     <div className="search-shift">

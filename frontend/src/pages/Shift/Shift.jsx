@@ -4,6 +4,7 @@ import { toast } from '../../assets/helpers/toast'
 import { config } from '../../env/config';
 import Accordion from '../../components/Accordion/Accordion';
 import Button from '../../components/Button/Button';
+import Spinner from '../../components/Spinner/Spinner';
 import { warningDeleteAlert } from '../../assets/helpers/customAlert';
 import { convertISOStringtoDateTime } from '../../assets/helpers/unixtimeToSomething';
 import './shift.css'
@@ -114,6 +115,7 @@ const Shift = () => {
     })
   }
 
+  if(loading) return <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', width: '100%'}}><Spinner /></div>
   return (
     <>
     <p className='shift-title' >{shift.name || '-'} {shift.lastName || '-'}</p>
