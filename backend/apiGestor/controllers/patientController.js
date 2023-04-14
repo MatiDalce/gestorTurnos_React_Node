@@ -177,9 +177,9 @@ module.exports = {
       chronicDisease,
       email
     } = req.body;
-
+  
     try {
-      const result = await db.Patient.update(
+      const [, [updatedPatient]] = await db.Patient.update(
         {
           name,
           lastName,
@@ -205,19 +205,19 @@ module.exports = {
           hasChronicDisease,
           chronicDisease,
           email
-        }, { where: { id } }
+        }, { where: { id }, returning: true }
       );
-
-      console.log(`PUT patientController : New patient record created: ${result.id}`);
-
-      res.status(201).json(result);
+  
+      console.log(`PUT patientController : Patient record updated: ${updatedPatient.id}`);
+  
+      res.status(201).json(updatedPatient);
     } catch (err) {
       console.error(err);
-      console.log(`PUT patientController : Error creating patient record: ${err}`);
-      res.status(500).json({ message: 'Error creating patient record' });
+      console.log(`PUT patientController : Error updating patient record: ${err}`);
+      res.status(500).json({ message: 'Error updating patient record' });
     }
-
   },
+  
   delete: async (req, res) => {
     const { id } = req.params;
 
