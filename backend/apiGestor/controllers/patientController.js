@@ -214,7 +214,7 @@ module.exports = {
     } catch (err) {
       console.error(err);
       console.log(`PUT patientController : Error updating patient record: ${err}`);
-      res.status(500).json({ message: 'Error updating patient record' });
+      res.status(500).json(err);
     }
   },
   
