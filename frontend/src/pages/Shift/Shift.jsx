@@ -5,7 +5,6 @@ import { config } from '../../env/config';
 import Accordion from '../../components/Accordion/Accordion';
 import Button from '../../components/Button/Button';
 import Spinner from '../../components/Spinner/Spinner';
-import { warningDeleteAlert } from '../../assets/helpers/customAlert';
 import { convertISOStringtoDateTime } from '../../assets/helpers/unixtimeToSomething';
 import './shift.css'
 import Swal from 'sweetalert2';
