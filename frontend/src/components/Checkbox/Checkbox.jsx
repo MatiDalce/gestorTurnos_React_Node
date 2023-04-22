@@ -19,16 +19,17 @@ const Checkbox = ({
     isRequired,
     isDisabled
 }) => {
+    
     const [activeOptions, setActiveOptions] = useState(false);
-    const [checkValue, setCheckValue] = useState();
+    const [checkValue, setCheckValue] = useState(false);
 
     useEffect(() => {
         if(formType === 'new') {
             if(value === undefined || value === null) setActiveOptions(true);
             if(value !== undefined || value!== null) setCheckValue(value);
         } else {
-            if(value === '' || value === undefined || value === null) setActiveOptions(true);
-            if(value !== '' || value !== undefined || value!== null) setCheckValue(value);
+            if(value === '' || value === null) handleYesOrNo(value === '' ? 'yes' : 'no')
+            if(value !== '' || value!== null) handleYesOrNo(value !== '' ? 'yes' : 'no')
         }
     }, [value, formType])
 
@@ -38,6 +39,7 @@ const Checkbox = ({
     }
 
     const handleYesOrNo = (value) => {
+        console.log(value);
         if(value === 'yes') {
             setActiveOptions(true);
         } else if(value === 'no') {
