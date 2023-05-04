@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     note: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    payStatus: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     timestamps: false // Disable timestamps for this model
