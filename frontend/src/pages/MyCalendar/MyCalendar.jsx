@@ -11,10 +11,11 @@ import Spinner from '../../components/Spinner/Spinner';
 import './myCalendar.css';
 
 const MyCalendar = () => {
-
+  // ===== ESTADOS =====
   const [openModal, setOpenModal] = useState(false)
   const [eventsList, setEventsList] = useState([])
   const [loading, setLoading] = useState(true)
+  // ===== ESTADO: DATA QUE SE VE EN EL MODAL =====
   const [modalData, setModalData] = useState({
     id: 0,
     title: '',
@@ -23,6 +24,7 @@ const MyCalendar = () => {
   })
 
   useEffect(() => {
+    // ===== GET DE DATOS DEL CALENDARIO =====
     fetch(`${config.webAPI}/appointments/calendar`)
     .then(res => res.json())
     .then(res => {
@@ -41,18 +43,20 @@ const MyCalendar = () => {
     .finally(() => setLoading(false))
   }, [])
 
-  // Esto convierte al formato que necesita el calendario
-  // new Date(la fecha).toISOString()
+  // El formato que necesita el calendario es ISOString con new Date(la fecha).toISOString()
 
+  // ===== ABRE/CIERRA MODAL =====
   const handleOpenModal = () => {
     setOpenModal(!openModal)
   }
 
-  const handleDateClick = (e) => {
+  // ===== DATA DE LA FECHA =====
+  // const handleDateClick = (e) => {
   //   console.log(e.date); // Fecha formato largo
   //   console.log(e.dateStr); // Fecha formato string yyyy-mm-dd
-  }
+  // }
 
+  // ===== CONFIGURA Y COLOCA LA DATA AL MODAL =====
   function handleEventOnClick(eventInfo) {
     const date = new Date(eventInfo.el.fcSeg.eventRange.range.start);
     const day = date.getDate() + 1;
@@ -68,6 +72,7 @@ const MyCalendar = () => {
     handleOpenModal()
   }
 
+  // ===== HTML =====
   return (
         <div className="calendar-box">
           {
@@ -96,10 +101,10 @@ const MyCalendar = () => {
                 start: "today prev,next",
               }}
               locale={esLocale} // Idioma
-              dateClick={handleDateClick} // Da info sobre el día
               eventClick={handleEventOnClick} // Da info sobre el evento
               eventBackgroundColor='var(--skyblue-bg)'
               stickyHeaderDates // Mantiene pegadas las cabeceras de los días
+              // dateClick={handleDateClick} // Da info sobre el día
               // weekends={false} // Quita los fines de semana
             />
           }

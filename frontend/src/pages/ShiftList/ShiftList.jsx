@@ -9,6 +9,7 @@ import './shiftList.css'
 
 const ShiftList = () => {
 
+    // ===== ESTADO =====
   const [shiftList, setShiftList] = useState([]);
   const [filterShift, setFilterShift] = useState({
     name: '',
@@ -18,6 +19,7 @@ const ShiftList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // ===== GET DE TURNOS =====
     fetch(`${config.webAPI}/appointments`)
     .then(res => res.json())
     .then(res => {
@@ -36,6 +38,7 @@ const ShiftList = () => {
     .finally(() => setLoading(false));
   }, [])
 
+  // ===== MANEJADORES DE ESTADO =====
   const handleName = (e) => {
     setFilterShift({
       ...filterShift,
@@ -43,21 +46,7 @@ const ShiftList = () => {
     })
   }
 
-  const handleDateFrom = (e) => {
-    setFilterShift({
-      ...filterShift,
-      dateFrom: e.target.value
-    })
-  }
-
-  const handleDateUntil = (e) => {
-    setFilterShift({
-      ...filterShift,
-      dateUntil: e.target.value
-    })
-  }
-
-  // Input de refresh
+  // Botón de refresh
   const handleRefresh = (e) => {
     fetch(`${config.webAPI}/appointments`)
     .then(res => res.json())
@@ -79,6 +68,7 @@ const ShiftList = () => {
     });
   }
 
+  // ===== Input de búsqueda =====
   const handleShiftSearch = () => {
     setLoading(true)
     fetch(`${config.webAPI}/appointments/search?q=${filterShift.name}`)
@@ -98,6 +88,7 @@ const ShiftList = () => {
     });
   }
 
+  // ===== HTML =====
   if(loading) return <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', width: '100%'}}><Spinner /></div>
   return (
     <>
@@ -123,27 +114,6 @@ const ShiftList = () => {
           />
         </div>
       </div>
-      {/* <div className="shiftList-input-box">
-        <Input 
-          onChange={handleDateFrom}
-          value={filterShift.dateFrom}
-          hasLabel
-          labelTitle='Fecha desde:'
-          type='date'
-          nameProp='fromDate'
-        />
-      </div>
-      <div className="shiftList-input-box">
-        <Input 
-          onChange={handleDateUntil}
-          value={filterShift.dateUntil}
-          hasLabel
-          labelTitle='Fecha hasta:'
-          type='date'
-          nameProp='untilDate'
-        />
-      </div> */}
-
       <div className="shiftList-btn-box">
         <Button 
           title={'Agregar Turno'} 

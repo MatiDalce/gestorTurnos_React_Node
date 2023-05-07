@@ -11,11 +11,13 @@ import Swal from 'sweetalert2';
 const Patient = () => {
   let {id} = useParams();
   const navigate = useNavigate()
+  // ===== ESTADO =====
   const [patient, setPatient] = useState([]);
   
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // ===== GET DEL PACIENTE =====
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
@@ -32,8 +34,8 @@ const Patient = () => {
     .finally(() => setLoading(false));
   }, [id])
 
+  // ===== DELETE DEL PACIENTE =====
   const handleDelete = () => {
-
     Swal.fire({
       title: 'Está por borrar este paciente',
       text: 'Esta acción no se puede deshacer ¿Está seguro?',
@@ -67,6 +69,7 @@ const Patient = () => {
 
   }
 
+  // ===== HTML =====
   if(loading) return <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', width: '100%'}}><Spinner /></div>
   return (
     <>

@@ -4,7 +4,7 @@ import Title from '../../components/Title/Title';
 import './home.css';
 
 const Home = () => {
-  
+  // ===== HTML =====
   return (
     <div className='home-bg'>
       <div className="home-container">

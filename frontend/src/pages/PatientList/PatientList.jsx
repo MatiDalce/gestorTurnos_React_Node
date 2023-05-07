@@ -6,13 +6,13 @@ import './patientList.css'
 import { config } from '../../env/config'
 
 const PatientList = () => {
-
-  const [search, setSearch] = useState('');
+  // ===== ESTADOS =====
   const [patients, setPatients] = useState([]);
+  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Listado de pacientes
+    // ===== GET DE LISTADO DE PACIENTES =====
     setLoading(true)
     fetch(`${config.webAPI}/patients/limit`)
     .then(res => res.json())
@@ -39,7 +39,7 @@ const PatientList = () => {
     setSearch(e.target.value)
   }
 
-  // Input de refresh
+  // Botón de refresh
   const handleRefresh = (e) => {
     fetch(`${config.webAPI}/patients/limit`)
     .then(res => res.json())
@@ -48,6 +48,7 @@ const PatientList = () => {
     });
   }
 
+  // ===== HTML =====
   return (
     <>
       <div className="search-patient">

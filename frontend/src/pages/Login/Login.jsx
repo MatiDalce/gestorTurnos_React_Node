@@ -8,13 +8,17 @@ import ErrorMsg from '../../components/ErrorMsg/ErrorMsg';
 
 const Login = () => {
   const navigate = useNavigate();
+  // ===== ESTADO =====
   const [pass, setPass] = useState()
   const [error, setError] = useState(false)
 
+  // ===== MANEJADOR DE ESTADO =====
   const handlePassword = (e) => {
     setPass(e.target.value);
   }
 
+  // ===== ACÁ PODES CAMBIAR LA CONTRASEÑA DEL CLIENTE =====
+    // La contraseña con la que tiene que coincidir actualmente es 'contraseña123'
   const handleCheckPassword = () => {
     if (pass !== 'contraseña123') {
       setError(true);
@@ -27,6 +31,7 @@ const Login = () => {
     }
   }
 
+  // ===== HTML =====
   return (
     <div className='login-bg'>
       <div className="login-container">

@@ -1,6 +1,7 @@
 import React from 'react'
 import './error.css'
 
+// ===== POR SI ENTRA A UNA URL QUE NO EXISTA, SE MUESTRA ESTE MENSAJE EN PANTALLA =====
 const Error = () => {
     return (
         <div className='error-container'>

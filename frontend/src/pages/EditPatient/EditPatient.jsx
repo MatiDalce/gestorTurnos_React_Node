@@ -8,7 +8,6 @@ import Select from '../../components/Select/Select';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import './editPatient.css';
 import { config } from '../../env/config';
-import { warningEditAlert } from '../../assets/helpers/customAlert';
 import { convertUnixtimeToDate } from '../../assets/helpers/unixtimeToSomething';
 import Swal from 'sweetalert2';
 
@@ -20,6 +19,7 @@ const EditPatient = () => {
 
   const [loading, setLoading] = useState(true);
 
+  // ===== ESTADO =====
   const [patient, setPatient] = useState({
     name: '',
     lastName: '',
@@ -48,6 +48,7 @@ const EditPatient = () => {
   })
 
   useEffect(() => {
+    // ===== GET DEL PACIENTE =====
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
@@ -86,6 +87,7 @@ const EditPatient = () => {
     .finally(() => setLoading(false));
   }, [id])
 
+  // ===== MANEJADORES DE ESTADO =====
   const handleName = (e) => {
     setPatient({
       ...patient,
@@ -213,6 +215,7 @@ const EditPatient = () => {
     })
   }
 
+  // ===== MANEJADOR DEL PUT =====
   const handleEditPatient = (e) => {
     e.preventDefault()
     let body = {
@@ -241,14 +244,6 @@ const EditPatient = () => {
       hasChronicDisease: patient.hasChronicDisease, // Boolean pero con 0 o 1
       chronicDisease: patient.chronicDisease,
     }
-    
-    // ! VER SI SE PUEDE USAR SINO YA FUE
-    // warningEditAlert(
-    //   `${config.webAPI}/patients/${id}`,
-    //   body,
-    //   'Esta por editar el paciente',
-    //   'Esta acción no se puede deshacer ¿Está seguro?'
-    // )
 
     Swal.fire({
       title: 'Esta por editar el paciente',
@@ -287,6 +282,7 @@ const EditPatient = () => {
     })
   }
 
+  // ===== HTML =====
   if(loading) return <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', width: '100%'}}><Spinner /></div>
   return (
     <>

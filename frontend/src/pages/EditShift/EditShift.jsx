@@ -20,6 +20,7 @@ const EditShift = () => {
   const [ error, setError ] = useState()
 
   useEffect(() => {
+    // ===== GET DEL TURNO =====
     setLoading(true)
     fetch(`${config.webAPI}/appointments/${id}`)
     .then(res => res.json())
@@ -38,6 +39,7 @@ const EditShift = () => {
     })
   }, [id])
 
+  // ===== MANEJADORES DE ESTADO =====
   const handleDate = (e) => {
     let inputValue = e.target.value;
     setDate(inputValue)
@@ -53,7 +55,7 @@ const EditShift = () => {
     setNotes(inputValue)
   };
 
-
+  // ===== MANEJADOR DEL PUT =====
   const handleChangeShift = () => {
 
     const dateTime = (date && hour) ? joinDateTimeToISOString(date, hour) : '';
@@ -63,22 +65,6 @@ const EditShift = () => {
       note: notes,
       patient: patientID
     }
-
-    // ! VER SI SE PUEDE USAR SINO YA FUE
-    // warningEditAlert(
-    //   `${config.webAPI}/appointments/${id}`,
-    //   body,
-    //   'Esta por editar el turno',
-    //   'Esta acción no se puede deshacer ¿Está seguro?'
-    // ).then(res => {
-    //   if(res === undefined) {
-    //     navigate('/listado-turnos')
-    //     toast('success', 'Se ha editado exitosamente')
-    //   } else {
-    //     toast('error', 'No se ha podido editar')
-    //     setError(true)
-    //   }
-    // })
 
     Swal.fire({
       title: 'Esta por editar el turno',
@@ -116,6 +102,7 @@ const EditShift = () => {
 
   };
 
+  // ===== HTML =====
   if(loading) return <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', width: '100%'}}><Spinner /></div>
   return (
     <>

@@ -11,6 +11,8 @@ import './addShift.css';
 const AddShift = () => {
   const navigate = useNavigate()
   const { state } = useLocation();
+
+  // ===== ESTADOS =====
   const [patientList, setPatientList] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState({text:'', value: -1});
   const [date, setDate] = useState(0);
@@ -20,6 +22,7 @@ const AddShift = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // ===== GET: LISTA DE PACIENTES =====
     fetch(`${config.webAPI}/patients/limit`)
     .then(res => res.json())
     .then(res => {
@@ -29,6 +32,7 @@ const AddShift = () => {
       }
     })
     .finally(() => {
+      // ===== SI VIENE DESDE LA PANTALLA DEL PACIENTE, SELECCIONA A ESE PACIENTE =====
       if(state) {
         setSelectedPatient({value: state.value, text: state.text})
       }
@@ -36,6 +40,7 @@ const AddShift = () => {
     )
   }, [state]);
 
+  // ===== MANEJADORES DE ESTADOS =====
   const handleSelectPatient = (patient) => {
     setSelectedPatient({value: patient.value, text: patient.text})
   }
@@ -48,6 +53,8 @@ const AddShift = () => {
   const handleNotes = (e) => {
     setNote(e.target.value)
   }
+
+    // ===== MANEJADOR DEL POST DE TURNO =====
   const handleAddShift = () => {
 
     const dateTime = new Date(`${date}T${hour}`); // Creamos un objeto Date con la fecha y la hora
@@ -78,6 +85,7 @@ const AddShift = () => {
     })
   }
 
+  // ===== HTML =====
   return (
     <>
       <div className="select-shift-center">

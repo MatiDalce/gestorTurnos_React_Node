@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 const Shift = () => {
   const navigate = useNavigate()
   let {id} = useParams();
+  // ===== ESTADO =====
   const [shift, setShift] = useState({
     name: '',
     note: '',
@@ -21,6 +22,7 @@ const Shift = () => {
   const [ loading, setLoading ] = useState(true)
 
   useEffect(() => {
+    // ===== GET DEL TURNO =====
     fetch(`${config.webAPI}/appointments/${id}`)
     .then(res => res.json())
     .then(res => {
@@ -37,8 +39,8 @@ const Shift = () => {
     .finally(() => setLoading(false));
   }, [id])
 
+  // ===== DELETE DEL TURNO =====
   const handleDeleteShift = () => {
-
     Swal.fire({
         title: 'Está por borrar este turno',
         text: 'Esta acción no se puede deshacer ¿Está seguro?',
@@ -72,6 +74,7 @@ const Shift = () => {
 
   } 
 
+  // ===== DESCARGA DEL TURNO =====
   const handleDownloadShift = () => {
     fetch(`${config.webAPI}/appointments/download/${id}`)
     .then(response => {
@@ -99,6 +102,7 @@ const Shift = () => {
     })
   }
 
+  // ===== HTML =====
   if(loading) return <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', width: '100%'}}><Spinner /></div>
   return (
     <>

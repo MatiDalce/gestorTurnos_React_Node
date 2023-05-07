@@ -12,11 +12,13 @@ const ShiftPatientList = () => {
 
   const { id } = useParams()
 
+  // ===== ESTADO =====
   const [shiftPatientList, setShiftPatientList] = useState([]);
   const [patientCompleteName, setPatientCompleteName] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // ===== GET DEL PACIENTE =====
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
@@ -30,6 +32,7 @@ const ShiftPatientList = () => {
     })
   }, [id])
 
+  // ===== GET DE LOS TURNOS DEL PACIENTE =====
   useEffect(() => {
     fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
     .then(res => res.json())
@@ -50,10 +53,7 @@ const ShiftPatientList = () => {
     .finally(() => setLoading(false));
   }, [id])
 
-  const handleDateFrom = () => {}
-
-  const handleDateUntil = () => {}
-
+  // ===== ORDEN DE TURNOS DESDE RECIENTES O ANTIGUOS =====
   const handleOrder = (e) => {
     setLoading(true)
     if(e.target.value === 'recientes') {
@@ -95,7 +95,7 @@ const ShiftPatientList = () => {
     }
   }
 
-    // Input de refresh
+    // Botón de refresh
     const handleRefresh = (e) => {
       setLoading(true)
       fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
@@ -117,28 +117,11 @@ const ShiftPatientList = () => {
       .finally(() => setLoading(false));
     }
 
+  // ===== HTML =====
   return (
     <>
     <Title title={patientCompleteName} margin={'0 0 2% 0'} />
     <div className="search-patient-shifts">
-      {/* <div className="shiftPatientList-input-box">
-        <Input 
-          onChange={handleDateFrom}
-          hasLabel
-          labelTitle='Fecha desde:'
-          type='date'
-          nameProp='fromDate'
-        />
-      </div>
-      <div className="shiftPatientList-input-box">
-        <Input 
-          onChange={handleDateUntil}
-          hasLabel
-          labelTitle='Fecha hasta:'
-          type='date'
-          nameProp='untilDate'
-        />
-      </div> */}
       <div className="shiftPatientList-input-box">
         <Select
           onChange={handleOrder}

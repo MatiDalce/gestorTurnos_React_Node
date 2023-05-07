@@ -15,6 +15,7 @@ const AddPatient = () => {
   
   const [error, setError] = useState(false);
 
+  // ===== ESTADO =====
   const [patient, setPatient] = useState({
     name: '',
     lastName: '',
@@ -42,6 +43,7 @@ const AddPatient = () => {
     medication: '',
   })
 
+  // ===== MANEJADORES DE ESTADOS =====
   const handleName = (e) => {
     setPatient({
       ...patient,
@@ -172,6 +174,7 @@ const AddPatient = () => {
     })
   }
 
+  // ===== MANEJADOR DEL POST DE PACIENTE =====
   const handleAddPatient = (e) => {
     e.preventDefault()
     let data = {
@@ -220,6 +223,7 @@ const AddPatient = () => {
     })
   }
 
+  // ===== HTML =====
   return (
     <>
         <Title title='INFORMACIÓN' />
