@@ -29,7 +29,7 @@ const Input = ({
     backgroundSize: isSearcheable ? `18px` : '',
     backgroundPosition: isSearcheable ? '95% 50%' : '',
     backgroundColor: isDisabled ? 'var(--gray-bg)' : '',
-    PointerEvent: isDisabled ? 'none' : '',
+    pointerEvents: isDisabled ? 'none' : '',
   }
 
 

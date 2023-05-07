@@ -8,7 +8,8 @@ const Button = ({
   bgColor,
   path,
   onClick,
-  isDisabled
+  isDisabled,
+  data
 }) => {
   const navigate = useNavigate()
 
@@ -25,7 +26,7 @@ const Button = ({
         type={type}
         className="btn"
         style={buttonStyle}
-        onClick={() => navigate(path)}
+        onClick={() => data ? navigate(path, {state: data}) : navigate(path)}
       >
         {title}
       </button>

@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { config } from '../../env/config';
 import { toast } from '../../assets/helpers/toast';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
-import Select from '../../components/Select/Select';
+import SearchableDropdown from '../../components/SearchableDropdown/SearchableDropdown';
 import './addShift.css';
 
 const AddShift = () => {
   const navigate = useNavigate()
+  const { state } = useLocation();
   const [patientList, setPatientList] = useState([]);
-  const [selectedPatient, setSelectedPatient] = useState('');
+  const [selectedPatient, setSelectedPatient] = useState({text:'', value: -1});
   const [date, setDate] = useState(0);
   const [hour, setHour] = useState(0);
   const [note, setNote] = useState('');
@@ -27,11 +28,18 @@ const AddShift = () => {
         setPatientList(patientsListNames)
       }
     })
-    .finally(() => setLoading(false))
-  }, []);
+    .finally(() => {
+      if(state) {
+        console.log("STATE ", state);
+        setSelectedPatient({value: state.value, text: state.text})
+      }
+      setLoading(false)}
+    )
+  }, [state]);
 
-  const handleSelectPatient = (e) => {
-    setSelectedPatient(e.target.value)
+  const handleSelectPatient = (patient) => {
+    console.log(patient);
+    setSelectedPatient({value: patient.value, text: patient.text})
   }
   const handleDate = (e) => {
     setDate(e.target.value)
@@ -42,16 +50,17 @@ const AddShift = () => {
   const handleNotes = (e) => {
     setNote(e.target.value)
   }
-  const handleAddShift = (e) => {
+  const handleAddShift = () => {
 
     const dateTime = new Date(`${date}T${hour}`); // Creamos un objeto Date con la fecha y la hora
     const formattedDateTime = date && hour ? dateTime.toISOString() : ''; // Si date y hour existen, las formateamos como string
 
     let data = {
       day: formattedDateTime,
-      patient: Number(selectedPatient),
+      patient: Number(selectedPatient.value),
       note: note
     };
+        console.log("ENVIO A BE ", data);
 
     fetch(`${config.webAPI}/appointments`, {
       method: 'POST',
@@ -76,19 +85,17 @@ const AddShift = () => {
     <>
       <div className="select-shift-center">
         <div className="select-shift-input">
-          <Select
-            onChange={handleSelectPatient}
-            options={[{text:'', value:null}, ...patientList]}
-            colorLabel='var(--black-bg)' 
-            hasLabel
+          <SearchableDropdown
+            list={[{text:'', value:null}, ...patientList]}
+            onSelect={handleSelectPatient}
+            selectedValue={selectedPatient.text}
             labelTitle='Seleccione el paciente'
-            isLabelCenter
-            nameProp='patients'
+            isDisabled={patientList.length === 0}
           />
           { (error && !selectedPatient) && <p className='addShift-error'>Este campo es requerido.</p> }
         </div>
       </div>
-      <div className="input-row-shift">
+      <div className="input-rowAdd-shift">
         <div className="addShift-input-container">
           <Input
             onChange={handleDate}

@@ -27,6 +27,7 @@ const EditPatient = () => {
     socialService: '',
     email: '',
     gender: '',
+    sexualOrientation: '',
     maritalStatus: '',
     birthday: '',
     father: '',
@@ -56,17 +57,18 @@ const EditPatient = () => {
           name: res.name,
           lastName: res.lastName,
           dni: res.dni,
-          socialNetwork: res.socialService, // No viene desde BE
-          gender: res.gender, // No viene desde BE
+          socialNetwork: res.socialService,
+          gender: res.gender,
+          sexualOrientation: res.sexualOrientation,
           maritalStatus: res.maritalStatus,
           email: res.email,
           birthday: convertUnixtimeToDate(res.birthday, true),
           academicLevel: res.academicLevel,
-          father: res.father, // No viene desde BE
-          mother: res.mother, // No viene desde BE
+          father: res.father,
+          mother: res.mother,
           children: res.children, 
           siblings: res.siblings,
-          // livingSiblings: res.livingSiblings, // No viene desde BE
+          // livingSiblings: res.livingSiblings,
           personalPhoneNumber: res.personalPhoneNumber,
           contactPhone: res.contactPhone,
           bloodType: res.bloodType,
@@ -118,6 +120,12 @@ const EditPatient = () => {
     setPatient({
       ...patient,
       gender: value
+    })
+  };
+  const handleSexualOrientation = (e) => {
+    setPatient({
+      ...patient,
+      sexualOrientation: e.target.value
     })
   };
   const handleMaritalStatus = (value) => {
@@ -282,7 +290,7 @@ const EditPatient = () => {
   if(loading) return <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', width: '100%'}}><Spinner /></div>
   return (
     <>
-      <h2 className='editPatient-title'>EDICIÓN DE DATOS DEL PACIENTE</h2>
+      <h2 className='editPatient-title'>EDICIÓN DE DATOS</h2>
       <form>
 
         <div className="input-editPatient-row">
@@ -293,7 +301,7 @@ const EditPatient = () => {
               onChange={handleName}
               colorLabel='var(--black-bg)' 
               hasLabel
-              labelTitle='Nombre del paciente'
+              labelTitle='Nombre'
               isLabelCenter
               placeholder='Ingrese el nombre'
               nameProp='name'
@@ -307,7 +315,7 @@ const EditPatient = () => {
               onChange={handleLastName}
               colorLabel='var(--black-bg)' 
               hasLabel
-              labelTitle='Apellido del paciente'
+              labelTitle='Apellido'
               isLabelCenter
               placeholder='Ingrese el apellido'
               nameProp='lastname'
@@ -324,7 +332,7 @@ const EditPatient = () => {
               type='number'
               colorLabel='var(--black-bg)' 
               hasLabel
-              labelTitle='DNI del paciente'
+              labelTitle='DNI'
               isLabelCenter
               placeholder='Ingrese el DNI'
               nameProp='dni'
@@ -351,6 +359,19 @@ const EditPatient = () => {
         </div>
         <div className="input-editPatient-row">
           <div className="input-editPatient-box">
+            <Input
+              isDisabled={loading}
+              value={patient.sexualOrientation}
+              onChange={handleSexualOrientation}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Orientación sexual'
+              isLabelCenter
+              placeholder='Ingrese la orientación sexual'
+              nameProp='sexualOrientation'
+            />
+          </div>
+          <div className="input-editPatient-box">
               <Input
                 isDisabled={loading}
                 value={patient.email}
@@ -364,21 +385,21 @@ const EditPatient = () => {
                 nameProp='email'
               />
           </div>
-          <div className="input-editPatient-box">
-            <Input
-              isDisabled={loading}
-              value={patient.socialNetwork}
-              onChange={handleSocialNetwork}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Obra Social del paciente'
-              isLabelCenter
-              placeholder='Ingrese la obra social'
-              nameProp='socialService'
-            />
-          </div>
       </div>
       <div className="input-editPatient-row">
+        <div className="input-editPatient-box">
+          <Input
+            isDisabled={loading}
+            value={patient.socialNetwork}
+            onChange={handleSocialNetwork}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Obra Social'
+            isLabelCenter
+            placeholder='Ingrese la obra social'
+            nameProp='socialService'
+          />
+        </div>
         <div className="input-editPatient-box">
           <Input
             isDisabled={loading}
@@ -393,6 +414,8 @@ const EditPatient = () => {
             nameProp='birthday'
           />
         </div>
+      </div>
+      <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Checkbox
             isDisabled={loading}
@@ -409,8 +432,6 @@ const EditPatient = () => {
             isChecked={patient.maritalStatus}
           />
         </div>
-      </div>
-      <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Input
             isDisabled={loading}
@@ -425,6 +446,8 @@ const EditPatient = () => {
             nameProp='personalPhoneNumber'
           />
         </div>
+      </div>
+      <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Input
             isDisabled={loading}
@@ -438,8 +461,6 @@ const EditPatient = () => {
             nameProp='contactPhone'
           />
         </div>
-      </div>
-      <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Checkbox
             isDisabled={loading}
@@ -457,7 +478,9 @@ const EditPatient = () => {
             options={['Sí', 'No']}
           />
         </div>
-          <div className="input-editPatient-box">
+      </div>
+      <div className="input-editPatient-row">
+      <div className="input-editPatient-box">
             <Checkbox
               isDisabled={loading}
               formType='edit'
@@ -474,43 +497,23 @@ const EditPatient = () => {
               options={['Sí', 'No']}
             />
           </div>
-          
-      </div>
-      <div className="input-editPatient-row">
         <div className="input-editPatient-box">
-            <Checkbox
-              isDisabled={loading}
-              formType='edit'
-              withText={'Tiene?'}
-              value={patient.children}
-              isChecked={patient.children !== ''}
-              onChange={handleChildren}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Hijos'
-              isLabelCenter
-              placeholder='Ingrese los nombres de los hijos'
-              nameProp='children'
-              options={['Sí', 'No']}
-            />
-          </div>
-          <div className="input-editPatient-box">
-            <Checkbox
-              isDisabled={loading}
-              formType='edit'
-              withText={'Tiene?'}
-              options={['Sí', 'No']}
-              isChecked={patient.siblings !== ''}
-              value={patient.siblings}
-              onChange={handleSiblings}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Hermanos'
-              isLabelCenter
-              placeholder='Ingrese los nombres de los hermanos'
-              nameProp='siblings'
-            />
-          </div>
+          <Checkbox
+            isDisabled={loading}
+            formType='edit'
+            withText={'Tiene?'}
+            value={patient.children}
+            isChecked={patient.children !== ''}
+            onChange={handleChildren}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Hijos'
+            isLabelCenter
+            placeholder='Ingrese los nombres de los hijos'
+            nameProp='children'
+            options={['Sí', 'No']}
+          />
+        </div>
       </div>
       <div className="input-editPatient-row input-editPatient-row-extra">
         {/* <div className="input-editPatient-box">
@@ -530,6 +533,23 @@ const EditPatient = () => {
               />
             </div>
         </div> */}
+        <div className="input-editPatient-box">
+          <Checkbox
+            isDisabled={loading}
+            formType='edit'
+            withText={'Tiene?'}
+            options={['Sí', 'No']}
+            isChecked={patient.siblings !== ''}
+            value={patient.siblings}
+            onChange={handleSiblings}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Hermanos'
+            isLabelCenter
+            placeholder='Ingrese los nombres de los hermanos'
+            nameProp='siblings'
+          />
+        </div>
         <div className="input-editPatient-box">
           <Select
             isDisabled={loading}
@@ -584,7 +604,9 @@ const EditPatient = () => {
             nameProp='academicLevel'
           />
         </div>
-        <div className="input-editPatient-box">
+      </div>
+      <div className="input-editPatient-row">
+      <div className="input-editPatient-box">
           <Select
             isDisabled={loading}
             options={[
@@ -618,8 +640,6 @@ const EditPatient = () => {
             nameProp='bloodType'
           />
         </div>
-      </div>
-      <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Checkbox
             isDisabled={loading}
@@ -636,6 +656,8 @@ const EditPatient = () => {
             nameProp='hasAllergies'
           />
         </div>
+      </div>
+      <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Checkbox
             isDisabled={loading}
@@ -652,8 +674,6 @@ const EditPatient = () => {
             nameProp='medication'
           />
         </div>
-      </div>
-      <div className="input-editPatient-row">
         <div className="input-editPatient-box">
           <Checkbox
             isDisabled={loading}

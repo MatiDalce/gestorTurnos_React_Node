@@ -16,8 +16,8 @@
 }
 
 .btn-patient-box {
-    width: 20%;
-    margin: 2% 3%;
+    width: 15%;
+    margin: 2% 2%;
 }
 
 .input-box {
@@ -102,11 +102,25 @@
     .data-title {
         font-size: 1.5em;
     }
+    .btn-patient-container {
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+        width: 80%;
+    }
+    .btn-patient-box {
+        width: 100%;
+        font-size: 1.4em;
+        margin: 5% 0;
+    }
 }
 /* LARGE */
 @media screen and (min-width: 992px) and (max-width: 1199px) {
     .input-patient-row {
         margin: 6% 0;
+    }
+    .btn-patient-container {
+        font-size: 0.8em;
     }
 }
 /* EXTRA LARGE */

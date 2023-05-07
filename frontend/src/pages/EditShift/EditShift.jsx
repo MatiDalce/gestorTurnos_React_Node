@@ -6,7 +6,6 @@ import Button from '../../components/Button/Button';
 import Spinner from '../../components/Spinner/Spinner';
 import Input from '../../components/Input/Input';
 import './editShift.css';
-import { warningEditAlert } from '../../assets/helpers/customAlert';
 import { convertISOStringtoDateTime, joinDateTimeToISOString } from '../../assets/helpers/unixtimeToSomething';
 import Swal from 'sweetalert2';
 
@@ -120,7 +119,7 @@ const EditShift = () => {
   if(loading) return <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', width: '100%'}}><Spinner /></div>
   return (
     <>
-      <div className="input-row-shift">
+      <div className="input-rowEdit-shift">
         <div className="editShift-input-box">
           <Input
             isDisabled={loading}

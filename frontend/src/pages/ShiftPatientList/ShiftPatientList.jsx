@@ -142,7 +142,7 @@ const ShiftPatientList = () => {
       <div className="shiftPatientList-input-box">
         <Select
           onChange={handleOrder}
-          isDisabled={loading}
+          isDisabled={loading || shiftPatientList.length === 0}
           options={[
             {
               text: 'Seleccione',

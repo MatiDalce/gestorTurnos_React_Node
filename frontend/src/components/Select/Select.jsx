@@ -12,7 +12,7 @@ const Select = ({
     isDisabled,
     value
 }) => {
-    
+
     const labelStyles = {
         color: colorLabel ? colorLabel : 'var(--skyblue-bg)',
         display: 'block',
@@ -20,7 +20,7 @@ const Select = ({
     }
     const inputStyles = {
         backgroundColor: isDisabled ? 'var(--gray-bg)' : '',
-        PointerEvent: isDisabled ? 'none' : '',
+        pointerEvents: isDisabled ? 'none' : '',
     }
 
     return (

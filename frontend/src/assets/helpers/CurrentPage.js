@@ -10,7 +10,7 @@ export const CurrentPage = ({pathname, id}) => {
             return 'Edición de Paciente'
             
         case `/paciente/${id}`:
-            return `Datos particulares del paciente`
+            return `Datos particulares`
             
         case '/listado-turnos':
             return 'Listado de Turnos'

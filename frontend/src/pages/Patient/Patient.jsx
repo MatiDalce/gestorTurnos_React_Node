@@ -3,7 +3,6 @@ import './patient.css';
 import Button from '../../components/Button/Button';
 import Spinner from '../../components/Spinner/Spinner';
 import { useNavigate, useParams } from 'react-router-dom';
-import { warningDeleteAlert } from '../../assets/helpers/customAlert';
 import { convertUnixtimeToAge, convertUnixtimeToDate } from '../../assets/helpers/unixtimeToSomething';
 import { config } from '../../env/config';
 import { toast } from '../../assets/helpers/toast';
@@ -89,18 +88,18 @@ const Patient = () => {
       <p className='patient-title'>{patient.name} {patient.lastName}</p>
       <div className="input-patient-row">
         <div className="input-box">
-          <p className="data-title">Nombre del Paciente</p>
+          <p className="data-title">Nombre</p>
           <p className="data">{patient.name || '-'}</p>
         </div>
         <div className="input-box">
-          <p className="data-title">Apellido del Paciente</p>
+          <p className="data-title">Apellido</p>
           <p className="data">{patient.lastName || '-'}</p>
         </div>
       </div>
       
       <div className="input-patient-row">
         <div className="input-box">
-          <p className="data-title">DNI del Paciente</p>
+          <p className="data-title">DNI</p>
           <p className="data">{patient.dni || '-'}</p>
         </div>
         <div className="input-box">
@@ -115,7 +114,7 @@ const Patient = () => {
           <p className="data">{patient.gender || '-'}</p>
         </div>
         <div className="input-box">
-          <p className="data-title">Obra Social del Paciente</p>
+          <p className="data-title">Obra Social</p>
           <p className="data">{patient.socialService || '-'}</p>
         </div>
       </div>
@@ -203,8 +202,6 @@ const Patient = () => {
             path={`/editar-paciente/${id}`}
             title={'Editar'} 
             type='button'
-            width='20%'
-            margin='5% 2%'
           />
         </div>
         <div className="btn-patient-box">
@@ -212,8 +209,15 @@ const Patient = () => {
             path={`/turnos-paciente/${id}`}
             title={'Ver Turnos'} 
             type='button'
-            width='20%'
-            margin='5% 2%'
+            bgColor='var(--green-bg)'
+          />
+        </div>
+        <div className="btn-patient-box">
+          <Button 
+            path={`/agregar-turno`}
+            data={{value: patient.id, text: `${patient.name} ${patient.lastName}`}}
+            title={'Agregar Turno'} 
+            type='button'
             bgColor='var(--green-bg)'
           />
         </div>
@@ -221,8 +225,6 @@ const Patient = () => {
           <Button 
             title={'Borrar'} 
             type='button'
-            width='20%'
-            margin='5% 2%'
             bgColor='var(--red-bg)'
             onClick={handleDelete}
           />

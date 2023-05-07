@@ -58,7 +58,7 @@ const Checkbox = ({
     }
     const inputStyles = {
         backgroundColor: isDisabled ? 'var(--gray-bg)' : '',
-        PointerEvent: isDisabled ? 'none' : '',
+        pointerEvents: isDisabled ? 'none' : '',
     }
 
     return (

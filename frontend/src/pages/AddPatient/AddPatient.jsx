@@ -22,6 +22,7 @@ const AddPatient = () => {
     socialService: '',
     email: '',
     gender: '',
+    sexualOrientation: '',
     maritalStatus: '',
     birthday: '',
     father: '',
@@ -75,6 +76,12 @@ const AddPatient = () => {
     setPatient({
       ...patient,
       gender: value
+    })
+  };
+  const handleSexualOrientation = (e) => {
+    setPatient({
+      ...patient,
+      sexualOrientation: e.target.value
     })
   };
   const handleMaritalStatus = (value) => {
@@ -215,7 +222,7 @@ const AddPatient = () => {
 
   return (
     <>
-        <Title title='DATOS DEL PACIENTE' />
+        <Title title='INFORMACIÓN' />
         <form onSubmit={handleAddPatient}>
         <div className="input-row">
           <div className="addPatient-box">
@@ -224,7 +231,7 @@ const AddPatient = () => {
               onChange={handleName}
               colorLabel='var(--black-bg)' 
               hasLabel
-              labelTitle='Nombre del paciente'
+              labelTitle='Nombre'
               isLabelCenter
               placeholder='Ingrese el nombre'
               nameProp='name'
@@ -237,7 +244,7 @@ const AddPatient = () => {
               onChange={handleLastName}
               colorLabel='var(--black-bg)' 
               hasLabel
-              labelTitle='Apellido del paciente'
+              labelTitle='Apellido'
               isLabelCenter
               placeholder='Ingrese el apellido'
               nameProp='lastname'
@@ -254,7 +261,7 @@ const AddPatient = () => {
               limitNumber={99999999999}
               colorLabel='var(--black-bg)' 
               hasLabel
-              labelTitle='DNI del paciente'
+              labelTitle='DNI'
               isLabelCenter
               placeholder='Ingrese el DNI'
               nameProp='dni'
@@ -279,6 +286,18 @@ const AddPatient = () => {
         <div className="input-row">
           <div className="addPatient-box">
             <Input
+              value={patient.sexualOrientation}
+              onChange={handleSexualOrientation}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Orientación sexual'
+              isLabelCenter
+              placeholder='Ingrese la orientación sexual'
+              nameProp='sexualOrientation'
+            />
+          </div>
+          <div className="addPatient-box">
+            <Input
               value={patient.email}
               onChange={handleEmail}
               colorLabel='var(--black-bg)' 
@@ -290,93 +309,95 @@ const AddPatient = () => {
               nameProp='email'
             />
           </div>
-          <div className="addPatient-box">
-            <Input
-              value={patient.socialService}
-              onChange={handleSocialService}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Obra Social del paciente'
-              isLabelCenter
-              placeholder='Ingrese la obra social'
-              nameProp='social-work'
-            />
-          </div>
       </div>
       <div className="input-row">
-          <div className="addPatient-box">
-            <Input
-              value={patient.birthday}
-              onChange={handleBirthday}
-              type='date'
-              colorLabel='var(--black-bg)'
-              hasLabel
-              labelTitle='Fecha de nacimiento'
-              isLabelCenter
-              placeholder='Ingrese la fecha de nacimiento'
-              nameProp='birthday'
-            />
-          </div>
-          <div className="addPatient-box">
-            <Checkbox
-              formType='new'
-              options={['Casado', 'Soltero', 'Divorciado', 'Viudo']}
-              onlyCheckboxes
-              onChangeOnlyBoxes={handleMaritalStatus}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Estado civil'
-              isLabelCenter
-              nameProp='maritalStatus'
-            />
-          </div>
+        <div className="addPatient-box">
+          <Input
+            value={patient.socialService}
+            onChange={handleSocialService}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Obra Social'
+            isLabelCenter
+            placeholder='Ingrese la obra social'
+            nameProp='social-work'
+          />
+        </div>
+        <div className="addPatient-box">
+          <Input
+            value={patient.birthday}
+            onChange={handleBirthday}
+            type='date'
+            colorLabel='var(--black-bg)'
+            hasLabel
+            labelTitle='Fecha de nacimiento'
+            isLabelCenter
+            placeholder='Ingrese la fecha de nacimiento'
+            nameProp='birthday'
+          />
+        </div>
       </div>
       <div className="input-row">
-          <div className="addPatient-box">
-            <Input
-              value={patient.personalPhoneNumber}
-              onChange={handlePersonalPhoneNumber}
-              type='number'
-              limitNumber={9999999999}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Teléfono personal'
-              isLabelCenter
-              placeholder='Ingrese el teléfono personal'
-              nameProp='personalPhoneNumber'
-            />
-          </div>
-          <div className="addPatient-box">
-            <Input
-              value={patient.contactPhone}
-              onChange={handleContactPhone}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Teléfono de contacto'
-              isLabelCenter
-              placeholder='Ingrese el teléfono de contacto'
-              nameProp='contactPhone'
-            />
-          </div>
-      </div>
-      <div className="input-row">
-          <div className="addPatient-box">
-            <Checkbox
-              formType='new'
-              withText={'¿Vive?'}
-              value={patient.father}
-              onChange={handleFather}
-              colorLabel='var(--black-bg)' 
-              hasLabel
-              labelTitle='Padre'
-              isLabelCenter
-              placeholder='Ingrese el nombre del padre'
-              nameProp='father'
-              options={['Sí', 'No']}
-            />
-          </div>
-          <div className="addPatient-box">
+        <div className="addPatient-box">
           <Checkbox
+            formType='new'
+            options={['Casado', 'Soltero', 'Divorciado', 'Viudo']}
+            onlyCheckboxes
+            onChangeOnlyBoxes={handleMaritalStatus}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Estado civil'
+            isLabelCenter
+            nameProp='maritalStatus'
+          />
+        </div>
+        <div className="addPatient-box">
+          <Input
+            value={patient.personalPhoneNumber}
+            onChange={handlePersonalPhoneNumber}
+            type='number'
+            limitNumber={9999999999}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Teléfono personal'
+            isLabelCenter
+            placeholder='Ingrese el teléfono personal'
+            nameProp='personalPhoneNumber'
+          />
+        </div>
+      </div>
+      <div className="input-row">
+        <div className="addPatient-box">
+          <Input
+            value={patient.contactPhone}
+            onChange={handleContactPhone}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Teléfono de contacto'
+            isLabelCenter
+            placeholder='Ingrese el teléfono de contacto'
+            nameProp='contactPhone'
+          />
+        </div>
+        <div className="addPatient-box">
+          <Checkbox
+            formType='new'
+            withText={'¿Vive?'}
+            value={patient.father}
+            onChange={handleFather}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Padre'
+            isLabelCenter
+            placeholder='Ingrese el nombre del padre'
+            nameProp='father'
+            options={['Sí', 'No']}
+          />
+        </div>
+      </div>
+      <div className="input-row">
+        <div className="addPatient-box">
+            <Checkbox
             formType='new'
               withText={'¿Vive?'}
               value={patient.mother}
@@ -390,23 +411,23 @@ const AddPatient = () => {
               options={['Sí', 'No']}
             />
           </div>
+          <div className="addPatient-box">
+            <Checkbox
+              formType='new'
+              withText={'Tiene?'}
+              value={patient.children}
+              onChange={handleChildren}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Hijos'
+              isLabelCenter
+              placeholder='Ingrese los nombres de los hijos'
+              nameProp='children'
+              options={['Sí', 'No']}
+            />
+          </div>
       </div>
       <div className="input-row">
-        <div className="addPatient-box">
-          <Checkbox
-            formType='new'
-            withText={'Tiene?'}
-            value={patient.children}
-            onChange={handleChildren}
-            colorLabel='var(--black-bg)' 
-            hasLabel
-            labelTitle='Hijos'
-            isLabelCenter
-            placeholder='Ingrese los nombres de los hijos'
-            nameProp='children'
-            options={['Sí', 'No']}
-          />
-        </div>
         <div className="addPatient-box">
           <Checkbox
             formType='new'
@@ -422,8 +443,6 @@ const AddPatient = () => {
             nameProp='siblings'
           />
         </div>
-      </div>
-      <div className="input-row">
         {/* <div className="addPatient-box">
           <Checkbox
             formType='new'
@@ -489,6 +508,8 @@ const AddPatient = () => {
             nameProp='academicLevel'
           />
         </div>
+      </div>
+      <div className="input-row">
         <div className="addPatient-box">
             <Select
               options={[
@@ -521,8 +542,6 @@ const AddPatient = () => {
               nameProp='bloodType'
             />
           </div>
-      </div>
-      <div className="input-row">
           <div className="addPatient-box">
             <Checkbox
               formType='new'
@@ -537,6 +556,8 @@ const AddPatient = () => {
               nameProp='hasAllergies'
             />
           </div>
+      </div>
+      <div className="input-row">
         <div className="addPatient-box">
           <Checkbox
             formType='new'
@@ -551,8 +572,6 @@ const AddPatient = () => {
             nameProp='medication'
           />
         </div>
-      </div>
-      <div className="input-row">
         <div className="addPatient-box">
             <Checkbox
               formType='new'
