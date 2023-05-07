@@ -39,21 +39,6 @@ const Shift = () => {
 
   const handleDeleteShift = () => {
 
-    // ! VER SI SE PUEDE USAR SINO YA FUE
-    // warningDeleteAlert(
-    //   `${config.webAPI}/appointments/${id}`,
-    //   'Está por borrar un turno', 
-    //   'Esta acción no se puede deshacer ¿Está seguro?', 
-    // ).then((res) => {
-    //   console.log(res);
-    //   if(res) {
-    //     toast('success', 'Turno eliminado exitosamente')
-    //     navigate('/listado-turnos')
-    //   } else {
-    //     toast('error', 'No se pudo eliminar el turno')
-    //   }
-    // })
-
     Swal.fire({
         title: 'Está por borrar este turno',
         text: 'Esta acción no se puede deshacer ¿Está seguro?',

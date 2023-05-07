@@ -39,7 +39,6 @@ const Checkbox = ({
     }
 
     const handleYesOrNo = (value) => {
-        console.log(value);
         if(value === 'yes') {
             setActiveOptions(true);
         } else if(value === 'no') {

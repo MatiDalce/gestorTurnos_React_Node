@@ -20,7 +20,6 @@ const SearchableDropdown = ({ list, onSelect, labelTitle, isDisabled, selectedVa
     };
 
     const handleSelectedOption = (value) => {
-        console.log(value);
         setFilter(value.text);
         setFilteredList([]);
         onSelect(value); // Llamar a la función onSelect con el valor seleccionado

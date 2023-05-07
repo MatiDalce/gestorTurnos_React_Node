@@ -30,7 +30,6 @@ const AddShift = () => {
     })
     .finally(() => {
       if(state) {
-        console.log("STATE ", state);
         setSelectedPatient({value: state.value, text: state.text})
       }
       setLoading(false)}
@@ -38,7 +37,6 @@ const AddShift = () => {
   }, [state]);
 
   const handleSelectPatient = (patient) => {
-    console.log(patient);
     setSelectedPatient({value: patient.value, text: patient.text})
   }
   const handleDate = (e) => {
@@ -60,7 +58,6 @@ const AddShift = () => {
       patient: Number(selectedPatient.value),
       note: note
     };
-        console.log("ENVIO A BE ", data);
 
     fetch(`${config.webAPI}/appointments`, {
       method: 'POST',

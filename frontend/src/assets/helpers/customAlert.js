@@ -47,6 +47,7 @@ export function warningEditAlert(
     })
 }
 
+// Por ahora no se usa
 export function warningDeleteAlert(
     endpoint = '',
     title = '',

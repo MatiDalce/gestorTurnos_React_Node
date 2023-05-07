@@ -34,21 +34,6 @@ const Patient = () => {
 
   const handleDelete = () => {
 
-    // ! VER SI SE PUEDE USAR SINO YA FUE
-    // warningDeleteAlert(
-    //   `${config.webAPI}/patients/${id}`,
-    //   'Está por borrar un paciente', 
-    //   'Esta acción no se puede deshacer ¿Está seguro?', 
-    // ).then((res) => {
-    //   console.log(res);
-    //   if(res === undefined) {
-    //     toast('success', 'Paciente eliminado exitosamente');
-    //     navigate('/listado-pacientes');
-    //   } else {
-    //     toast('error', 'No se pudo eliminar el paciente');
-    //   }
-    // })
-
     Swal.fire({
       title: 'Está por borrar este paciente',
       text: 'Esta acción no se puede deshacer ¿Está seguro?',
