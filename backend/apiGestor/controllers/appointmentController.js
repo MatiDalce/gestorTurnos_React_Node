@@ -89,7 +89,7 @@ module.exports = {
         }
       },
     post: async (req, res) => {
-        const { day, patient, note } = req.body;
+        const { day, patient, note, amountToPay, payStatus } = req.body;
 
         console.log(req.body)
 
@@ -109,7 +109,7 @@ module.exports = {
     },
     put: async (req, res) => {
 
-      const { day, patient, note } = req.body;
+      const { day, patient, note, amountToPay, payStatus } = req.body;
 
       try {
           const editedAppointment = await db.Appointment.update({
