@@ -44,6 +44,7 @@ const AddShift = () => {
   // ===== MANEJADORES DE ESTADOS =====
   const handleSelectPatient = (patient) => {
     setSelectedPatient({value: patient.value, text: patient.text})
+    
   }
   const handleDate = (e) => {
     setDate(e.target.value)
@@ -58,38 +59,36 @@ const AddShift = () => {
     setNote(e.target.value)
   }
 
-    // ===== MANEJADOR DEL POST DE TURNO =====
+  // ===== MANEJADOR DEL POST DE TURNO =====
   const handleAddShift = () => {
-
-    const dateTime = new Date(`${date}T${hour}`); // Creamos un objeto Date con la fecha y la hora
-    const formattedDateTime = date && hour ? dateTime.toISOString() : ''; // Si date y hour existen, las formateamos como string
-
-    let data = {
-      day: formattedDateTime,
-      amountToPay: Number(amount),
-      payStatus: 'Pendiente',
-      patient: Number(selectedPatient.value),
-      note: note
-    };
-    console.log(data);
-
-    fetch(`${config.webAPI}/appointments`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then((res) => {
-      if(!res.errors) {
-        toast('success', 'Turno agregado exitosamente');
-        navigate('/listado-turnos')
-      } else {
-        toast('error', 'No se pudo agregar el turno');
-        setError(true)
-      }
-    })
+      const dateTime = new Date(`${date}T${hour}`); // Creamos un objeto Date con la fecha y la hora
+      const formattedDateTime = date && hour ? dateTime.toISOString() : ''; // Si date y hour existen, las formateamos como string
+  
+      let data = {
+        day: formattedDateTime,
+        amountToPay: Number(amount),
+        payStatus: 'Pendiente',
+        patient: Number(selectedPatient.value),
+        note: note
+      };
+  
+      fetch(`${config.webAPI}/appointments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then((res) => {
+        if(!res.errors) {
+          toast('success', 'Turno agregado exitosamente');
+          navigate('/listado-turnos')
+        } else {
+          toast('error', 'No se pudo agregar el turno');
+          setError(true)
+        }
+      })
   }
 
   // ===== HTML =====
@@ -162,13 +161,16 @@ const AddShift = () => {
         />
         { (error && !note) && <p className='addShift-error'>Este campo es requerido.</p> }
       </div>
+      {/* {
+        patientSelectedError && <p style={{color:'var(--red-bg)'}}>Paciente: Debe seleccionar una de las opciones disponibles.</p>
+      } */}
       <div className='btn-addShift-container'>
         <Button 
           title={'Agregar'} 
           type='button'
           onClick={handleAddShift}
           isDisabled={
-            selectedPatient === '' ||
+            selectedPatient.text === '' ||
             date === 0 ||
             hour === 0 ||
             note === '' ||

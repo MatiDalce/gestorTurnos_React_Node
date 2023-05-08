@@ -4,7 +4,6 @@ import './searchableDropdown.css';
 const SearchableDropdown = ({ list, onSelect, labelTitle, isDisabled }) => {
     const [filter, setFilter] = useState('');
     const [filteredList, setFilteredList] = useState([]);
-    const [selectedItem, setSelectedItem] = useState(null);
 
     const selectDropdownStyle = {
         backgroundColor: isDisabled ? 'var(--gray-bg)' : '',
@@ -18,10 +17,10 @@ const SearchableDropdown = ({ list, onSelect, labelTitle, isDisabled }) => {
         const filteredList = getFilteredList(newFilter);
 
         setFilteredList(filteredList);
+
     };
 
     const handleSelectedOption = (value) => {
-        setSelectedItem(value);
         setFilter(value.text);
         setFilteredList([]);
         onSelect(value); // Llamar a la función onSelect con el valor seleccionado

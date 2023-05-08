@@ -26,7 +26,7 @@ const EditShift = () => {
     const shiftNotExist = () => {
       Swal.fire({
         icon: 'error',
-        title: "Paciente no encontrado",
+        title: "Turno no encontrado",
         text: "Será redirigido a la lista de turnos.",
         confirmButtonColor: 'var(--skyblue-bg)',
       }).then(() => {
