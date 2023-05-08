@@ -101,6 +101,7 @@ const Navbar = () => {
                                 <li className="menu__item" onClick={() => navigate('/')}>Inicio</li>
                                 <li className="menu__item" onClick={handleWatch}>Modo oculto</li>
                                 <li className="menu__item" onClick={() => navigate('/listado-pacientes')}>Listado de pacientes</li>
+                                <li className="menu__item" onClick={() => navigate('/mi-calendario')}>Calendario</li>
                                 <li className="menu__item" onClick={() => navigate('/listado-turnos')}>Listado de turnos</li>
                                 <li className="menu__item" onClick={handleDownloadAppointments}>Descargar los turnos</li>
                                 <li className="menu__item" onClick={handleSession}>Cerrar sesión</li>
