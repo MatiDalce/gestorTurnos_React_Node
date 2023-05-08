@@ -97,7 +97,9 @@ module.exports = {
             const newAppointment = await db.Appointment.create({
                 day,
                 patientId : patient,
-                note
+                note,
+                amountToPay,
+                payStatus
             });
             res.status(201).json(newAppointment);
         } catch (err) {
@@ -113,7 +115,9 @@ module.exports = {
           const editedAppointment = await db.Appointment.update({
               day,
               patient,
-              note, 
+              note,
+              amountToPay,
+              payStatus 
           },{
             where:{
                 id:req.params.id
