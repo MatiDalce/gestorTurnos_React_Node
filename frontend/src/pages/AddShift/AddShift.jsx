@@ -100,7 +100,6 @@ const AddShift = () => {
           <SearchableDropdown
             list={[{text:'', value:null}, ...patientList]}
             onSelect={handleSelectPatient}
-            selectedValue={selectedPatient.text}
             labelTitle='Seleccione el paciente'
             isDisabled={patientList.length === 0}
           />

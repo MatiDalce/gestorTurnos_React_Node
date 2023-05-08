@@ -49,3 +49,8 @@
     background-color: var(--skyblue-bg);
     color: var(--white-bg);
 }
+
+.selDropdown-input-btn {
+    display: flex;
+}
+
