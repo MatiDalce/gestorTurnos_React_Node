@@ -1,10 +1,16 @@
-# PASOS PARA SU EJECUCIÓN
+# EJECUCIÓN
 
+## Base
 * Abrir XAMPP y hacer click en "Start" en las filas de Apache y MySQL.
 * Abrir el administrador haciendo click en "Admin" en la fila de MySQL.
+* Seleccionar la base.
+
+## Backend
 * Abrir el proyecto en VSCode.
 * Para ejecutar el Backend, en la terminal entramos a backend/apiGestor.
 * En el package.json que esta dentro de apiGestor, en el objeto "scripts" cambiamos "start" que dice "node ./bin/www" por "nodemon ./bin/www". Luego de esto, escribimos en la terminal "npm start".
+
+## Frontend
 * Para ejecutar el Frontend, en la terminal entramos a frontend/src y luego escribimos "npm start".
 
 ---
