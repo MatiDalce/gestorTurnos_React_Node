@@ -17,22 +17,37 @@ const Patient = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const patientNotExist = () => {
+      Swal.fire({
+        icon: 'error',
+        title: "Paciente no encontrado",
+        text: "Será redirigido a la lista de pacientes.",
+        confirmButtonColor: 'var(--skyblue-bg)',
+      }).then(() => {
+          navigate('/listado-pacientes')
+      })
+    }
     // ===== GET DEL PACIENTE =====
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
       if(res){
-        setPatient({
-          ...res,
-          birthday: convertUnixtimeToDate(res.birthday),
-          age: convertUnixtimeToAge(new Date(res.birthday * 1000))
-        })
+        if(res.message && res.message === "No patient record found for the given ID") {
+          patientNotExist()
+        } else {
+          setPatient({
+            ...res,
+            birthday: convertUnixtimeToDate(res.birthday),
+            age: convertUnixtimeToAge(new Date(res.birthday * 1000))
+          })
+        }
       } else {
         toast('error', 'Algo salió mal, por favor recargue la página.')
+        patientNotExist()
       }
     })
     .finally(() => setLoading(false));
-  }, [id])
+  }, [id, navigate])
 
   // ===== DELETE DEL PACIENTE =====
   const handleDelete = () => {
@@ -114,7 +129,7 @@ const Patient = () => {
         </div>
         <div className="input-box">
           <p className="data-title">Edad</p>
-          <p className="data">{(patient.age)} años</p>
+          <p className="data">{isNaN(patient.age) ? "-" : `${(patient.age)} años`}</p>
         </div>
       </div>
       

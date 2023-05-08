@@ -20,24 +20,39 @@ const EditShift = () => {
   const [ error, setError ] = useState()
 
   useEffect(() => {
+    const shiftNotExist = () => {
+      Swal.fire({
+        icon: 'error',
+        title: "Paciente no encontrado",
+        text: "Será redirigido a la lista de turnos.",
+        confirmButtonColor: 'var(--skyblue-bg)',
+      }).then(() => {
+        navigate('/listado-turnos')
+      })
+    }
     // ===== GET DEL TURNO =====
     setLoading(true)
     fetch(`${config.webAPI}/appointments/${id}`)
     .then(res => res.json())
     .then(res => {
       if(res) {
-        let date = convertISOStringtoDateTime(res.day, 'date', true)
-        let hour = convertISOStringtoDateTime(res.day, 'hour')
-        setDate(date);
-        setHour(hour);
-        setNotes(res.note);
-        setPatientID(res.patient.id)
-        setLoading(false)
+        if(res.message && res.message === "No appointment found for the given ID") {
+          shiftNotExist()
+        } else {
+          let date = convertISOStringtoDateTime(res.day, 'date', true)
+          let hour = convertISOStringtoDateTime(res.day, 'hour')
+          setDate(date);
+          setHour(hour);
+          setNotes(res.note);
+          setPatientID(res.patient.id)
+          setLoading(false)
+        }
       } else {
         toast('error', 'Algo salió mal, por favor recargue la página.')
+        shiftNotExist()
       }
     })
-  }, [id])
+  }, [id, navigate])
 
   // ===== MANEJADORES DE ESTADO =====
   const handleDate = (e) => {

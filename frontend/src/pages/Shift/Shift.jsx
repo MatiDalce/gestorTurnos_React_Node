@@ -22,22 +22,39 @@ const Shift = () => {
   const [ loading, setLoading ] = useState(true)
 
   useEffect(() => {
+    const shiftNotExist = () => {
+      Swal.fire({
+        icon: 'error',
+        title: "Paciente no encontrado",
+        text: "Será redirigido a la lista de turnos.",
+        confirmButtonColor: 'var(--skyblue-bg)',
+      }).then(() => {
+        navigate('/listado-turnos')
+      })
+    }
     // ===== GET DEL TURNO =====
     fetch(`${config.webAPI}/appointments/${id}`)
     .then(res => res.json())
     .then(res => {
       if(res) {
-        setShift({
-          name: res.patient.name,
-          lastName: res.patient.lastName,
-          note: res.note,
-          date: convertISOStringtoDateTime(res.day, 'date'),
-          hour: convertISOStringtoDateTime(res.day, 'hour')
-        })
+        if(res.message && res.message === "No appointment found for the given ID") {
+          shiftNotExist()
+        } else {
+          setShift({
+            name: res.patient.name,
+            lastName: res.patient.lastName,
+            note: res.note,
+            date: convertISOStringtoDateTime(res.day, 'date'),
+            hour: convertISOStringtoDateTime(res.day, 'hour')
+          })
+        }
+      } else {
+        toast('error', 'Algo salió mal, por favor recargue la página.')
+        shiftNotExist()
       }
     })
     .finally(() => setLoading(false));
-  }, [id])
+  }, [id, navigate])
 
   // ===== DELETE DEL TURNO =====
   const handleDeleteShift = () => {

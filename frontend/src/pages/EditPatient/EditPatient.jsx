@@ -48,44 +48,59 @@ const EditPatient = () => {
   })
 
   useEffect(() => {
+    const patientNotExist = () => {
+      Swal.fire({
+        icon: 'error',
+        title: "Paciente no encontrado",
+        text: "Será redirigido a la lista de pacientes.",
+        confirmButtonColor: 'var(--skyblue-bg)',
+      }).then(() => {
+        navigate('/listado-pacientes')
+      })
+    }
     // ===== GET DEL PACIENTE =====
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
-      if(!res.errors) {
-        // SETEO DE ESTADO
-        setPatient({
-          name: res.name,
-          lastName: res.lastName,
-          dni: res.dni,
-          socialNetwork: res.socialService,
-          gender: res.gender,
-          sexualOrientation: res.sexualOrientation,
-          maritalStatus: res.maritalStatus,
-          email: res.email,
-          birthday: convertUnixtimeToDate(res.birthday, true),
-          academicLevel: res.academicLevel,
-          father: res.father,
-          mother: res.mother,
-          children: res.children, 
-          siblings: res.siblings,
-          // livingSiblings: res.livingSiblings,
-          personalPhoneNumber: res.personalPhoneNumber,
-          contactPhone: res.contactPhone,
-          bloodType: res.bloodType,
-          hasChronicDisease: res.hasChronicDisease,
-          chronicDisease: res.chronicDisease,
-          hasAllergies: res.hasAllergies,
-          allergies: res.allergies,
-          takesMedication: res.takesMedication,
-          medication: res.medication,
-        })
+      if(res) {
+        if(res.message && res.message === "No patient record found for the given ID") {
+          patientNotExist()
+        } else {
+          // SETEO DE ESTADO
+          setPatient({
+            name: res.name,
+            lastName: res.lastName,
+            dni: res.dni,
+            socialNetwork: res.socialService,
+            gender: res.gender,
+            sexualOrientation: res.sexualOrientation,
+            maritalStatus: res.maritalStatus,
+            email: res.email,
+            birthday: convertUnixtimeToDate(res.birthday, true),
+            academicLevel: res.academicLevel,
+            father: res.father,
+            mother: res.mother,
+            children: res.children, 
+            siblings: res.siblings,
+            // livingSiblings: res.livingSiblings,
+            personalPhoneNumber: res.personalPhoneNumber,
+            contactPhone: res.contactPhone,
+            bloodType: res.bloodType,
+            hasChronicDisease: res.hasChronicDisease,
+            chronicDisease: res.chronicDisease,
+            hasAllergies: res.hasAllergies,
+            allergies: res.allergies,
+            takesMedication: res.takesMedication,
+            medication: res.medication,
+          })
+        }
       } else {
-        setError(true)
+        toast('error', 'Algo salió mal, por favor recargue la página.')
+        patientNotExist()
       }
     })
     .finally(() => setLoading(false));
-  }, [id])
+  }, [id, navigate])
 
   // ===== MANEJADORES DE ESTADO =====
   const handleName = (e) => {
