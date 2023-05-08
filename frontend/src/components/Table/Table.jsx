@@ -37,7 +37,7 @@ const Table = ({
                 {row[key]}
               </td>
             case "Pendiente":
-              return <td className="table__cell" role="cell" style={{color:'#eef274', fontWeight: 'bold'}} data-label={value} key={key}>
+              return <td className="table__cell" role="cell" style={{color:'#ffd84a', fontWeight: 'bold'}} data-label={value} key={key}>
                 {row[key]}
               </td>
             default:

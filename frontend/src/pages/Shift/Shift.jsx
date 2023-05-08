@@ -139,7 +139,7 @@ const Shift = () => {
           <p className="data" style={{color: 'var(--red-bg)'}}>{shift.status || '-' }</p>
         }
         { shift.status === "Pendiente" && 
-          <p className="data" style={{color: 'yellow'}}>{shift.status || '-' }</p>
+          <p className="data" style={{color: '#ffd84a'}}>{shift.status || '-' }</p>
         }
         { shift.status === "Pagado" && 
           <p className="data" style={{color: 'var(--green-bg)'}}>{shift.status || '-' }</p>
