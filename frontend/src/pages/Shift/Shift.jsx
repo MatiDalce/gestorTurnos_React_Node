@@ -17,6 +17,8 @@ const Shift = () => {
     name: '',
     note: '',
     date: '',
+    status: '',
+    amount: '',
     hour: ''
   });
   const [ loading, setLoading ] = useState(true)
@@ -43,6 +45,8 @@ const Shift = () => {
           setShift({
             name: res.patient.name,
             lastName: res.patient.lastName,
+            status: res.payStatus,
+            amount: res.amountToPay,
             note: res.note,
             date: convertISOStringtoDateTime(res.day, 'date'),
             hour: convertISOStringtoDateTime(res.day, 'hour')
@@ -124,16 +128,32 @@ const Shift = () => {
   return (
     <>
     <p className='shift-title' >{shift.name || '-'} {shift.lastName || '-'}</p>
-
     <div className="data-shift-box-container">
       <div className="data-shift-box">
         <p className="data-shift">Fecha del turno</p>
         <p className="data">{shift.date || '-' }</p>
       </div>
-
+      <div className="data-shift-box">
+        <p className="data-shift">Estado</p>
+        { shift.status === "Adeuda" && 
+          <p className="data" style={{color: 'var(--red-bg)'}}>{shift.status || '-' }</p>
+        }
+        { shift.status === "Pendiente" && 
+          <p className="data" style={{color: 'yellow'}}>{shift.status || '-' }</p>
+        }
+        { shift.status === "Pagado" && 
+          <p className="data" style={{color: 'var(--green-bg)'}}>{shift.status || '-' }</p>
+        }
+      </div>
+    </div>
+    <div className="data-shift-box-container">
       <div className="data-shift-box">
         <p className="data-shift">Horario del turno</p>
         <p className="data">{`${shift.hour}` || '-'}hs</p>
+      </div>
+      <div className="data-shift-box">
+        <p className="data-shift">Monto</p>
+        <p className="data">{shift.amount || '-'}</p>
       </div>
     </div>
 
@@ -146,6 +166,7 @@ const Shift = () => {
         </Accordion>
       </div>
     </div>
+
     <div className='btn-shift-container'>
       <div className="shift-btn-box">
         <Button 

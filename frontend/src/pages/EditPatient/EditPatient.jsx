@@ -187,12 +187,6 @@ const EditPatient = () => {
       academicLevel: e.target.value
     })
   }
-  // const handleLivingSiblings = (value) => {
-  //   setPatient({
-  //     ...patient,
-  //     livingSiblings: value
-  //   })
-  // }
   const handlePersonalPhone = (e) => {
     setPatient({
       ...patient,
@@ -240,6 +234,7 @@ const EditPatient = () => {
       socialService: patient.socialService,
       email: patient.email,
       gender: patient.gender,
+      sexualOrientation: patient.sexualOrientation,
       birthday: patient.birthday ? Date.parse(patient.birthday) / 1000 : 0, // Number
       maritalStatus: patient.maritalStatus,
       personalPhoneNumber: patient.personalPhoneNumber, // Number
@@ -456,6 +451,7 @@ const EditPatient = () => {
             placeholder='Ingrese el teléfono personal'
             nameProp='personalPhoneNumber'
           />
+          { (error && !patient.personalPhoneNumber) && <p className='addPatient-error'>Este campo es requerido.</p> }
         </div>
       </div>
       <div className="input-editPatient-row">
@@ -712,7 +708,7 @@ const EditPatient = () => {
             isDisabled={
               patient.name === '' ||
               patient.lastName === '' ||
-              patient.email === '' ||
+              patient.personalPhoneNumber === 0 ||
               patient.dni === '' ||
               patient.gender === '' ||
               loading

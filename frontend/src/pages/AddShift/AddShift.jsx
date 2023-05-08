@@ -17,6 +17,7 @@ const AddShift = () => {
   const [selectedPatient, setSelectedPatient] = useState({text:'', value: -1});
   const [date, setDate] = useState(0);
   const [hour, setHour] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [note, setNote] = useState('');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -50,6 +51,9 @@ const AddShift = () => {
   const handleTime = (e) => {
     setHour(e.target.value)
   }
+  const handleAmount = (e) => {
+    setAmount(e.target.value)
+  }
   const handleNotes = (e) => {
     setNote(e.target.value)
   }
@@ -62,9 +66,12 @@ const AddShift = () => {
 
     let data = {
       day: formattedDateTime,
+      amountToPay: Number(amount),
+      payStatus: 'Pendiente',
       patient: Number(selectedPatient.value),
       note: note
     };
+    console.log(data);
 
     fetch(`${config.webAPI}/appointments`, {
       method: 'POST',
@@ -88,8 +95,8 @@ const AddShift = () => {
   // ===== HTML =====
   return (
     <>
-      <div className="select-shift-center">
-        <div className="select-shift-input">
+      <div className="input-rowAdd-shift">
+        <div className="addShift-input-container">
           <SearchableDropdown
             list={[{text:'', value:null}, ...patientList]}
             onSelect={handleSelectPatient}
@@ -99,8 +106,6 @@ const AddShift = () => {
           />
           { (error && !selectedPatient) && <p className='addShift-error'>Este campo es requerido.</p> }
         </div>
-      </div>
-      <div className="input-rowAdd-shift">
         <div className="addShift-input-container">
           <Input
             onChange={handleDate}
@@ -111,6 +116,21 @@ const AddShift = () => {
             isLabelCenter
             type='date'
             nameProp='date'
+          />
+          { (error && !date) && <p className='addShift-error'>Este campo es requerido.</p> }
+        </div>
+      </div>
+      <div className="input-rowAdd-shift">
+        <div className="addShift-input-container">
+          <Input
+            onChange={handleAmount}
+            value={amount}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Monto'
+            isLabelCenter
+            type='number'
+            nameProp='amountToPay'
           />
           { (error && !date) && <p className='addShift-error'>Este campo es requerido.</p> }
         </div>
@@ -129,6 +149,7 @@ const AddShift = () => {
           { (error && !hour) && <p className='addShift-error'>Este campo es requerido.</p> }
         </div>
       </div>
+
       <div className="textarea-input-shift">
         <Input
           onChange={handleNotes}

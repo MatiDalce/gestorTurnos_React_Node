@@ -14,7 +14,7 @@ const ShiftList = () => {
   const [filterShift, setFilterShift] = useState({
     name: '',
     dateFrom: '',
-    dateUntil: ''
+    dateUntil: '',
   });
   const [loading, setLoading] = useState(true);
 
@@ -29,7 +29,9 @@ const ShiftList = () => {
             id: shift.id,
             completeName: `${shift.patient.name} ${shift.patient.lastName}`,
             day: convertISOStringtoDateTime(shift.day, 'date'),
-            hour: convertISOStringtoDateTime(shift.day, 'hour')+' hs'
+            hour: convertISOStringtoDateTime(shift.day, 'hour')+' hs',
+            payStatus: shift.payStatus,
+            amountToPay: shift.amountToPay
           }
         })
         setShiftList(modifiedRes);
@@ -58,7 +60,9 @@ const ShiftList = () => {
             id: shift.id,
             completeName: `${shift.patient.name} ${shift.patient.lastName}`,
             day: convertISOStringtoDateTime(shift.day, 'date'),
-            hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs'
+            hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs',
+            payStatus: shift.payStatus,
+            amountToPay: shift.amountToPay
           }
         })
         setShiftList(modifiedRes);
@@ -80,7 +84,9 @@ const ShiftList = () => {
           id: shift.id,
           completeName: `${shift.patient.name} ${shift.patient.lastName}`,
           day: convertISOStringtoDateTime(shift.day, 'date'),
-          hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs'
+          hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs',
+          payStatus: shift.payStatus,
+          amountToPay: shift.amountToPay
         }
       })
       setShiftList(modifiedRes);
@@ -125,7 +131,7 @@ const ShiftList = () => {
     {
       shiftList.length > 0 ? <><Table 
         staticPath={'/turno'}
-        headers={{completeName: 'Nombre y Apellido', day: 'Fecha de turno', hour: 'Horario del turno'}}
+        headers={{completeName: 'Nombre y Apellido', day: 'Fecha de turno', hour: 'Horario del turno', payStatus: 'Estado', amountToPay: 'Monto'}}
         content={shiftList} 
       />
         <div className="addPatient-refresh-center">

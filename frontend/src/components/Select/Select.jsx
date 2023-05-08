@@ -21,6 +21,7 @@ const Select = ({
     const inputStyles = {
         backgroundColor: isDisabled ? 'var(--gray-bg)' : '',
         pointerEvents: isDisabled ? 'none' : '',
+        textAlign: 'center'
     }
 
     return (

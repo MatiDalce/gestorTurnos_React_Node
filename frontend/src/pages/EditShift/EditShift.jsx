@@ -8,6 +8,7 @@ import Input from '../../components/Input/Input';
 import './editShift.css';
 import { convertISOStringtoDateTime, joinDateTimeToISOString } from '../../assets/helpers/unixtimeToSomething';
 import Swal from 'sweetalert2';
+import Select from '../../components/Select/Select';
 
 const EditShift = () => {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ const EditShift = () => {
   const [ patientID, setPatientID] = useState()
   const [ date, setDate ] = useState()
   const [ hour, setHour ] = useState()
+  const [ amount, setAmount ] = useState()
+  const [ status, setStatus ] = useState()
   const [ notes, setNotes ] = useState()
   const [ loading, setLoading ] = useState(true)
   const [ error, setError ] = useState()
@@ -43,6 +46,8 @@ const EditShift = () => {
           let hour = convertISOStringtoDateTime(res.day, 'hour')
           setDate(date);
           setHour(hour);
+          setStatus(res.payStatus);
+          setAmount(res.amountToPay);
           setNotes(res.note);
           setPatientID(res.patient.id)
           setLoading(false)
@@ -65,6 +70,14 @@ const EditShift = () => {
     setHour(inputValue)
   };
 
+  const handleAmount = (e) => {
+    setAmount(e.target.value)
+  }
+
+  const handleStatus = (e) => {
+    setStatus(e.target.value)
+  }
+
   const handleNotes = (e) => {
     let inputValue = e.target.value;
     setNotes(inputValue)
@@ -77,6 +90,8 @@ const EditShift = () => {
 
     let body = {
       day: dateTime,
+      amountToPay: Number(amount),
+      payStatus: status,
       note: notes,
       patient: patientID
     }
@@ -114,7 +129,6 @@ const EditShift = () => {
         })
       } else return null
     })
-
   };
 
   // ===== HTML =====
@@ -137,20 +151,66 @@ const EditShift = () => {
           { (error && !date) && <p className='addShift-error'>Este campo es requerido.</p> }
         </div>
         <div className="editShift-input-box">
-          <Input
-            isDisabled={loading}
-            onChange={handleTime}
-            value={hour} // hh:mm:ss.ms
+          <Select
+            onChange={handleStatus}
             colorLabel='var(--black-bg)' 
             hasLabel
-            labelTitle='Hora'
+            value={status}
             isLabelCenter
-            placeholder='Ingrese la hora'
-            type='time'
-            nameProp='hour'
+            labelTitle='Estado'
+            nameProp='payStatus'
+            options={[
+              {
+                value: null,
+                text: 'Seleccione un valor',
+              },
+              {
+                value: 'Adeuda',
+                text: 'Adeuda',
+              },
+              {
+                value: 'Pendiente',
+                text: 'Pendiente',
+              },
+              {
+                value: 'Pagado',
+                text: 'Pagado',
+              },
+            ]}
           />
-          { (error && !hour) && <p className='addShift-error'>Este campo es requerido.</p> }
+          { (error && !date) && <p className='addShift-error'>Este campo es requerido.</p> }
         </div>
+      </div>
+      <div className="input-rowEdit-shift">
+        <div className="editShift-input-box">
+            <Input
+              isDisabled={loading}
+              onChange={handleTime}
+              value={hour} // hh:mm:ss.ms
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Hora'
+              isLabelCenter
+              placeholder='Ingrese la hora'
+              type='time'
+              nameProp='hour'
+            />
+            { (error && !hour) && <p className='addShift-error'>Este campo es requerido.</p> }
+          </div>
+          <div className="editShift-input-box">
+            <Input
+              isDisabled={loading}
+              onChange={handleAmount}
+              value={amount}
+              colorLabel='var(--black-bg)' 
+              hasLabel
+              labelTitle='Monto'
+              isLabelCenter
+              type='number'
+              nameProp='amountToPay'
+            />
+            { (error && !date) && <p className='addShift-error'>Este campo es requerido.</p> }
+          </div>
       </div>
       <div className="textarea-input-shift">
         <div className="editShift-textarea-box">

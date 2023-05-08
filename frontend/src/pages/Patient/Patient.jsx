@@ -31,6 +31,7 @@ const Patient = () => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
+      console.log(res);
       if(res){
         if(res.message && res.message === "No patient record found for the given ID") {
           patientNotExist()
@@ -117,82 +118,89 @@ const Patient = () => {
           <p className="data">{patient.gender || '-'}</p>
         </div>
         <div className="input-box">
-          <p className="data-title">Obra Social</p>
-          <p className="data">{patient.socialService || '-'}</p>
+          <p className="data-title">Orientación Sexual</p>
+          <p className="data">{patient.sexualOrientation || '-'}</p>
         </div>
       </div>
 
       <div className="input-patient-row">
         <div className="input-box">
+          <p className="data-title">Obra Social</p>
+          <p className="data">{patient.socialService || '-'}</p>
+        </div>
+        <div className="input-box">
           <p className="data-title">Fecha de nacimiento</p>
           <p className="data">{patient.birthday || '-'}</p>
         </div>
+      </div>
+      
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Edad</p>
           <p className="data">{isNaN(patient.age) ? "-" : `${(patient.age)} años`}</p>
         </div>
-      </div>
-      
-      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Estado civil</p>
           <p className="data">{patient.maritalStatus || '-'}</p>
         </div>
+      </div>
+      
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Padre</p>
           <p className="data">{patient.father || '-'}</p>
         </div>
-      </div>
-      
-      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Madre</p>
           <p className="data">{patient.mother || '-'}</p>
         </div>
+      </div>
+      
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Hijos</p>
           <p className="data">{patient.children || '-'}</p>
         </div>
-      </div>
-      
-      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Hermanos</p>
           <p className="data">{patient.siblings || '-'}</p>
         </div>
+      </div>
+      
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Teléfono personal</p>
           <p className="data">{patient.personalPhoneNumber || '-'}</p>
         </div>
-      </div>
-      
-      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Teléfono de contacto</p>
           <p className="data">{patient.contactPhone || '-'}</p>
         </div>
+      </div>
+      
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Nivel académico cursado</p>
           <p className="data">{patient.academicLevel || '-'}</p>
         </div>
-      </div>
-      
-      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">Grupo sanguíneo</p>
           <p className="data">{patient.bloodType || '-'}</p>
         </div>
-        <div className="input-box">
-          <p className="data-title">¿Toma algún medicamento?</p>
-          <p className="data">{patient.medication || '-'}</p>
-        </div>
       </div>
       
       <div className="input-patient-row">
         <div className="input-box">
+          <p className="data-title">¿Toma algún medicamento?</p>
+          <p className="data">{patient.medication || '-'}</p>
+        </div>
+        <div className="input-box">
           <p className="data-title">¿Tiene alguna alergia?</p>
           <p className="data">{patient.allergies || '-'}</p>
         </div>
+      </div>
+
+      <div className="input-patient-row">
         <div className="input-box">
           <p className="data-title">¿Tiene alguna enfermedad crónica?</p>
           <p className="data">{patient.chronicDisease || '-'}</p>

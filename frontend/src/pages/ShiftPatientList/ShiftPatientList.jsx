@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import { convertISOStringtoDateTime } from '../../assets/helpers/unixtimeToSomething';
 import { config } from '../../env/config';
 import Button from '../../components/Button/Button';
-import Title from '../../components/Title/Title'
-import Select from '../../components/Select/Select'
-import Table from '../../components/Table/Table'
-import './shiftPatientList.css'
+import Title from '../../components/Title/Title';
+import Select from '../../components/Select/Select';
+import Table from '../../components/Table/Table';
+import './shiftPatientList.css';
 
 const ShiftPatientList = () => {
 
@@ -44,6 +44,8 @@ const ShiftPatientList = () => {
             patientId: shift.patientId,
             day: convertISOStringtoDateTime(shift.day, 'date'),
             hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs',
+            payStatus: shift.payStatus,
+            amountToPay: shift.amountToPay,
             note: shift.note
           }
         })
@@ -67,6 +69,8 @@ const ShiftPatientList = () => {
               patientId: shift.patientId,
               day: convertISOStringtoDateTime(shift.day, 'date'),
               hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs',
+              payStatus: shift.payStatus,
+              amountToPay: shift.amountToPay,
               note: shift.note
             }
           })
@@ -85,6 +89,8 @@ const ShiftPatientList = () => {
               patientId: shift.patientId,
               day: convertISOStringtoDateTime(shift.day, 'date'),
               hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs',
+              payStatus: shift.payStatus,
+              amountToPay: shift.amountToPay,
               note: shift.note
             }
           })
@@ -108,6 +114,8 @@ const ShiftPatientList = () => {
               patientId: shift.patientId,
               day: convertISOStringtoDateTime(shift.day, 'date'),
               hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs',
+              payStatus: shift.payStatus,
+              amountToPay: shift.amountToPay,
               note: shift.note
             }
           })
@@ -149,7 +157,7 @@ const ShiftPatientList = () => {
     {
       shiftPatientList.length > 0 ? <><Table 
       staticPath={'/turno'}
-      headers={{day: 'Fecha', hour: 'Hora'}}
+      headers={{day: 'Fecha', hour: 'Hora', payStatus: "Estado", amountToPay: "Monto"}}
       content={shiftPatientList || []} 
     />
       <div className="addPatient-refresh-center">

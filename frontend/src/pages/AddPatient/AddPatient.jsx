@@ -122,12 +122,6 @@ const AddPatient = () => {
       siblings: value
     })
   }
-  // const handleLivingSiblings = (value) => {
-  //   setPatient({
-  //     ...patient,
-  //     livingSiblings: value
-  //   })
-  // }
   const handlePersonalPhoneNumber = (e) => {
     setPatient({
       ...patient,
@@ -368,6 +362,7 @@ const AddPatient = () => {
             placeholder='Ingrese el teléfono personal'
             nameProp='personalPhoneNumber'
           />
+          { (error && !patient.personalPhoneNumber) && <p className='addPatient-error'>Este campo es requerido.</p> }
         </div>
       </div>
       <div className="input-row">
@@ -447,19 +442,6 @@ const AddPatient = () => {
             nameProp='siblings'
           />
         </div>
-        {/* <div className="addPatient-box">
-          <Checkbox
-            formType='new'
-            onlyCheckboxes
-            hasLabel
-            onChangeOnlyBoxes={handleLivingSiblings}
-            labelTitle='¿Viven todos/as sus hermanos/as?'
-            options={['Sí', 'No']}
-            colorLabel='var(--black-bg)'
-            isLabelCenter
-            nameProp='livingSiblings'
-          />
-        </div> */}
         <div className="addPatient-box">
           <Select
             options={[
@@ -600,7 +582,7 @@ const AddPatient = () => {
             isDisabled={
               patient.name === '' ||
               patient.lastName === '' ||
-              patient.email === '' ||
+              patient.personalPhoneNumber === '' ||
               patient.dni === '' ||
               patient.gender === ''
             }

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import Spinner from '../Spinner/Spinner';
 import './table.css'
 
 const Table = ({
@@ -9,7 +8,6 @@ const Table = ({
   staticPath, // Parte de la ruta a la que va a redirigir
 }) => {
   let navigate = useNavigate();
-
   const renderHeading = ([key, value]) => {
     return <th className="table__heading" role="columnheader" key={key}>
       {value}
@@ -23,16 +21,36 @@ const Table = ({
       </tr>
     </thead>
   );
+
   const rowStyles = {
     cursor: staticPath ? 'pointer' : ''
   }
+
   const renderRow = row => {
     return <tr className="table__row" style={rowStyles} role="row" key={row.id} onClick={staticPath ? () => navigate(`${staticPath}/${row.id}`) : () => {}}>
-      {Object.entries(headers).map(([key, value]) => (
-        <td className="table__cell" role="cell" data-label={value} key={key}>
-          {row[key]}
-        </td>
-      ))}
+      {Object.entries(headers).map(([key, value]) => {
+        console.log();
+        if(key === "payStatus") {
+          switch (row[key]) {
+            case "Adeuda":
+              return <td className="table__cell" role="cell" style={{color:'var(--red-bg)', fontWeight: 'bold'}} data-label={value} key={key}>
+                {row[key]}
+              </td>
+            case "Pendiente":
+              return <td className="table__cell" role="cell" style={{color:'#eef274', fontWeight: 'bold'}} data-label={value} key={key}>
+                {row[key]}
+              </td>
+            default:
+              return <td className="table__cell" role="cell" style={{color:'var(--green-bg)', fontWeight: 'bold'}} data-label={value} key={key}>
+                {row[key]}
+              </td>
+          }
+        } else {
+          return <td className="table__cell" role="cell" data-label={value} key={key}>
+            {row[key]}
+          </td>
+        }
+      })}
     </tr>
   };
 
