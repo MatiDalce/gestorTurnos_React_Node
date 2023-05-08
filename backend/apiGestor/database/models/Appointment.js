@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     payStatus: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    amountToPay: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     timestamps: false // Disable timestamps for this model
