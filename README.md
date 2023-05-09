@@ -12,6 +12,10 @@
 
 ## Frontend
 * Para ejecutar el Frontend, en la terminal entramos a frontend/src y luego escribimos "npm start".
+* Para conectar nuestra baje de datos creamos a la altura de app.js el archivo .env y configuramos nuestras claves de la siguente manera
+DB_USER = root
+(el campo password se encuentra en database/config y es por defecto null)
+DB_NAME = gestorpsi
 
 ---
 
