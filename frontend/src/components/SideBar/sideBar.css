@@ -14,7 +14,8 @@
   
   /* Color/shape of burger icon bars on hover*/
   .bm-burger-bars-hover {
-    background: var(--secondary-skyblue-bg);;
+    background: var(--secondary-skyblue-bg);
+    filter:  drop-shadow(2px 2px 15px var(--white-bg)) invert(0);
   }
   
   /* Position and sizing of clickable cross button */
