@@ -31,7 +31,6 @@ const Patient = () => {
     fetch(`${config.webAPI}/patients/${id}`)
     .then(res => res.json())
     .then(res => {
-      console.log(res);
       if(res){
         if(res.message && res.message === "No patient record found for the given ID") {
           patientNotExist()

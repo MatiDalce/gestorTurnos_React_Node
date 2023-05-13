@@ -29,7 +29,6 @@ const Table = ({
   const renderRow = row => {
     return <tr className="table__row" style={rowStyles} role="row" key={row.id} onClick={staticPath ? () => navigate(`${staticPath}/${row.id}`) : () => {}}>
       {Object.entries(headers).map(([key, value]) => {
-        console.log();
         if(key === "payStatus") {
           switch (row[key]) {
             case "Adeuda":
