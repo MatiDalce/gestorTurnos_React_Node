@@ -626,17 +626,33 @@ const EditPatient = () => {
                 text: 'Tipo A',
               },
               {
+                value: 'Tipo A-',
+                text: 'Tipo A-',
+              },
+              {
                 value: 'Tipo B',
                 text: 'Tipo B',
+              },
+              {
+                value: 'Tipo B-',
+                text: 'Tipo B-',
               },
               {
                 value: 'Tipo AB',
                 text: 'Tipo AB',
               },
               {
+                value: 'Tipo AB-',
+                text: 'Tipo AB-',
+              },
+              {
                 value: 'Tipo O',
                 text: 'Tipo O',
               },
+              {
+                value: 'Tipo O-',
+                text: 'Tipo O-',
+              }
             ]}
             value={patient.bloodType}
             onChange={handleBloodType}

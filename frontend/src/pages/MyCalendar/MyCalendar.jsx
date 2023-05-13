@@ -21,6 +21,7 @@ const MyCalendar = () => {
     title: '',
     date: '',
     description: '',
+    sessionStatus: '',
   })
 
   useEffect(() => {
@@ -68,6 +69,7 @@ const MyCalendar = () => {
       title: eventInfo.event._def.extendedProps.name,
       date: `${day < 10 ? '0' + day : day}-${month < 10 ? '0' + month : month}-${year}`,
       description: eventInfo.event._def.extendedProps.note,
+      sessionStatus: eventInfo.event._def.extendedProps.sessionStatus,
     })
     handleOpenModal()
   }

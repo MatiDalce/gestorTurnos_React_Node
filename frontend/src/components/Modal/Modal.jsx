@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import Table from '../Table/Table'
-import Title from '../Title/Title'
 import CrossIcon from '../../assets/icons/xmark-solid.svg'
 import './modal.css'
 
@@ -8,7 +6,7 @@ import './modal.css'
 // EVENT CLICK - https://fullcalendar.io/docs/eventClick
 // EVENT DATA - https://fullcalendar.io/docs/v3/event-data
 
-const Modal = ({ title, description, date, setter, isOpen }) => {
+const Modal = ({ title, description, date, sessionStatus, setter }) => {
     const [show, setShow] = useState(true);
 
     const openCloseModal = () => {
@@ -26,8 +24,9 @@ const Modal = ({ title, description, date, setter, isOpen }) => {
                     <img className='closeModal' src={CrossIcon} alt='Cerrar' />
                 </div>
                 <h3 className='appointment-title'>{title || ''}</h3>
-                <p className='appointment-date'>Fecha: {date || ''}</p>
-                <p className='appointment-desc-title'>Descripción</p>
+                <p className='appointment-date'><b>Fecha:</b> {date || ''}</p>
+                <p className='appointment-sessionStatus'><b>Estado del turno:</b> {sessionStatus || ''}</p>
+                <p className='appointment-desc-title'><b>Descripción</b></p>
                 <p className='appointment-desc'>{description || ''}</p>
             </div>
         </div>

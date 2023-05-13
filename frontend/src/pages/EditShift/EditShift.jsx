@@ -18,6 +18,7 @@ const EditShift = () => {
   const [ hour, setHour ] = useState()
   const [ amount, setAmount ] = useState()
   const [ status, setStatus ] = useState()
+  const [ sessionStatus, setSessionStatus ] = useState()
   const [ notes, setNotes ] = useState()
   const [ loading, setLoading ] = useState(true)
   const [ error, setError ] = useState()
@@ -47,6 +48,7 @@ const EditShift = () => {
           setDate(date);
           setHour(hour);
           setStatus(res.payStatus);
+          setSessionStatus(res.sessionStatus);
           setAmount(res.amountToPay);
           setNotes(res.note);
           setPatientID(res.patient.id)
@@ -78,6 +80,10 @@ const EditShift = () => {
     setStatus(e.target.value)
   }
 
+  const handleSessionStatus = (e) => {
+    setSessionStatus(e.target.value)
+  }
+
   const handleNotes = (e) => {
     let inputValue = e.target.value;
     setNotes(inputValue)
@@ -92,6 +98,7 @@ const EditShift = () => {
       day: dateTime,
       amountToPay: Number(amount),
       payStatus: status,
+      sessionStatus: sessionStatus,
       note: notes,
       patient: patientID
     }
@@ -137,6 +144,42 @@ const EditShift = () => {
     <>
       <div className="input-rowEdit-shift">
         <div className="editShift-input-box">
+          <Select
+            options={[
+              {
+                value: null,
+                text: 'Seleccione un valor',
+              },
+              {
+                value: 'Presencial',
+                text: 'Presencial',
+              },
+              {
+                value: 'Virtual',
+                text: 'Virtual',
+              },
+              {
+                value: 'Pospuesto',
+                text: 'Pospuesto',
+              },
+              {
+                value: 'Cancelado',
+                text: 'Cancelado',
+              },
+              
+            ]}
+            value={sessionStatus}
+            onChange={handleSessionStatus}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Estado de sesión'
+            isLabelCenter
+            nameProp='sessionStatus'
+          />
+        </div>
+      </div>
+      <div className="input-rowEdit-shift">
+        <div className="editShift-input-box">
           <Input
             isDisabled={loading}
             onChange={handleDate}
@@ -157,7 +200,7 @@ const EditShift = () => {
             hasLabel
             value={status}
             isLabelCenter
-            labelTitle='Estado'
+            labelTitle='Estado del pago'
             nameProp='payStatus'
             options={[
               {

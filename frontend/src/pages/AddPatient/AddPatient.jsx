@@ -303,7 +303,7 @@ const AddPatient = () => {
               hasLabel
               labelTitle='Email'
               isLabelCenter
-              placeholder='Ingrese la edad'
+              placeholder='Ingrese el email'
               nameProp='email'
             />
           </div>
@@ -372,9 +372,9 @@ const AddPatient = () => {
             onChange={handleContactPhone}
             colorLabel='var(--black-bg)' 
             hasLabel
-            labelTitle='Teléfono de contacto'
+            labelTitle='Vínculo y Teléfono de contacto'
             isLabelCenter
-            placeholder='Ingrese el teléfono de contacto'
+            placeholder='Ingrese el teléfono de contacto del familiar o tutor'
             nameProp='contactPhone'
           />
         </div>
@@ -508,17 +508,33 @@ const AddPatient = () => {
                   text: 'Tipo A',
                 },
                 {
+                  value: 'Tipo A-',
+                  text: 'Tipo A-',
+                },
+                {
                   value: 'Tipo B',
                   text: 'Tipo B',
+                },
+                {
+                  value: 'Tipo B-',
+                  text: 'Tipo B-',
                 },
                 {
                   value: 'Tipo AB',
                   text: 'Tipo AB',
                 },
                 {
+                  value: 'Tipo AB-',
+                  text: 'Tipo AB-',
+                },
+                {
                   value: 'Tipo O',
                   text: 'Tipo O',
                 },
+                {
+                  value: 'Tipo O-',
+                  text: 'Tipo O-',
+                }
               ]}
               onChange={handleBloodType}
               colorLabel='var(--black-bg)' 

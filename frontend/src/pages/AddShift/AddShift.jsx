@@ -7,6 +7,7 @@ import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import SearchableDropdown from '../../components/SearchableDropdown/SearchableDropdown';
 import './addShift.css';
+import Select from '../../components/Select/Select';
 
 const AddShift = () => {
   const navigate = useNavigate()
@@ -15,6 +16,7 @@ const AddShift = () => {
   // ===== ESTADOS =====
   const [patientList, setPatientList] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState({text:'', value: -1});
+  const [sessionStatus, setSessionStatus] = useState('');
   const [date, setDate] = useState(0);
   const [hour, setHour] = useState(0);
   const [amount, setAmount] = useState(0);
@@ -44,7 +46,9 @@ const AddShift = () => {
   // ===== MANEJADORES DE ESTADOS =====
   const handleSelectPatient = (patient) => {
     setSelectedPatient({value: patient.value, text: patient.text})
-    
+  }
+  const handleSessionStatus = (e) => {
+    setSessionStatus(e.target.value)
   }
   const handleDate = (e) => {
     setDate(e.target.value)
@@ -68,6 +72,7 @@ const AddShift = () => {
         day: formattedDateTime,
         amountToPay: Number(amount),
         payStatus: 'Pendiente',
+        sessionStatus: sessionStatus,
         patient: Number(selectedPatient.value),
         note: note
       };
@@ -103,6 +108,41 @@ const AddShift = () => {
             isDisabled={patientList.length === 0}
           />
           { (error && !selectedPatient) && <p className='addShift-error'>Este campo es requerido.</p> }
+        </div>
+      </div>
+      <div className="input-rowAdd-shift">
+        <div className="addShift-input-container">
+          <Select
+            options={[
+              {
+                value: null,
+                text: 'Seleccione un valor',
+              },
+              {
+                value: 'Presencial',
+                text: 'Presencial',
+              },
+              {
+                value: 'Virtual',
+                text: 'Virtual',
+              },
+              {
+                value: 'Pospuesto',
+                text: 'Pospuesto',
+              },
+              {
+                value: 'Cancelado',
+                text: 'Cancelado',
+              },
+              
+            ]}
+            onChange={handleSessionStatus}
+            colorLabel='var(--black-bg)' 
+            hasLabel
+            labelTitle='Estado de sesión'
+            isLabelCenter
+            nameProp='sessionStatus'
+          />
         </div>
         <div className="addShift-input-container">
           <Input
@@ -165,7 +205,7 @@ const AddShift = () => {
         patientSelectedError && <p style={{color:'var(--red-bg)'}}>Paciente: Debe seleccionar una de las opciones disponibles.</p>
       } */}
       <div className='btn-addShift-container'>
-        <Button 
+        <Button
           title={'Agregar'} 
           type='button'
           onClick={handleAddShift}
@@ -173,6 +213,7 @@ const AddShift = () => {
             selectedPatient.text === '' ||
             date === 0 ||
             hour === 0 ||
+            sessionStatus === '' ||
             note === '' ||
             loading
           }

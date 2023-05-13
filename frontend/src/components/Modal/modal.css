@@ -84,7 +84,7 @@
     margin-bottom: 5%;
   }
 
-  .appointment-date {
+  .appointment-date, .appointment-sessionStatus {
     font-size: 1.6em;
     margin-bottom: 5%;
     color: var(--white-bg);
