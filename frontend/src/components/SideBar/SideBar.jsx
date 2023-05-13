@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { slide as Menu } from "react-burger-menu";
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { toast } from '../../assets/helpers/toast';
 import { config } from '../../env/config';
-import Cross from '../../assets/icons/xmark-solid.svg'
-import lala from '../../assets/icons/arrow-left-solid.svg'
 import "./sideBar.css";
 export const SideBar = (props) => {
     let navigate = useNavigate();
