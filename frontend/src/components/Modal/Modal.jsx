@@ -16,7 +16,7 @@ const Modal = ({ title, description, date, sessionStatus, setter }) => {
             setter();
         }, 300);
     }
-
+    console.log('MODAL ', sessionStatus);
     return (
         <div className={`modal-center ${!show ? 'modal-fade-out' : 'modal-fade-in'}`} >
             <div className="modal-container">

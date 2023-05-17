@@ -45,7 +45,7 @@ const ShiftPatientList = () => {
             day: convertISOStringtoDateTime(shift.day, 'date'),
             hour: convertISOStringtoDateTime(shift.day, 'hour') + ' hs',
             payStatus: shift.payStatus,
-            amountToPay: shift.amountToPay,
+            amountToPay: '$ ' + shift.amountToPay,
             note: shift.note
           }
         })

@@ -63,13 +63,12 @@ const MyCalendar = () => {
     const day = date.getDate() + 1;
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-
     setModalData({
       id: eventInfo.el.fcSeg.eventRange.def.id,
       title: eventInfo.event._def.extendedProps.name,
       date: `${day < 10 ? '0' + day : day}-${month < 10 ? '0' + month : month}-${year}`,
       description: eventInfo.event._def.extendedProps.note,
-      sessionStatus: eventInfo.event._def.extendedProps.sessionStatus,
+      sessionStatus: eventInfo.event.extendedProps.sessionStatus,
     })
     handleOpenModal()
   }
@@ -84,7 +83,8 @@ const MyCalendar = () => {
               onClose={setOpenModal} 
               title={modalData.title} 
               description={modalData.description} 
-              date={modalData.date} 
+              date={modalData.date}
+              sessionStatus={modalData.sessionStatus}
             />
           }
           {

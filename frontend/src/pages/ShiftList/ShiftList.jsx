@@ -32,7 +32,7 @@ const ShiftList = () => {
             hour: convertISOStringtoDateTime(shift.day, 'hour')+' hs',
             payStatus: shift.payStatus,
             sessionStatus: shift.sessionStatus,
-            amountToPay: shift.amountToPay
+            amountToPay: '$ ' + shift.amountToPay
           }
         })
         setShiftList(modifiedRes);
