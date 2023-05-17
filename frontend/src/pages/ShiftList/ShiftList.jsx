@@ -31,6 +31,7 @@ const ShiftList = () => {
             day: convertISOStringtoDateTime(shift.day, 'date'),
             hour: convertISOStringtoDateTime(shift.day, 'hour')+' hs',
             payStatus: shift.payStatus,
+            sessionStatus: shift.sessionStatus,
             amountToPay: shift.amountToPay
           }
         })
@@ -131,7 +132,7 @@ const ShiftList = () => {
     {
       shiftList.length > 0 ? <><Table 
         staticPath={'/turno'}
-        headers={{completeName: 'Nombre y Apellido', day: 'Fecha de turno', hour: 'Horario del turno', payStatus: 'Estado', amountToPay: 'Monto'}}
+        headers={{completeName: 'Nombre y Apellido', day: 'Fecha de turno', hour: 'Horario del turno', sessionStatus: 'Estado de sesión', payStatus: 'Estado de pago', amountToPay: 'Monto'}}
         content={shiftList} 
       />
         <div className="addPatient-refresh-center">

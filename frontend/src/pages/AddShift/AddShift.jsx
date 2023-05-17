@@ -101,12 +101,30 @@ const AddShift = () => {
     <>
       <div className="input-rowAdd-shift">
         <div className="addShift-input-container">
-          <SearchableDropdown
-            list={[{text:'', value:null}, ...patientList]}
-            onSelect={handleSelectPatient}
-            labelTitle='Seleccione el paciente'
-            isDisabled={patientList.length === 0}
-          />
+          {
+            (state && state.value) > 0 ?
+              <Select 
+                options={[
+                  {
+                    value: state.value,
+                    text: state.text,
+                  }
+                ]}
+                onChange={handleSelectPatient}
+                colorLabel='var(--black-bg)' 
+                hasLabel
+                labelTitle='Seleccione el paciente'
+                isLabelCenter
+                nameProp='selectPatient'
+              />
+            :
+            <SearchableDropdown
+              list={[{text:'', value:null}, ...patientList]}
+              onSelect={handleSelectPatient}
+              labelTitle='Seleccione el paciente'
+              isDisabled={patientList.length === 0}
+            />
+          }
           { (error && !selectedPatient) && <p className='addShift-error'>Este campo es requerido.</p> }
         </div>
       </div>
