@@ -90,7 +90,7 @@ module.exports = {
         }
       },
     post: async (req, res) => {
-        const { day, patient, note, amountToPay, payStatus } = req.body;
+        const { day, patient, note, amountToPay, payStatus, sessionStatus } = req.body;
 
         console.log(req.body)
 
@@ -100,7 +100,8 @@ module.exports = {
                 patientId : patient,
                 note,
                 amountToPay,
-                payStatus
+                payStatus,
+                sessionStatus
             });
             res.status(201).json(newAppointment);
         } catch (err) {
@@ -110,7 +111,7 @@ module.exports = {
     },
     put: async (req, res) => {
 
-      const { day, patient, note, amountToPay, payStatus } = req.body;
+      const { day, patient, note, amountToPay, payStatus, sessionStatus } = req.body;
 
       try {
           const editedAppointment = await db.Appointment.update({
@@ -118,7 +119,8 @@ module.exports = {
               patient,
               note,
               amountToPay,
-              payStatus 
+              payStatus,
+              sessionStatus
           },{
             where:{
                 id:req.params.id
@@ -360,6 +362,7 @@ module.exports = {
           return {
             id: appointment.id,
             start: appointment.day,
+            sessionStatus: appointment.sessionStatus,
             note: appointment.note,
             name: appointment.patient.name + " " +appointment.patient.lastName
           };
