@@ -36,7 +36,11 @@ const EditShift = () => {
     }
     // ===== GET DEL TURNO =====
     setLoading(true)
-    fetch(`${config.webAPI}/appointments/${id}`)
+    fetch(`${config.webAPI}/appointments/${id}`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       if(res) {
@@ -59,6 +63,9 @@ const EditShift = () => {
         shiftNotExist()
       }
     })
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
+    });
   }, [id, navigate])
 
   // ===== MANEJADORES DE ESTADO =====
@@ -118,6 +125,7 @@ const EditShift = () => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `${localStorage.getItem('token')}`
             },
             body: JSON.stringify(body)
         })
@@ -134,6 +142,9 @@ const EditShift = () => {
             toast('success', 'Se ha editado exitosamente')
           }
         })
+        .catch(err => {
+          if(err.message === "auth") { navigate('/login'); }
+        });
       } else return null
     })
   };

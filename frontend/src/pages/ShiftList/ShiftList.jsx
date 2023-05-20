@@ -5,10 +5,11 @@ import Spinner from '../../components/Spinner/Spinner'
 import Input from '../../components/Input/Input'
 import Table from '../../components/Table/Table'
 import { config } from '../../env/config';
+import { useNavigate } from 'react-router-dom';
 import './shiftList.css'
 
 const ShiftList = () => {
-
+    const navigate = useNavigate()
     // ===== ESTADO =====
   const [shiftList, setShiftList] = useState([]);
   const [filterShift, setFilterShift] = useState({
@@ -20,7 +21,11 @@ const ShiftList = () => {
 
   useEffect(() => {
     // ===== GET DE TURNOS =====
-    fetch(`${config.webAPI}/appointments`)
+    fetch(`${config.webAPI}/appointments`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       if(res.length > 0) {
@@ -38,8 +43,11 @@ const ShiftList = () => {
         setShiftList(modifiedRes);
       }
     })
-    .finally(() => setLoading(false));
-  }, [])
+    .finally(() => setLoading(false))
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
+    });
+  }, [navigate])
 
   // ===== MANEJADORES DE ESTADO =====
   const handleName = (e) => {
@@ -51,7 +59,11 @@ const ShiftList = () => {
 
   // Botón de refresh
   const handleRefresh = (e) => {
-    fetch(`${config.webAPI}/appointments`)
+    fetch(`${config.webAPI}/appointments`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       if(res) {
@@ -70,13 +82,20 @@ const ShiftList = () => {
         setLoading(false)
       } else {
       }
+    })
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
     });
   }
 
   // ===== Input de búsqueda =====
   const handleShiftSearch = () => {
     setLoading(true)
-    fetch(`${config.webAPI}/appointments/search?q=${filterShift.name}`)
+    fetch(`${config.webAPI}/appointments/search?q=${filterShift.name}`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       if(!res.appointments) return
@@ -92,6 +111,9 @@ const ShiftList = () => {
       })
       setShiftList(modifiedRes);
       setLoading(false)
+    })
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
     });
   }
 

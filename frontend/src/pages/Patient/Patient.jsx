@@ -28,7 +28,11 @@ const Patient = () => {
       })
     }
     // ===== GET DEL PACIENTE =====
-    fetch(`${config.webAPI}/patients/${id}`)
+    fetch(`${config.webAPI}/patients/${id}`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       if(res){
@@ -46,7 +50,10 @@ const Patient = () => {
         patientNotExist()
       }
     })
-    .finally(() => setLoading(false));
+    .finally(() => setLoading(false))
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
+    });
   }, [id, navigate])
 
   // ===== DELETE DEL PACIENTE =====
@@ -63,7 +70,10 @@ const Patient = () => {
     }).then((result) => {
       if (result.isConfirmed) {
           fetch(`${config.webAPI}/patients/${id}`, {
-              method: 'DELETE'
+              method: 'DELETE',
+              headers: {
+                'Authorization': `${localStorage.getItem('token')}`
+              }
           })
           .then(response => {
             if (!response.ok) {
@@ -79,6 +89,9 @@ const Patient = () => {
               toast('error', 'No se ha podido eliminar el paciente')
             }
           })
+          .catch(err => {
+            if(err.message === "auth") { navigate('/login'); }
+          });
       }
     })
 

@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es'; 
+import { useNavigate } from 'react-router-dom';
 import { addOneHourISOString } from '../../assets/helpers/unixtimeToSomething';
 import { config } from '../../env/config';
 import Modal from '../../components/Modal/Modal';
@@ -11,6 +12,7 @@ import Spinner from '../../components/Spinner/Spinner';
 import './myCalendar.css';
 
 const MyCalendar = () => {
+  const navigate = useNavigate()
   // ===== ESTADOS =====
   const [openModal, setOpenModal] = useState(false)
   const [eventsList, setEventsList] = useState([])
@@ -26,7 +28,11 @@ const MyCalendar = () => {
 
   useEffect(() => {
     // ===== GET DE DATOS DEL CALENDARIO =====
-    fetch(`${config.webAPI}/appointments/calendar`)
+    fetch(`${config.webAPI}/appointments/calendar`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       if(res && res.appointmentsCalendar.length > 0) {
@@ -42,7 +48,10 @@ const MyCalendar = () => {
       }
     })
     .finally(() => setLoading(false))
-  }, [])
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
+    });
+  }, [navigate])
 
   // El formato que necesita el calendario es ISOString con new Date(la fecha).toISOString()
 

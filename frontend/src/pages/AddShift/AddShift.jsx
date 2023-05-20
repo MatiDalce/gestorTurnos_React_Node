@@ -26,11 +26,15 @@ const AddShift = () => {
 
   useEffect(() => {
     // ===== GET: LISTA DE PACIENTES =====
-    fetch(`${config.webAPI}/patients/limit`)
+    fetch(`${config.webAPI}/patients/limit`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       if(res.length > 0) {
-        const patientsListNames = res.map(patient => {return {text:patient.completeName, value:patient.id}});
+        const patientsListNames = res.map(patient => { return {text:patient.completeName, value:patient.id} });
         setPatientList(patientsListNames)
       }
     })
@@ -41,7 +45,10 @@ const AddShift = () => {
       }
       setLoading(false)}
     )
-  }, [state]);
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
+    })
+  }, [state, navigate]);
 
   // ===== MANEJADORES DE ESTADOS =====
   const handleSelectPatient = (patient) => {
@@ -80,7 +87,8 @@ const AddShift = () => {
       fetch(`${config.webAPI}/appointments`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${localStorage.getItem('token')}`
         },
         body: JSON.stringify(data)
       })
@@ -93,6 +101,9 @@ const AddShift = () => {
           toast('error', 'No se pudo agregar el turno');
           setError(true)
         }
+      })
+      .catch(err => {
+        if(err.message === "auth") { navigate('/login'); }
       })
   }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { convertISOStringtoDateTime } from '../../assets/helpers/unixtimeToSomething';
 import { config } from '../../env/config';
 import Button from '../../components/Button/Button';
@@ -11,6 +11,7 @@ import './shiftPatientList.css';
 const ShiftPatientList = () => {
 
   const { id } = useParams()
+  const navigate = useNavigate()
 
   // ===== ESTADO =====
   const [shiftPatientList, setShiftPatientList] = useState([]);
@@ -19,7 +20,11 @@ const ShiftPatientList = () => {
 
   useEffect(() => {
     // ===== GET DEL PACIENTE =====
-    fetch(`${config.webAPI}/patients/${id}`)
+    fetch(`${config.webAPI}/patients/${id}`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       if(!res.errors) {
@@ -30,11 +35,18 @@ const ShiftPatientList = () => {
         setLoading(false)
       }
     })
-  }, [id])
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
+    });
+  }, [id, navigate])
 
   // ===== GET DE LOS TURNOS DEL PACIENTE =====
   useEffect(() => {
-    fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
+    fetch(`${config.webAPI}/patients/patient-appointments/${id}`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       if(res.length > 0) {
@@ -52,14 +64,21 @@ const ShiftPatientList = () => {
         setShiftPatientList(modifiedRes)
       }
     })
-    .finally(() => setLoading(false));
-  }, [id])
+    .finally(() => setLoading(false))
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
+    });
+  }, [id, navigate])
 
   // ===== ORDEN DE TURNOS DESDE RECIENTES O ANTIGUOS =====
   const handleOrder = (e) => {
     setLoading(true)
     if(e.target.value === 'recientes') {
-      fetch(`${config.webAPI}/patients/patient-appointmentsDSC/${id}`)
+      fetch(`${config.webAPI}/patients/patient-appointmentsDSC/${id}`, {
+        headers: {
+          'Authorization': `${localStorage.getItem('token')}`
+        }
+      })
       .then(res => res.json())
       .then(res => {
         if(res.length > 0) {
@@ -77,9 +96,16 @@ const ShiftPatientList = () => {
           setShiftPatientList(modifiedRes)
         }
       })
-      .finally(() => setLoading(false));
+      .finally(() => setLoading(false))
+      .catch(err => {
+        if(err.message === "auth") { navigate('/login'); }
+      });
     } else {
-      fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
+      fetch(`${config.webAPI}/patients/patient-appointments/${id}`, {
+        headers: {
+          'Authorization': `${localStorage.getItem('token')}`
+        }
+      })
       .then(res => res.json())
       .then(res => {
         if(res.length > 0) {
@@ -97,14 +123,21 @@ const ShiftPatientList = () => {
           setShiftPatientList(modifiedRes)
         }
       })
-      .finally(() => setLoading(false));
+      .finally(() => setLoading(false))
+      .catch(err => {
+        if(err.message === "auth") { navigate('/login'); }
+      });
     }
   }
 
     // Botón de refresh
     const handleRefresh = (e) => {
       setLoading(true)
-      fetch(`${config.webAPI}/patients/patient-appointments/${id}`)
+      fetch(`${config.webAPI}/patients/patient-appointments/${id}`, {
+        headers: {
+          'Authorization': `${localStorage.getItem('token')}`
+        }
+      })
       .then(res => res.json())
       .then(res => {
         if(res.length > 0) {
@@ -122,7 +155,10 @@ const ShiftPatientList = () => {
           setShiftPatientList(modifiedRes)
         }
       })
-      .finally(() => setLoading(false));
+      .finally(() => setLoading(false))
+      .catch(err => {
+        if(err.message === "auth") { navigate('/login'); }
+      });
     }
 
   // ===== HTML =====

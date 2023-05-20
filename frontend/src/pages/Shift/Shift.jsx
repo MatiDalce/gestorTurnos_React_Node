@@ -35,7 +35,11 @@ const Shift = () => {
       })
     }
     // ===== GET DEL TURNO =====
-    fetch(`${config.webAPI}/appointments/${id}`)
+    fetch(`${config.webAPI}/appointments/${id}`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       if(res) {
@@ -57,7 +61,10 @@ const Shift = () => {
         shiftNotExist()
       }
     })
-    .finally(() => setLoading(false));
+    .finally(() => setLoading(false))
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
+    });
   }, [id, navigate])
 
   // ===== DELETE DEL TURNO =====
@@ -74,7 +81,10 @@ const Shift = () => {
     }).then((result) => {
         if (result.isConfirmed) {
             fetch(`${config.webAPI}/appointments/${id}`, {
-                method: 'DELETE'
+              method: 'DELETE',
+              headers: {
+                'Authorization': `${localStorage.getItem('token')}`
+              }
             })
             .then(response => {
               if (!response.ok) {
@@ -90,6 +100,9 @@ const Shift = () => {
                 toast('error', 'No se ha podido eliminar el turno')
               }
             })
+            .catch(err => {
+              if(err.message === "auth") { navigate('/login'); }
+            });
         }
     })
 
@@ -97,7 +110,11 @@ const Shift = () => {
 
   // ===== DESCARGA DEL TURNO =====
   const handleDownloadShift = () => {
-    fetch(`${config.webAPI}/appointments/download/${id}`)
+    fetch(`${config.webAPI}/appointments/download/${id}`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(response => {
       if (!response.ok) {
         toast('error', 'Ha ocurrido un error en la descarga')
@@ -121,6 +138,9 @@ const Shift = () => {
         toast('error', 'Ha ocurrido un error en la descarga')
       }
     })
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
+    });
   }
 
   // ===== HTML =====

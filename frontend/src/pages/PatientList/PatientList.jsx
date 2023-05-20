@@ -39,11 +39,18 @@ const PatientList = () => {
 
   // Filtro de pacientes
   const handleFilterPatients = (e) => {
-    fetch(`${config.webAPI}/patients/search?q=${search}`)
+    fetch(`${config.webAPI}/patients/search?q=${search}`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       if(res.patientsWithCompleteName.length === 0) return
       setPatients(res.patientsWithCompleteName)
+    })
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
     });
   }
 
@@ -54,10 +61,17 @@ const PatientList = () => {
 
   // Botón de refresh
   const handleRefresh = (e) => {
-    fetch(`${config.webAPI}/patients/limit`)
+    fetch(`${config.webAPI}/patients/limit`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       setPatients(res)
+    })
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
     });
   }
 

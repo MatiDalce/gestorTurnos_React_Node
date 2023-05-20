@@ -201,7 +201,8 @@ const AddPatient = () => {
     fetch(`${config.webAPI}/patients`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${localStorage.getItem('token')}`
       },
       body: JSON.stringify(data)
     })
@@ -215,6 +216,9 @@ const AddPatient = () => {
         setError(true)
       }
     })
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
+    });
   }
 
   // ===== HTML =====

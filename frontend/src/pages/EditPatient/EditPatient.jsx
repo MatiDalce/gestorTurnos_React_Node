@@ -59,7 +59,11 @@ const EditPatient = () => {
       })
     }
     // ===== GET DEL PACIENTE =====
-    fetch(`${config.webAPI}/patients/${id}`)
+    fetch(`${config.webAPI}/patients/${id}`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
     .then(res => res.json())
     .then(res => {
       if(res) {
@@ -99,7 +103,10 @@ const EditPatient = () => {
         patientNotExist()
       }
     })
-    .finally(() => setLoading(false));
+    .finally(() => setLoading(false))
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
+    });
   }, [id, navigate])
 
   // ===== MANEJADORES DE ESTADO =====
@@ -270,6 +277,7 @@ const EditPatient = () => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `${localStorage.getItem('token')}`
             },
             body: JSON.stringify(body)
         })
@@ -288,6 +296,9 @@ const EditPatient = () => {
             setError(true)
           }
         })
+        .catch(err => {
+          if(err.message === "auth") { navigate('/login'); }
+        });
       } else return null
     })
   }
