@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const patientController = require('../controllers/patientController');
 const { validatePatientFields } = require('../middlewares/patientValidation');
-const authMidd = require("../middlewares/auth").default
+const authMidd = require("../middlewares/auth");
 
 
 router.get('/', authMidd, patientController.get);
