@@ -19,6 +19,7 @@ const Login = () => {
   }
 
   const handleLogin = () => {
+    setError(false)
     fetch(`${config.webAPI}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
