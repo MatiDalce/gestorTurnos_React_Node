@@ -11,8 +11,8 @@ module.exports = function verifyToken(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, secretKey);
-    req.user = decoded; // Store the decoded token payload in the request object for future use
-    next(); // Proceed to the next middleware or route handler
+    if(decoded){ // Store the decoded token payload in the request object for future use
+    next()}; // Proceed to the next middleware or route handler
   } catch (err) {
     return res.status(403).json({ error: 'Invalid token' });
   }

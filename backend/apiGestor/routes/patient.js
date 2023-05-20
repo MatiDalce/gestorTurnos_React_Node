@@ -6,7 +6,7 @@ const authMidd = require("../middlewares/auth");
 
 
 router.get('/', authMidd, patientController.get);
-router.get("/limit",authMidd,patientController.getOneLimit)
+router.get("/limit",authMidd ,patientController.getOneLimit)
 router.get("/search", authMidd,patientController.search)
 router.get('/:id',authMidd, patientController.getOne)
 
