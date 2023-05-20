@@ -63,16 +63,51 @@ const MyCalendar = () => {
     const day = date.getDate() + 1;
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-
     setModalData({
       id: eventInfo.el.fcSeg.eventRange.def.id,
       title: eventInfo.event._def.extendedProps.name,
       date: `${day < 10 ? '0' + day : day}-${month < 10 ? '0' + month : month}-${year}`,
       description: eventInfo.event._def.extendedProps.note,
-      sessionStatus: eventInfo.event._def.extendedProps.sessionStatus,
+      sessionStatus: eventInfo.event.extendedProps.sessionStatus,
     })
     handleOpenModal()
   }
+
+  const widnowWidth = window.innerWidth;
+
+  function renderEventContent(eventInfo) {
+    const circleStyle = {
+      backgroundColor: 'var(--skyblue-bg)', // Color de fondo del evento
+      borderRadius: '50%', // Hace que el evento tenga forma de círculo
+      color: '#fff', // Color del texto dentro del evento
+      display: 'inline-block',
+      marginRight: "3px",
+      width: "10px",
+      height: "10px",
+    };
+
+    const eventStyle = {
+      fontSize: widnowWidth > 1024 ? '1em' : "0.7em"
+    }
+
+    const barStyle = {
+      fontSize: widnowWidth > 1024 ? '0.8em' : "0.6em",
+      color: "#5c9d4b",
+      display: widnowWidth > 1024 ? 'inline-block' : "block",
+    }
+
+    return (
+      <div>
+        {
+          widnowWidth > 1024 && <div style={circleStyle}></div>
+        }
+        <span style={eventStyle}>{eventInfo.timeText}</span>
+        <span style={eventStyle}>{eventInfo.event.title}</span>
+        <span style={barStyle}> | {eventInfo.event.extendedProps.sessionStatus}</span>
+      </div>
+    );
+  }
+  
 
   // ===== HTML =====
   return (
@@ -84,7 +119,8 @@ const MyCalendar = () => {
               onClose={setOpenModal} 
               title={modalData.title} 
               description={modalData.description} 
-              date={modalData.date} 
+              date={modalData.date}
+              sessionStatus={modalData.sessionStatus}
             />
           }
           {
@@ -102,6 +138,7 @@ const MyCalendar = () => {
               footerToolbar={{
                 start: "today prev,next",
               }}
+              eventContent={renderEventContent}
               locale={esLocale} // Idioma
               eventClick={handleEventOnClick} // Da info sobre el evento
               eventBackgroundColor='var(--skyblue-bg)'
