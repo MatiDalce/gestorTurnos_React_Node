@@ -57,7 +57,7 @@ export const SideBar = (props) => {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                localStorage.removeItem('auth')
+                localStorage.removeItem('token')
                 navigate('/login') 
             } else {
                 return;
