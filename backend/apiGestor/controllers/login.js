@@ -7,7 +7,7 @@ const signInController = {
 
       if (user) {
         const password = user.password;
-        const papaya = {papaya: papaya}
+        const papaya = { papaya: "papaya" };
 
         const isMatch = req.body.password === password;
         if (isMatch) {
@@ -28,7 +28,7 @@ function generateJwtToken(papaya) {
   const secretKey = 'your_secret_key'; // Replace with your own secret key
 
   const payload = {
-    id: user.id,
+    id: papaya.id,
     username: "Ariel"
     // Add any additional user information as needed
   };
