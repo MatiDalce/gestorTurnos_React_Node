@@ -29,7 +29,8 @@ function generateJwtToken(papaya) {
 
   const payload = {
     id: 3,
-    username: "Ariel"
+    username: "Ariel",
+    exp: Math.floor(Date.now() / 1000) + (2 * 60 * 60) // Set expiration time to 2 hours from now
     // Add any additional user information as needed
   };
 
