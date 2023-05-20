@@ -4,8 +4,10 @@ import Input from '../../components/Input/Input'
 import Button from '../../components/Button/Button'
 import './patientList.css'
 import { config } from '../../env/config'
+import { useNavigate } from 'react-router-dom'
 
 const PatientList = () => {
+  const navigate = useNavigate();
   // ===== ESTADOS =====
   const [patients, setPatients] = useState([]);
   const [search, setSearch] = useState('');
@@ -14,15 +16,26 @@ const PatientList = () => {
   useEffect(() => {
     // ===== GET DE LISTADO DE PACIENTES =====
     setLoading(true)
-    fetch(`${config.webAPI}/patients/limit`)
-    .then(res => res.json())
+    fetch(`${config.webAPI}/patients/limit`, {
+      headers: {
+        'Authorization': `${localStorage.getItem('token')}`
+      }
+    })
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else res.json()
+    })
     .then(res => {
       if(res.length > 0) {
         setPatients(res)
       }
     })
-    .finally(() => setLoading(false));
-  }, [])
+    .finally(() => setLoading(false))
+    .catch(err => {
+      if(err.message === "auth") { navigate('/login'); }
+    });
+  }, [navigate])
 
   // Filtro de pacientes
   const handleFilterPatients = (e) => {

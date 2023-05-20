@@ -2,7 +2,7 @@ const express = require ('express') ;
 const router = express.Router () ;
 const appointmentController = require ('../controllers/appointmentController') ;
 const { appointmentValidationPost } = require("../middlewares/appointmentsValidation")
-
+const authMidd = require("../middlewares/auth")
 
 router.get("/", authMidd,appointmentController.get);
 router.get("/search",authMidd, appointmentController.search)

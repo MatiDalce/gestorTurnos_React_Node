@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import Title from '../../components/Title/Title';
-import './login.css';
-import { useNavigate } from 'react-router-dom';
 import ErrorMsg from '../../components/ErrorMsg/ErrorMsg';
+import { config } from '../../env/config';
+import './login.css';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,18 +18,24 @@ const Login = () => {
     setPass(e.target.value);
   }
 
-  // ===== ACÁ PODES CAMBIAR LA CONTRASEÑA DEL CLIENTE =====
-    // La contraseña con la que tiene que coincidir actualmente es 'contraseña123'
-  const handleCheckPassword = () => {
-    if (pass !== 'contraseña123') {
-      setError(true);
-      setTimeout(() => {
-        setError(false)
-      }, 5000);
-    } else {
-      localStorage.setItem('auth', 'Enabled')
-      navigate('/')
-    }
+  const handleLogin = () => {
+    fetch(`${config.webAPI}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({password: pass})
+    })
+    .then(response => response.json())
+    .then(data => {
+      if(data) {
+        localStorage.setItem('token', JSON.stringify(data));
+        navigate('/')
+      } else {
+        setError(true)
+      }
+    })
+    .catch(error => {
+      setError(true)
+    });
   }
 
   // ===== HTML =====
@@ -52,7 +59,7 @@ const Login = () => {
           </div>
           <div className="login-btn-box">
             <Button
-              onClick={handleCheckPassword}
+              onClick={handleLogin}
               title={'Ingresar'} 
               type='button'
               width='30%'
