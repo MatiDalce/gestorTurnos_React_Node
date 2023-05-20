@@ -28,7 +28,7 @@ function generateJwtToken(papaya) {
   const secretKey = 'your_secret_key'; // Replace with your own secret key
 
   const payload = {
-    id: papaya.id,
+    id: 3,
     username: "Ariel"
     // Add any additional user information as needed
   };
