@@ -105,6 +105,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    parents: {type: DataTypes.STRING,
+     allowNull:true}
   },{
     timestamps: false // Disable timestamps for this model
   });
