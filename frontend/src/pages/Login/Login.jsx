@@ -28,7 +28,7 @@ const Login = () => {
     .then(response => response.json())
     .then(data => {
       if(data) {
-        localStorage.setItem('token', JSON.stringify(data));
+        localStorage.setItem('token', JSON.stringify(data.token));
         navigate('/')
       } else {
         setError(true)
@@ -66,7 +66,6 @@ const Login = () => {
               width='30%'
               margin='5% 0'
             />
-            {/* <button onClick={handleCheckPassword}>alala</button> */}
           </div>
         </div>
       </div>

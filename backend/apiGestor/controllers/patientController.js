@@ -8,6 +8,7 @@ module.exports = {
       const patients = await db.Patient.findAll({
         attributes: { exclude: ['updatedAt', 'createdAt'] } // exclude createdAt field
       });
+      console.log('ACA => ', patients);
       res.status(200).json(patients);
       console.log("GET PatientController : All patients were returned successfully.");
     } catch (err) {
