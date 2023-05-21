@@ -18,7 +18,7 @@ const PatientList = () => {
     setLoading(true)
     fetch(`${config.webAPI}/patients/limit`, {
       headers: {
-        'Authorization': `${localStorage.getItem('token').replaceAll('"', '')}`
+        'Authorization': `${localStorage.getItem('token')}`
       }
     })
     .then(res => {
