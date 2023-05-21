@@ -19,6 +19,9 @@ export const SideBar = (props) => {
     const handleDownloadAppointments = () => {
         fetch(`${config.webAPI}/appointments/download`)
         .then(response => {
+            if(response.status === 401 || response.status === 403) {
+                throw new Error('auth'); // No está autorizado
+            }
             if (!response.ok) {
                 toast('error', 'Ha ocurrido un error en la descarga')
                 throw new Error('Falló la descarga');

@@ -41,7 +41,11 @@ const EditShift = () => {
         'Authorization': `${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       if(res) {
         if(res.message && res.message === "No appointment found for the given ID") {
@@ -130,6 +134,9 @@ const EditShift = () => {
             body: JSON.stringify(body)
         })
         .then(res => {
+            if(res.status === 401 || res.status === 403) {
+              throw new Error('auth'); // No está autorizado
+            }
             if (!res.ok) {
                 toast('error', 'No se ha podido editar el turno')
                 setError(true)

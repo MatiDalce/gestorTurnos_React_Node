@@ -64,7 +64,11 @@ const EditPatient = () => {
         'Authorization': `${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       if(res) {
         if(res.message && res.message === "No patient record found for the given ID") {
@@ -282,6 +286,9 @@ const EditPatient = () => {
             body: JSON.stringify(body)
         })
         .then(res => {
+          if(res.status === 401 || res.status === 403) {
+            throw new Error('auth'); // No está autorizado
+          }
           if (!res.ok) {
               toast('error', 'No se pudo editar al paciente')
               return Promise.reject(new Error("FALLÓ"))

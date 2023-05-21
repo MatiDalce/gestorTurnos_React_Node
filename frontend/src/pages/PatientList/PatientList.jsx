@@ -24,7 +24,7 @@ const PatientList = () => {
     .then(res => {
       if(res.status === 401 || res.status === 403) {
         throw new Error('auth'); // No está autorizado
-      } else res.json()
+      } else { return res.json() }
     })
     .then(res => {
       if(res.length > 0) {
@@ -44,7 +44,11 @@ const PatientList = () => {
         'Authorization': `${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       if(res.patientsWithCompleteName.length === 0) return
       setPatients(res.patientsWithCompleteName)
@@ -66,7 +70,11 @@ const PatientList = () => {
         'Authorization': `${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       setPatients(res)
     })

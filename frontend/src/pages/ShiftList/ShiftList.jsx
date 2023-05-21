@@ -26,7 +26,11 @@ const ShiftList = () => {
         'Authorization': `${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       if(res.length > 0) {
         const modifiedRes = res.map(shift => {
@@ -64,7 +68,11 @@ const ShiftList = () => {
         'Authorization': `${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       if(res) {
         setLoading(true)
@@ -96,7 +104,11 @@ const ShiftList = () => {
         'Authorization': `${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       if(!res.appointments) return
       const modifiedRes = res.appointments.map(shift => {

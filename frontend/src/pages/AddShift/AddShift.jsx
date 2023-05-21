@@ -31,7 +31,11 @@ const AddShift = () => {
         'Authorization': `${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       if(res.length > 0) {
         const patientsListNames = res.map(patient => { return {text:patient.completeName, value:patient.id} });
@@ -92,7 +96,11 @@ const AddShift = () => {
         },
         body: JSON.stringify(data)
       })
-      .then(res => res.json())
+      .then(res => {
+        if(res.status === 401 || res.status === 403) {
+          throw new Error('auth'); // No está autorizado
+        } else { return res.json() }
+      })
       .then((res) => {
         if(!res.errors) {
           toast('success', 'Turno agregado exitosamente');

@@ -206,7 +206,11 @@ const AddPatient = () => {
       },
       body: JSON.stringify(data)
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       if(!res.errors) {
         toast('success', 'Paciente agregado exitosamente')

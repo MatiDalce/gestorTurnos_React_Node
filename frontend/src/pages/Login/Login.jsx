@@ -25,7 +25,7 @@ const Login = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({password: pass})
     })
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
       if(data) {
         localStorage.setItem('token', JSON.stringify(data.token));

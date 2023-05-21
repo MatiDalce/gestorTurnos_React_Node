@@ -33,7 +33,11 @@ const MyCalendar = () => {
         'Authorization': `${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       if(res && res.appointmentsCalendar.length > 0) {
         // Esto modifica el array para que se coloquen los títulos en el calendario

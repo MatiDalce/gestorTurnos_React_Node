@@ -25,7 +25,11 @@ const ShiftPatientList = () => {
         'Authorization': `${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       if(!res.errors) {
         // SETEO DE ESTADO
@@ -47,7 +51,11 @@ const ShiftPatientList = () => {
         'Authorization': `${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       if(res.length > 0) {
         const modifiedRes = res.map(shift => {
@@ -79,7 +87,11 @@ const ShiftPatientList = () => {
           'Authorization': `${localStorage.getItem('token')}`
         }
       })
-      .then(res => res.json())
+      .then(res => {
+        if(res.status === 401 || res.status === 403) {
+          throw new Error('auth'); // No está autorizado
+        } else { return res.json() }
+      })
       .then(res => {
         if(res.length > 0) {
           const modifiedRes = res.map(shift => {
@@ -106,7 +118,11 @@ const ShiftPatientList = () => {
           'Authorization': `${localStorage.getItem('token')}`
         }
       })
-      .then(res => res.json())
+      .then(res => {
+        if(res.status === 401 || res.status === 403) {
+          throw new Error('auth'); // No está autorizado
+        } else { return res.json() }
+      })
       .then(res => {
         if(res.length > 0) {
           const modifiedRes = res.map(shift => {
@@ -138,7 +154,11 @@ const ShiftPatientList = () => {
           'Authorization': `${localStorage.getItem('token')}`
         }
       })
-      .then(res => res.json())
+      .then(res => {
+        if(res.status === 401 || res.status === 403) {
+          throw new Error('auth'); // No está autorizado
+        } else { return res.json() }
+      })
       .then(res => {
         if(res.length > 0) {
           const modifiedRes = res.map(shift => {

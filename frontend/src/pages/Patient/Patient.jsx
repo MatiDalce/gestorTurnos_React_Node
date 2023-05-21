@@ -33,7 +33,11 @@ const Patient = () => {
         'Authorization': `${localStorage.getItem('token')}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if(res.status === 401 || res.status === 403) {
+        throw new Error('auth'); // No está autorizado
+      } else { return res.json() }
+    })
     .then(res => {
       if(res){
         if(res.message && res.message === "No patient record found for the given ID") {
@@ -76,6 +80,9 @@ const Patient = () => {
               }
           })
           .then(response => {
+            if(response.status === 401 || response.status === 403) {
+              throw new Error('auth'); // No está autorizado
+            }
             if (!response.ok) {
               toast('error', 'No se ha podido eliminar el paciente')
               return Promise.reject(new Error("FALLÓ"))
