@@ -25,7 +25,7 @@ const signInController = {
 };
 
 function generateJwtToken(papaya) {
-  const secretKey = 'your_secret_key'; // Replace with your own secret key
+  const secretKey = process.env.SECRET_KEY; // Replace with your own secret key
 
   const payload = {
     id: 3,

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const secretKey = 'your_secret_key'; // Replace with your own secret key
+const secretKey = process.env.SECRET_KEY; // Replace with your own secret key
 
 module.exports = function verifyToken(req, res, next) {
   const token = req.headers.authorization.replaceAll('"', "" ); // Assuming the token is sent in the "Authorization" header
